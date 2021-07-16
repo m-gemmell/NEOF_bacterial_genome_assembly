@@ -1,0 +1,44 @@
+--- 
+title: "Bacterial genome assembly and annotation"
+author: "Matthew R. Gemmell"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
+``` 
+
+# Introduction
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/map.png", auto_pdf = TRUE)
+``` 
+
+This practical session aims to introduce you to Linux and its applications. The topics covered are:
+
+- What is Linux?
+- Logging in to our teaching VNC
+- The shell and commands
+- Tab complete
+- Files and Directories
+- Navigation of directories
+- Manipulating files i.e. creating, copying, moving, deleting
+- Text editor, `vim`
+- Advanced Linux
+- Other Bioinformatics programming languages
+
+The aim of this practical is to cover everything up to, but not including, Advanced Linux. This will give you sufficient skills in Linux to carry out the other practicals in this workshop. 
+If you are already familiar with Linux or you are a quick learner, please look at the Advanced Linux session followed by the Other Bioinformatics programming languages.
+
+Commands are in the following font, colour, and box.They should be run in the command line.
+```{bash eval=FALSE}
+echo "This is a command example" 
+``` 
+
+<!--chapter:end:01-Bacterial_genome_assembly_and_annotation.Rmd-->
+
