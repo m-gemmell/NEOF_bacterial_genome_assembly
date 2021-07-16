@@ -1,0 +1,36 @@
+# Genome Assembly {#redbeanassembly}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
+``` 
+
+
+## Redbean
+
+Redbean (AKA wtdbg2)
+
+
+### Redbean: Conda environnment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `bacterial_assembly` conda environment for our Redbean assembly.
+
+```{bash eval=FALSE}
+. usebacterialassembly
+```
+
+### Redbean: Assemble long reads
+
+```{bash eval=FALSE}
+wtdbg2 -x rs -g 4.6m -i ecoli_reads/ecoli.fastq -o redbean_assembly/ecoli -t 8
+```
+
+
+(can I use bandage to visualise the assembly graph)
+
+### Redbean: Derive consensus
+
+
+### Redbean: Bandage Visualisation
+(view assembly graphs, why consensus is derived)

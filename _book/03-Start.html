@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bacterial genome assembly and annotation</title>
+  <title>Chapter 3 Before we start | Bacterial genome assembly and annotation</title>
   <meta name="description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bacterial genome assembly and annotation" />
+  <meta property="og:title" content="Chapter 3 Before we start | Bacterial genome assembly and annotation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/figures/NEOF.png" />
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bacterial genome assembly and annotation" />
+  <meta name="twitter:title" content="Chapter 3 Before we start | Bacterial genome assembly and annotation" />
   
   <meta name="twitter:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-
-<link rel="next" href="02-Cluster_Introduction.html"/>
+<link rel="prev" href="02-Cluster_Introduction.html"/>
+<link rel="next" href="04-Overview.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -182,40 +182,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Bacterial genome assembly and annotation</h1>
-<p class="author"><em>Matthew R. Gemmell</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-16</em></p>
+<div id="before-we-start" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Before we start</h1>
+<p><img src="figures/start.png" width="20%" style="display: block; margin: auto;" /></p>
+<div id="workshop-directory-data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Workshop directory &amp; data</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="03-Start.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make directory</span></span>
+<span id="cb2-2"><a href="03-Start.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/bacterial_assembly/standard_workflow</span>
+<span id="cb2-3"><a href="03-Start.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into it</span></span>
+<span id="cb2-4"><a href="03-Start.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span></code></pre></div>
+<p>For the standard workflow we will be using pre QC’d PacBio reads of an <em>Escherichia coli</em> genome. Create a directory and create a soft link of the read data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="03-Start.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ecoli_reads</span>
+<span id="cb3-2"><a href="03-Start.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq ecoli_reads</span></code></pre></div>
 </div>
-<p><img src="figures/NEOF.png" width="30%" style="display: block; margin: auto;" /></p>
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p><img src="figures/map.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>This practical session aims to introduce you to Linux and its applications. The topics covered are:</p>
-<ul>
-<li>What is Linux?</li>
-<li>Logging in to our teaching VNC</li>
-<li>The shell and commands</li>
-<li>Tab complete</li>
-<li>Files and Directories</li>
-<li>Navigation of directories</li>
-<li>Manipulating files i.e. creating, copying, moving, deleting</li>
-<li>Text editor, <code>vim</code></li>
-<li>Advanced Linux</li>
-<li>Other Bioinformatics programming languages</li>
-</ul>
-<p>The aim of this practical is to cover everything up to, but not including, Advanced Linux. This will give you sufficient skills in Linux to carry out the other practicals in this workshop. If you are already familiar with Linux or you are a quick learner, please look at the Advanced Linux session followed by the Other Bioinformatics programming languages.</p>
-<p>Commands are in the following font, colour, and box.They should be run in the command line.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="01-Bacterial_genome_assembly_and_annotation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;This is a command example&quot;</span> </span></code></pre></div>
+<div id="conda-environments" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Conda environments</h2>
+<p>(Explain about use and conda environments)</p>
+<p>(Additionally have list of tables showing the different programs for each conda env)</p>
+<p>During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space <code>.</code>):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="03-Start.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> useshotgun</span></code></pre></div>
+<p>The <code>use</code> scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with <code>less /usr/local/bin/useshotgun</code> if you are interested in its contents.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="02-Cluster_Introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="02-Cluster_Introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="04-Overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

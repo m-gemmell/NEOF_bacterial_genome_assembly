@@ -1,4 +1,4 @@
---- 
+---
 title: "Bacterial genome assembly and annotation"
 author: "Matthew R. Gemmell"
 date: "`r Sys.Date()`"
@@ -8,37 +8,182 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
+favicon: figures/NEOF_favicon.png
+description: NEOF book for the Bacterial genome assembly and annotation workshop
+cover-image: "figures/NEOF.png"
 ---
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
-``` 
+```
 
 # Introduction
+
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/map.png", auto_pdf = TRUE)
-``` 
+```
 
 This practical session aims to introduce you to Linux and its applications. The topics covered are:
 
-- What is Linux?
-- Logging in to our teaching VNC
-- The shell and commands
-- Tab complete
-- Files and Directories
-- Navigation of directories
-- Manipulating files i.e. creating, copying, moving, deleting
-- Text editor, `vim`
-- Advanced Linux
-- Other Bioinformatics programming languages
+-   What is Linux?
+-   Logging in to our teaching VNC
+-   The shell and commands
+-   Tab complete
+-   Files and Directories
+-   Navigation of directories
+-   Manipulating files i.e. creating, copying, moving, deleting
+-   Text editor, `vim`
+-   Advanced Linux
+-   Other Bioinformatics programming languages
 
-The aim of this practical is to cover everything up to, but not including, Advanced Linux. This will give you sufficient skills in Linux to carry out the other practicals in this workshop. 
-If you are already familiar with Linux or you are a quick learner, please look at the Advanced Linux session followed by the Other Bioinformatics programming languages.
+The aim of this practical is to cover everything up to, but not including, Advanced Linux. This will give you sufficient skills in Linux to carry out the other practicals in this workshop. If you are already familiar with Linux or you are a quick learner, please look at the Advanced Linux session followed by the Other Bioinformatics programming languages.
 
 Commands are in the following font, colour, and box.They should be run in the command line.
+
 ```{bash eval=FALSE}
 echo "This is a command example" 
-``` 
+```
 
 <!--chapter:end:01-Bacterial_genome_assembly_and_annotation.Rmd-->
+
+# Cluster Introduction
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
+``` 
+
+## Logon instructions
+For this workshop we will be using Virtual Network Computing (VNC). Connect to the VNC with a browser by using the webVNC link you were sent.
+
+You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
+``` 
+
+If the VNC is taking up too much/little space of your browser you can use the zoom of your browser to adjust the size. Ensure you can see one whole terminal.
+
+These instructions will not work outside of this workshop. If you would like to install your own Linux OS on your desktop or laptop we would recommend Ubuntu. 
+
+The following link is a guide to install Ubuntu:  
+https://www.ubuntu.com/download/desktop/install-ubuntu-desktop.  
+If you use a USB you need to create a bootable USB stick. The following link will assist:  
+https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows 
+
+## The Terminal Window
+In our case the terminal window looks like the picture below. We are using the terminal window as our shell to interpret our commands to the kernel. Depending on your system and preferences it may look different.
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
+``` 
+
+Already there is useful information for us on the terminal window.
+
+- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
+- __gauss03__: This is the machine name the user is logged into.
+- __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
+- Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.
+
+__To open a new terminal window__, right click on the main screen, choose `Applications` -> `Shell` -> `bash`
+
+<!--chapter:end:02-Cluster_Introduction.Rmd-->
+
+# (PART\*) Standard workflow {-}
+
+# Before we start
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
+``` 
+
+## Workshop directory & data
+
+```{bash eval=FALSE}
+#Make directory
+mkdir -p ~/bacterial_assembly/standard_workflow
+#Move into it
+cd ~/bacterial_assembly/standard_workflow
+```
+
+For the standard workflow we will be using pre QC'd PacBio reads of an _Escherichia coli_ genome. Create a directory and create a soft link of the read data.
+
+```{bash eval=FALSE}
+mkdir ecoli_reads
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq ecoli_reads
+```
+
+## Conda environments
+
+(Explain about use and conda environments)
+
+(Additionally have list of tables showing the different programs for each conda env)
+
+
+During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
+
+```{bash eval=FALSE}
+. useshotgun
+```
+
+The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
+
+<!--chapter:end:03-Start.Rmd-->
+
+# Overview {#overview}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
+``` 
+
+<!--chapter:end:04-Overview.Rmd-->
+
+# Genome Assembly {#redbeanassembly}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
+``` 
+
+
+## Redbean
+
+Redbean (AKA wtdbg2)
+
+
+### Redbean: Conda environnment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `bacterial_assembly` conda environment for our Redbean assembly.
+
+Additionally, we will make a new directory where we will carry out our standard workflow.
+
+
+
+
+
+<!--chapter:end:05-Assembly.Rmd-->
+
+# Genome assembly assessment {#genomeassemblyassessment}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
+``` 
+
+<!--chapter:end:06-Genome_assessment.Rmd-->
+
+# Polishing {#polishing}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/polishing.png", auto_pdf = TRUE)
+``` 
+
+<!--chapter:end:07-Polishing.Rmd-->
+
+# Circlator {#Circlator}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
+``` 
+
+<!--chapter:end:08-Circlator.Rmd-->
+
+# Annotation {#annotation}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+``` 
+
+<!--chapter:end:09-Annotation.Rmd-->
 

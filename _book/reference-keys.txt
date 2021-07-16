@@ -1,1 +1,15 @@
 introduction
+cluster-introduction
+logon-instructions
+the-terminal-window
+before-we-start
+workshop-directory-data
+conda-environments
+overview
+redbeanassembly
+redbean
+redbean-conda-environnment-directory
+genomeassemblyassessment
+polishing
+Circlator
+annotation

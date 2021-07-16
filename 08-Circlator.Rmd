@@ -1,0 +1,4 @@
+# Circlator {#Circlator}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
+``` 

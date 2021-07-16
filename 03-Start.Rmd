@@ -1,0 +1,37 @@
+# (PART\*) Standard workflow {-}
+
+# Before we start
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
+``` 
+
+## Workshop directory & data
+
+```{bash eval=FALSE}
+#Make directory
+mkdir -p ~/bacterial_assembly/standard_workflow
+#Move into it
+cd ~/bacterial_assembly/standard_workflow
+```
+
+For the standard workflow we will be using pre QC'd PacBio reads of an _Escherichia coli_ genome. Create a directory and create a soft link of the read data.
+
+```{bash eval=FALSE}
+mkdir ecoli_reads
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq ecoli_reads
+```
+
+## Conda environments
+
+(Explain about use and conda environments)
+
+(Additionally have list of tables showing the different programs for each conda env)
+
+
+During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
+
+```{bash eval=FALSE}
+. useshotgun
+```
+
+The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.

@@ -1,0 +1,37 @@
+# Cluster Introduction
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
+``` 
+
+## Logon instructions
+For this workshop we will be using Virtual Network Computing (VNC). Connect to the VNC with a browser by using the webVNC link you were sent.
+
+You will now be in a logged-in Linux VNC desktop. You will see something as below (there may be only one terminal which is fine). If you do not see something similar please ask for assistance.
+
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/logon_pic.png", auto_pdf = TRUE)
+``` 
+
+If the VNC is taking up too much/little space of your browser you can use the zoom of your browser to adjust the size. Ensure you can see one whole terminal.
+
+These instructions will not work outside of this workshop. If you would like to install your own Linux OS on your desktop or laptop we would recommend Ubuntu. 
+
+The following link is a guide to install Ubuntu:  
+https://www.ubuntu.com/download/desktop/install-ubuntu-desktop.  
+If you use a USB you need to create a bootable USB stick. The following link will assist:  
+https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows 
+
+## The Terminal Window
+In our case the terminal window looks like the picture below. We are using the terminal window as our shell to interpret our commands to the kernel. Depending on your system and preferences it may look different.
+```{r, fig.align = 'center',out.width= '80%', echo=FALSE }
+knitr::include_graphics(path = "figures/terminal_window.png", auto_pdf = TRUE)
+``` 
+
+Already there is useful information for us on the terminal window.
+
+- __nsc065__: This is the login name, also known as the username. In this case nsc065 is a demonstrator's account. Your screen should show a different account name which will be your username for the Linux machine/cluster you are logged into.
+- __gauss03__: This is the machine name the user is logged into.
+- __\~__: This represents the current directory of the user, or the directory a command was run in. In the Linux OS and others __'~'__ is a shortcut to the user's home directory.
+- Everything after the __'$'__ is where commands are typed into the terminal. This is also referred to as the command line.
+
+__To open a new terminal window__, right click on the main screen, choose `Applications` -> `Shell` -> `bash`
