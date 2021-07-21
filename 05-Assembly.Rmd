@@ -3,6 +3,7 @@
 knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
 ``` 
 
+(bit of a spiel about assembly)
 
 ## Redbean
 
@@ -26,11 +27,39 @@ We will use the `bacterial_assembly` conda environment for our Redbean assembly.
 wtdbg2 -x rs -g 4.6m -i ecoli_reads/ecoli.fastq -o redbean_assembly/ecoli -t 8
 ```
 
-
-(can I use bandage to visualise the assembly graph)
-
 ### Redbean: Derive consensus
 
+```{bash eval=FALSE}
+wtpoa-cns -t 8 -i redbean_assembly/ecoli.ctg.lay.gz -fo redbean_assembly/ecoli.ctg.fa
+```
 
 ### Redbean: Bandage Visualisation
+
+(for interest about assembly graph)
 (view assembly graphs, why consensus is derived)
+
+`gunzip` files
+```{bash eval=FALSE}
+gunzip redbean_assembly/ecoli.1.dot.gz
+gunzip redbean_assembly/ecoli.2.dot.gz
+gunzip redbean_assembly/ecoli.3.dot.gz
+```
+
+Convert `.dot` file into `.gfa` file required for `Bandage`.
+
+The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. Unfortunately this is not installed when you install `wtdbg2` via `conda`.
+```{bash eval=FALSE}
+wtdbg2-dot2gfa.pl redbean_assembly/ecoli.1.dot > redbean_assembly/ecoli.1.dot.gfa
+wtdbg2-dot2gfa.pl redbean_assembly/ecoli.2.dot > redbean_assembly/ecoli.2.dot.gfa
+wtdbg2-dot2gfa.pl redbean_assembly/ecoli.3.dot > redbean_assembly/ecoli.3.dot.gfa
+```
+
+Open up `Bandage` GUI.
+```{bash eval=FALSE}
+Bandage
+```
+
+File -> Load Graph -> 
+Graph Drawing -> Draw graph
+
+## Other long read assemblers
