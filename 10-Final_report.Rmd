@@ -1,0 +1,4 @@
+# Final report {#finalreport}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+``` 

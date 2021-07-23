@@ -10,7 +10,7 @@ knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
 Redbean (AKA wtdbg2)
 
 
-### Redbean: Conda environnment & directory
+### Redbean: Conda environment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
@@ -19,6 +19,11 @@ We will use the `bacterial_assembly` conda environment for our Redbean assembly.
 
 ```{bash eval=FALSE}
 . usebacterialassembly
+```
+
+```{bash eval=FALSE}
+cd ~/bacterial_assembly/standard_workflow
+mkdir redbean_assembly
 ```
 
 ### Redbean: Assemble long reads
@@ -49,9 +54,9 @@ Convert `.dot` file into `.gfa` file required for `Bandage`.
 
 The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. Unfortunately this is not installed when you install `wtdbg2` via `conda`.
 ```{bash eval=FALSE}
-wtdbg2-dot2gfa.pl redbean_assembly/ecoli.1.dot > redbean_assembly/ecoli.1.dot.gfa
-wtdbg2-dot2gfa.pl redbean_assembly/ecoli.2.dot > redbean_assembly/ecoli.2.dot.gfa
-wtdbg2-dot2gfa.pl redbean_assembly/ecoli.3.dot > redbean_assembly/ecoli.3.dot.gfa
+wtdbg-dot2gfa.pl redbean_assembly/ecoli.1.dot > redbean_assembly/ecoli.1.dot.gfa
+wtdbg-dot2gfa.pl redbean_assembly/ecoli.2.dot > redbean_assembly/ecoli.2.dot.gfa
+wtdbg-dot2gfa.pl redbean_assembly/ecoli.3.dot > redbean_assembly/ecoli.3.dot.gfa
 ```
 
 Open up `Bandage` GUI.

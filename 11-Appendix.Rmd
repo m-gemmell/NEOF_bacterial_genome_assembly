@@ -1,0 +1,71 @@
+# (APPENDIX) Appendix {-}
+
+# Next steps{#nextsteps}
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
+``` 
+
+Below are some good links to start with before carrying out your own projects.
+
+(Conda and Mamba)
+
+https://github.com/mamba-org/mamba
+
+
+# Manuals
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
+``` 
+
+Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+
+FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+MultiQC: https://multiqc.info/
+
+Trim Galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
+
+Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+
+samtools: http://www.htslib.org/
+
+BBTools: https://jgi.doe.gov/data-and-tools/bbtools/
+
+Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
+
+Krona: https://github.com/marbl/Krona/wiki/KronaTools
+
+Bracken: https://ccb.jhu.edu/software/bracken/index.shtml?t=manual
+
+LEfSe: https://huttenhower.sph.harvard.edu/lefse/
+
+HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
+
+MetaPhlAn2: https://huttenhower.sph.harvard.edu/metaphlan2/
+
+Biobakery: https://github.com/biobakery/biobakery
+
+MegaHit: https://github.com/voutcn/megahit
+
+BWA: https://github.com/lh3/bwa
+
+minimap2: https://github.com/lh3/minimap2
+
+MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
+
+MetaWRAP: https://github.com/bxlab/metaWRAP
+
+Pokka: https://github.com/tseemann/prokka
+
+MinPath: https://github.com/mgtools/MinPath/blob/master/readme
+
+MetaCyc: https://metacyc.org/
+
+# Obtaining Read Data
+
+https://github.com/PacificBiosciences/DevNet/wiki/8-plex-Ecoli-Multiplexed-Microbial-Assembly
+

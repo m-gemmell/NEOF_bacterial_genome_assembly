@@ -67,7 +67,7 @@ less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 
 ## MultiQC
 
-```{bash eval=FALS}
+```{bash eval=FALSE}
 mkdir -p multiqc/redbean/ecoli/input
 ln -s quast/redbean/report.tsv multiqc/redbean/ecoli/input
 ln -s busco/redbean/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt\

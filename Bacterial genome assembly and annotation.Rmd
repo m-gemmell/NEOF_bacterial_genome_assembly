@@ -17,26 +17,25 @@ cover-image: "figures/NEOF.png"
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
 ```
 
+# (PART\*) Start {-}
 # Introduction
 
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/map.png", auto_pdf = TRUE)
 ```
 
-This practical session aims to introduce you to Linux and its applications. The topics covered are:
+This practical session will run you through a standard bacterial genome assembly and annotation workflow using PacBio data. The topics covered are:
 
--   What is Linux?
--   Logging in to our teaching VNC
--   The shell and commands
--   Tab complete
--   Files and Directories
--   Navigation of directories
--   Manipulating files i.e. creating, copying, moving, deleting
--   Text editor, `vim`
--   Advanced Linux
--   Other Bioinformatics programming languages
+- [Setup](#setup)
+- [Overview](#overview)
+- [Genome assembly with `Redbean` (`wtdbg2`)](#redbeanassembly)
+- [Assembly assessment](#genomeassemblyassessment)
+- [Polishing with `arrow`](#polishing)
+- [Circularisation with `Circlator`](#Circlator)
+- [Annotation with `Prokka`](#annotation)
+- [Final report generation with `MultiQC`](#finalreport)
 
-The aim of this practical is to cover everything up to, but not including, Advanced Linux. This will give you sufficient skills in Linux to carry out the other practicals in this workshop. If you are already familiar with Linux or you are a quick learner, please look at the Advanced Linux session followed by the Other Bioinformatics programming languages.
+The aim of this practical is to produce a genome assembly of _Eschrichia coli_, annotate it, and produce a report with the assembly's stats. Read QC will be skipped as this has been covered in a previous NEOF workshop.
 
 Commands are in the following font, colour, and box.They should be run in the command line.
 
@@ -86,14 +85,17 @@ __To open a new terminal window__, right click on the main screen, choose `Appli
 
 <!--chapter:end:02-Cluster_Introduction.Rmd-->
 
-# (PART\*) Standard workflow {-}
+# (PART\*) Standard workflow {.unnumbered}
 
-# Before we start
+# Setup {#setup}
+
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/start.png", auto_pdf = TRUE)
-``` 
+```
 
 ## Workshop directory & data
+
+Prior to starting analysis we will create a working directory. The directory `~/bacterial_assembly/standard_workflow` will contain all the inputs and outputs of our analyses.
 
 ```{bash eval=FALSE}
 #Make directory
@@ -102,27 +104,50 @@ mkdir -p ~/bacterial_assembly/standard_workflow
 cd ~/bacterial_assembly/standard_workflow
 ```
 
-For the standard workflow we will be using pre QC'd PacBio reads of an _Escherichia coli_ genome. Create a directory and create a soft link of the read data.
+During the workflow we will keep a tidy directory structure outputting the results form different tools into their respective directories.
+
+For the standard workflow we will be using pre QC'd PacBio reads of an *Escherichia coli* genome. Create a directory and create a soft link (i.e. a shortcut) of the read data.
 
 ```{bash eval=FALSE}
+#Create directory
 mkdir ecoli_reads
+#Softlink of read data
 ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq ecoli_reads
 ```
 
 ## Conda environments
 
-(Explain about use and conda environments)
-
-(Additionally have list of tables showing the different programs for each conda env)
-
-
-During this practical you will use a number of installed programs and scripts. To ensure that the system knows where to look for the scripts, run the following command (ensure this starts with a full stop and a space `. `):
-
-```{bash eval=FALSE}
-. useshotgun
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ```
 
-The `use` scripts in this workshop are custom scripts that set up conda environments. You can look at the above script with `less /usr/local/bin/useshotgun` if you are interested in its contents.
+`Conda` is a very useful tool for bioinformaticians. It allows for the creation of virtual environments so you can install different programs. This is generally easier than manually installing programs for 2 main reasons:
+
+-   Usually `Conda` will install all the dependencies a program needs.
+    -   Prior to `Conda` it could take more than a day to install a program and all its dependencies plus the dependencies of the dependencies etc.
+-   Different programs may need different versions of the same program as a dependency (e.g. Python version 2 or version 3). Therefore installing one can break the other. Having separate `Conda` environments (virtual environments) can isolate clashing programs.
+
+**Analogy**: You can think of programs as food and environments as food storage units. You could try to shove all your food into one giant cold room but most of your food will either be too cold or too warm. Instead it would be better to have different types of food in different compartments as outlined in the below table.
+
+| Storage environment | Food examples                      |
+|---------------------|------------------------------------|
+| Fridge              | Fresh vegetables, fresh meat, etc. |
+| Freezer             | Frozen meat, ice, etc.             |
+| Pantry              | Canned food, jarred food, etc.     |
+| Cellar              | Wine.                              |
+| Fruit bowl          | Fruit.                             |
+
+As we will be using many different programs we will be using different `Conda` environments. To activate these environments you will be using `use` scripts that will activate the relevant `Conda` environment belonging to user `nsc006` (Matthew Gemmell).
+
+Preferably during the course of this workflow you will have a terminal open for each `Conda` environment. It is important to make sure you are in the correct terminal/environment for each chapter. 
+
+You can see what environment a terminal currently has activated by looking at the command prompt. Below we can see the command prompt shows we are in the environment called `bacterial_assembly` due the environment name being in the `()` before your login/user name. This is consistent with `Conda` in all systems.
+
+```{r, fig.align = 'center',out.width= '60%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda_bacterial_assembly_terminal.png", auto_pdf = TRUE)
+```
+
+For your own future analysis you would use your own `Conda`. If you are interested please see the `Conda` and `Mamba` links in the [Next steps](#nextsteps) section of the Appendix.
 
 <!--chapter:end:03-Start.Rmd-->
 
@@ -138,6 +163,7 @@ knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
 ``` 
 
+(bit of a spiel about assembly)
 
 ## Redbean
 
@@ -151,18 +177,141 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 
 We will use the `bacterial_assembly` conda environment for our Redbean assembly.
 
-Additionally, we will make a new directory where we will carry out our standard workflow.
+```{bash eval=FALSE}
+. usebacterialassembly
+```
 
+### Redbean: Assemble long reads
 
+```{bash eval=FALSE}
+wtdbg2 -x rs -g 4.6m -i ecoli_reads/ecoli.fastq -o redbean_assembly/ecoli -t 8
+```
 
+### Redbean: Derive consensus
 
+```{bash eval=FALSE}
+wtpoa-cns -t 8 -i redbean_assembly/ecoli.ctg.lay.gz -fo redbean_assembly/ecoli.ctg.fa
+```
+
+### Redbean: Bandage Visualisation
+
+(for interest about assembly graph)
+(view assembly graphs, why consensus is derived)
+
+`gunzip` files
+```{bash eval=FALSE}
+gunzip redbean_assembly/ecoli.1.dot.gz
+gunzip redbean_assembly/ecoli.2.dot.gz
+gunzip redbean_assembly/ecoli.3.dot.gz
+```
+
+Convert `.dot` file into `.gfa` file required for `Bandage`.
+
+The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. Unfortunately this is not installed when you install `wtdbg2` via `conda`.
+```{bash eval=FALSE}
+wtdbg2-dot2gfa.pl redbean_assembly/ecoli.1.dot > redbean_assembly/ecoli.1.dot.gfa
+wtdbg2-dot2gfa.pl redbean_assembly/ecoli.2.dot > redbean_assembly/ecoli.2.dot.gfa
+wtdbg2-dot2gfa.pl redbean_assembly/ecoli.3.dot > redbean_assembly/ecoli.3.dot.gfa
+```
+
+Open up `Bandage` GUI.
+```{bash eval=FALSE}
+Bandage
+```
+
+File -> Load Graph -> 
+Graph Drawing -> Draw graph
+
+## Other long read assemblers
 
 <!--chapter:end:05-Assembly.Rmd-->
 
 # Genome assembly assessment {#genomeassemblyassessment}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
+```
+
+
+## Assessment: Conda environnment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
+
+We will use the `bacterial_genome_assessment` `conda` environment for our `Redbean` assembly.
+
+```{bash eval=FALSE}
+chos 8
+. usebacterialassembly
+```
+
+```{bash eval=FALSE}
+cd ~/bacterial_assembly/standard_workflow
+```
+
+## QUAST
+
+```{bash eval=FALSE}
+mkdir -p quast/redbean
+quast -o quast/redbean redbean_assembly/ecoli.ctg.fa
+```
+
+```{bash eval=FALSE}
+firefox quast/redbean/report.html
+```
+
+## BUSCO
+
+```{bash eval=FALSE}
+mkdir -p busco/redbean
+cd busco/redbean
+```
+
+```{bash eval=FALSE}
+busco --list-datasets | less -S
+```
+
+```{bash eval=FALSE}
+busco -i ../../redbean_assembly/ecoli.ctg.fa -l enterobacterales_odb10 -m geno -o ecoli
+```
+
+```{bash eval=FALSE}
+less ecoli/short_summary.specific.enterobacterales_obd10.ecoli.txt
+```
+
+## CheckM
+
+```{bash eval=FALSE}
+cd ~/bacterial_assembly/standard_workflow
+mkdir -p checkm/redbean/ecoli
+```
+
+```{bash eval=FALSE}
+checkm lineage_wf --tab_table -f checkm/ecoli_checkm.tsv -t 8 -x ctg.fa redbean_assembly/ checkm/redbean/ecoli
+```
+
+```{bash eval=FALSE}
+less -S checkm/redbean/ecoli/ecoli_checkm.tsv
+```
+
+## MultiQC
+
+```{bash eval=FALSE}
+mkdir -p multiqc/redbean/ecoli/input
+ln -s quast/redbean/report.tsv multiqc/redbean/ecoli/input
+ln -s busco/redbean/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt\
+multiqc/redbean/ecoli/input
+```
+
+```{bash eval=FALSE}
+multiqc --outdir multiqc/redbean/ecoli/input multiqc/redbean/ecoli
+```
+
+```{bash eval=FALSE}
+firefox multiqc/redbean/ecoli/multiqc_report.html
+```
+
+
+MultiQC modules: https://multiqc.info/docs/#multiqc-modules
 
 <!--chapter:end:06-Genome_assessment.Rmd-->
 
@@ -186,4 +335,85 @@ knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ``` 
 
 <!--chapter:end:09-Annotation.Rmd-->
+
+# Final report {#finalreport}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+``` 
+
+<!--chapter:end:10-Final_report.Rmd-->
+
+# (APPENDIX) Appendix {-}
+
+# Next steps{#nextsteps}
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
+``` 
+
+Below are some good links to start with before carrying out your own projects.
+
+(Conda and Mamba)
+
+https://github.com/mamba-org/mamba
+
+
+# Manuals
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
+``` 
+
+Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+
+FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+MultiQC: https://multiqc.info/
+
+Trim Galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
+
+Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+
+samtools: http://www.htslib.org/
+
+BBTools: https://jgi.doe.gov/data-and-tools/bbtools/
+
+Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
+
+Krona: https://github.com/marbl/Krona/wiki/KronaTools
+
+Bracken: https://ccb.jhu.edu/software/bracken/index.shtml?t=manual
+
+LEfSe: https://huttenhower.sph.harvard.edu/lefse/
+
+HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
+
+MetaPhlAn2: https://huttenhower.sph.harvard.edu/metaphlan2/
+
+Biobakery: https://github.com/biobakery/biobakery
+
+MegaHit: https://github.com/voutcn/megahit
+
+BWA: https://github.com/lh3/bwa
+
+minimap2: https://github.com/lh3/minimap2
+
+MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
+
+MetaWRAP: https://github.com/bxlab/metaWRAP
+
+Pokka: https://github.com/tseemann/prokka
+
+MinPath: https://github.com/mgtools/MinPath/blob/master/readme
+
+MetaCyc: https://metacyc.org/
+
+# Obtaining Read Data
+
+https://github.com/PacificBiosciences/DevNet/wiki/8-plex-Ecoli-Multiplexed-Microbial-Assembly
+
+
+<!--chapter:end:11-Appendix.Rmd-->
 
