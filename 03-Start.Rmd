@@ -25,7 +25,7 @@ For the standard workflow we will be using pre QC'd PacBio reads of an *Escheric
 #Create directory
 mkdir ecoli_reads
 #Softlink of read data
-ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli* ecoli_reads
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq ecoli_reads
 ```
 
 ## Conda environments

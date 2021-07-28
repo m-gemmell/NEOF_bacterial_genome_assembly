@@ -64,23 +64,3 @@ checkm lineage_wf --tab_table -f checkm/ecoli_checkm.tsv -t 8 -x ctg.fa redbean_
 ```{bash eval=FALSE}
 less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 ```
-
-## MultiQC
-
-```{bash eval=FALSE}
-mkdir -p multiqc/redbean/ecoli/input
-ln -s quast/redbean/report.tsv multiqc/redbean/ecoli/input
-ln -s busco/redbean/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt\
-multiqc/redbean/ecoli/input
-```
-
-```{bash eval=FALSE}
-multiqc --outdir multiqc/redbean/ecoli/input multiqc/redbean/ecoli
-```
-
-```{bash eval=FALSE}
-firefox multiqc/redbean/ecoli/multiqc_report.html
-```
-
-
-MultiQC modules: https://multiqc.info/docs/#multiqc-modules

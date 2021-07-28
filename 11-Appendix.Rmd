@@ -5,12 +5,7 @@
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
 
-Below are some good links to start with before carrying out your own projects.
-
-(Conda and Mamba)
-
-https://github.com/mamba-org/mamba
-
+`Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
 
 # Manuals
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -18,6 +13,17 @@ knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
 
 Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+
+Mamba: https://github.com/mamba-org/mamba
+
+Redbean (wtdbg2): https://github.com/ruanjue/wtdbg2
+
+
+
+
+
+
+
 
 FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 

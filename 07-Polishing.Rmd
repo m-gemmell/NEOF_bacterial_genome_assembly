@@ -2,3 +2,89 @@
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/polishing.png", auto_pdf = TRUE)
 ``` 
+
+
+## Racon
+
+
+### Racon: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `bacterial_assembly` conda environment for our Redbean assembly.
+
+```{bash eval=FALSE}
+. usebacterialassembly
+```
+
+```{bash eval=FALSE}
+cd ~/bacterial_assembly/standard_workflow
+mkdir -p racon/redbean/ecoli
+```
+
+### Racon: Index assembly
+```{bash eval=FALSE}
+bwa index redbean_assembly/ecoli.ctg.fa
+```
+
+### Racon: Read alignment to assembly
+```{bash eval=FALSE}
+bwa mem \
+-t 8 \
+-x pacbio redbean_assembly/ecoli.ctg.fa \
+ecoli_reads/ecoli.fastq \
+> racon/redbean/ecoli/ecoli_i1.sam
+```
+
+### Racon: Polishing
+```{bash eval=FALSE}
+racon -t 8 \
+ecoli_reads/ecoli.fastq \
+racon/redbean/ecoli/ecoli_i1.sam redbean_assembly/ecoli.ctg.fa \
+> racon/redbean/ecoli/ecoli_i1.fasta
+```
+
+### Racon: Polishing report
+
+We can compare the redbean assembly and the polished assmebly to get a polishing report. This can be carried out with the `dnadiff` command from the program `mummer`.
+
+```{bash eval=FALSE}
+mkdir racon/redbean/ecoli/dnadiff
+```
+
+```{bash eval=FALSE}
+dnadiff --prefix racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1 redbean_assembly/ecoli.ctg.fa racon/redbean/ecoli/ecoli_i1.fasta
+```
+
+```{bash eval=FALSE}
+less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
+```
+
+(total seqs went from 4 to 1, total bases decreased by ~50k, 627 SNPs i.e. base changes)
+
+`dnadiff` README:
+https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
+
+
+### Racon: Second iteration
+
+With genome polishing normally multiple iterations of polishing are required. Therefore let us polish the polished assembly to create the second iteration of polishing.
+
+```{bash eval=FALSE}
+bwa index racon/redbean/ecoli/ecoli_i1.fasta
+
+bwa mem -t 8 -x pacbi racon/redbean/ecoli/ecoli_1.fasta ecoli_reads/ecoli.fastq > racon/redbean/ecoli/ecoli_i2.sam
+
+racon -t 8 ecoli_reads/ecoli.fastq racon/redbean/ecoli/ecoli_i2.sam racon/redbean/ecoli/ecoli_1.fasta > racon/redbean/ecoli/ecoli_i2.fasta
+```
+
+```{bash eval=FALSE}
+dnadiff --prefix racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2 racon/redbean/ecoli/ecoli_i1.fasta racon/redbean/ecoli/ecoli_i2.fasta
+```
+
+```{bash eval=FALSE}
+less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi2.report
+```
+
+(40 SNPs, much reduced, looking for convergence, eventually number of changes will stabilise showing bases that could be one or the other)

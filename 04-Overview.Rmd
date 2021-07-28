@@ -2,3 +2,31 @@
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
 ``` 
+
+## Overview: Bacterial genome assembly
+
+(Specific points about bacterial genome assembly)
+
+
+
+## Overview: Long read data
+
+(short versus long read assembly. long read becoming more popular)
+
+(PacBio vs ONT, this standard pipeline will work for ONT with some changes)
+
+## Overview: Read QC
+
+(talk about the read data here and how it was created)
+
+## Overview: Assembly
+
+## Overview: Assembly assessment
+
+## Overview: Polishing
+
+## Overview: Circlator
+
+## Overview: Annotation
+
+## Overview: Final report

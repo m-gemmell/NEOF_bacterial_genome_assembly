@@ -2,3 +2,35 @@
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ``` 
+
+
+## QUAST
+
+(use reference)
+
+
+
+
+## MultiQC
+
+(change commands)
+
+```{bash eval=FALSE}
+mkdir -p multiqc/redbean/ecoli/input
+ln -s quast/redbean/report.tsv multiqc/redbean/ecoli/input
+ln -s busco/redbean/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt\
+multiqc/redbean/ecoli/input
+```
+
+```{bash eval=FALSE}
+multiqc --outdir multiqc/redbean/ecoli/input multiqc/redbean/ecoli
+```
+
+```{bash eval=FALSE}
+firefox multiqc/redbean/ecoli/multiqc_report.html
+```
+
+
+MultiQC modules: https://multiqc.info/docs/#multiqc-modules
+
+## Compare against reference with dnadif

@@ -3,40 +3,74 @@
 knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
 ``` 
 
-(bit of a spiel about assembly)
+The first step of any genome assembly is QC of the reads to be used but the step after that is genome assembly. There are many different assemblers and in past times the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
+
+The two considerations have been alleviated by improvements to sequencing technologies and bioinformatics processes.
+
+- Sequencing technologies are creating longer and higher quality reads.      - The better the length and quality gets the less work assemblers needs to do.
+   - There may come a time when you can get one read that perfectly represents an entire genome/chromosome. Assembly would not be required at all.
+- Genome assemblers are getting better.
+   - There is a large choice of good genome assemblers. It is less a question of which to use and more a question of which not to use.
+- Genome assembly parameter choice is a smaller issue.
+   - For older assemblers and older versions of assemblers it would take a lot of trial and error to try to find the best parameters.
+   - Now like many bioinformatics tools assemblers will attempt to use the best parameters for your data. Generally they are better and quicker than humans at this.
 
 ## Redbean
 
-Redbean (AKA wtdbg2)
+For assembly of our PacBio reads we will be using `Redbean` (AKA `wtdbg2`). `Redbean` is a long read assembler with comparable performance to others. However, where it excels is its speed,  it is much faster than other long read assemblers. This make it perfect for this workshop.
 
+`Redbean` can be used for genomes of all sizes. It will work for Viruses, Bacteria, Archaea, and Eukaryotes.
 
 ### Redbean: Conda environment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `bacterial_assembly` conda environment for our Redbean assembly.
+We will use the `bacterial_assembly` `conda` environment for our Redbean assembly. This will be our main conda environment for our standard workflow.
+
+Activate the environment:
 
 ```{bash eval=FALSE}
 . usebacterialassembly
 ```
 
+Before we start we will move into our analysis directory and create a directory for the assembly we will produce.
+
 ```{bash eval=FALSE}
+#Change directory to analysis directory
 cd ~/bacterial_assembly/standard_workflow
+#Create directory for redbean output
 mkdir redbean_assembly
 ```
 
 ### Redbean: Assemble long reads
 
+The first step of `Redbean` is to carry out the assembly. This is carried out with the `wtdgb2` command.
+
 ```{bash eval=FALSE}
 wtdbg2 -x rs -g 4.6m -i ecoli_reads/ecoli.fastq -o redbean_assembly/ecoli -t 8
 ```
 
+This will create a bunch of files. Most of these we will ignore with only 4 being used below.
+
 ### Redbean: Derive consensus
+
+If you checked the output directory you may have noticed there was no fasta file. Therefore the next step is to create a fasta file that contains the consensus assembly with `wtpoa-cns`.
 
 ```{bash eval=FALSE}
 wtpoa-cns -t 8 -i redbean_assembly/ecoli.ctg.lay.gz -fo redbean_assembly/ecoli.ctg.fa
 ```
+
+The consensus is produced from the assembly graph (mor eon the graph below). Assembly is not always straight forward and when producing a graph an assembler may derive multiple paths through the assembly. A two examples of how this can happen are:
+
+- Repeating regions: With the data it may be hard to determine how many times a repeat occurs within the repeat region. Maybe it is 10 or 11 times.
+- Identical homopolymers: It is possible that long homopolymers of As (or one of the other bases) occurs multiple times in the genome. It may then be difficult to know what is at either end of each unique homopolymer location. 
+   - E.g. There are 2 homopolymer sequences (H1 & H2) with 4 ends (E1-4).
+   - Is H1 flanked by E1 and E2 and therefore H2 is flanked by E3 and E4?
+   - Or is H1 flanked by E1 and E3 and therefore H2 is flanked by E2 and E4?
+   - Etc.
+
+The consensus can then be thought of as the one best path through the graph to produce the most likely genome assembly.
 
 ### Redbean: Bandage Visualisation
 
@@ -68,3 +102,6 @@ File -> Load Graph ->
 Graph Drawing -> Draw graph
 
 ## Other long read assemblers
+
+`Redbean` may not produce as good an assembly as other assemblers. However, even if you plan to use another assembler `Redbean` is very good as a first pass tool. Run a `Redbean` assembly and carry out genome assessment (in next chapter) to see if there are any issues with the reads that was not caught in the read QC. Various issues and solutions are covered in the supplemental bookdown.
+
