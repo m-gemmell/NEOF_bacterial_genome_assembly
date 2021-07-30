@@ -3,34 +3,60 @@
 knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ``` 
 
+## Report
 
-## QUAST
+### Report: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+```{bash eval=FALSE}
+chos 8
+. usebacterialgenomeassessment
+```
+
+```{bash eval=FALSE}
+cd ~/bacterial_assembly/standard_workflow/final_assembly
+```
+
+### Report: QUAST
+
+```{bash eval=FALSE}
+cp -r /pub39/tea/nsc006/NEOF/bact_assembly/ref/ ~/bacterial_assembly/
+```
 
 (use reference)
+```{bash eval=FALSE}
+mkdir quast
+quast -r ../../ ecoli_ref.fasta -o quast assembly/ecoli.fasta
+```
 
+### Report: BUSCO
 
+```{bash eval=FALSE}
+mkdir busco
+busco -i assembly/ecoli.fasta -l enterobacterales_odb10 -m geno -o ecoli --out_path ./busco/
+```
 
-
-## MultiQC
+### Report: MultiQC
 
 (change commands)
-
 ```{bash eval=FALSE}
-mkdir -p multiqc/redbean/ecoli/input
-ln -s quast/redbean/report.tsv multiqc/redbean/ecoli/input
-ln -s busco/redbean/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt\
-multiqc/redbean/ecoli/input
+mkdir multiqc
+cd multiqc
+mkdir input
+cp ../quast/report.tsv input/
+cp ../busco/ecoli/short_summary.specific.enterobacterales_odb10.txt input/
+cp ../prokka/ecoli/ecoli.txt input/
 ```
 
 ```{bash eval=FALSE}
-multiqc --outdir multiqc/redbean/ecoli/input multiqc/redbean/ecoli
+multiqc --cl-config "prokka_fn_snames: True" -o . input/*
 ```
 
 ```{bash eval=FALSE}
-firefox multiqc/redbean/ecoli/multiqc_report.html
+firefox multiqc_report.html
 ```
 
 
 MultiQC modules: https://multiqc.info/docs/#multiqc-modules
-
-## Compare against reference with dnadif

@@ -2,3 +2,34 @@
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
 ``` 
+
+
+```{bash eval=FALSE}
+chos 8
+. usecirclator
+```
+
+
+```{bash eval=FALSE}
+canu -correct -p ecoli -d ecoli_reads genomeSize=4.6m -pacbio ecoli_reads/ecoli.fastq
+```
+
+#don’t actually run as will take ~30 minutes
+
+#instead copy predoen
+```{bash eval=FALSE}
+cp /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
+gunzip ecoli_reads/ecoli.correctedReads.fasta.gz
+```
+
+
+#circlator 
+```{bash eval=FALSE}
+mkdir -p circlator/redbean_racon_i2/
+```
+```{bash eval=FALSE}
+circlator all racon/redbean/ecoli/ecoli_i2.fasta ecoli_reads/ecoli.correctedReads.fasta circlator/redbean_racon_i2/ecoli
+```
+
+
+(note always good to assess after these type of steps but we will contiue with annotation followed by assessment)

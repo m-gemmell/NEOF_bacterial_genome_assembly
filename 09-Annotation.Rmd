@@ -2,3 +2,36 @@
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ``` 
+
+```{bash eval=FALSE}
+chos 8
+. useprokka
+```
+
+```{bash eval=FALSE}
+cd ~/cd bacterial_assembly/standard_workflow
+mkdir final_assembly
+cd final_assembly
+```
+
+
+```{bash eval=FALSE}
+mkdir assembly
+cp ../circlator/redbean_racon_i2/ecoli/06.fixstart.fasta assembly/ecoli.fasta
+```
+
+```{bash eval=FALSE}
+mkdir prokka
+```
+
+
+```{bash eval=FALSE}
+#outdir must not exist
+prokka --addgenes --prefix ecoli --outdir prokka/ecoli assembly/ecoli.fasta
+```
+
+#look at summary output
+
+```{bash eval=FALSE}
+less -S prokka/ecoli/ecoli.txt
+```
