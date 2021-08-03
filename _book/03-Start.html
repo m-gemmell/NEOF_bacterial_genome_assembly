@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-07-30" />
+<meta name="date" content="2021-08-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,9 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-conda-environment-directory"><i class="fa fa-check"></i><b>5.1.1</b> Redbean: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="5.1.2" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-assemble-long-reads"><i class="fa fa-check"></i><b>5.1.2</b> Redbean: Assemble long reads</a></li>
 <li class="chapter" data-level="5.1.3" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-derive-consensus"><i class="fa fa-check"></i><b>5.1.3</b> Redbean: Derive consensus</a></li>
-<li class="chapter" data-level="5.1.4" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-bandage-visualisation"><i class="fa fa-check"></i><b>5.1.4</b> Redbean: Bandage Visualisation</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="05-Assembly.html"><a href="05-Assembly.html#other-long-read-assemblers"><i class="fa fa-check"></i><b>5.2</b> Other long read assemblers</a></li>
+<li class="chapter" data-level="5.2" data-path="05-Assembly.html"><a href="05-Assembly.html#bandage-visualisation"><i class="fa fa-check"></i><b>5.2</b> Bandage Visualisation</a></li>
+<li class="chapter" data-level="5.3" data-path="05-Assembly.html"><a href="05-Assembly.html#other-long-read-assemblers"><i class="fa fa-check"></i><b>5.3</b> Other long read assemblers</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
@@ -260,11 +260,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p><code>Conda</code> is a very useful tool for bioinformaticians. It allows for the creation of virtual environments so you can install different programs. This is generally easier than manually installing programs for 2 main reasons:</p>
 <ul>
-<li>Usually <code>Conda</code> will install all the dependencies a program needs.
+<li><strong>Normally</strong> <code>Conda</code> will install all the dependencies a program needs.
 <ul>
 <li>Prior to <code>Conda</code> it could take more than a day to install a program and all its dependencies plus the dependencies of the dependencies etc.</li>
 </ul></li>
-<li>Different programs may need different versions of the same program as a dependency (e.g. One programs may need Python2 whilst another needs Python3). Therefore installing one can break the other. Having separate <code>Conda</code> environments (virtual environments) can isolate clashing programs.</li>
+<li>Different programs may need different versions of the same program as a dependency (e.g. One program may need Python2 whilst another needs Python3). Therefore installing one can break the other. Having separate <code>Conda</code> environments (virtual environments) can isolate clashing programs.</li>
 </ul>
 <p><strong>Analogy</strong>: You can think of programs as food and environments as food storage units. You could try to shove all your food into one giant cold room but most of your food will either be too cold or too warm. Instead it would be better to have different types of food in different environments as outlined in the below table.</p>
 <table>
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>As we will be using many different programs we will be using different <code>Conda</code> environments. To activate these environments you will be using <code>use</code> scripts that will activate the relevant <code>Conda</code> environment belonging to user <code>nsc006</code> (Matthew Gemmell).</p>
 <p>Preferably during the course of this workflow you will have a terminal open for each <code>Conda</code> environment. It is important to make sure you are in the correct terminal/environment for each chapter.</p>
-<p>You can see what environment a terminal currently has activated by looking at the command prompt. Below we can see the command prompt shows we the terminal is in the environment called <code>bacterial_assembly</code>. The name of the currenlty activated <code>Conda</code> environment will always be in <code>()</code> before the login/user name across all systems.</p>
+<p>You can see what environment a terminal currently has activated by looking at the command prompt. In the below picture we can see the command prompt says we are in the environment called <code>bacterial_assembly</code>. The name of the currently activated <code>Conda</code> environment will always be in <code>()</code> before the login/user name across all systems when using <code>Conda</code>.</p>
 <p><img src="figures/conda_bacterial_assembly_terminal.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>For your own future analyses you would use your own <code>Conda</code>. If you are interested please see the <code>Conda</code> and <code>Mamba</code> links in the <a href="12-Appendix.html#nextsteps">Next steps</a> section of the Appendix.</p>
 

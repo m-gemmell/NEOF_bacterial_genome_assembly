@@ -36,9 +36,9 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 
 `Conda` is a very useful tool for bioinformaticians. It allows for the creation of virtual environments so you can install different programs. This is generally easier than manually installing programs for 2 main reasons:
 
--   Usually `Conda` will install all the dependencies a program needs.
+-   __Normally__ `Conda` will install all the dependencies a program needs.
     -   Prior to `Conda` it could take more than a day to install a program and all its dependencies plus the dependencies of the dependencies etc.
--   Different programs may need different versions of the same program as a dependency (e.g. One programs may need Python2 whilst another needs Python3). Therefore installing one can break the other. Having separate `Conda` environments (virtual environments) can isolate clashing programs.
+-   Different programs may need different versions of the same program as a dependency (e.g. One program may need Python2 whilst another needs Python3). Therefore installing one can break the other. Having separate `Conda` environments (virtual environments) can isolate clashing programs.
 
 **Analogy**: You can think of programs as food and environments as food storage units. You could try to shove all your food into one giant cold room but most of your food will either be too cold or too warm. Instead it would be better to have different types of food in different environments as outlined in the below table.
 
@@ -54,7 +54,7 @@ As we will be using many different programs we will be using different `Conda` e
 
 Preferably during the course of this workflow you will have a terminal open for each `Conda` environment. It is important to make sure you are in the correct terminal/environment for each chapter. 
 
-You can see what environment a terminal currently has activated by looking at the command prompt. Below we can see the command prompt shows we the terminal is in the environment called `bacterial_assembly`. The name of the currenlty activated `Conda` environment will always be in `()` before the login/user name across all systems.
+You can see what environment a terminal currently has activated by looking at the command prompt. In the below picture we can see the command prompt says we are in the environment called `bacterial_assembly`. The name of the currently activated `Conda` environment will always be in `()` before the login/user name across all systems when using `Conda`.
 
 ```{r, fig.align = 'center',out.width= '60%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda_bacterial_assembly_terminal.png", auto_pdf = TRUE)

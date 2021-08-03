@@ -4,6 +4,7 @@ knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
 ```
 
 
+
 ## Assessment: Conda environnment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)

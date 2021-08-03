@@ -5,9 +5,14 @@
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
 
-`Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
+- `Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
+- Benchmarks of long-read assemblers paper.
+   - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/
 
-# Manuals
+
+
+
+# Manuals{#manuals}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
@@ -18,10 +23,21 @@ Mamba: https://github.com/mamba-org/mamba
 
 Redbean (wtdbg2): https://github.com/ruanjue/wtdbg2
 
+Bandage: https://rrwick.github.io/Bandage/
 
+GFA spec: http://gfa-spec.github.io/GFA-spec/GFA1.html
 
+Canu: https://github.com/marbl/canu
 
+HGAP: https://github.com/PacificBiosciences/Bioinformatics-Training/wiki/HGAP
 
+Flye: https://github.com/fenderglass/Flye
+
+Raven: https://github.com/lbcb-sci/raven
+
+NECAT: https://github.com/xiaochuanle/NECAT
+
+Shasta: https://github.com/chanzuckerberg/shasta
 
 
 

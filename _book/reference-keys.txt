@@ -20,7 +20,7 @@ redbean
 redbean-conda-environment-directory
 redbean-assemble-long-reads
 redbean-derive-consensus
-redbean-bandage-visualisation
+bandage-visualisation
 other-long-read-assemblers
 genomeassemblyassessment
 assessment-conda-environnment-directory

@@ -1,32 +1,38 @@
 # Genome Assembly {#redbeanassembly}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/string.png", auto_pdf = TRUE)
 ``` 
 
-The first step of any genome assembly is QC of the reads to be used but the step after that is genome assembly. There are many different assemblers and in past times the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
+The first step of any genome assembly project is to carry out is QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
 
-The two considerations have been alleviated by improvements to sequencing technologies and bioinformatics processes.
+The bioinformatician's choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:
 
-- Sequencing technologies are creating longer and higher quality reads.      - The better the length and quality gets the less work assemblers needs to do.
+- Sequencing technologies are creating longer and higher quality reads.
+   - The better the length and quality, the less work assemblers needs to do.
    - There may come a time when you can get one read that perfectly represents an entire genome/chromosome. Assembly would not be required at all.
-- Genome assemblers are getting better.
+- Genome assemblers are improving.
    - There is a large choice of good genome assemblers. It is less a question of which to use and more a question of which not to use.
 - Genome assembly parameter choice is a smaller issue.
    - For older assemblers and older versions of assemblers it would take a lot of trial and error to try to find the best parameters.
-   - Now like many bioinformatics tools assemblers will attempt to use the best parameters for your data. Generally they are better and quicker than humans at this.
+   - Now like many bioinformatics tools, assemblers will attempt to use the best parameters for your data. Generally they are better and quicker than humans at this.
 
 ## Redbean
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/redbean.png", auto_pdf = TRUE)
+``` 
 
 For assembly of our PacBio reads we will be using `Redbean` (AKA `wtdbg2`). `Redbean` is a long read assembler with comparable performance to others. However, where it excels is its speed,  it is much faster than other long read assemblers. This make it perfect for this workshop.
 
 `Redbean` can be used for genomes of all sizes. It will work for Viruses, Bacteria, Archaea, and Eukaryotes.
+
+`Redbean` works for PacBio RSII, PacBio Sequel, and Oxford nanopore data.
 
 ### Redbean: Conda environment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `bacterial_assembly` `conda` environment for our Redbean assembly. This will be our main conda environment for our standard workflow.
+We will use the `bacterial_assembly` `conda` environment for our `Redbean` assembly. This will be our main conda environment for our standard workflow.
 
 Activate the environment:
 
@@ -34,7 +40,7 @@ Activate the environment:
 . usebacterialassembly
 ```
 
-Before we start we will move into our analysis directory and create a directory for the assembly we will produce.
+Before we start we will move into our analysis directory (created in [setup](#setup)) and create a directory for the assembly we will produce.
 
 ```{bash eval=FALSE}
 #Change directory to analysis directory
@@ -44,6 +50,9 @@ mkdir redbean_assembly
 ```
 
 ### Redbean: Assemble long reads
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/assembly_simple.png", auto_pdf = TRUE)
+``` 
 
 The first step of `Redbean` is to carry out the assembly. This is carried out with the `wtdgb2` command.
 
@@ -51,9 +60,29 @@ The first step of `Redbean` is to carry out the assembly. This is carried out wi
 wtdbg2 -x rs -g 4.6m -i ecoli_reads/ecoli.fastq -o redbean_assembly/ecoli -t 8
 ```
 
-This will create a bunch of files. Most of these we will ignore with only 4 being used below.
+__Parameters__
+
+- `-x` : This indicates the sequencing technology of the input reads.
+   - `rs` = PacBio RSII
+   - `sq` = PacBio Sequel
+   - `ccs` = PacBio CCS reads
+   - `ont` = Oxford Nanopore
+- `-g` : This indicates the estimated size of the genome
+   - This does not need to be super exact with and you ca round up to two significant figures. Examples are below.
+      - _E.coli_ | genome size = 4,639,221 bp => `-g 4.6m` (m = megabases)
+      - _Phi-X174_ | genome size = 5386 bp => `-g 5.4k` (k = kilobase)
+      - _H.Sapiens_ | genome size = 3.2Gb => `-g 3g` (g = gigabase)
+- `-i` : The input reads.
+- `-o` : The output prefix.
+   - With this set to `redbean_assembly/ecoli` all the output files will be in the directory `redbean_assembly` with the prefix `ecoli`.
+- `-t` : Number of threads to be used.
+
+The will create a bunch of output files. Most of these we will ignore with only 4 being used below.
 
 ### Redbean: Derive consensus
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/consensus.png", auto_pdf = TRUE)
+``` 
 
 If you checked the output directory you may have noticed there was no fasta file. Therefore the next step is to create a fasta file that contains the consensus assembly with `wtpoa-cns`.
 
@@ -61,47 +90,92 @@ If you checked the output directory you may have noticed there was no fasta file
 wtpoa-cns -t 8 -i redbean_assembly/ecoli.ctg.lay.gz -fo redbean_assembly/ecoli.ctg.fa
 ```
 
-The consensus is produced from the assembly graph (mor eon the graph below). Assembly is not always straight forward and when producing a graph an assembler may derive multiple paths through the assembly. A two examples of how this can happen are:
+__Parameters__
 
-- Repeating regions: With the data it may be hard to determine how many times a repeat occurs within the repeat region. Maybe it is 10 or 11 times.
-- Identical homopolymers: It is possible that long homopolymers of As (or one of the other bases) occurs multiple times in the genome. It may then be difficult to know what is at either end of each unique homopolymer location. 
+- `-i` : The input `ctg.lay.gz` file produced by `wtdbg2`
+- `-fo` : The output file path for the consensus assembly in fasta format.
+- `-t` : Number of threads to be used.
+
+The consensus is produced from the assembly graph (more on the graph below). Assembly is not always straight forward and when producing a graph, an assembler may derive multiple paths/branches through the assembly. 
+
+Two examples of how this may occur are:
+
+- __Repeating regions__: An assembler may find it hard to determine how many times a repeat occurs within the repeat region. Maybe it is 10 or 11 times.
+- __Identical homopolymers__: It is possible that long homopolymers of As (or one of the other bases) occurs multiple times in the genome. It may then be difficult to know what is at either end of each unique homopolymer location. 
    - E.g. There are 2 homopolymer sequences (H1 & H2) with 4 ends (E1-4).
-   - Is H1 flanked by E1 and E2 and therefore H2 is flanked by E3 and E4?
-   - Or is H1 flanked by E1 and E3 and therefore H2 is flanked by E2 and E4?
-   - Etc.
+      - Is H1 flanked by E1 and E2 and therefore H2 is flanked by E3 and E4?
+      - Or is H1 flanked by E1 and E3 and therefore H2 is flanked by E2 and E4?
+      - Etc.
 
 The consensus can then be thought of as the one best path through the graph to produce the most likely genome assembly.
 
-### Redbean: Bandage Visualisation
+## Bandage Visualisation
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/bandage.png", auto_pdf = TRUE)
+``` 
 
-(for interest about assembly graph)
-(view assembly graphs, why consensus is derived)
+This part is optional and generally something I never do in real analyses. However, it is interesting and will help your understanding of assembly graphs.
 
-`gunzip` files
+`Redbean` carries out 3 iterations of graph construction, each getting better. These three graph iterations are represented by the `.dot.gz` files. We can visualise these graphs with the tool `Bandage`.
+
+Before visualisation we need to convert the files to `.gfa` (link on file specs in [appendix](#manuals)) files which are compatible with `Bandage`.
+
+First we need to `gunzip` the files.
+
 ```{bash eval=FALSE}
 gunzip redbean_assembly/ecoli.1.dot.gz
 gunzip redbean_assembly/ecoli.2.dot.gz
 gunzip redbean_assembly/ecoli.3.dot.gz
 ```
 
-Convert `.dot` file into `.gfa` file required for `Bandage`.
+Next we convert the `.dot` files into `.gfa` files.
 
-The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. Unfortunately this is not installed when you install `wtdbg2` via `conda`.
+The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. Unfortunately this is not installed when you install `wtdbg2` via `Conda`.
+
 ```{bash eval=FALSE}
 wtdbg-dot2gfa.pl redbean_assembly/ecoli.1.dot > redbean_assembly/ecoli.1.dot.gfa
 wtdbg-dot2gfa.pl redbean_assembly/ecoli.2.dot > redbean_assembly/ecoli.2.dot.gfa
 wtdbg-dot2gfa.pl redbean_assembly/ecoli.3.dot > redbean_assembly/ecoli.3.dot.gfa
 ```
 
-Open up `Bandage` GUI.
+Now we can open up the `Bandage` GUI.
 ```{bash eval=FALSE}
 Bandage
 ```
 
-File -> Load Graph -> 
-Graph Drawing -> Draw graph
+Using this GUI we will open the `.gfa` files one at a time. Start with the `ecoli.1.dot.gfa` file (the 1st graph), then the `ecoli.2.dot.gfa` file (2nd), followed by the `ecoli.3.dot.gfa` file (3rd, last, and best).
+
+To open a graph carry out the following
+
+- On the tool bar click `File` -> `Load graph`
+- In the pop up file explorer navigate to `~/bacterial_assembly/standard_workflow/redbean_assembly/` and double click on the `.gfa` file you would like to view.
+- In the `Graph drawing` section on the right side bar:
+   - Ensure `Scope:` is set to `Entire graph`
+   - Ensure `Style` is set to `Single`
+   - Click the `Draw graph` button
+
+__Tips__: 
+
+- The graph for `ecoli.1.dot.gfa` will take quite a while to load.
+- The graphs for `ecoli.2.dot.gfa` and `ecoli.3.dot.gfa` are very large so you may need to change the `zoom` to 1%.
+
+As you go from 1 to 3 you will see two many changes:
+
+- __Fewer contigs__: This shows the assembler is connecting parts of the assembly to give a more contiguous assembly.
+- __Fewer branches__: In the 1st and 2nd graphs you will see branches, parts of the graph that branch off and possibly reconnect again. This represents multiple paths through the assembly that are possible. Through the `Redbean` iterations the assembler chooses the best routes, removing the other routes. You will need to zoom in to properly see these branches.
 
 ## Other long read assemblers
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/canoe.png", auto_pdf = TRUE)
+``` 
 
-`Redbean` may not produce as good an assembly as other assemblers. However, even if you plan to use another assembler `Redbean` is very good as a first pass tool. Run a `Redbean` assembly and carry out genome assessment (in next chapter) to see if there are any issues with the reads that was not caught in the read QC. Various issues and solutions are covered in the supplemental bookdown.
+`Redbean` will not always be the optimal assembler. However, even if you plan to use another assembler `Redbean` is very good as a first pass tool due to its speed. It can be very useful to run a `Redbean` assembly and carry out genome assessment (shown in next chapter) to see if there are any issues with the reads that was not caught in the read QC. Various issues and solutions are covered in the supplemental bookdown.
 
+Other long read assemblers to explore for yourself include (links in [appendix](#manuals)):
+
+- `Canu`
+- `HGAP`
+- `Flye`
+- `Raven`
+- `NECAT`
+- `Shasta`

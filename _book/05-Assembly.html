@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-07-30" />
+<meta name="date" content="2021-08-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,9 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-conda-environment-directory"><i class="fa fa-check"></i><b>5.1.1</b> Redbean: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="5.1.2" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-assemble-long-reads"><i class="fa fa-check"></i><b>5.1.2</b> Redbean: Assemble long reads</a></li>
 <li class="chapter" data-level="5.1.3" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-derive-consensus"><i class="fa fa-check"></i><b>5.1.3</b> Redbean: Derive consensus</a></li>
-<li class="chapter" data-level="5.1.4" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-bandage-visualisation"><i class="fa fa-check"></i><b>5.1.4</b> Redbean: Bandage Visualisation</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="05-Assembly.html"><a href="05-Assembly.html#other-long-read-assemblers"><i class="fa fa-check"></i><b>5.2</b> Other long read assemblers</a></li>
+<li class="chapter" data-level="5.2" data-path="05-Assembly.html"><a href="05-Assembly.html#bandage-visualisation"><i class="fa fa-check"></i><b>5.2</b> Bandage Visualisation</a></li>
+<li class="chapter" data-level="5.3" data-path="05-Assembly.html"><a href="05-Assembly.html#other-long-read-assemblers"><i class="fa fa-check"></i><b>5.3</b> Other long read assemblers</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
@@ -240,35 +240,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="redbeanassembly" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Genome Assembly</h1>
-<p><img src="figures/redbean.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>The first step of any genome assembly is QC of the reads to be used but the step after that is genome assembly. There are many different assemblers and in past times the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.</p>
-<p>The two considerations have been alleviated by improvements to sequencing technologies and bioinformatics processes.</p>
+<p><img src="figures/string.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>The first step of any genome assembly project is to carry out is QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.</p>
+<p>The bioinformatician’s choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:</p>
 <ul>
-<li>Sequencing technologies are creating longer and higher quality reads. - The better the length and quality gets the less work assemblers needs to do.
+<li>Sequencing technologies are creating longer and higher quality reads.
 <ul>
+<li>The better the length and quality, the less work assemblers needs to do.</li>
 <li>There may come a time when you can get one read that perfectly represents an entire genome/chromosome. Assembly would not be required at all.</li>
 </ul></li>
-<li>Genome assemblers are getting better.
+<li>Genome assemblers are improving.
 <ul>
 <li>There is a large choice of good genome assemblers. It is less a question of which to use and more a question of which not to use.</li>
 </ul></li>
 <li>Genome assembly parameter choice is a smaller issue.
 <ul>
 <li>For older assemblers and older versions of assemblers it would take a lot of trial and error to try to find the best parameters.</li>
-<li>Now like many bioinformatics tools assemblers will attempt to use the best parameters for your data. Generally they are better and quicker than humans at this.</li>
+<li>Now like many bioinformatics tools, assemblers will attempt to use the best parameters for your data. Generally they are better and quicker than humans at this.</li>
 </ul></li>
 </ul>
 <div id="redbean" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Redbean</h2>
+<p><img src="figures/redbean.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>For assembly of our PacBio reads we will be using <code>Redbean</code> (AKA <code>wtdbg2</code>). <code>Redbean</code> is a long read assembler with comparable performance to others. However, where it excels is its speed, it is much faster than other long read assemblers. This make it perfect for this workshop.</p>
 <p><code>Redbean</code> can be used for genomes of all sizes. It will work for Viruses, Bacteria, Archaea, and Eukaryotes.</p>
+<p><code>Redbean</code> works for PacBio RSII, PacBio Sequel, and Oxford nanopore data.</p>
 <div id="redbean-conda-environment-directory" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Redbean: Conda environment &amp; directory</h3>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>We will use the <code>bacterial_assembly</code> <code>conda</code> environment for our Redbean assembly. This will be our main conda environment for our standard workflow.</p>
+<p>We will use the <code>bacterial_assembly</code> <code>conda</code> environment for our <code>Redbean</code> assembly. This will be our main conda environment for our standard workflow.</p>
 <p>Activate the environment:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="05-Assembly.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usebacterialassembly</span></code></pre></div>
-<p>Before we start we will move into our analysis directory and create a directory for the assembly we will produce.</p>
+<p>Before we start we will move into our analysis directory (created in <a href="03-Start.html#setup">setup</a>) and create a directory for the assembly we will produce.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="05-Assembly.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory to analysis directory</span></span>
 <span id="cb5-2"><a href="05-Assembly.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span>
 <span id="cb5-3"><a href="05-Assembly.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create directory for redbean output</span></span>
@@ -276,49 +279,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="redbean-assemble-long-reads" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Redbean: Assemble long reads</h3>
+<p><img src="figures/assembly_simple.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>The first step of <code>Redbean</code> is to carry out the assembly. This is carried out with the <code>wtdgb2</code> command.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="05-Assembly.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg2</span> <span class="at">-x</span> rs <span class="at">-g</span> 4.6m <span class="at">-i</span> ecoli_reads/ecoli.fastq <span class="at">-o</span> redbean_assembly/ecoli <span class="at">-t</span> 8</span></code></pre></div>
-<p>This will create a bunch of files. Most of these we will ignore with only 4 being used below.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>-x</code> : This indicates the sequencing technology of the input reads.
+<ul>
+<li><code>rs</code> = PacBio RSII</li>
+<li><code>sq</code> = PacBio Sequel</li>
+<li><code>ccs</code> = PacBio CCS reads</li>
+<li><code>ont</code> = Oxford Nanopore</li>
+</ul></li>
+<li><code>-g</code> : This indicates the estimated size of the genome
+<ul>
+<li>This does not need to be super exact with and you ca round up to two significant figures. Examples are below.
+<ul>
+<li><em>E.coli</em> | genome size = 4,639,221 bp =&gt; <code>-g 4.6m</code> (m = megabases)</li>
+<li><em>Phi-X174</em> | genome size = 5386 bp =&gt; <code>-g 5.4k</code> (k = kilobase)</li>
+<li><em>H.Sapiens</em> | genome size = 3.2Gb =&gt; <code>-g 3g</code> (g = gigabase)</li>
+</ul></li>
+</ul></li>
+<li><code>-i</code> : The input reads.</li>
+<li><code>-o</code> : The output prefix.
+<ul>
+<li>With this set to <code>redbean_assembly/ecoli</code> all the output files will be in the directory <code>redbean_assembly</code> with the prefix <code>ecoli</code>.</li>
+</ul></li>
+<li><code>-t</code> : Number of threads to be used.</li>
+</ul>
+<p>The will create a bunch of output files. Most of these we will ignore with only 4 being used below.</p>
 </div>
 <div id="redbean-derive-consensus" class="section level3" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Redbean: Derive consensus</h3>
+<p><img src="figures/consensus.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>If you checked the output directory you may have noticed there was no fasta file. Therefore the next step is to create a fasta file that contains the consensus assembly with <code>wtpoa-cns</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="05-Assembly.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wtpoa-cns</span> <span class="at">-t</span> 8 <span class="at">-i</span> redbean_assembly/ecoli.ctg.lay.gz <span class="at">-fo</span> redbean_assembly/ecoli.ctg.fa</span></code></pre></div>
-<p>The consensus is produced from the assembly graph (mor eon the graph below). Assembly is not always straight forward and when producing a graph an assembler may derive multiple paths through the assembly. A two examples of how this can happen are:</p>
+<p><strong>Parameters</strong></p>
 <ul>
-<li>Repeating regions: With the data it may be hard to determine how many times a repeat occurs within the repeat region. Maybe it is 10 or 11 times.</li>
-<li>Identical homopolymers: It is possible that long homopolymers of As (or one of the other bases) occurs multiple times in the genome. It may then be difficult to know what is at either end of each unique homopolymer location.
+<li><code>-i</code> : The input <code>ctg.lay.gz</code> file produced by <code>wtdbg2</code></li>
+<li><code>-fo</code> : The output file path for the consensus assembly in fasta format.</li>
+<li><code>-t</code> : Number of threads to be used.</li>
+</ul>
+<p>The consensus is produced from the assembly graph (more on the graph below). Assembly is not always straight forward and when producing a graph, an assembler may derive multiple paths/branches through the assembly.</p>
+<p>Two examples of how this may occur are:</p>
 <ul>
-<li>E.g. There are 2 homopolymer sequences (H1 &amp; H2) with 4 ends (E1-4).</li>
+<li><strong>Repeating regions</strong>: An assembler may find it hard to determine how many times a repeat occurs within the repeat region. Maybe it is 10 or 11 times.</li>
+<li><strong>Identical homopolymers</strong>: It is possible that long homopolymers of As (or one of the other bases) occurs multiple times in the genome. It may then be difficult to know what is at either end of each unique homopolymer location.
+<ul>
+<li>E.g. There are 2 homopolymer sequences (H1 &amp; H2) with 4 ends (E1-4).
+<ul>
 <li>Is H1 flanked by E1 and E2 and therefore H2 is flanked by E3 and E4?</li>
 <li>Or is H1 flanked by E1 and E3 and therefore H2 is flanked by E2 and E4?</li>
 <li>Etc.</li>
 </ul></li>
+</ul></li>
 </ul>
 <p>The consensus can then be thought of as the one best path through the graph to produce the most likely genome assembly.</p>
 </div>
-<div id="redbean-bandage-visualisation" class="section level3" number="5.1.4">
-<h3><span class="header-section-number">5.1.4</span> Redbean: Bandage Visualisation</h3>
-<p>(for interest about assembly graph)
-(view assembly graphs, why consensus is derived)</p>
-<p><code>gunzip</code> files</p>
+</div>
+<div id="bandage-visualisation" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Bandage Visualisation</h2>
+<p><img src="figures/bandage.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>This part is optional and generally something I never do in real analyses. However, it is interesting and will help your understanding of assembly graphs.</p>
+<p><code>Redbean</code> carries out 3 iterations of graph construction, each getting better. These three graph iterations are represented by the <code>.dot.gz</code> files. We can visualise these graphs with the tool <code>Bandage</code>.</p>
+<p>Before visualisation we need to convert the files to <code>.gfa</code> (link on file specs in <a href="12-Appendix.html#manuals">appendix</a>) files which are compatible with <code>Bandage</code>.</p>
+<p>First we need to <code>gunzip</code> the files.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="05-Assembly.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> redbean_assembly/ecoli.1.dot.gz</span>
 <span id="cb8-2"><a href="05-Assembly.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> redbean_assembly/ecoli.2.dot.gz</span>
 <span id="cb8-3"><a href="05-Assembly.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> redbean_assembly/ecoli.3.dot.gz</span></code></pre></div>
-<p>Convert <code>.dot</code> file into <code>.gfa</code> file required for <code>Bandage</code>.</p>
-<p>The script <code>wtdbg2-dot2gfa.pl</code> is found in the scripts directory of <code>wtdbg2</code> which can be found at: <a href="https://github.com/ruanjue/wtdbg2/tree/master/scripts" class="uri">https://github.com/ruanjue/wtdbg2/tree/master/scripts</a>. Unfortunately this is not installed when you install <code>wtdbg2</code> via <code>conda</code>.</p>
+<p>Next we convert the <code>.dot</code> files into <code>.gfa</code> files.</p>
+<p>The script <code>wtdbg2-dot2gfa.pl</code> is found in the scripts directory of <code>wtdbg2</code> which can be found at: <a href="https://github.com/ruanjue/wtdbg2/tree/master/scripts" class="uri">https://github.com/ruanjue/wtdbg2/tree/master/scripts</a>. Unfortunately this is not installed when you install <code>wtdbg2</code> via <code>Conda</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="05-Assembly.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg-dot2gfa.pl</span> redbean_assembly/ecoli.1.dot <span class="op">&gt;</span> redbean_assembly/ecoli.1.dot.gfa</span>
 <span id="cb9-2"><a href="05-Assembly.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg-dot2gfa.pl</span> redbean_assembly/ecoli.2.dot <span class="op">&gt;</span> redbean_assembly/ecoli.2.dot.gfa</span>
 <span id="cb9-3"><a href="05-Assembly.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg-dot2gfa.pl</span> redbean_assembly/ecoli.3.dot <span class="op">&gt;</span> redbean_assembly/ecoli.3.dot.gfa</span></code></pre></div>
-<p>Open up <code>Bandage</code> GUI.</p>
+<p>Now we can open up the <code>Bandage</code> GUI.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="05-Assembly.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Bandage</span></span></code></pre></div>
-<p>File -&gt; Load Graph -&gt;
-Graph Drawing -&gt; Draw graph</p>
+<p>Using this GUI we will open the <code>.gfa</code> files one at a time. Start with the <code>ecoli.1.dot.gfa</code> file (the 1st graph), then the <code>ecoli.2.dot.gfa</code> file (2nd), followed by the <code>ecoli.3.dot.gfa</code> file (3rd, last, and best).</p>
+<p>To open a graph carry out the following</p>
+<ul>
+<li>On the tool bar click <code>File</code> -&gt; <code>Load graph</code></li>
+<li>In the pop up file explorer navigate to <code>~/bacterial_assembly/standard_workflow/redbean_assembly/</code> and double click on the <code>.gfa</code> file you would like to view.</li>
+<li>In the <code>Graph drawing</code> section on the right side bar:
+<ul>
+<li>Ensure <code>Scope:</code> is set to <code>Entire graph</code></li>
+<li>Ensure <code>Style</code> is set to <code>Single</code></li>
+<li>Click the <code>Draw graph</code> button</li>
+</ul></li>
+</ul>
+<p><strong>Tips</strong>:</p>
+<ul>
+<li>The graph for <code>ecoli.1.dot.gfa</code> will take quite a while to load.</li>
+<li>The graphs for <code>ecoli.2.dot.gfa</code> and <code>ecoli.3.dot.gfa</code> are very large so you may need to change the <code>zoom</code> to 1%.</li>
+</ul>
+<p>As you go from 1 to 3 you will see two many changes:</p>
+<ul>
+<li><strong>Fewer contigs</strong>: This shows the assembler is connecting parts of the assembly to give a more contiguous assembly.</li>
+<li><strong>Fewer branches</strong>: In the 1st and 2nd graphs you will see branches, parts of the graph that branch off and possibly reconnect again. This represents multiple paths through the assembly that are possible. Through the <code>Redbean</code> iterations the assembler chooses the best routes, removing the other routes. You will need to zoom in to properly see these branches.</li>
+</ul>
 </div>
-</div>
-<div id="other-long-read-assemblers" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Other long read assemblers</h2>
-<p><code>Redbean</code> may not produce as good an assembly as other assemblers. However, even if you plan to use another assembler <code>Redbean</code> is very good as a first pass tool. Run a <code>Redbean</code> assembly and carry out genome assessment (in next chapter) to see if there are any issues with the reads that was not caught in the read QC. Various issues and solutions are covered in the supplemental bookdown.</p>
+<div id="other-long-read-assemblers" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Other long read assemblers</h2>
+<p><img src="figures/canoe.png" width="15%" style="display: block; margin: auto;" /></p>
+<p><code>Redbean</code> will not always be the optimal assembler. However, even if you plan to use another assembler <code>Redbean</code> is very good as a first pass tool due to its speed. It can be very useful to run a <code>Redbean</code> assembly and carry out genome assessment (shown in next chapter) to see if there are any issues with the reads that was not caught in the read QC. Various issues and solutions are covered in the supplemental bookdown.</p>
+<p>Other long read assemblers to explore for yourself include (links in <a href="12-Appendix.html#manuals">appendix</a>):</p>
+<ul>
+<li><code>Canu</code></li>
+<li><code>HGAP</code></li>
+<li><code>Flye</code></li>
+<li><code>Raven</code></li>
+<li><code>NECAT</code></li>
+<li><code>Shasta</code></li>
+</ul>
 
 </div>
 </div>
