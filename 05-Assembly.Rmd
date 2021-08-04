@@ -27,7 +27,7 @@ For assembly of our PacBio reads we will be using `Redbean` (AKA `wtdbg2`). `Red
 
 `Redbean` works for PacBio RSII, PacBio Sequel, and Oxford nanopore data.
 
-### Redbean: Conda environment & directory
+### Redbean: Conda environment & directory {#redbeanassemblyconda}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 

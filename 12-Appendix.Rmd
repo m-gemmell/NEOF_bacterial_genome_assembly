@@ -39,6 +39,35 @@ NECAT: https://github.com/xiaochuanle/NECAT
 
 Shasta: https://github.com/chanzuckerberg/shasta
 
+QUAST: http://quast.sourceforge.net/quast
+
+BUSCO: https://busco.ezlab.org/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+BWA: https://github.com/lh3/bwa
+
+SAM: https://samtools.github.io/hts-specs/SAMv1.pdf
+
+RACON: https://github.com/isovic/racon
+
+MUMmer: http://mummer.sourceforge.net/
+
+dnadiff: https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
+
+Pilon: https://github.com/broadinstitute/pilon/wiki
+
+PacBio's GenomicConsensus: https://github.com/broadinstitute/pilon/wiki
+
+HyPo: https://github.com/kensung-lab/hypo
+
+Medaka: https://github.com/nanoporetech/medaka
+
+NextPolish: https://github.com/Nextomics/NextPolish
+
+
+
+
 
 
 FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/

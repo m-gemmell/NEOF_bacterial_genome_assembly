@@ -1,6 +1,6 @@
 # Cleanup {#cleanup}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/sweep.png", auto_pdf = TRUE)
 ``` 
 
 Like to remove intermediary files that are not needed. We could delete all the directories apart from final assembly however we will delete files that are definitely not needed, leaving files that we may want to use again (assembly fasta files, stats etc.).

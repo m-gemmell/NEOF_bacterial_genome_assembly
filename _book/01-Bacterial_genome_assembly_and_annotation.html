@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-03" />
+<meta name="date" content="2021-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean"><i class="fa fa-check"></i><b>5.1</b> Redbean</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-conda-environment-directory"><i class="fa fa-check"></i><b>5.1.1</b> Redbean: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="5.1.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbeanassemblyconda"><i class="fa fa-check"></i><b>5.1.1</b> Redbean: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="5.1.2" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-assemble-long-reads"><i class="fa fa-check"></i><b>5.1.2</b> Redbean: Assemble long reads</a></li>
 <li class="chapter" data-level="5.1.3" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-derive-consensus"><i class="fa fa-check"></i><b>5.1.3</b> Redbean: Derive consensus</a></li>
 </ul></li>
@@ -180,6 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
 <li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
 <li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
+<li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="07-Polishing.html"><a href="07-Polishing.html"><i class="fa fa-check"></i><b>7</b> Polishing</a>
 <ul>
@@ -192,8 +193,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
 <li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
 </ul></li>
+<li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="08-Circlator.html"><a href="08-Circlator.html"><i class="fa fa-check"></i><b>8</b> Circlator</a></li>
+<li class="chapter" data-level="8" data-path="08-Circlator.html"><a href="08-Circlator.html"><i class="fa fa-check"></i><b>8</b> Circularisation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator"><i class="fa fa-check"></i><b>8.1</b> Circlator</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-conda-environment-directory"><i class="fa fa-check"></i><b>8.1.1</b> Circlator: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-read-correction"><i class="fa fa-check"></i><b>8.1.2</b> Circlator: Read correction</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-circularisation"><i class="fa fa-check"></i><b>8.1.3</b> Circlator: Circularisation</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="09-Annotation.html"><a href="09-Annotation.html"><i class="fa fa-check"></i><b>9</b> Annotation</a></li>
 <li class="chapter" data-level="10" data-path="10-Final_report.html"><a href="10-Final_report.html"><i class="fa fa-check"></i><b>10</b> Final report</a>
 <ul>
@@ -241,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Bacterial genome assembly and annotation</h1>
 <p class="author"><em>Matthew R. Gemmell</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-08-03</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-08-04</em></p>
 </div>
 <p><img src="figures/NEOF.png" width="30%" style="display: block; margin: auto;" /></p>
 

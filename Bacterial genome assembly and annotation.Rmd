@@ -215,7 +215,7 @@ For assembly of our PacBio reads we will be using `Redbean` (AKA `wtdbg2`). `Red
 
 `Redbean` works for PacBio RSII, PacBio Sequel, and Oxford nanopore data.
 
-### Redbean: Conda environment & directory
+### Redbean: Conda environment & directory {#redbeanassemblyconda}
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
@@ -375,68 +375,235 @@ Other long read assemblers to explore for yourself include (links in [appendix](
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
 ```
 
+After carrying out an assembly it is always advised to assess its quality. We will carry this out with three tools:
 
+- `QUAST` - Gives assembly stats related to contiguity.
+- `BUSCO` - Estimates completeness of a genome.
+- `CheckM` - Estimates completeness and contamination of a genome.
 
 ## Assessment: Conda environnment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `bacterial_genome_assessment` `conda` environment for our `Redbean` assembly.
+Open a new terminal (right click on the main screen, choose `Applications` -> `Shell` -> `bash`). 
+
+We will use the `bacterial_genome_assessment` `conda` environment for our genome assessment tools.
 
 ```{bash eval=FALSE}
 chos 8
-. usebacterialassembly
+. usebacterialgenomeassessment
 ```
+
+Ensure you are in the the `standard_workflow` directory for this new terminal and environment.
 
 ```{bash eval=FALSE}
 cd ~/bacterial_assembly/standard_workflow
 ```
 
 ## QUAST
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/measuring_tape.png", auto_pdf = TRUE)
+``` 
+
+`QUAST` is the most used tool to assess genomes. It gives various statistics related to the contiguity of the assembly. Unless stated these statistics are based on contigs that are >=500bp.
+
+Create an output directory and run `QUAST`.
 
 ```{bash eval=FALSE}
+#Make output directory
 mkdir -p quast/redbean
+#Run QUAST
 quast -o quast/redbean redbean_assembly/ecoli.ctg.fa
 ```
+
+__Parameters__
+
+- `-o` : The output directory.
+- The input file/s are at the end of the command without a flag (e.g. `-o`).
+   - __Note__ : `QUAST` can be run on multiple assemblies giving a report which contains info on all the input assemblies.
+
+`QUAST` produces reports in various formats. We will look at the html report.
 
 ```{bash eval=FALSE}
 firefox quast/redbean/report.html
 ```
 
+Inspect the table and interact with the interactive plots.
+
+Statistics such as length, # contigs (number of contigs), and GC (%) are self explanatory. Two definitions that you may not be aware of are N50/N75 and L50/L75. 
+
+To calculate N50 and L50:
+
+1. Order the contigs from largest to smallest.
+2. Find the point that is 50% the length of the assembly starting from the start of the largest contig going toward the smallest contig.
+3. Determine which contig this point belongs to.
+4. The N50 is equal to the length of the contig.
+5. The L50 is equal to the number of contigs that is >= in length to the N50.
+
+To find the N75 & L75 change the 50% to 75% in point 2. You can use any number between 1-100 for the Nx or Lx.
+
+Additionally, below is a visual demonstration of Nx and Lx.
+
+```{r, fig.align = 'center',out.width= '60%', echo=FALSE }
+knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
+``` 
+
+__Questions__
+
+- How many total contigs are there?
+- Approximately how much bigger is the total assembly compared to the largest contigs (to the nearest 1k)?
+- Does the GC% match what is know about _E.coli_? (You may need to google)
+- Why is the N50 and N75 the same?
+
+Overall these contiguity stats are good. It is not a one contig assembly, which is what we would aim for a single chromosome genome, but it is close. It mainly consists of one large contig with 3 smaller contigs.
+
+Some things you will want to look out for in future projects:
+
+- High number of contigs, with small N50: This may indicate the genome assembly is very uncontiguous and so the assembler had issues with assembly. 
+   - It is possible the genome is a particularly difficult genome to resolve.
+   - The input data could be poor. Examples include:
+      - Low quality.
+      - Low coverage.
+      - Average coverage could be good but it is possible areas of the genome have low coverage so these areas could not be assembled well.
+- Length is not correct: Could be caused by several reasons:
+   - Parts of the genome are duplicated in the assembly causing the assembly to be too long. This can be caused by parts where a consensus could not be reached effectively.
+   - A short assembly can indicate that parts of the genome are missing.
+   - A drastically increased length can indicate the presence of contamination from another organism. The GC (%) can give a clue if this may be the case.
+   
+Further assessment can elucidate if there are any issues and what the issue may be.
+
 ## BUSCO
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/universe.png", auto_pdf = TRUE)
+``` 
+
+`BUSCO` stands for Benchmarking Universal Single-Copy Orthologs. The tool is used to estimate the completeness of genome assemblies by determining how many BUSCOs are present. 
+
+Prior to running `BUSCO` we will create an output directory for the `BUSCO` analysis.
 
 ```{bash eval=FALSE}
 mkdir -p busco/redbean
-cd busco/redbean
 ```
+
+BUSCOs are genes that are:
+
+- __Universal__: The genes are present in all organisms of a specific lineage.
+- __Single-Copy__: The genes are only found as one copy.
+
+`BUSCO` has many different lineage datasets. These are datasets of the different groups of BUSCOs found in various different lineages. Carry out the below command to see all these different datasets.
 
 ```{bash eval=FALSE}
 busco --list-datasets | less -S
 ```
 
-```{bash eval=FALSE}
-busco -i ../../redbean_assembly/ecoli.ctg.fa -l enterobacterales_odb10 -m geno -o ecoli
-```
+You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, & eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organisms lineage. A more specific lineage will have more BUSCOs that a more generic one.
+
+__Note__: All datasets end with `_odb10` which tands for OrthoDB version 10 (https://www.orthodb.org/).
+
+Looking through the choices (and using NCBI taxonomy) what lineage dataset would you use for the following genera?
+
+- __Psychrobacter__ (Taxonomy ID: 497)
+- __Iamia__ (Taxonomy ID: 467975)
+- __Phycisphaera__ (Taxonomy ID: 666508)
+- __Atribacter__ (Taxonomy ID: 2847777)
+
+For our `E.coli` we will choose the `enterobacterales_odb10` as our lineage dataset. With that we can run `BUSCO` on our genome assembly.
 
 ```{bash eval=FALSE}
-less ecoli/short_summary.specific.enterobacterales_obd10.ecoli.txt
+busco \
+-i redbean_assembly/ecoli.ctg.fa \
+-l enterobacterales_odb10 \
+-m geno \
+-o ecoli \
+--out_path busco/redbean
 ```
+
+__Parameter choice__
+
+- `-i` : The input genome assembly in fasat format.
+- `-l` : The lineage dataset to be used. This has to end with the `_odb10` part. This will download the dataset (if it does not exist) into a directory called `busco_downloads` in the current directory. The directory will be created if it doesn't exist.
+- `-m` : The assessment mode.
+   - `geno` = genome assemblies (DNA)
+   - `tran` = transcriptome assemblies (DNA)
+   - `prot` = annotated gene sets (protein)
+- `-o` : The run name. Output folders and files will be labelled with this name.
+- `--out_path` : Path where the output directory will be created.
+
+There are many output files in the directory `busco/redbean/ecoli`. A full list of the output can be found in the following link: https://busco.ezlab.org/busco_userguide.html#outputs
+
+I ignore most of the output most of the time, instead only looking at the short summary file.
+
+```{bash eval=FALSE}
+less busco/redbean/ecoli/short_summary.specific.enterobacterales_obd10.ecoli.txt
+```
+
+This provides us with 6 values. These values are presented in terms of percentage (along the top line of the Results) and total numbers (the next 6 lines). The values represent:
+
+- __Complete BUSCOs__ : The number of complete BUSCOs discovered. The closer this value is to 100% the better. This number is the sum of the next two values.
+- __Complete and single-copy BUSCOs__: The number of BUSCOs found as complete and single-copy. The closer this number is to 100% the better. A good assembly will generally be >90%.
+- __Complete and duplicated BUSCOs__: Complete BUSCOs that have been found two or more times within the assembly. This indicates there are duplicated areas of the genome. Preferably we would like this number to be low. 
+- __Fragmented BUSCOs__: This could indicate that genes that only partially present within the genome. This could be due to misassmebly.
+- __Missing BUSCOs__: These are BUSCOs that could not be found in the genome assembly. This could indicate parts of the genome are missing in the assembly.
+- __Total BUSCO groups searched__: This represents the total number of BUSCOs within lineage dataset used for analysis.
+
+For more info on interpreting the results please see the following link: https://busco.ezlab.org/busco_userguide.html#interpreting-the-results
+
+__Questions__
+
+- Ignoring total BUSCOs, what is the highest value? Do you want this value to be the highest?
+- Are these values good? What may the stats indicate?
+
+The `BUSCO` stats are ok. There are a bit more fragmented and missing BUSCOs than we would like. We'll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on.
 
 ## CheckM
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/CheckM.png", auto_pdf = TRUE)
+``` 
+
+`CheckM` can also be used to estimate the completeness of a bacterial genome, however I prefer `BUSCO` for this. Instead, we will use `CheckM` to estimate contamination within our assembly.
+
+First create an output directory.
 
 ```{bash eval=FALSE}
-cd ~/bacterial_assembly/standard_workflow
 mkdir -p checkm/redbean/ecoli
 ```
+
+`CheckM` has many different commands. We will use its typical workflow which is conveniently wrapped into one command.
 
 ```{bash eval=FALSE}
 checkm lineage_wf --tab_table -f checkm/ecoli_checkm.tsv -t 8 -x ctg.fa redbean_assembly/ checkm/redbean/ecoli
 ```
 
+__Parameters__
+
+- `--tab_table` : Creates a `.tsv` file (tab seperated value) that acts a summary of results. This is the one file we will inspect.
+- `-f` : Path for output summary `.tsv` file.
+- `-t` : Number of threads to be used.
+- `-x` : Suffix of genome assembly files to be analysed. The command will carry out analysis on all the files with this suffix in the __bin directory__.
+- The second last option (which is flagless) is the __bin directory__. The command will carry out the workflow on each file with the suffix as stated in the `-x` parameter.
+- The last option (which is flagless) is the output directory.
+
+Ignore all the other files and view the summary files.
+
 ```{bash eval=FALSE}
 less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 ```
+
+There are quite a few statistics but we are only interested in the  `Contamination` column (you may need to use the right key to move to it). This value is a percentage. Is it a large value?
+
+Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. There is info on how to crry this out in the supplemental bookdown.
+
+If you are interested in the other values please check: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
+
+## Assessment recap
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/recap.png", auto_pdf = TRUE)
+``` 
+
+Our assembly looks good. Good contiguity figures from `QUAST`, and `CheckM` shows low signs, if any, contamination. The `BUSCO` values are not brilliant with some fragmented and missing BUSCOs.
+
+In real analysis I would try another assembler to see if that would improve the BUSCO situation. For the purpose of time we will continue and I will let you explore other assemblers in your own time.
 
 <!--chapter:end:06-Genome_assessment.Rmd-->
 
@@ -445,20 +612,34 @@ less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 knitr::include_graphics(path = "figures/polishing.png", auto_pdf = TRUE)
 ``` 
 
+Genome polishing is very important for long read assembly. This is due to the relatively high rate of error in PacBio and ONT technologies compared to Illumina. 
+
+The general principle is to align reads to the genome assembly to correct incorrect bases. This is carried out by determining the consensus on each base. For example:
+
+- The 10th base in a contig is A.
+- Reads are aligned to the contig with 11 reads covering the 10th base.
+- Therefore there are 11 bases form reads aligned to the 10th base.
+- 4 of these bases are A, 1 is C, and 5 are Gs.
+- In this case the polisher may determine that the 10th base is more likely to be a G and so __polishes__ the base to a G.
+
+If possible I would recommend polishing with Illumina reads over long reads due to their accuracy if they are available. However, we only have PacBio reads so that is what we will use.
 
 ## Racon
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/racoon.png", auto_pdf = TRUE)
+``` 
 
+`Racon` is a polisher that can use Illumina, PacBio or ONT reads to polish genome assemblies. This makes it a lot more flexible that other polishers that can only use one or two types of sequencing technologies for polishing.
 
 ### Racon: Conda environment & directory
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `bacterial_assembly` conda environment for our Redbean assembly.
+We will use the `bacterial_assembly` conda environment for our `Racon` polishing. Either:
 
-```{bash eval=FALSE}
-. usebacterialassembly
-```
+- Use your currently open `bacterial_assembly` terminal.
+- If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
 
 ```{bash eval=FALSE}
 cd ~/bacterial_assembly/standard_workflow
@@ -466,104 +647,263 @@ mkdir -p racon/redbean/ecoli
 ```
 
 ### Racon: Index assembly
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/index.png", auto_pdf = TRUE)
+``` 
+
+The first step is to `bwa index` the assembly we want polished. This will create various index files that start with `redbean_assembly/ecoli.ctg.fa` and end with different suffixes (`.ann`, `.bwt`, `.mmi`, etc). 
+
+Without the index files the  read alignment process would be much more difficult and therefore slower. Imagine trying to search for a topic in an encyclopaedia without an index or trying to search for a topic in Wikipedia without the search bar. You could probably do it but it would take a lot longer.
+
 ```{bash eval=FALSE}
+#Index the assmebly
 bwa index redbean_assembly/ecoli.ctg.fa
+#List the index files
+ls redbean_assembly/ecoli.ctg.fa.*
 ```
 
 ### Racon: Read alignment to assembly
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
+``` 
+
+With our index files created we can align the reads we will use for polishing to the assembly to be polished.
+
 ```{bash eval=FALSE}
 bwa mem \
 -t 8 \
--x pacbio redbean_assembly/ecoli.ctg.fa \
+-x pacbio \
+redbean_assembly/ecoli.ctg.fa \
 ecoli_reads/ecoli.fastq \
 > racon/redbean/ecoli/ecoli_i1.sam
 ```
 
+__Parameters__
+
+- `-t` : Number of threads.
+- `-x` : Read type. This will change various parameters to suit the read technology better.
+   - `pacbio` : Pacbio reads.
+   - `ont2d` : Oxford Nanopore 2D-reads
+- The second last parameter (`redbean_assembly/ecoli.ctg.fa`) indicates the indexed assembly the reads will be aligned to.
+- The last parameter (`ecoli_reads/ecoli.fastq`) indicates the reads to be aligned.
+- The command would output the alignment to your screen (i.e. the standard output) but instead we will redirect (`>`) it to a new file (`racon/redbean/ecoli/ecoli_i1.sam`). This is a SAM file which contains the alignment information (SAM file specification: https://samtools.github.io/hts-specs/SAMv1.pdf).
+
+BAM files are the binary version of SAM files. FOr most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, `Racon` rquires a SAM file so we will not convert it to BAM. 
+
 ### Racon: Polishing
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/shiny_emerald.png", auto_pdf = TRUE)
+``` 
+
+Now that we have all the required files we will carry out `Racon` polishing.
+
 ```{bash eval=FALSE}
 racon -t 8 \
 ecoli_reads/ecoli.fastq \
-racon/redbean/ecoli/ecoli_i1.sam redbean_assembly/ecoli.ctg.fa \
+racon/redbean/ecoli/ecoli_i1.sam \
+redbean_assembly/ecoli.ctg.fa \
 > racon/redbean/ecoli/ecoli_i1.fasta
 ```
 
-### Racon: Polishing report
+__Parameters__
 
-We can compare the redbean assembly and the polished assmebly to get a polishing report. This can be carried out with the `dnadiff` command from the program `mummer`.
+- `-t` : Number of threads.
+- The first flagless input is the reads to be aligned.
+- The second flagless input is the alignment file (SAM file).
+- The third flagless input is the assembly to be polished.
+- The output is redirected (`>`) to a fasta file (`racon/redbean/ecoli/ecoli_i1.fasta`). This contains the polished assembly.
+
+### Racon: Polishing report
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/report.png", auto_pdf = TRUE)
+```
+
+unfortunately `Racon` does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the `dnadiff` command from the program `MUMmer`.
+
+`dnadiff` will create quite a few files so we will create an output directory for its results.
 
 ```{bash eval=FALSE}
 mkdir racon/redbean/ecoli/dnadiff
 ```
 
-```{bash eval=FALSE}
-dnadiff --prefix racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1 redbean_assembly/ecoli.ctg.fa racon/redbean/ecoli/ecoli_i1.fasta
-```
+We will use `dnadiff` to align the original assembly (reference) to our polished assembly (query). This will then provide detailed information on the differences between the two assemblies (i.e. we can see how polishing affected the assembly).
 
 ```{bash eval=FALSE}
+dnadiff \
+--prefix racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1 \
+redbean_assembly/ecoli.ctg.fa \
+racon/redbean/ecoli/ecoli_i1.fasta
+```
+
+__Parameters__
+
+- --prefix : Prefix of the output files. The output files will be in the directory `racon/redbean/ecoli/dnadiff/` with the prefix `ref_redbean_query_raconi1`.
+- The first flagless input is the reference assembly for comparison.
+- The second flagless input is the query assembly for comparison.
+
+List all the output files. There is a lot of information in them but for our purposes we will only inspect the report file.
+
+```{bash eval=FALSE}
+#List the output files
+ls racon/redbean/ecoli/dnadiff
+#View the report
 less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 ```
 
-(total seqs went from 4 to 1, total bases decreased by ~50k, 627 SNPs i.e. base changes)
+There is a lot of useful information in this file. The __[REF]__ column represents the original assembly whilst the __[QRY]__ column represent the polished assembly. Let us go through some (not all) of the stats.
 
-`dnadiff` README:
+- __[Sequences]__
+   - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. That is good to see.
+   - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa.
+- __[Bases]__
+   - TotalBases: Our total bases has decreased (~50k) from reference to query. This is by a small amount though and it is likely it was redundant parts from merging the 4 contigs into 1
+- __[Feature Estimates]__
+   - Insertions: There are 19 insertion events that consists of ~50Kbp in the reference assembly. This indicates these areas were caused by misassembly and removed from the query by polishing.
+- __[SNPs]__
+   - TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627 were changed due to the polisher.
+   - TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases added and removed by polishing. 
+      - The first four rows in the [QRY] column show added bases. ~2500 bases were added by polishing.
+      - The next four rows in the [QRY] column show bases removed by polishing. ~1200 bases were removed by polishing.
+
+This shows that polishing definetly worked and did quite a lot.
+
+For more info on `dnadiff` and the report statistics README:
 https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
 
-
 ### Racon: Second iteration
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/repeat.png", auto_pdf = TRUE)
+```
 
-With genome polishing normally multiple iterations of polishing are required. Therefore let us polish the polished assembly to create the second iteration of polishing.
+With genome polishing normally multiple iterations are required. Therefore let us polish the polished assembly to create the second iteration of polishing.
 
 ```{bash eval=FALSE}
+#Index iteration 1 polished assembly
 bwa index racon/redbean/ecoli/ecoli_i1.fasta
-
-bwa mem -t 8 -x pacbi racon/redbean/ecoli/ecoli_1.fasta ecoli_reads/ecoli.fastq > racon/redbean/ecoli/ecoli_i2.sam
-
-racon -t 8 ecoli_reads/ecoli.fastq racon/redbean/ecoli/ecoli_i2.sam racon/redbean/ecoli/ecoli_1.fasta > racon/redbean/ecoli/ecoli_i2.fasta
+#Align the reads to iteration 1 polished assembly
+#This will create the second iteration SAM file
+bwa mem \
+-t 8 \
+-x pacbio \
+racon/redbean/ecoli/ecoli_i1.fasta \
+ecoli_reads/ecoli.fastq \
+> racon/redbean/ecoli/ecoli_i2.sam
+#Polish iteration 1 pished assembly
+# Carried out with the second iteration SAM file
+racon \
+-t 8 \
+ecoli_reads/ecoli.fastq \
+racon/redbean/ecoli/ecoli_i2.sam \
+racon/redbean/ecoli/ecoli_i1.fasta \
+> racon/redbean/ecoli/ecoli_i2.fasta
 ```
+
+With the second iteration of polishing carried out we will assess how much polishing was carried out with `dnadiff`. In this case we will use the first iteration polished assembly as the reference and the second iteration polished assembly as the query.
 
 ```{bash eval=FALSE}
-dnadiff --prefix racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2 racon/redbean/ecoli/ecoli_i1.fasta racon/redbean/ecoli/ecoli_i2.fasta
+dnadiff \
+--prefix racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2 \
+racon/redbean/ecoli/ecoli_i1.fasta \
+racon/redbean/ecoli/ecoli_i2.fasta
 ```
+
+Inspect the new report file.
 
 ```{bash eval=FALSE}
 less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi2.report
 ```
 
-(40 SNPs, much reduced, looking for convergence, eventually number of changes will stabilise showing bases that could be one or the other)
+__Questions__
+
+- Has the number of changes reduced?
+- Would you carry out further polishing?
+
+The number of changes has indeed reduced by quite a bit, from 3782 to 40 TotalSNPs. When we are polishing we are looking for these stats to stop changing and converge to a similar value.
+
+Unfortunately my experience is that no matter how many iterations you carry out these stats will not go to zero. Instead the polisher gets to a certain point where it cannot tell what base certain positions should be. As an example one position could be polished to change it from an A to a G then in the next polishing iteration it will change from G to A and so on.  
+
+So it would be advised to do some more polishing but for the sake of time we will continue on.
+
+## Other polishers
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/pilon.png", auto_pdf = TRUE)
+```
+
+Other polishers to explore for yourself include (links in [appendix](#manuals)):
+
+- `Pilon`
+- PacBio's `GenomicConsensus`
+- ONT's `Medaka`
+- `HyPo`
+- `NextPolish`
 
 <!--chapter:end:07-Polishing.Rmd-->
 
-# Circlator {#Circlator}
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+# Circularisation {#Circlator}
+```{r, fig.align = 'center',out.width= '18%', echo=FALSE }
 knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
 ``` 
 
+## Circlator
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/chain_circle.png", auto_pdf = TRUE)
+``` 
+
+### Circlator: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `circlator` conda environment for our `Circlator` circularisation.
+
+Open a new terminal (right click on the main screen, choose `Applications` -> `Shell` -> `bash`) and run:
 
 ```{bash eval=FALSE}
 chos 8
 . usecirclator
 ```
 
+Move to the `standard_workflow` directory and make a new output directory for `Circlator`.
 
 ```{bash eval=FALSE}
-canu -correct -p ecoli -d ecoli_reads genomeSize=4.6m -pacbio ecoli_reads/ecoli.fastq
+#Change directory
+cd ~/bacterial_assembly/standard_workflow
+#Make directory
+mkdir -p circlator/redbean_racon_i2/
+```
+
+### Circlator: Read correction
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/correction.png", auto_pdf = TRUE)
+``` 
+
+```{bash eval=FALSE}
+canu -correct \
+-p ecoli \
+-d ecoli_reads \
+genomeSize=4.6m \
+-pacbio ecoli_reads/ecoli.fastq
 ```
 
 #don’t actually run as will take ~30 minutes
 
-#instead copy predoen
+#instead copy predone
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
 gunzip ecoli_reads/ecoli.correctedReads.fasta.gz
 ```
 
 
-#circlator 
+### Circlator: Circularisation
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/circlularisation.png", auto_pdf = TRUE)
+``` 
+
 ```{bash eval=FALSE}
-mkdir -p circlator/redbean_racon_i2/
-```
-```{bash eval=FALSE}
-circlator all racon/redbean/ecoli/ecoli_i2.fasta ecoli_reads/ecoli.correctedReads.fasta circlator/redbean_racon_i2/ecoli
+circlator all \
+racon/redbean/ecoli/ecoli_i2.fasta \
+ecoli_reads/ecoli.correctedReads.fasta \
+circlator/redbean_racon_i2/ecoli
 ```
 
 
@@ -613,7 +953,7 @@ less -S prokka/ecoli/ecoli.txt
 
 # Final report {#finalreport}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/final_report.png", auto_pdf = TRUE)
 ``` 
 
 ## Report
@@ -678,7 +1018,7 @@ MultiQC modules: https://multiqc.info/docs/#multiqc-modules
 
 # Cleanup {#cleanup}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
-knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/sweep.png", auto_pdf = TRUE)
 ``` 
 
 Like to remove intermediary files that are not needed. We could delete all the directories apart from final assembly however we will delete files that are definitely not needed, leaving files that we may want to use again (assembly fasta files, stats etc.).
@@ -817,6 +1157,35 @@ Raven: https://github.com/lbcb-sci/raven
 NECAT: https://github.com/xiaochuanle/NECAT
 
 Shasta: https://github.com/chanzuckerberg/shasta
+
+QUAST: http://quast.sourceforge.net/quast
+
+BUSCO: https://busco.ezlab.org/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+BWA: https://github.com/lh3/bwa
+
+SAM: https://samtools.github.io/hts-specs/SAMv1.pdf
+
+RACON: https://github.com/isovic/racon
+
+MUMmer: http://mummer.sourceforge.net/
+
+dnadiff: https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
+
+Pilon: https://github.com/broadinstitute/pilon/wiki
+
+PacBio's GenomicConsensus: https://github.com/broadinstitute/pilon/wiki
+
+HyPo: https://github.com/kensung-lab/hypo
+
+Medaka: https://github.com/nanoporetech/medaka
+
+NextPolish: https://github.com/Nextomics/NextPolish
+
+
+
 
 
 

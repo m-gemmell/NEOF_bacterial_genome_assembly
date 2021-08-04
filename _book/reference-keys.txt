@@ -17,7 +17,7 @@ overview-annotation
 overview-final-report
 redbeanassembly
 redbean
-redbean-conda-environment-directory
+redbeanassemblyconda
 redbean-assemble-long-reads
 redbean-derive-consensus
 bandage-visualisation
@@ -27,6 +27,7 @@ assessment-conda-environnment-directory
 quast
 busco
 checkm
+assessment-recap
 polishing
 racon
 racon-conda-environment-directory
@@ -35,7 +36,12 @@ racon-read-alignment-to-assembly
 racon-polishing
 racon-polishing-report
 racon-second-iteration
+other-polishers
 Circlator
+circlator
+circlator-conda-environment-directory
+circlator-read-correction
+circlator-circularisation
 annotation
 finalreport
 report

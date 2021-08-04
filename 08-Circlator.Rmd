@@ -1,34 +1,68 @@
-# Circlator {#Circlator}
-```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+# Circularisation {#Circlator}
+```{r, fig.align = 'center',out.width= '18%', echo=FALSE }
 knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
 ``` 
 
+## Circlator
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/chain_circle.png", auto_pdf = TRUE)
+``` 
+
+### Circlator: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `circlator` conda environment for our `Circlator` circularisation.
+
+Open a new terminal (right click on the main screen, choose `Applications` -> `Shell` -> `bash`) and run:
 
 ```{bash eval=FALSE}
 chos 8
 . usecirclator
 ```
 
+Move to the `standard_workflow` directory and make a new output directory for `Circlator`.
 
 ```{bash eval=FALSE}
-canu -correct -p ecoli -d ecoli_reads genomeSize=4.6m -pacbio ecoli_reads/ecoli.fastq
+#Change directory
+cd ~/bacterial_assembly/standard_workflow
+#Make directory
+mkdir -p circlator/redbean_racon_i2/
+```
+
+### Circlator: Read correction
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/correction.png", auto_pdf = TRUE)
+``` 
+
+```{bash eval=FALSE}
+canu -correct \
+-p ecoli \
+-d ecoli_reads \
+genomeSize=4.6m \
+-pacbio ecoli_reads/ecoli.fastq
 ```
 
 #don’t actually run as will take ~30 minutes
 
-#instead copy predoen
+#instead copy predone
 ```{bash eval=FALSE}
 cp /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
 gunzip ecoli_reads/ecoli.correctedReads.fasta.gz
 ```
 
 
-#circlator 
+### Circlator: Circularisation
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/circlularisation.png", auto_pdf = TRUE)
+``` 
+
 ```{bash eval=FALSE}
-mkdir -p circlator/redbean_racon_i2/
-```
-```{bash eval=FALSE}
-circlator all racon/redbean/ecoli/ecoli_i2.fasta ecoli_reads/ecoli.correctedReads.fasta circlator/redbean_racon_i2/ecoli
+circlator all \
+racon/redbean/ecoli/ecoli_i2.fasta \
+ecoli_reads/ecoli.correctedReads.fasta \
+circlator/redbean_racon_i2/ecoli
 ```
 
 
