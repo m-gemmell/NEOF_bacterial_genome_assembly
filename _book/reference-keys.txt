@@ -42,7 +42,12 @@ circlator
 circlator-conda-environment-directory
 circlator-read-correction
 circlator-circularisation
+circlator-assessment-polishing
 annotation
+prokka
+prokka-conda-environment-directory
+prokka-run
+prokka-output
 finalreport
 report
 report-conda-environment-directory

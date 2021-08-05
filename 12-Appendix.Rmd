@@ -65,56 +65,15 @@ Medaka: https://github.com/nanoporetech/medaka
 
 NextPolish: https://github.com/Nextomics/NextPolish
 
+Canu: https://github.com/marbl/canu
 
+Circlator: https://github.com/sanger-pathogens/circlator
 
+Prokka: https://github.com/tseemann/prokka
 
+EC numers: https://en.wikipedia.org/wiki/Enzyme_Commission_number
 
-
-FastQC: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
-
-MultiQC: https://multiqc.info/
-
-Trim Galore: https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/
-
-Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
-
-samtools: http://www.htslib.org/
-
-BBTools: https://jgi.doe.gov/data-and-tools/bbtools/
-
-Kraken2: https://github.com/DerrickWood/kraken2/wiki/Manual
-
-Krona: https://github.com/marbl/Krona/wiki/KronaTools
-
-Bracken: https://ccb.jhu.edu/software/bracken/index.shtml?t=manual
-
-LEfSe: https://huttenhower.sph.harvard.edu/lefse/
-
-HUMAnN2: https://github.com/biobakery/biobakery/wiki/humann2
-
-MetaPhlAn2: https://huttenhower.sph.harvard.edu/metaphlan2/
-
-Biobakery: https://github.com/biobakery/biobakery
-
-MegaHit: https://github.com/voutcn/megahit
-
-BWA: https://github.com/lh3/bwa
-
-minimap2: https://github.com/lh3/minimap2
-
-MetaBAT2: https://bitbucket.org/berkeleylab/metabat/src/master/
-
-CheckM: https://github.com/Ecogenomics/CheckM/wiki
-
-PhyloPhlAn: https://github.com/biobakery/phylophlan/wiki
-
-MetaWRAP: https://github.com/bxlab/metaWRAP
-
-Pokka: https://github.com/tseemann/prokka
-
-MinPath: https://github.com/mgtools/MinPath/blob/master/readme
-
-MetaCyc: https://metacyc.org/
+COG: https://www.ncbi.nlm.nih.gov/research/cog
 
 # Obtaining Read Data
 

@@ -3,9 +3,17 @@
 knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
 ``` 
 
+Circularisation is useful for bacterial genomes which consist of circular chromosomes and plasmids. 
+
 ## Circlator
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/chain_circle.png", auto_pdf = TRUE)
+``` 
+
+`Circlator`, the first circularisation tool created, attempts to identify circular sequences and produce a linearised version of them. The goal is to have each circular sequence (chromosome or plasmid) as one contig with no overlap between the start and end of the contig. This would lead to a contig where if you moved one position forward/right from the last base in the contig you would wrap back around to the first base of the contig.
+
+```{r, fig.align = 'center',out.width= '60%', echo=FALSE }
+knitr::include_graphics(path = "figures/circularisation_diagram.png", auto_pdf = TRUE)
 ``` 
 
 ### Circlator: Conda environment & directory
@@ -36,6 +44,12 @@ mkdir -p circlator/redbean_racon_i2/
 knitr::include_graphics(path = "figures/correction.png", auto_pdf = TRUE)
 ``` 
 
+`Circlator` requires corrected reads (reads with improved accuracy). There are various tools to correct reads (https://github.com/sanger-pathogens/circlator/wiki/Input-files-for-circlator). We will use the assembler `Canu` to correct our reads.
+
+If you assemble your data with `Canu` you would already have the corrected reads. Since we have not we can correct them now using the correction part and skipping the assembly part.
+
+__Note__: The below command takes a long time. In the interest of time skip the command and use the lower down copy command to get the pre-computed corrected reads.
+
 ```{bash eval=FALSE}
 canu -correct \
 -p ecoli \
@@ -44,19 +58,40 @@ genomeSize=4.6m \
 -pacbio ecoli_reads/ecoli.fastq
 ```
 
-#don’t actually run as will take ~30 minutes
+__Parameters__
 
-#instead copy predone
+- `-p` : Prefix of output files.
+- `-d` : Output directory.
+- `genomeSize=` : Approximate genome size.
+- `-pacbio` : Specify the pacbio reads to be used.
+   - Alternative options are: `-nanopore` and `-pacbio-hifi`.
+
+The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a `.fasta.gz` file, and gunzip the file for further use.
+
 ```{bash eval=FALSE}
+#Copy corrected read fasta.gz file
 cp /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
+#Gunzip file
 gunzip ecoli_reads/ecoli.correctedReads.fasta.gz
 ```
 
-
 ### Circlator: Circularisation
-```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/circlularisation.png", auto_pdf = TRUE)
 ``` 
+
+With the corrected reads we can now carry out the `Circlator` step. `Circlator` has many different commands for the various stages of circularisation:
+
+0. __Check the input assembly__: Formatting fasta headers.
+1. __Map reads to assembly__: Alignment of reads to the assmebly by `BWA mem`.
+2. __Extract reads for reassembly__: Extract the aligned reads, therefore removing reads that did not align to the assembly.
+3. __Assembly of extract reads__: Carried out with the `SPAdes` assembler.
+4. __Merge and circularise__: Merges overlapping contigs form the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.
+5. __Clean contigs__: Removal of small contigs (default = 2k) and contigs completely contained in another contig.
+6. __Fix contig start positions__: Attempts to make the start position to be at a dnaA gene (if found).
+   - dnaA gene produces the "Chromosomal replication initiator protein DnaA" (https://www.uniprot.org/uniprot/P03004).
+
+To run all 7 steps as a workflow We will use the `circlator all` command (https://github.com/sanger-pathogens/circlator/wiki/Task:-all).
 
 ```{bash eval=FALSE}
 circlator all \
@@ -65,5 +100,25 @@ ecoli_reads/ecoli.correctedReads.fasta \
 circlator/redbean_racon_i2/ecoli
 ```
 
+__Parameters__
 
-(note always good to assess after these type of steps but we will contiue with annotation followed by assessment)
+- The 1st flagless option is the input assembly to be circularised.
+- The 2nd flagless option is the corrected reads to be used for circularisation,
+- The 3rd flagless option is the output directory.
+
+You can list all the output noting the prefix number shows which step the files/directories were created at.
+
+```{bash eval=FALSE}
+ls circlator/redbean_racon_i2/ecoli
+```
+
+The final circularised genome is in the file `06.fixstart.fasta`.
+
+### Circlator: Assessment & Polishing
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/assessment_n_polish.png", auto_pdf = TRUE)
+```
+
+Now would be a good time to carry out a genome assessment to determine if circularisation was beneficial. Then it would be good to carry out further polishing.
+
+You are more than welcome to do that now, if not we will go onto annotation.

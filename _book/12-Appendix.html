@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-04" />
+<meta name="date" content="2021-08-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -202,9 +202,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.1" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-conda-environment-directory"><i class="fa fa-check"></i><b>8.1.1</b> Circlator: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="8.1.2" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-read-correction"><i class="fa fa-check"></i><b>8.1.2</b> Circlator: Read correction</a></li>
 <li class="chapter" data-level="8.1.3" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-circularisation"><i class="fa fa-check"></i><b>8.1.3</b> Circlator: Circularisation</a></li>
+<li class="chapter" data-level="8.1.4" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-assessment-polishing"><i class="fa fa-check"></i><b>8.1.4</b> Circlator: Assessment &amp; Polishing</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="09-Annotation.html"><a href="09-Annotation.html"><i class="fa fa-check"></i><b>9</b> Annotation</a></li>
+<li class="chapter" data-level="9" data-path="09-Annotation.html"><a href="09-Annotation.html"><i class="fa fa-check"></i><b>9</b> Annotation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka"><i class="fa fa-check"></i><b>9.1</b> Prokka</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka-conda-environment-directory"><i class="fa fa-check"></i><b>9.1.1</b> Prokka: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="9.1.2" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka-run"><i class="fa fa-check"></i><b>9.1.2</b> Prokka: Run</a></li>
+<li class="chapter" data-level="9.1.3" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka-output"><i class="fa fa-check"></i><b>9.1.3</b> Prokka: Output</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="10" data-path="10-Final_report.html"><a href="10-Final_report.html"><i class="fa fa-check"></i><b>10</b> Final report</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="10-Final_report.html"><a href="10-Final_report.html#report"><i class="fa fa-check"></i><b>10.1</b> Report</a>
@@ -286,29 +295,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>HyPo: <a href="https://github.com/kensung-lab/hypo" class="uri">https://github.com/kensung-lab/hypo</a></p>
 <p>Medaka: <a href="https://github.com/nanoporetech/medaka" class="uri">https://github.com/nanoporetech/medaka</a></p>
 <p>NextPolish: <a href="https://github.com/Nextomics/NextPolish" class="uri">https://github.com/Nextomics/NextPolish</a></p>
-<p>FastQC: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" class="uri">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a></p>
-<p>MultiQC: <a href="https://multiqc.info/" class="uri">https://multiqc.info/</a></p>
-<p>Trim Galore: <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" class="uri">https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/</a></p>
-<p>Bowtie2: <a href="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml" class="uri">http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml</a></p>
-<p>samtools: <a href="http://www.htslib.org/" class="uri">http://www.htslib.org/</a></p>
-<p>BBTools: <a href="https://jgi.doe.gov/data-and-tools/bbtools/" class="uri">https://jgi.doe.gov/data-and-tools/bbtools/</a></p>
-<p>Kraken2: <a href="https://github.com/DerrickWood/kraken2/wiki/Manual" class="uri">https://github.com/DerrickWood/kraken2/wiki/Manual</a></p>
-<p>Krona: <a href="https://github.com/marbl/Krona/wiki/KronaTools" class="uri">https://github.com/marbl/Krona/wiki/KronaTools</a></p>
-<p>Bracken: <a href="https://ccb.jhu.edu/software/bracken/index.shtml?t=manual" class="uri">https://ccb.jhu.edu/software/bracken/index.shtml?t=manual</a></p>
-<p>LEfSe: <a href="https://huttenhower.sph.harvard.edu/lefse/" class="uri">https://huttenhower.sph.harvard.edu/lefse/</a></p>
-<p>HUMAnN2: <a href="https://github.com/biobakery/biobakery/wiki/humann2" class="uri">https://github.com/biobakery/biobakery/wiki/humann2</a></p>
-<p>MetaPhlAn2: <a href="https://huttenhower.sph.harvard.edu/metaphlan2/" class="uri">https://huttenhower.sph.harvard.edu/metaphlan2/</a></p>
-<p>Biobakery: <a href="https://github.com/biobakery/biobakery" class="uri">https://github.com/biobakery/biobakery</a></p>
-<p>MegaHit: <a href="https://github.com/voutcn/megahit" class="uri">https://github.com/voutcn/megahit</a></p>
-<p>BWA: <a href="https://github.com/lh3/bwa" class="uri">https://github.com/lh3/bwa</a></p>
-<p>minimap2: <a href="https://github.com/lh3/minimap2" class="uri">https://github.com/lh3/minimap2</a></p>
-<p>MetaBAT2: <a href="https://bitbucket.org/berkeleylab/metabat/src/master/" class="uri">https://bitbucket.org/berkeleylab/metabat/src/master/</a></p>
-<p>CheckM: <a href="https://github.com/Ecogenomics/CheckM/wiki" class="uri">https://github.com/Ecogenomics/CheckM/wiki</a></p>
-<p>PhyloPhlAn: <a href="https://github.com/biobakery/phylophlan/wiki" class="uri">https://github.com/biobakery/phylophlan/wiki</a></p>
-<p>MetaWRAP: <a href="https://github.com/bxlab/metaWRAP" class="uri">https://github.com/bxlab/metaWRAP</a></p>
-<p>Pokka: <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a></p>
-<p>MinPath: <a href="https://github.com/mgtools/MinPath/blob/master/readme" class="uri">https://github.com/mgtools/MinPath/blob/master/readme</a></p>
-<p>MetaCyc: <a href="https://metacyc.org/" class="uri">https://metacyc.org/</a></p>
+<p>Canu: <a href="https://github.com/marbl/canu" class="uri">https://github.com/marbl/canu</a></p>
+<p>Circlator: <a href="https://github.com/sanger-pathogens/circlator" class="uri">https://github.com/sanger-pathogens/circlator</a></p>
+<p>Prokka: <a href="https://github.com/tseemann/prokka" class="uri">https://github.com/tseemann/prokka</a></p>
+<p>EC numers: <a href="https://en.wikipedia.org/wiki/Enzyme_Commission_number" class="uri">https://en.wikipedia.org/wiki/Enzyme_Commission_number</a></p>
+<p>COG: <a href="https://www.ncbi.nlm.nih.gov/research/cog" class="uri">https://www.ncbi.nlm.nih.gov/research/cog</a></p>
 </div>
 <div id="obtaining-read-data" class="section level1" number="14">
 <h1><span class="header-section-number">C</span> Obtaining Read Data</h1>
