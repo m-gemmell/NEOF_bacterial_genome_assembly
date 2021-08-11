@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Multiple sample workflow | Bacterial genome assembly and annotation supplemental</title>
+  <meta name="description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Multiple sample workflow | Bacterial genome assembly and annotation supplemental" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/figures/NEOF.png" />
+  <meta property="og:description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Multiple sample workflow | Bacterial genome assembly and annotation supplemental" />
+  
+  <meta name="twitter:description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
+  <meta name="twitter:image" content="/figures/NEOF.png" />
+
+<meta name="author" content="Matthew R. Gemmell" />
+
+
+<meta name="date" content="2021-08-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
+<link rel="prev" href="01-Bacterial_genome_supplemental.html"/>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/neof_small_logo.png"></a></li>
+<li><a>Bacterial genome assembly and annotation supplemental</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="01-Bacterial_genome_supplemental.html"><a href="01-Bacterial_genome_supplemental.html"><i class="fa fa-check"></i><b>1</b> Supplemental</a></li>
+<li class="chapter" data-level="2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html"><i class="fa fa-check"></i><b>2</b> Multiple sample workflow</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#multiple-sample-raw-data"><i class="fa fa-check"></i><b>2.1</b> Multiple sample raw data</a></li>
+<li class="chapter" data-level="2.2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#sample-file"><i class="fa fa-check"></i><b>2.2</b> Sample file</a></li>
+<li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
+<li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bacterial genome assembly and annotation supplemental</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multiple-sample-workflow" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Multiple sample workflow</h1>
+<p><img src="figures/bacteria_multiple.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>In the standard workflow bookdown we assembled and annotated a single sample/genome. In your future projects you will most likely need to carry this out for multiple samples at one. This could be carried out by running each command for each sample separately. However, there are much quicker methods.</p>
+<p>In this section I will introduce you to my preferred method of carrying out commands on multiple samples. This involves a text file containing all the samples names in conjunction with <code>while read</code> loops.</p>
+<div id="multiple-sample-raw-data" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Multiple sample raw data</h2>
+<p><img src="figures/usb_stick.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Prior to running we need the data first. Copy over the directory that contains the data and will be used as the analysis directory.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="02-Multi-sample_workflow.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move to your bacterial_assembly directory</span></span>
+<span id="cb2-2"><a href="02-Multi-sample_workflow.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/</span>
+<span id="cb2-3"><a href="02-Multi-sample_workflow.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a multi_sample_workflow directory with a data subdirectory</span></span>
+<span id="cb2-4"><a href="02-Multi-sample_workflow.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multi_sample_workflow/data</span>
+<span id="cb2-5"><a href="02-Multi-sample_workflow.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the new analysis directory</span></span>
+<span id="cb2-6"><a href="02-Multi-sample_workflow.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multi_sample_workflow</span></code></pre></div>
+<p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We’ll create softlinks of the PacBio fastq files (always good if you know the sequencing data will not be moved or deleted).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="02-Multi-sample_workflow.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Softlink the PacBio fastq files we will use</span></span>
+<span id="cb3-2"><a href="02-Multi-sample_workflow.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/matthew/NEOF/bact_assembly/multi_sample_workflow/<span class="pp">*</span> data/</span>
+<span id="cb3-3"><a href="02-Multi-sample_workflow.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of the data directory</span></span>
+<span id="cb3-4"><a href="02-Multi-sample_workflow.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data</span></code></pre></div>
+</div>
+<div id="sample-file" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Sample file</h2>
+<p><img src="figures/shopping_list.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Now it is time to make the sample file we will use for the future <code>while read</code> loops. This file will contain the sample names, one sample name per line.</p>
+<p>For ease and convenience we will change the prefix of our PacBio fastq files to that of our desired samples names. In this case it is simply removing the <code>_0001.fastq</code> part.</p>
+<p>We could simply rename all the files with the <code>mv</code> command but this might be awkward with many files. Instead we will use the <code>rename</code> command</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="02-Multi-sample_workflow.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the data directory</span></span>
+<span id="cb4-2"><a href="02-Multi-sample_workflow.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> data</span>
+<span id="cb4-3"><a href="02-Multi-sample_workflow.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Rename the files</span></span>
+<span id="cb4-4"><a href="02-Multi-sample_workflow.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> <span class="st">&quot;s/_0001//&quot;</span> <span class="pp">*</span>.fastq</span>
+<span id="cb4-5"><a href="02-Multi-sample_workflow.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents</span></span>
+<span id="cb4-6"><a href="02-Multi-sample_workflow.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> .</span></code></pre></div>
+<p><code>rename</code> will rename all indicated files (<code>*.fastq</code>: all files in current directory with the suffix <code>.fastq</code>) using syntax similar to the <code>sed</code> command. The <code>"s/_0001//"</code> is made of four parts:</p>
+<ol style="list-style-type: decimal">
+<li><code>s/</code>: The <code>s</code> indicates we are carrying out a <strong>substitution</strong>.</li>
+<li><code>/_0001/</code>: The first instance of <code>_0001</code> is to be substituted.</li>
+<li><code>//</code>: The matched pattern (<code>_0001</code>) is to be substituted with nothing.</li>
+</ol>
+<p>For more info on <code>sed</code> please the Intro to Unix bookdown.</p>
+<p>With our newly named softlinks we can quickly create our sample file.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="02-Multi-sample_workflow.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#List fastq files</span></span>
+<span id="cb5-2"><a href="02-Multi-sample_workflow.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>fastq</span>
+<span id="cb5-3"><a href="02-Multi-sample_workflow.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List fastq files and remove the suffix (i.e. list sample names)</span></span>
+<span id="cb5-4"><a href="02-Multi-sample_workflow.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>fastq <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/.fastq//&quot;</span></span>
+<span id="cb5-5"><a href="02-Multi-sample_workflow.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Redirect sample names to a new sample file</span></span>
+<span id="cb5-6"><a href="02-Multi-sample_workflow.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>fastq <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s/.fastq//&quot;</span> <span class="op">&gt;</span> ../samples.txt</span></code></pre></div>
+<p>Move up one directory to the main analysis directory and view the contents of the sample file.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="02-Multi-sample_workflow.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move up one directory</span></span>
+<span id="cb6-2"><a href="02-Multi-sample_workflow.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb6-3"><a href="02-Multi-sample_workflow.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Print samples.txt contents to screen</span></span>
+<span id="cb6-4"><a href="02-Multi-sample_workflow.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt</span></code></pre></div>
+</div>
+<div id="start-looping" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Start looping</h2>
+<p><img src="figures/while_loop.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Now that we have our data and our sample file we can start carrying out the standard workflow with loops.</p>
+<p>First ensure you are in a terminal with an activate <code>bacterial_assembly</code> environment then create an assembly output directory.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="02-Multi-sample_workflow.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> redbean_assembly</span></code></pre></div>
+<p>Now to run the redbean assembly steps with loops</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="02-Multi-sample_workflow.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#wtdbg2 step</span></span>
+<span id="cb8-2"><a href="02-Multi-sample_workflow.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">s</span></span>
+<span id="cb8-3"><a href="02-Multi-sample_workflow.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb8-4"><a href="02-Multi-sample_workflow.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg2</span> <span class="dt">\</span></span>
+<span id="cb8-5"><a href="02-Multi-sample_workflow.html#cb8-5" aria-hidden="true" tabindex="-1"></a>-x rs <span class="dt">\</span></span>
+<span id="cb8-6"><a href="02-Multi-sample_workflow.html#cb8-6" aria-hidden="true" tabindex="-1"></a>-g 5.4m <span class="dt">\</span></span>
+<span id="cb8-7"><a href="02-Multi-sample_workflow.html#cb8-7" aria-hidden="true" tabindex="-1"></a>-i data/<span class="va">${s}</span>.fastq <span class="dt">\</span></span>
+<span id="cb8-8"><a href="02-Multi-sample_workflow.html#cb8-8" aria-hidden="true" tabindex="-1"></a>-o redbean_assembly/<span class="va">${s}</span> <span class="dt">\</span></span>
+<span id="cb8-9"><a href="02-Multi-sample_workflow.html#cb8-9" aria-hidden="true" tabindex="-1"></a>-t 8</span>
+<span id="cb8-10"><a href="02-Multi-sample_workflow.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb8-11"><a href="02-Multi-sample_workflow.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Derive consensus</span></span>
+<span id="cb8-12"><a href="02-Multi-sample_workflow.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">s</span></span>
+<span id="cb8-13"><a href="02-Multi-sample_workflow.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb8-14"><a href="02-Multi-sample_workflow.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">wtpoa-cns</span> <span class="dt">\</span></span>
+<span id="cb8-15"><a href="02-Multi-sample_workflow.html#cb8-15" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
+<span id="cb8-16"><a href="02-Multi-sample_workflow.html#cb8-16" aria-hidden="true" tabindex="-1"></a>-i redbean_assembly/<span class="va">${s}</span>.ctg.lay.gz <span class="dt">\</span></span>
+<span id="cb8-17"><a href="02-Multi-sample_workflow.html#cb8-17" aria-hidden="true" tabindex="-1"></a>-fo redbean_assembly/<span class="va">${s}</span>.ctg.fa</span>
+<span id="cb8-18"><a href="02-Multi-sample_workflow.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>As can be seen the contents of the file <code>samples.txt</code> is provided to the loop (<code>while read</code>) with a <code>cat</code> command and a pipe <code>|</code>.</p>
+<p>When looping through this file the commands in the loop are carried out three times, once for each samples. In future cases the loop will occur as many times as there are lines in the <code>samples.txt</code> file.</p>
+<p>In each loop the <code>${s}</code> is replaced with the current line from the file. <code>s</code> is set as the <code>variable</code> by the user when the loop is initiated (<code>while read s</code>). <code>s</code> is arbitrary and I use it to be short for “sample.” It could be any letter or even a word.</p>
+<p>Below we will put the <code>wtdbg2</code> within an echo within the loop. This will print out to screen the commands that would be run, replacing the variables (<code>${s}</code>) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="02-Multi-sample_workflow.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">s</span></span>
+<span id="cb9-2"><a href="02-Multi-sample_workflow.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb9-3"><a href="02-Multi-sample_workflow.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span></span>
+<span id="cb9-4"><a href="02-Multi-sample_workflow.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="ex">wtdbg2</span> <span class="dt">\</span></span>
+<span id="cb9-5"><a href="02-Multi-sample_workflow.html#cb9-5" aria-hidden="true" tabindex="-1"></a>-x rs <span class="dt">\</span></span>
+<span id="cb9-6"><a href="02-Multi-sample_workflow.html#cb9-6" aria-hidden="true" tabindex="-1"></a>-g 5.4m <span class="dt">\</span></span>
+<span id="cb9-7"><a href="02-Multi-sample_workflow.html#cb9-7" aria-hidden="true" tabindex="-1"></a>-i data/<span class="va">${s}</span>.fastq <span class="dt">\</span></span>
+<span id="cb9-8"><a href="02-Multi-sample_workflow.html#cb9-8" aria-hidden="true" tabindex="-1"></a>-o redbean_assembly/<span class="va">${s}</span> <span class="dt">\</span></span>
+<span id="cb9-9"><a href="02-Multi-sample_workflow.html#cb9-9" aria-hidden="true" tabindex="-1"></a>-t 8<span class="kw">`</span></span>
+<span id="cb9-10"><a href="02-Multi-sample_workflow.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p><strong>Note</strong>: Loops need to start with <code>do</code> and end with <code>done</code> as shown in the command.</p>
+</div>
+<div id="continuing-the-workflow" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Continuing the workflow</h2>
+<p><img src="figures/workflow_standard.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>With this quick intro to using <code>while loops</code> and the Standard workflow bookdown complete genome assembly and annotation for these three samples. Finish off with one final <code>MultiQC</code> report containing the final <code>QUAST</code> , <code>BUSCO</code>, and <code>Prokka</code> info for all the samples.</p>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li><code>QUAST</code>: This command can be provided multiple assembly files at once so loop won’t be needed.</li>
+<li><code>BUSCO</code>: Ensure you use the correct lineage dataset.</li>
+<li><code>MultiQC</code>: Like QUAST no loop is required for this command.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="01-Bacterial_genome_supplemental.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Cleanup | Bacterial genome assembly and annotation</title>
+  <meta name="description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Cleanup | Bacterial genome assembly and annotation" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/figures/NEOF.png" />
+  <meta property="og:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Cleanup | Bacterial genome assembly and annotation" />
+  
+  <meta name="twitter:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
+  <meta name="twitter:image" content="/figures/NEOF.png" />
+
+<meta name="author" content="Matthew R. Gemmell" />
+
+
+<meta name="date" content="2021-08-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
+<link rel="prev" href="10-Final_report.html"/>
+<link rel="next" href="12-Appendix.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="https://neof.org.uk/" target="blank"><img src="figures/neof_small_logo.png"></a></li>
+<li><a>Bacterial genome assembly and annotation</a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>Start</b></span></li>
+<li class="chapter" data-level="1" data-path="01-Bacterial_genome_assembly_and_annotation.html"><a href="01-Bacterial_genome_assembly_and_annotation.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="02-Cluster_Introduction.html"><a href="02-Cluster_Introduction.html"><i class="fa fa-check"></i><b>2</b> Cluster Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-Cluster_Introduction.html"><a href="02-Cluster_Introduction.html#logon-instructions"><i class="fa fa-check"></i><b>2.1</b> Logon instructions</a></li>
+<li class="chapter" data-level="2.2" data-path="02-Cluster_Introduction.html"><a href="02-Cluster_Introduction.html#the-terminal-window"><i class="fa fa-check"></i><b>2.2</b> The Terminal Window</a></li>
+</ul></li>
+<li class="part"><span><b>Standard workflow</b></span></li>
+<li class="chapter" data-level="3" data-path="03-Start.html"><a href="03-Start.html"><i class="fa fa-check"></i><b>3</b> Setup</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-Start.html"><a href="03-Start.html#workshop-directory-data"><i class="fa fa-check"></i><b>3.1</b> Workshop directory &amp; data</a></li>
+<li class="chapter" data-level="3.2" data-path="03-Start.html"><a href="03-Start.html#conda-environments"><i class="fa fa-check"></i><b>3.2</b> Conda environments</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-Overview.html"><a href="04-Overview.html"><i class="fa fa-check"></i><b>4</b> Overview</a></li>
+<li class="chapter" data-level="5" data-path="05-Assembly.html"><a href="05-Assembly.html"><i class="fa fa-check"></i><b>5</b> Genome Assembly</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean"><i class="fa fa-check"></i><b>5.1</b> Redbean</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="05-Assembly.html"><a href="05-Assembly.html#redbeanassemblyconda"><i class="fa fa-check"></i><b>5.1.1</b> Redbean: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="5.1.2" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-assemble-long-reads"><i class="fa fa-check"></i><b>5.1.2</b> Redbean: Assemble long reads</a></li>
+<li class="chapter" data-level="5.1.3" data-path="05-Assembly.html"><a href="05-Assembly.html#redbean-derive-consensus"><i class="fa fa-check"></i><b>5.1.3</b> Redbean: Derive consensus</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="05-Assembly.html"><a href="05-Assembly.html#bandage-visualisation"><i class="fa fa-check"></i><b>5.2</b> Bandage Visualisation</a></li>
+<li class="chapter" data-level="5.3" data-path="05-Assembly.html"><a href="05-Assembly.html#other-long-read-assemblers"><i class="fa fa-check"></i><b>5.3</b> Other long read assemblers</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessmentconda"><i class="fa fa-check"></i><b>6.1</b> Assessment: Conda environnment &amp; directory</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
+<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
+<li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
+<li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-Polishing.html"><a href="07-Polishing.html"><i class="fa fa-check"></i><b>7</b> Polishing</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-Polishing.html"><a href="07-Polishing.html#racon"><i class="fa fa-check"></i><b>7.1</b> Racon</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-conda-environment-directory"><i class="fa fa-check"></i><b>7.1.1</b> Racon: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-index-assembly"><i class="fa fa-check"></i><b>7.1.2</b> Racon: Index assembly</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-read-alignment-to-assembly"><i class="fa fa-check"></i><b>7.1.3</b> Racon: Read alignment to assembly</a></li>
+<li class="chapter" data-level="7.1.4" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing"><i class="fa fa-check"></i><b>7.1.4</b> Racon: Polishing</a></li>
+<li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
+<li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-Circlator.html"><a href="08-Circlator.html"><i class="fa fa-check"></i><b>8</b> Circularisation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator"><i class="fa fa-check"></i><b>8.1</b> Circlator</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-conda-environment-directory"><i class="fa fa-check"></i><b>8.1.1</b> Circlator: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="8.1.2" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-read-correction"><i class="fa fa-check"></i><b>8.1.2</b> Circlator: Read correction</a></li>
+<li class="chapter" data-level="8.1.3" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-circularisation"><i class="fa fa-check"></i><b>8.1.3</b> Circlator: Circularisation</a></li>
+<li class="chapter" data-level="8.1.4" data-path="08-Circlator.html"><a href="08-Circlator.html#circlator-assessment-polishing"><i class="fa fa-check"></i><b>8.1.4</b> Circlator: Assessment &amp; Polishing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-Annotation.html"><a href="09-Annotation.html"><i class="fa fa-check"></i><b>9</b> Annotation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka"><i class="fa fa-check"></i><b>9.1</b> Prokka</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka-conda-environment-directory"><i class="fa fa-check"></i><b>9.1.1</b> Prokka: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="9.1.2" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka-run"><i class="fa fa-check"></i><b>9.1.2</b> Prokka: Run</a></li>
+<li class="chapter" data-level="9.1.3" data-path="09-Annotation.html"><a href="09-Annotation.html#prokka-output"><i class="fa fa-check"></i><b>9.1.3</b> Prokka: Output</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="09-Annotation.html"><a href="09-Annotation.html#exploring-annotations"><i class="fa fa-check"></i><b>9.2</b> Exploring annotations</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-Final_report.html"><a href="10-Final_report.html"><i class="fa fa-check"></i><b>10</b> Final report</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-Final_report.html"><a href="10-Final_report.html#report"><i class="fa fa-check"></i><b>10.1</b> Report</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="10-Final_report.html"><a href="10-Final_report.html#report-conda-environment-directory"><i class="fa fa-check"></i><b>10.1.1</b> Report: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="10.1.2" data-path="10-Final_report.html"><a href="10-Final_report.html#report-quast"><i class="fa fa-check"></i><b>10.1.2</b> Report: QUAST</a></li>
+<li class="chapter" data-level="10.1.3" data-path="10-Final_report.html"><a href="10-Final_report.html#report-busco"><i class="fa fa-check"></i><b>10.1.3</b> Report: BUSCO</a></li>
+<li class="chapter" data-level="10.1.4" data-path="10-Final_report.html"><a href="10-Final_report.html#report-multiqc"><i class="fa fa-check"></i><b>10.1.4</b> Report: MultiQC</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="10-Final_report.html"><a href="10-Final_report.html#final-recap"><i class="fa fa-check"></i><b>10.2</b> Final recap</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-Cleanup.html"><a href="11-Cleanup.html"><i class="fa fa-check"></i><b>11</b> Cleanup</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11-Cleanup.html"><a href="11-Cleanup.html#deleting-unwanted-data"><i class="fa fa-check"></i><b>11.1</b> Deleting unwanted data</a></li>
+<li class="chapter" data-level="11.2" data-path="11-Cleanup.html"><a href="11-Cleanup.html#compressing-the-final-directory"><i class="fa fa-check"></i><b>11.2</b> Compressing the final directory</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
+<li class="chapter" data-level="B" data-path="09-Annotation.html"><a href="09-Annotation.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
+<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bacterial genome assembly and annotation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cleanup" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Cleanup</h1>
+<p><img src="figures/sweep.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the <code>final_assembly</code> directory but instead we will delete files that are definitely not needed. Thi will leave files that we may want to use again (assembly fasta files, stats etc.).</p>
+<p>You can delete files/directories you definitely don’t need as you go along (recommended for large files/directories or if storage space is a premium) but I tend to do my cleanup at the end of a project.</p>
+<div id="deleting-unwanted-data" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Deleting unwanted data</h2>
+<p><img src="figures/binning.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>Instead of running you through this by the normal conversational prose, I will instead give you the below code block with annotations to run through.</p>
+<p><strong>Note</strong>: No specific conda environment is needed for this as we are using default linux commands.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="11-Cleanup.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure you are in the standard_workflow directory</span></span>
+<span id="cb52-2"><a href="11-Cleanup.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span>
+<span id="cb52-3"><a href="11-Cleanup.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the du command to see the size of directories</span></span>
+<span id="cb52-4"><a href="11-Cleanup.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">#This is useful to target larger files</span></span>
+<span id="cb52-5"><a href="11-Cleanup.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Use `man du` if you are interested in know more about du and its options</span></span>
+<span id="cb52-6"><a href="11-Cleanup.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> <span class="pp">*</span></span>
+<span id="cb52-7"><a href="11-Cleanup.html#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="11-Cleanup.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co">##Redbean</span></span>
+<span id="cb52-9"><a href="11-Cleanup.html#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage of redbean output</span></span>
+<span id="cb52-10"><a href="11-Cleanup.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> redbean_assembly/<span class="pp">*</span></span>
+<span id="cb52-11"><a href="11-Cleanup.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the gzipped files that we will most likely never even look at</span></span>
+<span id="cb52-12"><a href="11-Cleanup.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co">#I always like to ls before using wildcards to delete or </span></span>
+<span id="cb52-13"><a href="11-Cleanup.html#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co"># deleting directories</span></span>
+<span id="cb52-14"><a href="11-Cleanup.html#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co">#This helps ensure you are not going to delete anything you don’t want to</span></span>
+<span id="cb52-15"><a href="11-Cleanup.html#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/<span class="pp">*</span>gz</span>
+<span id="cb52-16"><a href="11-Cleanup.html#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> redbean_assembly/<span class="pp">*</span>gz</span>
+<span id="cb52-17"><a href="11-Cleanup.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the assembly index files</span></span>
+<span id="cb52-18"><a href="11-Cleanup.html#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="co">#We created these for racon polishing</span></span>
+<span id="cb52-19"><a href="11-Cleanup.html#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span>
+<span id="cb52-20"><a href="11-Cleanup.html#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span>
+<span id="cb52-21"><a href="11-Cleanup.html#cb52-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-22"><a href="11-Cleanup.html#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="co">##QUAST</span></span>
+<span id="cb52-23"><a href="11-Cleanup.html#cb52-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Generally quast does not produce large files so we will ignore its output</span></span>
+<span id="cb52-24"><a href="11-Cleanup.html#cb52-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-25"><a href="11-Cleanup.html#cb52-25" aria-hidden="true" tabindex="-1"></a><span class="co">##BUSCO</span></span>
+<span id="cb52-26"><a href="11-Cleanup.html#cb52-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-27"><a href="11-Cleanup.html#cb52-27" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> busco/redbean/<span class="pp">*</span></span>
+<span id="cb52-28"><a href="11-Cleanup.html#cb52-28" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the the BUSCO downloads directory</span></span>
+<span id="cb52-29"><a href="11-Cleanup.html#cb52-29" aria-hidden="true" tabindex="-1"></a><span class="co">#This contained the lineage dataset information</span></span>
+<span id="cb52-30"><a href="11-Cleanup.html#cb52-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco_downloads</span>
+<span id="cb52-31"><a href="11-Cleanup.html#cb52-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco_downloads</span>
+<span id="cb52-32"><a href="11-Cleanup.html#cb52-32" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the BUSCO logs</span></span>
+<span id="cb52-33"><a href="11-Cleanup.html#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/busco_<span class="pp">*</span>.log</span>
+<span id="cb52-34"><a href="11-Cleanup.html#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> busco/redbean/busco_<span class="pp">*</span>.log</span>
+<span id="cb52-35"><a href="11-Cleanup.html#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage of ecoli BUSCO results</span></span>
+<span id="cb52-36"><a href="11-Cleanup.html#cb52-36" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> busco/redbean/ecoli/<span class="pp">*</span></span>
+<span id="cb52-37"><a href="11-Cleanup.html#cb52-37" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the logs directory</span></span>
+<span id="cb52-38"><a href="11-Cleanup.html#cb52-38" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/logs</span>
+<span id="cb52-39"><a href="11-Cleanup.html#cb52-39" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/logs</span>
+<span id="cb52-40"><a href="11-Cleanup.html#cb52-40" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the prodigal output</span></span>
+<span id="cb52-41"><a href="11-Cleanup.html#cb52-41" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/prodigal_output</span>
+<span id="cb52-42"><a href="11-Cleanup.html#cb52-42" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/prodigal_output</span>
+<span id="cb52-43"><a href="11-Cleanup.html#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the run output</span></span>
+<span id="cb52-44"><a href="11-Cleanup.html#cb52-44" aria-hidden="true" tabindex="-1"></a><span class="co">#This directory may be useful but normally the short summary </span></span>
+<span id="cb52-45"><a href="11-Cleanup.html#cb52-45" aria-hidden="true" tabindex="-1"></a><span class="co"># is sufficient to keep and use</span></span>
+<span id="cb52-46"><a href="11-Cleanup.html#cb52-46" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/run_enterobacterales_odb10</span>
+<span id="cb52-47"><a href="11-Cleanup.html#cb52-47" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/run_enterobacterales_odb10</span>
+<span id="cb52-48"><a href="11-Cleanup.html#cb52-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-49"><a href="11-Cleanup.html#cb52-49" aria-hidden="true" tabindex="-1"></a><span class="co">## checkm</span></span>
+<span id="cb52-50"><a href="11-Cleanup.html#cb52-50" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-51"><a href="11-Cleanup.html#cb52-51" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> checkm/redbean/ecoli/<span class="pp">*</span></span>
+<span id="cb52-52"><a href="11-Cleanup.html#cb52-52" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the CheckM storage directory</span></span>
+<span id="cb52-53"><a href="11-Cleanup.html#cb52-53" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> checkm/redbean/ecoli/storage</span>
+<span id="cb52-54"><a href="11-Cleanup.html#cb52-54" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> checkm/redbean/ecoli/storage</span>
+<span id="cb52-55"><a href="11-Cleanup.html#cb52-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-56"><a href="11-Cleanup.html#cb52-56" aria-hidden="true" tabindex="-1"></a><span class="co">## racon</span></span>
+<span id="cb52-57"><a href="11-Cleanup.html#cb52-57" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-58"><a href="11-Cleanup.html#cb52-58" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> racon/redbean/ecoli/<span class="pp">*</span></span>
+<span id="cb52-59"><a href="11-Cleanup.html#cb52-59" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the SAM files</span></span>
+<span id="cb52-60"><a href="11-Cleanup.html#cb52-60" aria-hidden="true" tabindex="-1"></a><span class="co">#These are relatively large and can be generated quickly</span></span>
+<span id="cb52-61"><a href="11-Cleanup.html#cb52-61" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/<span class="pp">*</span>sam</span>
+<span id="cb52-62"><a href="11-Cleanup.html#cb52-62" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> racon/redbean/ecoli/<span class="pp">*</span>sam</span>
+<span id="cb52-63"><a href="11-Cleanup.html#cb52-63" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the index files</span></span>
+<span id="cb52-64"><a href="11-Cleanup.html#cb52-64" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/<span class="pp">*</span>.fasta.<span class="pp">*</span></span>
+<span id="cb52-65"><a href="11-Cleanup.html#cb52-65" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> racon/redbean/ecoli/<span class="pp">*</span>.fasta.<span class="pp">*</span></span>
+<span id="cb52-66"><a href="11-Cleanup.html#cb52-66" aria-hidden="true" tabindex="-1"></a><span class="co">#The dnadiff output is small so we will leave it alone</span></span>
+<span id="cb52-67"><a href="11-Cleanup.html#cb52-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-68"><a href="11-Cleanup.html#cb52-68" aria-hidden="true" tabindex="-1"></a><span class="co">##Circlator</span></span>
+<span id="cb52-69"><a href="11-Cleanup.html#cb52-69" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-70"><a href="11-Cleanup.html#cb52-70" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> circlator/redbean_raconi2/ecoli/<span class="pp">*</span></span>
+<span id="cb52-71"><a href="11-Cleanup.html#cb52-71" aria-hidden="true" tabindex="-1"></a><span class="co">#We are only interested in the files produced by the 6th step</span></span>
+<span id="cb52-72"><a href="11-Cleanup.html#cb52-72" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete all the 00-05 files</span></span>
+<span id="cb52-73"><a href="11-Cleanup.html#cb52-73" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> circlator/redbean_raconi2/ecoli/0[0-5]<span class="pp">*</span></span>
+<span id="cb52-74"><a href="11-Cleanup.html#cb52-74" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> circlator/redbean_raconi2/ecoli/0[0-5]<span class="pp">*</span></span>
+<span id="cb52-75"><a href="11-Cleanup.html#cb52-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-76"><a href="11-Cleanup.html#cb52-76" aria-hidden="true" tabindex="-1"></a><span class="co">##Prokka</span></span>
+<span id="cb52-77"><a href="11-Cleanup.html#cb52-77" aria-hidden="true" tabindex="-1"></a><span class="co">#All the prokka files are useful so no deleting here</span></span></code></pre></div>
+<p><strong>Task</strong></p>
+<p>Using the experience above cleanup unwanted files and directories in your final assembly directory</p>
+</div>
+<div id="compressing-the-final-directory" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Compressing the final directory</h2>
+<p><img src="figures/targz.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>It is good practice to compress a cleaned directory when it is not needed any more. Lots of files will slow down a cluster whilst a compressed directory will only count as one file. Therefore if you like your analyses to run quickly please compress your project directories that you don’t plan to touch again for more than 6 months.</p>
+<p>For practice you will make a copy of your <code>bacterial_assembly</code> directory.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="11-Cleanup.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure in you ar ein correct directory</span></span>
+<span id="cb53-2"><a href="11-Cleanup.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly</span>
+<span id="cb53-3"><a href="11-Cleanup.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy the standard_workflow directory with a new name</span></span>
+<span id="cb53-4"><a href="11-Cleanup.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> standard_workflow standard_workflow_backup</span></code></pre></div>
+<p>Now compress the directory <code>standard_workflow_backup</code> into the compressed archive <code>standard_workflow.tar.gz</code>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="11-Cleanup.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-czvf</span> standard_workflow.tar.gz standard_workflow_backup</span></code></pre></div>
+<p><strong>Paramters</strong></p>
+<ul>
+<li><code>-czvf</code> : Consists of multiple flags.
+<ul>
+<li><code>c</code> : Create a new archive. In this case <code>standard_workflow.tar.gz</code>.</li>
+<li><code>z</code> : After tar compression (<code>.tar</code>) carry out gzip compression (<code>.gz</code>).</li>
+<li><code>v</code> : Verbosely lists files processed.</li>
+<li><code>f</code> : Use archive file. This will mean that after unarchiving the directory will retain its original name.</li>
+</ul></li>
+</ul>
+<p>Now that we have a compressed version of the directory we will remove the directory.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="11-Cleanup.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> standard_workflow_backup</span></code></pre></div>
+<p>To uncompress the directory archive we use <code>tar</code> again but instead we use <code>-x</code> (uncompress) instead of <code>-c</code> (compress).</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="11-Cleanup.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Uncompress</span></span>
+<span id="cb56-2"><a href="11-Cleanup.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzvf</span> standard_workflow.tar.gz</span>
+<span id="cb56-3"><a href="11-Cleanup.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of uncompressed directory</span></span>
+<span id="cb56-4"><a href="11-Cleanup.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> standard_workflow_backup</span></code></pre></div>
+<p>Great! That is the end of this bookdown. Check out the appendix for some links to next steps and the websites of all the tools used in this workflow.</p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="10-Final_report.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="12-Appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

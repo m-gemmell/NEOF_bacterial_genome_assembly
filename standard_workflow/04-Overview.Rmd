@@ -1,0 +1,16 @@
+# Overview {#overview}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
+``` 
+
+In this bookdown we will be running a standard workflow for genome assembly with long reads. This, on top of QC, can be used for PacBio and ONT data. Most of the time this will be all you need to produce a good annotated genome assembly.
+
+Below is a diagram of the workflow. 
+
+```{r, fig.align = 'center',out.width= '90%', echo=FALSE }
+knitr::include_graphics(path = "figures/bact_genome_standard_workflow.png", auto_pdf = TRUE)
+``` 
+
+Ideally you would actually run assessment after every non assessment step to make sure the various steps are performing well.
+
+This workflow will not always be effective which may require the use of other assemblers or other processes. Some of these will be covered in the supplemental bookdown.

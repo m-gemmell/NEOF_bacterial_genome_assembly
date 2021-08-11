@@ -1,0 +1,148 @@
+# Cleanup {#cleanup}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/sweep.png", auto_pdf = TRUE)
+``` 
+
+When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the `final_assembly` directory but instead we will delete files that are definitely not needed. Thi will leave files that we may want to use again (assembly fasta files, stats etc.).
+
+You can delete files/directories you definitely don't need as you go along (recommended for large files/directories or if storage space is a premium) but I tend to do my cleanup at the end of a project.
+
+## Deleting unwanted data
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/binning.png", auto_pdf = TRUE)
+``` 
+
+Instead of running you through this by the normal conversational prose, I will instead give you the below code block with annotations to run through.
+
+__Note__: No specific conda environment is needed for this as we are using default linux commands.
+
+```{bash eval=FALSE}
+#Ensure you are in the standard_workflow directory
+cd ~/bacterial_assembly/standard_workflow
+#Use the du command to see the size of directories
+#This is useful to target larger files
+#Use `man du` if you are interested in know more about du and its options
+du -hsc *
+
+##Redbean
+#Check file storage of redbean output
+du -hsc redbean_assembly/*
+#Delete the gzipped files that we will most likely never even look at
+#I always like to ls before using wildcards to delete or 
+# deleting directories
+#This helps ensure you are not going to delete anything you don’t want to
+ls redbean_assembly/*gz
+rm redbean_assembly/*gz
+#Delete the assembly index files
+#We created these for racon polishing
+ls redbean_assembly/ecoli.ctg.fa.*
+rm redbean_assembly/ecoli.ctg.fa.*
+
+##QUAST
+#Generally quast does not produce large files so we will ignore its output
+
+##BUSCO
+#Check file storage
+du -hsc busco/redbean/*
+#Delete the the BUSCO downloads directory
+#This contained the lineage dataset information
+ls busco_downloads
+rm -r busco_downloads
+#Delete the BUSCO logs
+ls busco/redbean/busco_*.log
+rm busco/redbean/busco_*.log
+#Check file storage of ecoli BUSCO results
+du -hsc busco/redbean/ecoli/*
+#Remove the logs directory
+ls busco/redbean/ecoli/logs
+rm -r busco/redbean/ecoli/logs
+#Remove the prodigal output
+ls busco/redbean/ecoli/prodigal_output
+rm -r busco/redbean/ecoli/prodigal_output
+#Remove the run output
+#This directory may be useful but normally the short summary 
+# is sufficient to keep and use
+ls busco/redbean/ecoli/run_enterobacterales_odb10
+rm -r busco/redbean/ecoli/run_enterobacterales_odb10
+
+## checkm
+#Check file storage
+du -hsc checkm/redbean/ecoli/*
+#Remove the CheckM storage directory
+ls checkm/redbean/ecoli/storage
+rm -r checkm/redbean/ecoli/storage
+
+## racon
+#Check file storage
+du -hsc racon/redbean/ecoli/*
+#Delete the SAM files
+#These are relatively large and can be generated quickly
+ls racon/redbean/ecoli/*sam
+rm racon/redbean/ecoli/*sam
+#Remove the index files
+ls racon/redbean/ecoli/*.fasta.*
+rm racon/redbean/ecoli/*.fasta.*
+#The dnadiff output is small so we will leave it alone
+
+##Circlator
+#Check file storage
+du -hsc circlator/redbean_raconi2/ecoli/*
+#We are only interested in the files produced by the 6th step
+#Delete all the 00-05 files
+ls circlator/redbean_raconi2/ecoli/0[0-5]*
+rm circlator/redbean_raconi2/ecoli/0[0-5]*
+
+##Prokka
+#All the prokka files are useful so no deleting here
+```
+
+__Task__
+
+Using the experience above cleanup unwanted files and directories in your final assembly directory
+
+## Compressing the final directory
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/targz.png", auto_pdf = TRUE)
+``` 
+
+It is good practice to compress a cleaned directory when it is not needed any more. Lots of files will slow down a cluster whilst a compressed directory will only count as one file. Therefore if you like your analyses to run quickly please compress your project directories that you don't plan to touch again for more than 6 months.
+
+For practice you will make a copy of your `bacterial_assembly` directory.
+
+```{bash eval=FALSE}
+#Ensure in you ar ein correct directory
+cd ~/bacterial_assembly
+#Copy the standard_workflow directory with a new name
+cp -r standard_workflow standard_workflow_backup
+```
+
+Now compress the directory `standard_workflow_backup` into the compressed archive `standard_workflow.tar.gz`.
+
+```{bash eval=FALSE}
+tar -czvf standard_workflow.tar.gz standard_workflow_backup
+```
+
+__Paramters__
+
+- `-czvf` : Consists of multiple flags.
+   - `c` : Create a new archive. In this case `standard_workflow.tar.gz`.
+   - `z` : After tar compression (`.tar`) carry out gzip compression (`.gz`).
+   - `v` : Verbosely lists files processed.
+   - `f` : Use archive file. This will mean that after unarchiving the directory will retain its original name.
+
+Now that we have a compressed version of the directory we will remove the directory.
+
+```{bash eval=FALSE}
+rm -rf standard_workflow_backup
+```
+
+To uncompress the directory archive we use `tar` again but instead we use `-x` (uncompress) instead of `-c` (compress).
+
+```{bash eval=FALSE}
+#Uncompress
+tar -xzvf standard_workflow.tar.gz
+#List contents of uncompressed directory
+ls standard_workflow_backup
+```
+
+Great! That is the end of this bookdown. Check out the appendix for some links to next steps and the websites of all the tools used in this workflow.

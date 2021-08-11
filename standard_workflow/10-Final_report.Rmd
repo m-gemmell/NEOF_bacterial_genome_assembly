@@ -1,0 +1,144 @@
+# Final report {#finalreport}
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/final_report.png", auto_pdf = TRUE)
+``` 
+
+## Report
+
+Once you have your final assmeblies it is always a good idea to make a final report. This will involve running `QUAST` and `BUSCO` on the final assemblies. Additionally, we will use `MultiQC` to make a html report including the metrics/stats from `QUAST`, `BUSCO`, and `Prokka`.
+
+### Report: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `bacterial_genome_assessment` conda environment for our report generation. Either:
+
+- Use your currently open `bacterial_genome_assessment` terminal.
+- If you need a new `bacterial_genome_assessment` terminal see the [assembly assessment conda activation instructions](#assessmentconda)
+
+Ensure you are in the `final_assembly` directory
+
+```{bash eval=FALSE}
+cd ~/bacterial_assembly/standard_workflow/final_assembly
+```
+
+### Report: QUAST
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/measuring_tape.png", auto_pdf = TRUE)
+```
+
+We will run `QUAST` but this time we will include a reference. Make a softlink for the genome reference. This reference genome is the genome used to create the PacBio simulated reads we have been using for assembly.
+
+```{bash eval=FALSE}
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/ref/ ~/bacterial_assembly/
+```
+
+Now we will run `QUAST` with the added option of `-r` specifying the reference fasta to be used. 
+
+```{bash eval=FALSE}
+#Make QUAST output directory
+mkdir quast
+#Run QUAST
+quast -r ../../ecoli_ref.fasta -o quast assembly/ecoli.fasta
+```
+
+This `-r` option will add comparison metrics of the provided assembly/assemblies to the reference assembly. This is similar to `dnadiff` but more basic. We will look at the `QUAST metrics further down.
+
+### Report: BUSCO
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/universe.png", auto_pdf = TRUE)
+``` 
+
+Now to run `BUSCO` for the assembly.
+
+```{bash eval=FALSE}
+#Make BUSCO directory
+mkdir busco
+#run BUSCO
+busco -i assembly/ecoli.fasta -l enterobacterales_odb10 -m geno -o ecoli --out_path ./busco/
+```
+
+### Report: MultiQC
+```{r, fig.align = 'center',out.width= '25%', echo=FALSE }
+knitr::include_graphics(path = "figures/multiqc.png", auto_pdf = TRUE)
+```
+
+`MultiQC` will create a html report from the output from various tools. A list of compatible tools and output files can be found at: https://multiqc.info/docs/#multiqc-modules
+
+When running `MultiQC` the user points it to a directory or multiple directories which contain the output you want included in the report. `MultiQC` will then search through the files looking for all the compatible files and ignoring the incompatible files.
+
+However, I find `MultiQC` is very slow to search through files, especially for tools that create a lot of output files. I therefore like to create an `input` directory where I copy all the input for `MultiQC` so it will run much quicker. Let's do that now.
+
+```{bash eval=FALSE}
+#Make MultiQC directory
+mkdir multiqc
+#Move into MultiQC directory
+cd multiqc
+#Make a input directory
+mkdir input
+#Copy the relevant QUAST, BUSCO, and Prokka files to be used as MultiQC input
+cp ../quast/report.tsv input/
+cp ../busco/ecoli/short_summary.specific.enterobacterales_odb10.txt input/
+cp ../prokka/ecoli/ecoli.txt input/
+```
+
+Now we can run `MultiQC`.
+
+```{bash eval=FALSE}
+multiqc --cl-config "prokka_fn_snames: True" -o . input/
+```
+
+__Parameters__
+
+- `--cl-config` : This parameter allows you to config how MultiQC will analyse/present data. 
+   - `"prokka_fn_snames: True"`: `MultiQC` will use the file names as the sample names. Other wise the sample name is generated using the first line of the `Prokka` `.txt` file.
+   - More info on configuring `MultiQC`: https://multiqc.info/docs/#configuring-multiqc
+- `-o` : Output directory.
+- At the end of the command all the input directories (directories with the `MultiQC` inputs) are supplied. In this case it is just `input/` as it contains all our input.
+
+Inspect the html report.
+
+```{bash eval=FALSE}
+firefox multiqc_report.html
+```
+
+In the `QUAST` `Assembly Statistics` table you will see normal contiguity metrics plus new metrics based on comparing the assembly to the reference assembly:
+
+- __Misassemblies__: Number of misassmebly positions in contigs.
+- __Mismatches/100kbp__: Average number of mismatches per 100000 aligned bases.
+- __Indels/100kbp__: Average number of indels per 100000 aligned bases.
+- __Genome Fraction__: Percentage of bases in the reference that aligned to the genome assembly.
+
+More info on metrics: http://quast.sourceforge.net/docs/manual.html#sec3.1
+
+__Questions__
+
+- What percentage of reference bases aligned to the genome assembly?
+- When compared to the reference is there a higher number of Mismatches of Indels? Do you think Illumina sequencing would cause the same issue?
+- How have the BUSCO metrics changed from the BUSCO of the original assembly?
+
+## Final recap
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/recap.png", auto_pdf = TRUE)
+``` 
+
+We have produced a circularised, and polished genome assembly. Additionally we have annotated this assembly and assessed it for contiguity and completeness.
+
+The assembly has very good contiguity but not the highest completeness estimation which appears to be due to missassemblies from mismatches but primarily indels (as evidenced by comparing the assembly to the reference).
+
+Below are a few suggestions for how this could be improved in a real project:
+
+- Better QC of the initial data.
+   - Filter out small reads (<500-1kbp).
+   - Correct reads prior to the first assembly.
+- Try out other long read assemblers.
+- Further polishing
+   - Polishing after circularisation.
+   - Try out a different polisher.
+- Include Illumina reads
+   - Hybrid assembly with PacBio and Illumina reads
+   - Polish PacBio reads with Illumina reads
+   - Polish the assembly with the Illumina reads rather than the PacBio reads. PacBio & ONT reads are less accurate and more susceptible to indel errors than Illumina reads.
+
+As you can see there are a lot of ways to try to improve an assembly. That is why it is always important to carry out regular assembly assessment to determine if you are taking the best route. Additionally, it is also good to know if you have reached the optimum assembly from your data, if so there is not much point spending a lot more bioinformatics time to improve the assembly. Some times you need better/more data.

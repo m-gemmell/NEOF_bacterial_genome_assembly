@@ -1,0 +1,5 @@
+book_filename: "Bacterial genome assembly and annotation supplemental"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: FALSE
