@@ -32,6 +32,8 @@ We will use the `bacterial_assembly` conda environment for our `Racon` polishing
 - Use your currently open `bacterial_assembly` terminal.
 - If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
 
+Ensure you are in the correct directory and create a new output directory.
+
 ```{bash eval=FALSE}
 cd ~/bacterial_assembly/standard_workflow
 mkdir -p racon/redbean/ecoli
@@ -144,10 +146,10 @@ less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 There is a lot of useful information in this file. The __[REF]__ column represents the original assembly whilst the __[QRY]__ column represent the polished assembly. Let us go through some (not all) of the stats.
 
 - __[Sequences]__
-   - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. That is good to see.
-   - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa.
+   - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. Racon has removed unpolished contigs.
+   - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa. 
 - __[Bases]__
-   - TotalBases: Our total bases has decreased (~50k) from reference to query. This is by a small amount though and it is likely it was redundant parts from merging the 4 contigs into 1
+   - TotalBases: Our total bases has decreased (~50k) from reference to query.
 - __[Feature Estimates]__
    - Insertions: There are 19 insertion events that consists of ~50Kbp in the reference assembly. This indicates these areas were caused by misassembly and removed from the query by polishing.
 - __[SNPs]__

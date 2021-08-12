@@ -27,7 +27,7 @@ We will be running three _Bacillus cereus_ samples through the standard workflow
 
 ```{bash eval=FALSE}
 #Softlink the PacBio fastq files we will use
-ln -s /pub39/tea/matthew/NEOF/bact_assembly/multi_sample_workflow/* data/
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/* data/
 #List contents of the data directory
 ls data
 ```

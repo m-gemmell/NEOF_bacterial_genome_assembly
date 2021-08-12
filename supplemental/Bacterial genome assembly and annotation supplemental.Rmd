@@ -62,7 +62,7 @@ We will be running three _Bacillus cereus_ samples through the standard workflow
 
 ```{bash eval=FALSE}
 #Softlink the PacBio fastq files we will use
-ln -s /pub39/tea/matthew/NEOF/bact_assembly/multi_sample_workflow/* data/
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/* data/
 #List contents of the data directory
 ls data
 ```
@@ -188,4 +188,221 @@ __Notes__:
 - `MultiQC`: Like QUAST no loop is required for this command.
 
 <!--chapter:end:02-Multi-sample_workflow.Rmd-->
+
+# High coverage
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
+knitr::include_graphics(path = "figures/wifi_coverage.png", auto_pdf = TRUE)
+``` 
+
+Low sequence coverage (<20X) can cause assembly issues due to:
+
+- Under represented areas of the genomes. 
+   - Sequencing will not lead to uniform coverage across the genome and so the lower coverage areas may not be missing of have very low coverage.
+- Errors cannot be corrected/polished.
+   - Low coverage may mean there are areas which do not have enough sequences to produce an accurate assembly.
+   
+Low sequence coverage can be corrected by carrying out more sequencing. 
+
+High sequence coverage (>100X) may seem perfect but it can cause issues. Although it may seem good, high coverage will cause assembly issues. As coverage increases the number of errors in the data increases (even if the % of errors is stable). If data contains a 10% error rate then 100 megabases will contain 10 megabases of errors whilst 1 gigabase will contain 100 megabases of errors. It is a lot easier for an assembly to detemrine what may be errors if there is a smaller total amount of them. 
+
+The errors will confuse the assembler and it may create create an assembly graph that looks like a bowl of spaghetti rather than one long spaghetti strand. If you provide enough coverage the assembler may never finish or crash due to memory limitations as it tries to disentangle the graph.
+
+How do we prevent this?
+
+## Detecting high coverage
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE}
+knitr::include_graphics(path = "figures/altimeter.png", auto_pdf = TRUE)
+``` 
+
+To detect high coverage (>100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix command sto do this.
+
+```{bash eval=FALSE}
+#Move into the directory with your ecoli reads
+cd ~/bacterial_assembly/standard_workflow/ecoli_reads
+#Print out to screen the number of bases in ecoli.fastq
+cat ecoli.fastq | paste - - - - | cut -f 2 | wc -c
+```
+
+The command consists of multiple parts with the parts piping (`|`) their outputs to be the next command's input. The parts are:
+
+- `cat ecoli.fastq` : read `ecoli.fastq` to use it as the intial input for the commands.
+- `paste - - - -` : This separates the lines into columns. Four columns are specified here by `- - - -`. As each fastq entry consists of four lines this works perfectly to create a header, a sequence, a quality header, and a quality column.
+- `cut -f 2` : `cut` will extract our field/column (`-f`) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.
+- `wc -c` : `wc` stands for word count and the `-c` options stands for characters. We are therefore counting all the characters. We therefore print to screen the number of bases in the fastq file.
+
+With this we can find out if we may have too much coverage. In this case 106,770,005bp is about 23X for a 4.6m genome (_E.coli_) so we are definitely not worried about the coverage being too high.
+
+## Subsampling
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE}
+knitr::include_graphics(path = "figures/subsample.png", auto_pdf = TRUE)
+``` 
+
+To reduce the coverage we can subsample the reads. This is the act of randomly extracting reads (without replacement) to a set number or fraction. As the process is random it should not add in any bias (or at least any more bias than is present in sequencing anyway).
+
+We will use `Seqtk` along with its option `subsample` to extract half (0.5) of the ecoli reads in the hopes we will be left with slightly more than 50Mbp.
+
+__Note__: Use the `Conda` environment `bacterial_assembly`.
+
+```{bash eval=FALSE}
+seqtk sample -s 100 ecoli.fastq 0.5 > ecoli_subsample.fastq
+```
+
+__Parameters__
+
+- `-s 100` : This indicates the random seed to be used for subsampling.
+   - This can be any number and is arbitrarily chosen.
+   - With Paired reads this number must be the same for the forward and reverse reads. This is to ensure the two files have matching reads.
+- `ecoli.fastq` : The first flagless parameter to indicate the input fastq file.
+- `0.5` : The second flagless parameter to indicate the subsample size.
+   - If the number is a fraction (0.5, 0.2, 0.87 etc.) then the specified fraction of reads (compared to the intial total) will be extracted.
+   - if the number is a whole number (1, 100, 98762 etc.) the specified number of reads will be extracted.
+   
+As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsamples file.
+
+```{bash eval=FALSE}
+cat ecoli_subsample.fastq | paste - - - - | cut -f 2 | wc -c
+```
+
+__Tasks__
+
+- Using `seqtk sample` attempt to subsample the data so you retain ~10X coverage (44-48Mbp). What fraction/number did you use?
+- Try out different seed numbers, with the same subsample number/fraction, to see the effect it has on subsampling.
+
+__Note__ There is probable no reason you would want 10X in real life this is just for practice.
+
+I generally suggest only carrying out random subsampling if you have very high coverage (>100X) and trying to get subsample to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.
+
+<!--chapter:end:03-High_coverage.Rmd-->
+
+# Hybrid assembly
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
+knitr::include_graphics(path = "figures/wifi_coverage.png", auto_pdf = TRUE)
+``` 
+
+Hybrid assembly methods can be used when you have long read (PacBio or ONT) and short read (Illumina) sequencing data for your samples. There are two main methods for this.
+
+1. Use both during the assembly step (`hybridSPAdes`)
+2. Assemble with the long reads and polish with the short reads (`pilon`)
+
+## Hybrid assembly: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `bacterial_assembly` conda environment for our `Racon` polishing. Either:
+
+- Use your currently open `bacterial_assembly` terminal.
+- If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
+
+Before running any commands we will get directories and data setup.
+
+```{bash eval=FALSE}
+
+```
+
+
+## hybridSPAdes
+
+A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. In this case it is used the same as for just using Illumina data but with the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
+
+
+
+
+<!--chapter:end:04-Hybrid_assembly.Rmd-->
+
+# (APPENDIX) Appendix {-}
+
+# Next steps{#nextsteps}
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
+``` 
+
+- `Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
+- Assembly algorithms for next-generation sequencing data
+   - https://www.sciencedirect.com/science/article/pii/S0888754310000492
+- The Most Frequently Used Sequencing Technologies and Assembly Methods in Different Time Segments of the Bacterial Surveillance and RefSeq Genome Databases.
+   - https://www.frontiersin.org/articles/10.3389/fcimb.2020.527102/full
+- Benchmarks of long-read assemblers paper.
+   - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/
+- Predicting metabolic pathways using MinPath
+   - https://metagenomics-workshop.readthedocs.io/en/2014-11-uppsala/functional-annotation/minpath.html
+
+# Manuals{#manuals}
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
+``` 
+
+Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+
+Mamba: https://github.com/mamba-org/mamba
+
+Redbean (wtdbg2): https://github.com/ruanjue/wtdbg2
+
+Bandage: https://rrwick.github.io/Bandage/
+
+GFA spec: http://gfa-spec.github.io/GFA-spec/GFA1.html
+
+Canu: https://github.com/marbl/canu
+
+HGAP: https://github.com/PacificBiosciences/Bioinformatics-Training/wiki/HGAP
+
+Flye: https://github.com/fenderglass/Flye
+
+Raven: https://github.com/lbcb-sci/raven
+
+NECAT: https://github.com/xiaochuanle/NECAT
+
+Shasta: https://github.com/chanzuckerberg/shasta
+
+QUAST: http://quast.sourceforge.net/quast
+
+BUSCO: https://busco.ezlab.org/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+BWA: https://github.com/lh3/bwa
+
+SAM: https://samtools.github.io/hts-specs/SAMv1.pdf
+
+RACON: https://github.com/isovic/racon
+
+MUMmer: http://mummer.sourceforge.net/
+
+dnadiff: https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
+
+Pilon: https://github.com/broadinstitute/pilon/wiki
+
+PacBio's GenomicConsensus: https://github.com/broadinstitute/pilon/wiki
+
+HyPo: https://github.com/kensung-lab/hypo
+
+Medaka: https://github.com/nanoporetech/medaka
+
+NextPolish: https://github.com/Nextomics/NextPolish
+
+Canu: https://github.com/marbl/canu
+
+Circlator: https://github.com/sanger-pathogens/circlator
+
+Prokka: https://github.com/tseemann/prokka
+
+EC numers: https://en.wikipedia.org/wiki/Enzyme_Commission_number
+
+COG: https://www.ncbi.nlm.nih.gov/research/cog
+
+IGV: https://software.broadinstitute.org/software/igv/v1.2
+
+Artemis: http://sanger-pathogens.github.io/Artemis/Artemis/
+
+GhostKOALA: https://www.kegg.jp/ghostkoala/
+
+MinPath: https://github.com/mgtools/MinPath
+
+
+# Obtaining Read Data
+
+https://github.com/PacificBiosciences/DevNet/wiki/8-plex-Ecoli-Multiplexed-Microbial-Assembly
+
+
+<!--chapter:end:12-Appendix.Rmd-->
 

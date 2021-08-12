@@ -1,0 +1,33 @@
+# Hybrid assembly
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
+knitr::include_graphics(path = "figures/wifi_coverage.png", auto_pdf = TRUE)
+``` 
+
+Hybrid assembly methods can be used when you have long read (PacBio or ONT) and short read (Illumina) sequencing data for your samples. There are two main methods for this.
+
+1. Use both during the assembly step (`hybridSPAdes`)
+2. Assemble with the long reads and polish with the short reads (`pilon`)
+
+## Hybrid assembly: Conda environment & directory
+```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
+``` 
+
+We will use the `bacterial_assembly` conda environment for our `Racon` polishing. Either:
+
+- Use your currently open `bacterial_assembly` terminal.
+- If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
+
+Before running any commands we will get directories and data setup.
+
+```{bash eval=FALSE}
+
+```
+
+
+## hybridSPAdes
+
+A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. In this case it is used the same as for just using Illumina data but with the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
+
+
+

@@ -4,3 +4,12 @@ multiple-sample-raw-data
 sample-file
 start-looping
 continuing-the-workflow
+high-coverage
+detecting-high-coverage
+subsampling
+hybrid-assembly
+hybrid-assembly-conda-environment-directory
+hybridspades
+nextsteps
+manuals
+obtaining-read-data

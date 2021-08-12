@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-08-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
 <link rel="prev" href="01-Bacterial_genome_supplemental.html"/>
-
+<link rel="next" href="03-High_coverage.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -146,6 +146,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
 <li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="03-High_coverage.html"><a href="03-High_coverage.html"><i class="fa fa-check"></i><b>3</b> High coverage</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="03-High_coverage.html"><a href="03-High_coverage.html#detecting-high-coverage"><i class="fa fa-check"></i><b>3.1</b> Detecting high coverage</a></li>
+<li class="chapter" data-level="3.2" data-path="03-High_coverage.html"><a href="03-High_coverage.html#subsampling"><i class="fa fa-check"></i><b>3.2</b> Subsampling</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html"><i class="fa fa-check"></i><b>4</b> Hybrid assembly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-assembly-conda-environment-directory"><i class="fa fa-check"></i><b>4.1</b> Hybrid assembly: Conda environment &amp; directory</a></li>
+<li class="chapter" data-level="4.2" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybridspades"><i class="fa fa-check"></i><b>4.2</b> hybridSPAdes</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
+<li class="chapter" data-level="B" data-path="12-Appendix.html"><a href="12-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
+<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -183,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="02-Multi-sample_workflow.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multi_sample_workflow</span></code></pre></div>
 <p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We’ll create softlinks of the PacBio fastq files (always good if you know the sequencing data will not be moved or deleted).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="02-Multi-sample_workflow.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Softlink the PacBio fastq files we will use</span></span>
-<span id="cb3-2"><a href="02-Multi-sample_workflow.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/matthew/NEOF/bact_assembly/multi_sample_workflow/<span class="pp">*</span> data/</span>
+<span id="cb3-2"><a href="02-Multi-sample_workflow.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/<span class="pp">*</span> data/</span>
 <span id="cb3-3"><a href="02-Multi-sample_workflow.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of the data directory</span></span>
 <span id="cb3-4"><a href="02-Multi-sample_workflow.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data</span></code></pre></div>
 </div>
@@ -278,8 +292,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="01-Bacterial_genome_supplemental.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="01-Bacterial_genome_supplemental.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="03-High_coverage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

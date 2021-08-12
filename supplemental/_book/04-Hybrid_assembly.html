@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bacterial genome assembly and annotation supplemental</title>
+  <title>Chapter 4 Hybrid assembly | Bacterial genome assembly and annotation supplemental</title>
   <meta name="description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bacterial genome assembly and annotation supplemental" />
+  <meta property="og:title" content="Chapter 4 Hybrid assembly | Bacterial genome assembly and annotation supplemental" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/figures/NEOF.png" />
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bacterial genome assembly and annotation supplemental" />
+  <meta name="twitter:title" content="Chapter 4 Hybrid assembly | Bacterial genome assembly and annotation supplemental" />
   
   <meta name="twitter:description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-
-<link rel="next" href="02-Multi-sample_workflow.html"/>
+<link rel="prev" href="03-High_coverage.html"/>
+<link rel="next" href="12-Appendix.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,26 +180,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Bacterial genome assembly and annotation supplemental</h1>
-<p class="author"><em>Matthew R. Gemmell</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-08-12</em></p>
+<div id="hybrid-assembly" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Hybrid assembly</h1>
+<p><img src="figures/wifi_coverage.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>Hybrid assembly methods can be used when you have long read (PacBio or ONT) and short read (Illumina) sequencing data for your samples. There are two main methods for this.</p>
+<ol style="list-style-type: decimal">
+<li>Use both during the assembly step (<code>hybridSPAdes</code>)</li>
+<li>Assemble with the long reads and polish with the short reads (<code>pilon</code>)</li>
+</ol>
+<div id="hybrid-assembly-conda-environment-directory" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Hybrid assembly: Conda environment &amp; directory</h2>
+<p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
+<p>We will use the <code>bacterial_assembly</code> conda environment for our <code>Racon</code> polishing. Either:</p>
+<ul>
+<li>Use your currently open <code>bacterial_assembly</code> terminal.</li>
+<li>If you need a new <code>bacterial_assembly</code> terminal see the <a href="#redbeanassemblyconda">bacterial assembly conda activation instructions</a></li>
+</ul>
+<p>Before running any commands we will get directories and data setup.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 </div>
-<p><img src="figures/NEOF.png" width="30%" style="display: block; margin: auto;" /></p>
-<div id="supplemental" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Supplemental</h1>
-<p><img src="figures/bact_genome_supplement.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>Commands are in the following font, colour, and box.They should be run in the command line.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="01-Bacterial_genome_supplemental.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;This is a command example&quot;</span> </span></code></pre></div>
+<div id="hybridspades" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> hybridSPAdes</h2>
+<p>A popular hybrid assembler for bacterial genomes is <code>hybridSPAdes</code>. In this case it is used the same as for just using Illumina data but with the addition of the <code>--pacbio</code> for PacBio reads or <code>--nanopore</code> for Oxford nanopore reads.</p>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="02-Multi-sample_workflow.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="03-High_coverage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="12-Appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

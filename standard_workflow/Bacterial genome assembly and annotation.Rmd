@@ -625,6 +625,8 @@ We will use the `bacterial_assembly` conda environment for our `Racon` polishing
 - Use your currently open `bacterial_assembly` terminal.
 - If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
 
+Ensure you are in the correct directory and create a new output directory.
+
 ```{bash eval=FALSE}
 cd ~/bacterial_assembly/standard_workflow
 mkdir -p racon/redbean/ecoli
@@ -737,10 +739,10 @@ less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 There is a lot of useful information in this file. The __[REF]__ column represents the original assembly whilst the __[QRY]__ column represent the polished assembly. Let us go through some (not all) of the stats.
 
 - __[Sequences]__
-   - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. That is good to see.
-   - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa.
+   - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. Racon has removed unpolished contigs.
+   - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa. 
 - __[Bases]__
-   - TotalBases: Our total bases has decreased (~50k) from reference to query. This is by a small amount though and it is likely it was redundant parts from merging the 4 contigs into 1
+   - TotalBases: Our total bases has decreased (~50k) from reference to query.
 - __[Feature Estimates]__
    - Insertions: There are 19 insertion events that consists of ~50Kbp in the reference assembly. This indicates these areas were caused by misassembly and removed from the query by polishing.
 - __[SNPs]__
@@ -1468,91 +1470,27 @@ Great! That is the end of this bookdown. Check out the appendix for some links t
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
 
-- `Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
-- Assembly algorithms for next-generation sequencing data
-   - https://www.sciencedirect.com/science/article/pii/S0888754310000492
-- The Most Frequently Used Sequencing Technologies and Assembly Methods in Different Time Segments of the Bacterial Surveillance and RefSeq Genome Databases.
-   - https://www.frontiersin.org/articles/10.3389/fcimb.2020.527102/full
-- Benchmarks of long-read assemblers paper.
-   - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/
-- Predicting metabolic pathways using MinPath
-   - https://metagenomics-workshop.readthedocs.io/en/2014-11-uppsala/functional-annotation/minpath.html
+- Unix Loop tutorial
+   - https://swcarpentry.github.io/shell-novice/05-loop/index.html
 
 # Manuals{#manuals}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
 
-Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+Seqtk - https://github.com/lh3/seqtk
 
-Mamba: https://github.com/mamba-org/mamba
+HybridSPAdes - http://cab.spbu.ru/files/release3.11.1/manual.html
 
-Redbean (wtdbg2): https://github.com/ruanjue/wtdbg2
+Pilon
 
-Bandage: https://rrwick.github.io/Bandage/
+# Data
 
-GFA spec: http://gfa-spec.github.io/GFA-spec/GFA1.html
+_B.cereus_ reference genomes:
 
-Canu: https://github.com/marbl/canu
-
-HGAP: https://github.com/PacificBiosciences/Bioinformatics-Training/wiki/HGAP
-
-Flye: https://github.com/fenderglass/Flye
-
-Raven: https://github.com/lbcb-sci/raven
-
-NECAT: https://github.com/xiaochuanle/NECAT
-
-Shasta: https://github.com/chanzuckerberg/shasta
-
-QUAST: http://quast.sourceforge.net/quast
-
-BUSCO: https://busco.ezlab.org/
-
-CheckM: https://github.com/Ecogenomics/CheckM/wiki
-
-BWA: https://github.com/lh3/bwa
-
-SAM: https://samtools.github.io/hts-specs/SAMv1.pdf
-
-RACON: https://github.com/isovic/racon
-
-MUMmer: http://mummer.sourceforge.net/
-
-dnadiff: https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
-
-Pilon: https://github.com/broadinstitute/pilon/wiki
-
-PacBio's GenomicConsensus: https://github.com/broadinstitute/pilon/wiki
-
-HyPo: https://github.com/kensung-lab/hypo
-
-Medaka: https://github.com/nanoporetech/medaka
-
-NextPolish: https://github.com/Nextomics/NextPolish
-
-Canu: https://github.com/marbl/canu
-
-Circlator: https://github.com/sanger-pathogens/circlator
-
-Prokka: https://github.com/tseemann/prokka
-
-EC numers: https://en.wikipedia.org/wiki/Enzyme_Commission_number
-
-COG: https://www.ncbi.nlm.nih.gov/research/cog
-
-IGV: https://software.broadinstitute.org/software/igv/v1.2
-
-Artemis: http://sanger-pathogens.github.io/Artemis/Artemis/
-
-GhostKOALA: https://www.kegg.jp/ghostkoala/
-
-MinPath: https://github.com/mgtools/MinPath
-
-
-# Obtaining Read Data
-
-https://github.com/PacificBiosciences/DevNet/wiki/8-plex-Ecoli-Multiplexed-Microbial-Assembly
+- https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP024655?report=fasta
+- https://www.ncbi.nlm.nih.gov/nuccore/CP068719.1?report=fasta
+- https://www.ncbi.nlm.nih.gov/nuccore/CP043966?report=fasta
 
 
 <!--chapter:end:12-Appendix.Rmd-->
