@@ -175,7 +175,7 @@ This workflow will not always be effective which may require the use of other as
 knitr::include_graphics(path = "figures/string.png", auto_pdf = TRUE)
 ``` 
 
-The first step of any genome assembly project is to carry out is QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
+The first step of any genome assembly project is to carry out QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
 
 The bioinformatician's choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:
 
@@ -240,7 +240,7 @@ __Parameters__
    - `ccs` = PacBio CCS reads
    - `ont` = Oxford Nanopore
 - `-g` : This indicates the estimated size of the genome
-   - This does not need to be super exact with and you ca round up to two significant figures. Examples are below.
+   - This does not need to be super exact with and you can round up to two significant figures. Examples are below.
       - _E.coli_ | genome size = 4,639,221 bp => `-g 4.6m` (m = megabases)
       - _Phi-X174_ | genome size = 5386 bp => `-g 5.4k` (k = kilobase)
       - _H.Sapiens_ | genome size = 3.2Gb => `-g 3g` (g = gigabase)
@@ -331,7 +331,7 @@ __Tips__:
 - The graph for `ecoli.1.dot.gfa` will take quite a while to load.
 - The graphs for `ecoli.2.dot.gfa` and `ecoli.3.dot.gfa` are very large so you may need to change the `zoom` to 1%.
 
-As you go from 1 to 3 you will see two many changes:
+As you go from 1 to 3 you will see two main changes:
 
 - __Fewer contigs__: This shows the assembler is connecting parts of the assembly to give a more contiguous assembly.
 - __Fewer branches__: In the 1st and 2nd graphs you will see branches, parts of the graph that branch off and possibly reconnect again. This represents multiple paths through the assembly that are possible. Through the `Redbean` iterations the assembler chooses the best routes, removing the other routes. You will need to zoom in to properly see these branches.
@@ -483,7 +483,7 @@ busco --list-datasets | less -S
 
 You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, & eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organisms lineage. A more specific lineage will have more BUSCOs that a more generic one.
 
-__Note__: All datasets end with `_odb10` which tands for OrthoDB version 10 (https://www.orthodb.org/).
+__Note__: All datasets end with `_odb10` which stands for OrthoDB version 10 (https://www.orthodb.org/).
 
 Looking through the choices (and using NCBI taxonomy) what lineage dataset would you use for the following genera?
 
@@ -527,9 +527,9 @@ This provides us with 6 values. These values are presented in terms of percentag
 - __Complete BUSCOs__ : The number of complete BUSCOs discovered. The closer this value is to 100% the better. This number is the sum of the next two values.
 - __Complete and single-copy BUSCOs__: The number of BUSCOs found as complete and single-copy. The closer this number is to 100% the better. A good assembly will generally be >90%.
 - __Complete and duplicated BUSCOs__: Complete BUSCOs that have been found two or more times within the assembly. This indicates there are duplicated areas of the genome. Preferably we would like this number to be low. 
-- __Fragmented BUSCOs__: This could indicate that genes that only partially present within the genome. This could be due to misassmebly.
-- __Missing BUSCOs__: These are BUSCOs that could not be found in the genome assembly. This could indicate parts of the genome are missing in the assembly.
-- __Total BUSCO groups searched__: This represents the total number of BUSCOs within lineage dataset used for analysis.
+- __Fragmented BUSCOs__: This could indicate that there are genes that are only partially present within the genome. This could be due to misassmebly.
+- __Missing BUSCOs__: These are BUSCOs that could not be found in the genome assembly. This could indicate that parts of the genome are missing in the assembly.
+- __Total BUSCO groups searched__: This represents the total number of BUSCOs within the lineage dataset used for analysis.
 
 For more info on interpreting the results please see the following link: https://busco.ezlab.org/busco_userguide.html#interpreting-the-results
 
@@ -555,8 +555,15 @@ mkdir -p checkm/redbean/ecoli
 
 `CheckM` has many different commands. We will use its typical workflow which is conveniently wrapped into one command.
 
+__Note__: This command can take >10 minutes.
+
 ```{bash eval=FALSE}
-checkm lineage_wf --tab_table -f checkm/ecoli_checkm.tsv -t 8 -x ctg.fa redbean_assembly/ checkm/redbean/ecoli
+checkm lineage_wf \
+--tab_table \
+-f checkm/redbean/ecoli/ecoli_checkm.tsv \
+-t 8 \
+-x ctg.fa redbean_assembly/ \
+checkm/redbean/ecoli
 ```
 
 __Parameters__
@@ -576,7 +583,7 @@ less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 
 There are quite a few statistics but we are only interested in the  `Contamination` column (you may need to use the right key to move to it). This value is a percentage. Is it a large value?
 
-Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. There is info on how to crry this out in the supplemental bookdown.
+Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you ar einterested in contamination removal (link in [Appendix](#manuals))
 
 If you are interested in the other values please check: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
 
@@ -653,7 +660,7 @@ ls redbean_assembly/ecoli.ctg.fa.*
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With our index files created we can align the reads we will use for polishing to the assembly to be polished.
+With our index files created we can align the reads we will use for polishing to the assembly to be polished. This may take >10 minutes.
 
 ```{bash eval=FALSE}
 bwa mem \
@@ -738,6 +745,8 @@ less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 
 There is a lot of useful information in this file. The __[REF]__ column represents the original assembly whilst the __[QRY]__ column represent the polished assembly. Let us go through some (not all) of the stats.
 
+__Note__: Your values may differ from those mentioned below.
+
 - __[Sequences]__
    - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. Racon has removed unpolished contigs.
    - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa. 
@@ -796,7 +805,7 @@ racon/redbean/ecoli/ecoli_i2.fasta
 Inspect the new report file.
 
 ```{bash eval=FALSE}
-less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi2.report
+less -S racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2.report
 ```
 
 __Questions__
@@ -897,7 +906,7 @@ The above command would produce various files. However, we are only interested i
 
 ```{bash eval=FALSE}
 #Copy corrected read fasta.gz file
-cp /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
+cp /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
 #Gunzip file
 gunzip ecoli_reads/ecoli.correctedReads.fasta.gz
 ```
@@ -1470,27 +1479,93 @@ Great! That is the end of this bookdown. Check out the appendix for some links t
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
 
-- Unix Loop tutorial
-   - https://swcarpentry.github.io/shell-novice/05-loop/index.html
+- `Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
+- Assembly algorithms for next-generation sequencing data
+   - https://www.sciencedirect.com/science/article/pii/S0888754310000492
+- The Most Frequently Used Sequencing Technologies and Assembly Methods in Different Time Segments of the Bacterial Surveillance and RefSeq Genome Databases.
+   - https://www.frontiersin.org/articles/10.3389/fcimb.2020.527102/full
+- Benchmarks of long-read assemblers paper.
+   - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/
+- Predicting metabolic pathways using MinPath
+   - https://metagenomics-workshop.readthedocs.io/en/2014-11-uppsala/functional-annotation/minpath.html
 
 # Manuals{#manuals}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
 
-Seqtk - https://github.com/lh3/seqtk
+Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
 
-HybridSPAdes - http://cab.spbu.ru/files/release3.11.1/manual.html
+Mamba: https://github.com/mamba-org/mamba
 
-Pilon
+Redbean (wtdbg2): https://github.com/ruanjue/wtdbg2
 
-# Data
+Bandage: https://rrwick.github.io/Bandage/
 
-_B.cereus_ reference genomes:
+GFA spec: http://gfa-spec.github.io/GFA-spec/GFA1.html
 
-- https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP024655?report=fasta
-- https://www.ncbi.nlm.nih.gov/nuccore/CP068719.1?report=fasta
-- https://www.ncbi.nlm.nih.gov/nuccore/CP043966?report=fasta
+Canu: https://github.com/marbl/canu
+
+HGAP: https://github.com/PacificBiosciences/Bioinformatics-Training/wiki/HGAP
+
+Flye: https://github.com/fenderglass/Flye
+
+Raven: https://github.com/lbcb-sci/raven
+
+NECAT: https://github.com/xiaochuanle/NECAT
+
+Shasta: https://github.com/chanzuckerberg/shasta
+
+QUAST: http://quast.sourceforge.net/quast
+
+BUSCO: https://busco.ezlab.org/
+
+CheckM: https://github.com/Ecogenomics/CheckM/wiki
+
+BlobTools2: https://github.com/blobtoolkit/blobtools2
+
+BWA: https://github.com/lh3/bwa
+
+SAM: https://samtools.github.io/hts-specs/SAMv1.pdf
+
+RACON: https://github.com/isovic/racon
+
+MUMmer: http://mummer.sourceforge.net/
+
+dnadiff: https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
+
+Pilon: https://github.com/broadinstitute/pilon/wiki
+
+PacBio's GenomicConsensus: https://github.com/broadinstitute/pilon/wiki
+
+HyPo: https://github.com/kensung-lab/hypo
+
+Medaka: https://github.com/nanoporetech/medaka
+
+NextPolish: https://github.com/Nextomics/NextPolish
+
+Canu: https://github.com/marbl/canu
+
+Circlator: https://github.com/sanger-pathogens/circlator
+
+Prokka: https://github.com/tseemann/prokka
+
+EC numers: https://en.wikipedia.org/wiki/Enzyme_Commission_number
+
+COG: https://www.ncbi.nlm.nih.gov/research/cog
+
+IGV: https://software.broadinstitute.org/software/igv/v1.2
+
+Artemis: http://sanger-pathogens.github.io/Artemis/Artemis/
+
+GhostKOALA: https://www.kegg.jp/ghostkoala/
+
+MinPath: https://github.com/mgtools/MinPath
+
+
+# Obtaining Read Data
+
+https://github.com/PacificBiosciences/DevNet/wiki/8-plex-Ecoli-Multiplexed-Microbial-Assembly
 
 
 <!--chapter:end:12-Appendix.Rmd-->

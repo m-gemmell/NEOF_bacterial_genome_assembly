@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
 <li class="chapter" data-level="B" data-path="09-Annotation.html"><a href="09-Annotation.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
-<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#data"><i class="fa fa-check"></i><b>C</b> Data</a></li>
+<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="redbeanassembly" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Genome Assembly</h1>
 <p><img src="figures/string.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>The first step of any genome assembly project is to carry out is QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.</p>
+<p>The first step of any genome assembly project is to carry out QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.</p>
 <p>The bioinformatician’s choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:</p>
 <ul>
 <li>Sequencing technologies are creating longer and higher quality reads.
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><code>-g</code> : This indicates the estimated size of the genome
 <ul>
-<li>This does not need to be super exact with and you ca round up to two significant figures. Examples are below.
+<li>This does not need to be super exact with and you can round up to two significant figures. Examples are below.
 <ul>
 <li><em>E.coli</em> | genome size = 4,639,221 bp =&gt; <code>-g 4.6m</code> (m = megabases)</li>
 <li><em>Phi-X174</em> | genome size = 5386 bp =&gt; <code>-g 5.4k</code> (k = kilobase)</li>
@@ -377,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The graph for <code>ecoli.1.dot.gfa</code> will take quite a while to load.</li>
 <li>The graphs for <code>ecoli.2.dot.gfa</code> and <code>ecoli.3.dot.gfa</code> are very large so you may need to change the <code>zoom</code> to 1%.</li>
 </ul>
-<p>As you go from 1 to 3 you will see two many changes:</p>
+<p>As you go from 1 to 3 you will see two main changes:</p>
 <ul>
 <li><strong>Fewer contigs</strong>: This shows the assembler is connecting parts of the assembly to give a more contiguous assembly.</li>
 <li><strong>Fewer branches</strong>: In the 1st and 2nd graphs you will see branches, parts of the graph that branch off and possibly reconnect again. This represents multiple paths through the assembly that are possible. Through the <code>Redbean</code> iterations the assembler chooses the best routes, removing the other routes. You will need to zoom in to properly see these branches.</li>

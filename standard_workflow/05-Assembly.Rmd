@@ -3,7 +3,7 @@
 knitr::include_graphics(path = "figures/string.png", auto_pdf = TRUE)
 ``` 
 
-The first step of any genome assembly project is to carry out is QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
+The first step of any genome assembly project is to carry out QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.
 
 The bioinformatician's choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:
 
@@ -68,7 +68,7 @@ __Parameters__
    - `ccs` = PacBio CCS reads
    - `ont` = Oxford Nanopore
 - `-g` : This indicates the estimated size of the genome
-   - This does not need to be super exact with and you ca round up to two significant figures. Examples are below.
+   - This does not need to be super exact with and you can round up to two significant figures. Examples are below.
       - _E.coli_ | genome size = 4,639,221 bp => `-g 4.6m` (m = megabases)
       - _Phi-X174_ | genome size = 5386 bp => `-g 5.4k` (k = kilobase)
       - _H.Sapiens_ | genome size = 3.2Gb => `-g 3g` (g = gigabase)
@@ -159,7 +159,7 @@ __Tips__:
 - The graph for `ecoli.1.dot.gfa` will take quite a while to load.
 - The graphs for `ecoli.2.dot.gfa` and `ecoli.3.dot.gfa` are very large so you may need to change the `zoom` to 1%.
 
-As you go from 1 to 3 you will see two many changes:
+As you go from 1 to 3 you will see two main changes:
 
 - __Fewer contigs__: This shows the assembler is connecting parts of the assembly to give a more contiguous assembly.
 - __Fewer branches__: In the 1st and 2nd graphs you will see branches, parts of the graph that branch off and possibly reconnect again. This represents multiple paths through the assembly that are possible. Through the `Redbean` iterations the assembler chooses the best routes, removing the other routes. You will need to zoom in to properly see these branches.

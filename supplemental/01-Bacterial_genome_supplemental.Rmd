@@ -23,7 +23,13 @@ knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/bact_genome_supplement.png", auto_pdf = TRUE)
 ```
 
+This bookdown is a supplement to the main one. It contains some workflows and tools that are not part of the standard workflow workflow. However, they may prove useful depending on your needs.
 
+The sections in this supplement will cover:
+
+- [Running the standard workflow with multiple samples](#multisampleworkflow)
+- [Having too much sequencing coverage](#coverage)
+- [Using long and short reads in hybrid assembly approaches](#hybrid)
 
 Commands are in the following font, colour, and box.They should be run in the command line.
 

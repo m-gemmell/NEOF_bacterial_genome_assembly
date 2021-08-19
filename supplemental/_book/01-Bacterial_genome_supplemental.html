@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#sample-file"><i class="fa fa-check"></i><b>2.2</b> Sample file</a></li>
 <li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
 <li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
+<li class="chapter" data-level="2.5" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#gnu-parallel"><i class="fa fa-check"></i><b>2.5</b> GNU Parallel</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="03-High_coverage.html"><a href="03-High_coverage.html"><i class="fa fa-check"></i><b>3</b> High coverage</a>
 <ul>
@@ -155,11 +156,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-assembly-conda-environment-directory"><i class="fa fa-check"></i><b>4.1</b> Hybrid assembly: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="4.2" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybridspades"><i class="fa fa-check"></i><b>4.2</b> hybridSPAdes</a></li>
+<li class="chapter" data-level="4.3" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#pilon"><i class="fa fa-check"></i><b>4.3</b> Pilon</a></li>
+<li class="chapter" data-level="4.4" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-approaches-recap"><i class="fa fa-check"></i><b>4.4</b> Hybrid approaches recap</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
-<li class="chapter" data-level="B" data-path="12-Appendix.html"><a href="12-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
-<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="A" data-path="05-Appendix.html"><a href="05-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
+<li class="chapter" data-level="B" data-path="05-Appendix.html"><a href="05-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
+<li class="chapter" data-level="C" data-path="05-Appendix.html"><a href="05-Appendix.html#data"><i class="fa fa-check"></i><b>C</b> Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -183,12 +186,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Bacterial genome assembly and annotation supplemental</h1>
 <p class="author"><em>Matthew R. Gemmell</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-08-12</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-08-18</em></p>
 </div>
 <p><img src="figures/NEOF.png" width="30%" style="display: block; margin: auto;" /></p>
 <div id="supplemental" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Supplemental</h1>
 <p><img src="figures/bact_genome_supplement.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>This bookdown is a supplement to the main one. It contains some workflows and tools that are not part of the standard workflow workflow. However, they may prove useful depending on your needs.</p>
+<p>The sections in this supplement will cover:</p>
+<ul>
+<li><a href="02-Multi-sample_workflow.html#multisampleworkflow">Running the standard workflow with multiple samples</a></li>
+<li><a href="03-High_coverage.html#coverage">Having too much sequencing coverage</a></li>
+<li><a href="04-Hybrid_assembly.html#hybrid">Using long and short reads in hybrid assembly approaches</a></li>
+</ul>
 <p>Commands are in the following font, colour, and box.They should be run in the command line.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="01-Bacterial_genome_supplemental.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;This is a command example&quot;</span> </span></code></pre></div>
 

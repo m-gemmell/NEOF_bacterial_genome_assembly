@@ -70,7 +70,7 @@ The above command would produce various files. However, we are only interested i
 
 ```{bash eval=FALSE}
 #Copy corrected read fasta.gz file
-cp /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
+cp /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads
 #Gunzip file
 gunzip ecoli_reads/ecoli.correctedReads.fasta.gz
 ```

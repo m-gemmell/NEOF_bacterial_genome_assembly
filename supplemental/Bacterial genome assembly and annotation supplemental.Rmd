@@ -23,7 +23,13 @@ knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/bact_genome_supplement.png", auto_pdf = TRUE)
 ```
 
+This bookdown is a supplement to the main one. It contains some workflows and tools that are not part of the standard workflow workflow. However, they may prove useful depending on your needs.
 
+The sections in this supplement will cover:
+
+- [Running the standard workflow with multiple samples](#multisampleworkflow)
+- [Having too much sequencing coverage](#coverage)
+- [Using long and short reads in hybrid assembly approaches](#hybrid)
 
 Commands are in the following font, colour, and box.They should be run in the command line.
 
@@ -33,7 +39,7 @@ echo "This is a command example"
 
 <!--chapter:end:01-Bacterial_genome_supplemental.Rmd-->
 
-# Multiple sample workflow
+# Multiple sample workflow {#multisampleworkflow}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
 knitr::include_graphics(path = "figures/bacteria_multiple.png", auto_pdf = TRUE)
 ``` 
@@ -47,7 +53,7 @@ In this section I will introduce you to my preferred method of carrying out comm
 knitr::include_graphics(path = "figures/usb_stick.png", auto_pdf = TRUE)
 ``` 
 
-Prior to running we need the data first. Copy over the directory that contains the data and will be used as the analysis directory.
+Prior to running we need the data first. Copy over the directory that contains the data. The copied directory will be used as the analysis directory.
 
 ```{bash eval=FALSE}
 #Move to your bacterial_assembly directory
@@ -58,7 +64,7 @@ mkdir -p multi_sample_workflow/data
 cd multi_sample_workflow
 ```
 
-We will be running three _Bacillus cereus_ samples through the standard workflow. We'll create softlinks of the PacBio fastq files (always good if you know the sequencing data will not be moved or deleted).
+We will be running three _Bacillus cereus_ samples through the standard workflow. We'll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you not its not going to move from its original location.
 
 ```{bash eval=FALSE}
 #Softlink the PacBio fastq files we will use
@@ -67,6 +73,8 @@ ln -s /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/* data/
 ls data
 ```
 
+__Note__ When creating a softlink you should always use absolute (whole) paths for the original file/s you specify.
+
 ## Sample file
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
 knitr::include_graphics(path = "figures/shopping_list.png", auto_pdf = TRUE)
@@ -74,9 +82,9 @@ knitr::include_graphics(path = "figures/shopping_list.png", auto_pdf = TRUE)
 
 Now it is time to make the sample file we will use for the future `while read` loops. This file will contain the sample names, one sample name per line.
 
-For ease and convenience we will change the prefix of our PacBio fastq files to that of our desired samples names. In this case it is simply removing the `_0001.fastq` part.
+For ease and convenience we will change the prefix of our PacBio fastq files to that of our desired samples names. In this case it is removing the `_0001` part.
 
-We could simply rename all the files with the `mv` command but this might be awkward with many files. Instead we will use the `rename` command
+We could rename all the files with the `mv` command but this might be awkward with many files. Instead we will use the `rename` command
 
 ```{bash eval=FALSE}
 #Move into the data directory
@@ -87,11 +95,17 @@ rename "s/_0001//" *.fastq
 ls .
 ```
 
-`rename` will rename all indicated files (`*.fastq`: all files in current directory with the suffix `.fastq`) using syntax similar to the `sed` command. The `"s/_0001//"` is made of four parts:
+`rename` will rename all indicated files (`*.fastq` = all files in current directory with the suffix `.fastq`) using syntax similar to the `sed` command. 
 
-1. `s/`: The `s` indicates we are carrying out a __substitution__.
+The `"s/_0001//"` is made of four parts:
+
+1. `s/`: The `s` indicates we are carrying out a __substitution__. We will subsititue regular expressions (i.e. pattern) for a replacement.
 2. `/_0001/`: The first instance of `_0001` is to be substituted.
+   - This is the regular expression.
 3. `//`: The matched pattern (`_0001`) is to be substituted with nothing.
+   - This is the replacement.
+4. The end, after the last `/`: Contains any flags to be provided to the substitution command. 
+   - The most commonly used flag is `g` which stands for global substitution. This will cause substitutions to occur for every instance of the regular expression found. Default is only the first instance of the regular expression to replaced.
 
 For more info on `sed` please the Intro to Unix bookdown.
 
@@ -122,7 +136,7 @@ knitr::include_graphics(path = "figures/while_loop.png", auto_pdf = TRUE)
 
 Now that we have our data and our sample file we can start carrying out the standard workflow with loops.
 
-First ensure you are in a terminal with an activate `bacterial_assembly` environment then create an assembly output directory.
+First ensure you are in a terminal with an active `bacterial_assembly` environment then create an assembly output directory.
 
 ```{bash eval=FALSE}
 mkdir redbean_assembly
@@ -151,11 +165,11 @@ wtpoa-cns \
 done
 ```
 
-As can be seen the contents of the file `samples.txt` is provided to the loop (`while read`) with a `cat` command and a pipe `|`. 
+IN the commands the contents of the file `samples.txt` is provided to the loop (`while read`) with a `cat` command and a pipe `|`. 
 
-When looping through this file the commands in the loop are carried out three times, once for each samples. In future cases the loop will occur as many times as there are lines in the `samples.txt` file.
+When looping through this file the commands in the loop are carried out three times, once for each sample. In future cases the loop will occur as many times as there are lines in the `samples.txt` file.
 
-In each loop the `${s}` is replaced with the current line from the file. `s` is set as the `variable` by the user when the loop is initiated (`while read s`). `s` is arbitrary and I use it to be short for "sample". It could be any letter or even a word.
+In each loop the `${s}` is replaced with the current line from the file. `s` is set as the `variable` by the user when the loop is initiated (`while read s`). `s` is arbitrary and I use it to be short for "sample" . It could be any letter or even a word, I would not recommend using only numbers.
 
 Below we will put the `wtdbg2` within an echo within the loop. This will print out to screen the commands that would be run, replacing the variables (`${s}`) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.
 
@@ -172,24 +186,41 @@ echo
 done
 ```
 
-__Note__: Loops need to start with `do` and end with `done` as shown in the command.
+__Note__: Loops need to start with `do` and end with `done` as shown in the commands.
 
 ## Continuing the workflow
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE}
 knitr::include_graphics(path = "figures/workflow_standard.png", auto_pdf = TRUE)
 ``` 
 
-With this quick intro to using `while loops` and the Standard workflow bookdown complete genome assembly and annotation for these three samples. Finish off with one final `MultiQC` report containing the final `QUAST` , `BUSCO`, and `Prokka` info for all the samples.
+With this quick intro to using `while loops` and the Standard workflow bookdown, complete the genome assembly and annotation for these three samples. Finish off with one final `MultiQC` report containing the final `QUAST` , `BUSCO`, and `Prokka` info for all the samples.
 
 __Notes__: 
 
-- `QUAST`: This command can be provided multiple assembly files at once so loop won't be needed.
-- `BUSCO`: Ensure you use the correct lineage dataset.
+- `QUAST`: This command can be provided multiple assembly files at once so a loop won't be needed.
+- `BUSCO`: Ensure you use the correct lineage dataset for _Bacillus cereus_.
 - `MultiQC`: Like QUAST no loop is required for this command.
+
+## GNU Parallel
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/gnu_parallel.png", auto_pdf = TRUE)
+``` 
+
+Loops are a convenient method for relatively quick processes or when you have the time. However in the future you may be on time constraints or you may have a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.
+
+There a different ways to do this but the most common tool I use is `GNU Parallel`. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. Keep in mind other users might be taking up the machine's processes. The command `top` allows you to see the current load on a machine.
+
+`GNU Parallel` will put on a new job once a job has finished. I.e. if you have four jobs on at once, with 4 waiting, the fifth job will be put on once one of the first four finish (depending on which finished first). Compare this to another tool that can put put on multiple jobs/processes at once, such as `xargs`. If you put on four jobs/processes at once with `xargs` it will wait for the first four processes to all finish before putting on the next four. This can increase the time of analysis due to some samples taking much longer than others, as visualised below.
+
+```{r, fig.align = 'center',out.width= '60%', echo=FALSE }
+knitr::include_graphics(path = "figures/xargs_vs_gnu_parallel.png", auto_pdf = TRUE)
+```
+
+Each coloured block is a different job with the width showing the time it takes to run. With four jobs/processes being parallelised at once the same 8 jobs are finished with `GNU Parallel` quicker than with `xargs`.
 
 <!--chapter:end:02-Multi-sample_workflow.Rmd-->
 
-# High coverage
+# High coverage {#coverage}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
 knitr::include_graphics(path = "figures/wifi_coverage.png", auto_pdf = TRUE)
 ``` 
@@ -199,11 +230,11 @@ Low sequence coverage (<20X) can cause assembly issues due to:
 - Under represented areas of the genomes. 
    - Sequencing will not lead to uniform coverage across the genome and so the lower coverage areas may not be missing of have very low coverage.
 - Errors cannot be corrected/polished.
-   - Low coverage may mean there are areas which do not have enough sequences to produce an accurate assembly.
+   - Low coverage may mean there are areas which do not have enough sequences to produce an accurate consensus.
    
 Low sequence coverage can be corrected by carrying out more sequencing. 
 
-High sequence coverage (>100X) may seem perfect but it can cause issues. Although it may seem good, high coverage will cause assembly issues. As coverage increases the number of errors in the data increases (even if the % of errors is stable). If data contains a 10% error rate then 100 megabases will contain 10 megabases of errors whilst 1 gigabase will contain 100 megabases of errors. It is a lot easier for an assembly to detemrine what may be errors if there is a smaller total amount of them. 
+High sequence coverage (>100X) may seem perfect but it can cause assembly issues. As coverage increases the number of errors in the data increases (even if the % of errors is stable). If data contains a 10% error rate then 100 megabases will contain 10 megabases of errors whilst 1 gigabase will contain 100 megabases of errors. It is a lot easier for an assembler to determine what may be errors if there is a smaller total amount of them. 
 
 The errors will confuse the assembler and it may create create an assembly graph that looks like a bowl of spaghetti rather than one long spaghetti strand. If you provide enough coverage the assembler may never finish or crash due to memory limitations as it tries to disentangle the graph.
 
@@ -214,7 +245,7 @@ How do we prevent this?
 knitr::include_graphics(path = "figures/altimeter.png", auto_pdf = TRUE)
 ``` 
 
-To detect high coverage (>100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix command sto do this.
+To detect high coverage (>100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix commands to do this.
 
 ```{bash eval=FALSE}
 #Move into the directory with your ecoli reads
@@ -225,10 +256,10 @@ cat ecoli.fastq | paste - - - - | cut -f 2 | wc -c
 
 The command consists of multiple parts with the parts piping (`|`) their outputs to be the next command's input. The parts are:
 
-- `cat ecoli.fastq` : read `ecoli.fastq` to use it as the intial input for the commands.
+- `cat ecoli.fastq` : read `ecoli.fastq` to use it as the initial input for the commands.
 - `paste - - - -` : This separates the lines into columns. Four columns are specified here by `- - - -`. As each fastq entry consists of four lines this works perfectly to create a header, a sequence, a quality header, and a quality column.
 - `cut -f 2` : `cut` will extract our field/column (`-f`) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.
-- `wc -c` : `wc` stands for word count and the `-c` options stands for characters. We are therefore counting all the characters. We therefore print to screen the number of bases in the fastq file.
+- `wc -c` : `wc` stands for word count and the `-c` options stands for characters. This counts all the characters.
 
 With this we can find out if we may have too much coverage. In this case 106,770,005bp is about 23X for a 4.6m genome (_E.coli_) so we are definitely not worried about the coverage being too high.
 
@@ -257,7 +288,7 @@ __Parameters__
    - If the number is a fraction (0.5, 0.2, 0.87 etc.) then the specified fraction of reads (compared to the intial total) will be extracted.
    - if the number is a whole number (1, 100, 98762 etc.) the specified number of reads will be extracted.
    
-As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsamples file.
+As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsampled file.
 
 ```{bash eval=FALSE}
 cat ecoli_subsample.fastq | paste - - - - | cut -f 2 | wc -c
@@ -270,18 +301,18 @@ __Tasks__
 
 __Note__ There is probable no reason you would want 10X in real life this is just for practice.
 
-I generally suggest only carrying out random subsampling if you have very high coverage (>100X) and trying to get subsample to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.
+I generally suggest only carrying out random subsampling if you have very high coverage (>100X) and trying to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.
 
 <!--chapter:end:03-High_coverage.Rmd-->
 
-# Hybrid assembly
+# Hybrid assembly {#hybrid}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
-knitr::include_graphics(path = "figures/wifi_coverage.png", auto_pdf = TRUE)
+knitr::include_graphics(path = "figures/hybrid_car.png", auto_pdf = TRUE)
 ``` 
 
 Hybrid assembly methods can be used when you have long read (PacBio or ONT) and short read (Illumina) sequencing data for your samples. There are two main methods for this.
 
-1. Use both during the assembly step (`hybridSPAdes`)
+1. Using both short read and long read data during the assembly step (`hybridSPAdes`)
 2. Assemble with the long reads and polish with the short reads (`pilon`)
 
 ## Hybrid assembly: Conda environment & directory
@@ -289,24 +320,202 @@ Hybrid assembly methods can be used when you have long read (PacBio or ONT) and 
 knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 ``` 
 
-We will use the `bacterial_assembly` conda environment for our `Racon` polishing. Either:
+We will use the `hybrid` `conda` environment for our hybrid assembly methods.
 
-- Use your currently open `bacterial_assembly` terminal.
-- If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
-
-Before running any commands we will get directories and data setup.
+Activate the environment:
 
 ```{bash eval=FALSE}
-
+chos 8
+. usehybrid
 ```
 
+Before running any commands we will get the Illumina and PacBio data directories setup.
+
+```{bash eval=FALSE}
+#Change directory to bacterial_assembly directory
+cd ~/bacterial_assembly/
+#Make a hybrid analysis directory
+mkdir hybrid_methods
+#Move into the hybrid_methods directory
+cd hybrid_methods
+#Make directories to contain softlinks for Illumina and PacBio data
+mkdir illumina_data
+mkdir pacbio_data
+#Make softlinks of E.coli sequencing data
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/illumina_data/* illumina_data
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq pacbio_data
+```
 
 ## hybridSPAdes
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE}
+knitr::include_graphics(path = "figures/spades.png", auto_pdf = TRUE)
+``` 
 
-A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. In this case it is used the same as for just using Illumina data but with the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
+A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's use case is very similar to just using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
 
+First we will create an output directory for `HybridSPAdes`.
 
+```{bash eval=FALSE}
+#Main output directory
+mkdir hybridspades
+#Ouptut directory for our sample
+mkdir hybridspades/ecoli
+```
 
+Now to run `HybridSPAdes` with our Illumina and PacBio data.
+
+```{bash eval=FALSE}
+spades.py \
+-1 illumina_data/ecoli_R1.fastq \
+-2 illumina_data/ecoli_R2.fastq \
+--pacbio pacbio_data/ecoli.fastq \
+-o hybridspades/ecoli \
+-t 8 -m 50
+```
+
+__Note__: This command will take about 10 minutes.
+
+__Parameters__:
+
+- `-1` : The forward paired-end reads.
+- `-2` : The reverse paired-end reads.
+- `--pacbio` : Provide PacBio reads for a hybrid assembly.
+   - `--nanopore` : Used for ONT data.
+- `-o` : The output directory.
+- `-t` : The number of threads to be used with the process (default is 16).
+- `-m` : The max RAM (in Gb) to be used for the assembly (default is 250Gb).
+
+`SPAdes` can be very memory (RAM) hungry. This can be dangerous as using too much RAM is an easy way to crash the machine you are using. The flag `-m` is very good to prevent this . Additionally, decreasing the number of threads (`-t`) will decrease the RAM load.
+
+Next view the output directory of this command.
+
+```{bash eval=FALSE}
+ls hybridspades/ecoli
+```
+
+You will notice a lot of output. Most of this can be deleted (especially the directories starting with `K`). The actually assembly in fasta format is the file `contigs.fasta`.
+
+For more info on all the output please see: https://github.com/ablab/spades#spadesoutsec
+
+## Pilon
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE}
+knitr::include_graphics(path = "figures/pilon.png", auto_pdf = TRUE)
+``` 
+
+Another method for a hybrid approach is to carry out the standard workflow using only the long reads and then polish with short (Illumina) reads.
+
+In this case we are going to carry out polishing using the tool `Pilon`. In theory assembling with the long reads is good to produce a very continuous assembly and then polishing with Illumina reads should drastically improve the quality and accuracy.
+
+First we will make a directory and make a softlink of the circularised genome assembly from the standard workflow.
+
+```{bash eval=FALSE}
+#Move to main directory
+#Change directory to bacterial_assembly directory
+cd ~/bacterial_assembly/hybrid_methods
+#Make assembly for long read assembly
+mkdir long_read_assembly
+#Softlink of assembly
+#Using a premade file in case you don't have yours
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/standard_workflow/ecoli.fasta long_read_assembly
+```
+
+The next part is to align our Illumina reads to our assembly. This is similar to the process for `Racon`. 
+
+First we index the assembly.
+
+```{bash eval=FALSE}
+bwa index long_read_assembly/ecoli.fasta
+```
+
+Next we align our reads to the assembly we want polished. We carry this out with `bwa` which aligns Illumina reads by default.
+
+```{bash eval=FALSE}
+#Create output directory
+mkdir -p pilon/ecoli
+#Align the reads
+bwa mem \
+long_read_assembly/ecoli.fasta \
+illumina_data/ecoli_R1.fastq \
+illumina_data/ecoli_R2.fastq > \
+pilon/ecoli/aln_i1.sam
+```
+
+__Note__: We have included `i1` in the output file to indicate  this is the first polishing iteration.
+
+`Pilon` requires an indexed sorted `BAM` file. We will use `samtools` to produce this from our `SAM` file.
+
+```{bash eval=FALSE}
+#Create a bam file from the sam file
+samtools view -Sb pilon/ecoli/aln_i1.sam > pilon/ecoli/aln_i1.bam
+#Delete the old sam file
+rm pilon/ecoli/aln_i1.sam
+#Sort the bam file
+samtools sort pilon/ecoli/aln_i1.bam -o pilon/ecoli/aln_i1.sort.bam
+#delete the original bam file
+rm pilon/ecoli/aln_i1.bam
+#Index the sorted bam file
+samtools index pilon/ecoli/aln_i1.sort.bam
+```
+
+Now we have a sorted `.bam` file and a `.bam.bai` file that contains the index information.
+
+With this we can carry out `Pilon` polishing. `Pilon` is a `java` based program so we need to set the max memory (RAM) outside of the actual command. We'll assign the max RAM of all future java based programs within the current terminal (including `Pilon`) to 30 Gb.
+
+```{bash eval=FALSE}
+export _JAVA_OPTIONS="-Xmx30g"
+```
+
+__Yes__, the `_` before `JAVA` needs to be there. For more info on Java heap sizes check out: https://alvinalexander.com/blog/post/java/java-xmx-xms-memory-heap-size-control/
+
+With the maximum memory set to 30Gb (the default size is too low) we can run our first iteration of `Pilon`.
+
+```{bash eval=FALSE}
+pilon \
+--genome long_read_assembly/ecoli.fasta \
+--frags pilon/ecoli/aln_i1.sort.bam \
+--outdir pilon/ecoli/ \
+--output ecoli_i1 \
+--changes 
+```
+
+__Parameters__
+
+- `--genome` : The input genome to be polished.
+- `--frags` : `BAM` containing fragment paired-end alignment using `bwa` or `bowtie2`.
+   - There are other options for other types of Illumina reads and sequencing technologies than can be checked using `pilon --help | less`.
+- `--outdir` : Output directory for all output files.
+- `--output` : Set the prefix for output files.
+- `--changes` : This will produce a file listing the polishing changes. More info below.
+
+In the output directory there will be two files:
+
+1. `ecoli_i1.fasta` : The polished fasta file.
+2. `ecoli_i1.changes` : This file lists all the changes polishing carried out. There is one line per change.
+
+Let us find out how many changes `Pilon` polishing carried out:
+
+```{bash eval=FALSE}
+wc -l pilon/ecoli/ecoli_i1.changes
+```
+
+That is a lot of changes! 
+
+__Task__
+
+It would be good to polish the genome again. Therefore polish it once more using:
+
+- The `Pilon` method like above.
+- The pilon polished assembly `pilon/ecoli/ecoli_i1.fasta` as the input for the `bwa` and `pilon` commands.
+- `i2` instead of `i1` for the new files you make.
+
+Once polishing is done check the number of changes. Has the number decreased a lot?
+
+## Hybrid approaches recap
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE}
+knitr::include_graphics(path = "figures/recap.png", auto_pdf = TRUE)
+``` 
+
+Great now you can carry out and hybrid assembly and polishing with short reads. If you produce a hybrid assembly it may also be a good idea to polish the assembly with `Racon` or `Pilon`.
 
 <!--chapter:end:04-Hybrid_assembly.Rmd-->
 
@@ -317,92 +526,34 @@ A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. In this case
 knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
 ``` 
 
-- `Conda` and `Mamba` are invaluable tools to install programs and create virtual environments.
-- Assembly algorithms for next-generation sequencing data
-   - https://www.sciencedirect.com/science/article/pii/S0888754310000492
-- The Most Frequently Used Sequencing Technologies and Assembly Methods in Different Time Segments of the Bacterial Surveillance and RefSeq Genome Databases.
-   - https://www.frontiersin.org/articles/10.3389/fcimb.2020.527102/full
-- Benchmarks of long-read assemblers paper.
-   - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/
-- Predicting metabolic pathways using MinPath
-   - https://metagenomics-workshop.readthedocs.io/en/2014-11-uppsala/functional-annotation/minpath.html
+- Unix Loop tutorial
+   - https://swcarpentry.github.io/shell-novice/05-loop/index.html
 
 # Manuals{#manuals}
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
 ``` 
 
-Conda: https://conda.io/projects/conda/en/latest/user-guide/getting-started.html
+sed - https://www.gnu.org/software/sed/manual/sed.html
 
-Mamba: https://github.com/mamba-org/mamba
+GNU Parallel - https://www.gnu.org/software/parallel/
 
-Redbean (wtdbg2): https://github.com/ruanjue/wtdbg2
+Seqtk - https://github.com/lh3/seqtk
 
-Bandage: https://rrwick.github.io/Bandage/
+HybridSPAdes - http://cab.spbu.ru/files/release3.11.1/manual.html
 
-GFA spec: http://gfa-spec.github.io/GFA-spec/GFA1.html
+Pilon - https://github.com/broadinstitute/pilon
 
-Canu: https://github.com/marbl/canu
+samtools - http://www.htslib.org/
 
-HGAP: https://github.com/PacificBiosciences/Bioinformatics-Training/wiki/HGAP
+# Data
 
-Flye: https://github.com/fenderglass/Flye
+_B.cereus_ reference genomes:
 
-Raven: https://github.com/lbcb-sci/raven
-
-NECAT: https://github.com/xiaochuanle/NECAT
-
-Shasta: https://github.com/chanzuckerberg/shasta
-
-QUAST: http://quast.sourceforge.net/quast
-
-BUSCO: https://busco.ezlab.org/
-
-CheckM: https://github.com/Ecogenomics/CheckM/wiki
-
-BWA: https://github.com/lh3/bwa
-
-SAM: https://samtools.github.io/hts-specs/SAMv1.pdf
-
-RACON: https://github.com/isovic/racon
-
-MUMmer: http://mummer.sourceforge.net/
-
-dnadiff: https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
-
-Pilon: https://github.com/broadinstitute/pilon/wiki
-
-PacBio's GenomicConsensus: https://github.com/broadinstitute/pilon/wiki
-
-HyPo: https://github.com/kensung-lab/hypo
-
-Medaka: https://github.com/nanoporetech/medaka
-
-NextPolish: https://github.com/Nextomics/NextPolish
-
-Canu: https://github.com/marbl/canu
-
-Circlator: https://github.com/sanger-pathogens/circlator
-
-Prokka: https://github.com/tseemann/prokka
-
-EC numers: https://en.wikipedia.org/wiki/Enzyme_Commission_number
-
-COG: https://www.ncbi.nlm.nih.gov/research/cog
-
-IGV: https://software.broadinstitute.org/software/igv/v1.2
-
-Artemis: http://sanger-pathogens.github.io/Artemis/Artemis/
-
-GhostKOALA: https://www.kegg.jp/ghostkoala/
-
-MinPath: https://github.com/mgtools/MinPath
+- https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP024655?report=fasta
+- https://www.ncbi.nlm.nih.gov/nuccore/CP068719.1?report=fasta
+- https://www.ncbi.nlm.nih.gov/nuccore/CP043966?report=fasta
 
 
-# Obtaining Read Data
-
-https://github.com/PacificBiosciences/DevNet/wiki/8-plex-Ecoli-Multiplexed-Microbial-Assembly
-
-
-<!--chapter:end:12-Appendix.Rmd-->
+<!--chapter:end:05-Appendix.Rmd-->
 

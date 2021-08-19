@@ -60,7 +60,7 @@ ls redbean_assembly/ecoli.ctg.fa.*
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With our index files created we can align the reads we will use for polishing to the assembly to be polished.
+With our index files created we can align the reads we will use for polishing to the assembly to be polished. This may take >10 minutes.
 
 ```{bash eval=FALSE}
 bwa mem \
@@ -145,6 +145,8 @@ less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 
 There is a lot of useful information in this file. The __[REF]__ column represents the original assembly whilst the __[QRY]__ column represent the polished assembly. Let us go through some (not all) of the stats.
 
+__Note__: Your values may differ from those mentioned below.
+
 - __[Sequences]__
    - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. Racon has removed unpolished contigs.
    - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa. 
@@ -203,7 +205,7 @@ racon/redbean/ecoli/ecoli_i2.fasta
 Inspect the new report file.
 
 ```{bash eval=FALSE}
-less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi2.report
+less -S racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2.report
 ```
 
 __Questions__

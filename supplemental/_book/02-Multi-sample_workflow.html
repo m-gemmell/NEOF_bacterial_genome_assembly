@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#sample-file"><i class="fa fa-check"></i><b>2.2</b> Sample file</a></li>
 <li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
 <li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
+<li class="chapter" data-level="2.5" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#gnu-parallel"><i class="fa fa-check"></i><b>2.5</b> GNU Parallel</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="03-High_coverage.html"><a href="03-High_coverage.html"><i class="fa fa-check"></i><b>3</b> High coverage</a>
 <ul>
@@ -155,11 +156,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-assembly-conda-environment-directory"><i class="fa fa-check"></i><b>4.1</b> Hybrid assembly: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="4.2" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybridspades"><i class="fa fa-check"></i><b>4.2</b> hybridSPAdes</a></li>
+<li class="chapter" data-level="4.3" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#pilon"><i class="fa fa-check"></i><b>4.3</b> Pilon</a></li>
+<li class="chapter" data-level="4.4" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-approaches-recap"><i class="fa fa-check"></i><b>4.4</b> Hybrid approaches recap</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
-<li class="chapter" data-level="B" data-path="12-Appendix.html"><a href="12-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
-<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="A" data-path="05-Appendix.html"><a href="05-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
+<li class="chapter" data-level="B" data-path="05-Appendix.html"><a href="05-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
+<li class="chapter" data-level="C" data-path="05-Appendix.html"><a href="05-Appendix.html#data"><i class="fa fa-check"></i><b>C</b> Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -180,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-sample-workflow" class="section level1" number="2">
+<div id="multisampleworkflow" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Multiple sample workflow</h1>
 <p><img src="figures/bacteria_multiple.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>In the standard workflow bookdown we assembled and annotated a single sample/genome. In your future projects you will most likely need to carry this out for multiple samples at one. This could be carried out by running each command for each sample separately. However, there are much quicker methods.</p>
@@ -188,36 +191,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multiple-sample-raw-data" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Multiple sample raw data</h2>
 <p><img src="figures/usb_stick.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Prior to running we need the data first. Copy over the directory that contains the data and will be used as the analysis directory.</p>
+<p>Prior to running we need the data first. Copy over the directory that contains the data. The copied directory will be used as the analysis directory.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="02-Multi-sample_workflow.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move to your bacterial_assembly directory</span></span>
 <span id="cb2-2"><a href="02-Multi-sample_workflow.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/</span>
 <span id="cb2-3"><a href="02-Multi-sample_workflow.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a multi_sample_workflow directory with a data subdirectory</span></span>
 <span id="cb2-4"><a href="02-Multi-sample_workflow.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multi_sample_workflow/data</span>
 <span id="cb2-5"><a href="02-Multi-sample_workflow.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the new analysis directory</span></span>
 <span id="cb2-6"><a href="02-Multi-sample_workflow.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multi_sample_workflow</span></code></pre></div>
-<p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We’ll create softlinks of the PacBio fastq files (always good if you know the sequencing data will not be moved or deleted).</p>
+<p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We’ll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you not its not going to move from its original location.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="02-Multi-sample_workflow.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Softlink the PacBio fastq files we will use</span></span>
 <span id="cb3-2"><a href="02-Multi-sample_workflow.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/<span class="pp">*</span> data/</span>
 <span id="cb3-3"><a href="02-Multi-sample_workflow.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of the data directory</span></span>
 <span id="cb3-4"><a href="02-Multi-sample_workflow.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data</span></code></pre></div>
+<p><strong>Note</strong> When creating a softlink you should always use absolute (whole) paths for the original file/s you specify.</p>
 </div>
 <div id="sample-file" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Sample file</h2>
 <p><img src="figures/shopping_list.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now it is time to make the sample file we will use for the future <code>while read</code> loops. This file will contain the sample names, one sample name per line.</p>
-<p>For ease and convenience we will change the prefix of our PacBio fastq files to that of our desired samples names. In this case it is simply removing the <code>_0001.fastq</code> part.</p>
-<p>We could simply rename all the files with the <code>mv</code> command but this might be awkward with many files. Instead we will use the <code>rename</code> command</p>
+<p>For ease and convenience we will change the prefix of our PacBio fastq files to that of our desired samples names. In this case it is removing the <code>_0001</code> part.</p>
+<p>We could rename all the files with the <code>mv</code> command but this might be awkward with many files. Instead we will use the <code>rename</code> command</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="02-Multi-sample_workflow.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the data directory</span></span>
 <span id="cb4-2"><a href="02-Multi-sample_workflow.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> data</span>
 <span id="cb4-3"><a href="02-Multi-sample_workflow.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Rename the files</span></span>
 <span id="cb4-4"><a href="02-Multi-sample_workflow.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rename</span> <span class="st">&quot;s/_0001//&quot;</span> <span class="pp">*</span>.fastq</span>
 <span id="cb4-5"><a href="02-Multi-sample_workflow.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents</span></span>
 <span id="cb4-6"><a href="02-Multi-sample_workflow.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> .</span></code></pre></div>
-<p><code>rename</code> will rename all indicated files (<code>*.fastq</code>: all files in current directory with the suffix <code>.fastq</code>) using syntax similar to the <code>sed</code> command. The <code>"s/_0001//"</code> is made of four parts:</p>
+<p><code>rename</code> will rename all indicated files (<code>*.fastq</code> = all files in current directory with the suffix <code>.fastq</code>) using syntax similar to the <code>sed</code> command.</p>
+<p>The <code>"s/_0001//"</code> is made of four parts:</p>
 <ol style="list-style-type: decimal">
-<li><code>s/</code>: The <code>s</code> indicates we are carrying out a <strong>substitution</strong>.</li>
-<li><code>/_0001/</code>: The first instance of <code>_0001</code> is to be substituted.</li>
-<li><code>//</code>: The matched pattern (<code>_0001</code>) is to be substituted with nothing.</li>
+<li><code>s/</code>: The <code>s</code> indicates we are carrying out a <strong>substitution</strong>. We will subsititue regular expressions (i.e. pattern) for a replacement.</li>
+<li><code>/_0001/</code>: The first instance of <code>_0001</code> is to be substituted.
+<ul>
+<li>This is the regular expression.</li>
+</ul></li>
+<li><code>//</code>: The matched pattern (<code>_0001</code>) is to be substituted with nothing.
+<ul>
+<li>This is the replacement.</li>
+</ul></li>
+<li>The end, after the last <code>/</code>: Contains any flags to be provided to the substitution command.
+<ul>
+<li>The most commonly used flag is <code>g</code> which stands for global substitution. This will cause substitutions to occur for every instance of the regular expression found. Default is only the first instance of the regular expression to replaced.</li>
+</ul></li>
 </ol>
 <p>For more info on <code>sed</code> please the Intro to Unix bookdown.</p>
 <p>With our newly named softlinks we can quickly create our sample file.</p>
@@ -237,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.3</span> Start looping</h2>
 <p><img src="figures/while_loop.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now that we have our data and our sample file we can start carrying out the standard workflow with loops.</p>
-<p>First ensure you are in a terminal with an activate <code>bacterial_assembly</code> environment then create an assembly output directory.</p>
+<p>First ensure you are in a terminal with an active <code>bacterial_assembly</code> environment then create an assembly output directory.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="02-Multi-sample_workflow.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> redbean_assembly</span></code></pre></div>
 <p>Now to run the redbean assembly steps with loops</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="02-Multi-sample_workflow.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#wtdbg2 step</span></span>
@@ -258,9 +273,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-16"><a href="02-Multi-sample_workflow.html#cb8-16" aria-hidden="true" tabindex="-1"></a>-i redbean_assembly/<span class="va">${s}</span>.ctg.lay.gz <span class="dt">\</span></span>
 <span id="cb8-17"><a href="02-Multi-sample_workflow.html#cb8-17" aria-hidden="true" tabindex="-1"></a>-fo redbean_assembly/<span class="va">${s}</span>.ctg.fa</span>
 <span id="cb8-18"><a href="02-Multi-sample_workflow.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<p>As can be seen the contents of the file <code>samples.txt</code> is provided to the loop (<code>while read</code>) with a <code>cat</code> command and a pipe <code>|</code>.</p>
-<p>When looping through this file the commands in the loop are carried out three times, once for each samples. In future cases the loop will occur as many times as there are lines in the <code>samples.txt</code> file.</p>
-<p>In each loop the <code>${s}</code> is replaced with the current line from the file. <code>s</code> is set as the <code>variable</code> by the user when the loop is initiated (<code>while read s</code>). <code>s</code> is arbitrary and I use it to be short for “sample.” It could be any letter or even a word.</p>
+<p>IN the commands the contents of the file <code>samples.txt</code> is provided to the loop (<code>while read</code>) with a <code>cat</code> command and a pipe <code>|</code>.</p>
+<p>When looping through this file the commands in the loop are carried out three times, once for each sample. In future cases the loop will occur as many times as there are lines in the <code>samples.txt</code> file.</p>
+<p>In each loop the <code>${s}</code> is replaced with the current line from the file. <code>s</code> is set as the <code>variable</code> by the user when the loop is initiated (<code>while read s</code>). <code>s</code> is arbitrary and I use it to be short for “sample” . It could be any letter or even a word, I would not recommend using only numbers.</p>
 <p>Below we will put the <code>wtdbg2</code> within an echo within the loop. This will print out to screen the commands that would be run, replacing the variables (<code>${s}</code>) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="02-Multi-sample_workflow.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">s</span></span>
 <span id="cb9-2"><a href="02-Multi-sample_workflow.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
@@ -272,18 +287,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-8"><a href="02-Multi-sample_workflow.html#cb9-8" aria-hidden="true" tabindex="-1"></a>-o redbean_assembly/<span class="va">${s}</span> <span class="dt">\</span></span>
 <span id="cb9-9"><a href="02-Multi-sample_workflow.html#cb9-9" aria-hidden="true" tabindex="-1"></a>-t 8<span class="kw">`</span></span>
 <span id="cb9-10"><a href="02-Multi-sample_workflow.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<p><strong>Note</strong>: Loops need to start with <code>do</code> and end with <code>done</code> as shown in the command.</p>
+<p><strong>Note</strong>: Loops need to start with <code>do</code> and end with <code>done</code> as shown in the commands.</p>
 </div>
 <div id="continuing-the-workflow" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Continuing the workflow</h2>
 <p><img src="figures/workflow_standard.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>With this quick intro to using <code>while loops</code> and the Standard workflow bookdown complete genome assembly and annotation for these three samples. Finish off with one final <code>MultiQC</code> report containing the final <code>QUAST</code> , <code>BUSCO</code>, and <code>Prokka</code> info for all the samples.</p>
+<p>With this quick intro to using <code>while loops</code> and the Standard workflow bookdown, complete the genome assembly and annotation for these three samples. Finish off with one final <code>MultiQC</code> report containing the final <code>QUAST</code> , <code>BUSCO</code>, and <code>Prokka</code> info for all the samples.</p>
 <p><strong>Notes</strong>:</p>
 <ul>
-<li><code>QUAST</code>: This command can be provided multiple assembly files at once so loop won’t be needed.</li>
-<li><code>BUSCO</code>: Ensure you use the correct lineage dataset.</li>
+<li><code>QUAST</code>: This command can be provided multiple assembly files at once so a loop won’t be needed.</li>
+<li><code>BUSCO</code>: Ensure you use the correct lineage dataset for <em>Bacillus cereus</em>.</li>
 <li><code>MultiQC</code>: Like QUAST no loop is required for this command.</li>
 </ul>
+</div>
+<div id="gnu-parallel" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> GNU Parallel</h2>
+<p><img src="figures/gnu_parallel.png" width="20%" style="display: block; margin: auto;" /></p>
+<p>Loops are a convenient method for relatively quick processes or when you have the time. However in the future you may be on time constraints or you may have a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.</p>
+<p>There a different ways to do this but the most common tool I use is <code>GNU Parallel</code>. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. Keep in mind other users might be taking up the machine’s processes. The command <code>top</code> allows you to see the current load on a machine.</p>
+<p><code>GNU Parallel</code> will put on a new job once a job has finished. I.e. if you have four jobs on at once, with 4 waiting, the fifth job will be put on once one of the first four finish (depending on which finished first). Compare this to another tool that can put put on multiple jobs/processes at once, such as <code>xargs</code>. If you put on four jobs/processes at once with <code>xargs</code> it will wait for the first four processes to all finish before putting on the next four. This can increase the time of analysis due to some samples taking much longer than others, as visualised below.</p>
+<p><img src="figures/xargs_vs_gnu_parallel.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Each coloured block is a different job with the width showing the time it takes to run. With four jobs/processes being parallelised at once the same 8 jobs are finished with <code>GNU Parallel</code> quicker than with <code>xargs</code>.</p>
 
 </div>
 </div>

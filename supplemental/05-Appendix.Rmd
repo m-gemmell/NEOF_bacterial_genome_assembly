@@ -1,0 +1,35 @@
+# (APPENDIX) Appendix {-}
+
+# Next steps{#nextsteps}
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/step.png", auto_pdf = TRUE)
+``` 
+
+- Unix Loop tutorial
+   - https://swcarpentry.github.io/shell-novice/05-loop/index.html
+
+# Manuals{#manuals}
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/manual.png", auto_pdf = TRUE)
+``` 
+
+sed - https://www.gnu.org/software/sed/manual/sed.html
+
+GNU Parallel - https://www.gnu.org/software/parallel/
+
+Seqtk - https://github.com/lh3/seqtk
+
+HybridSPAdes - http://cab.spbu.ru/files/release3.11.1/manual.html
+
+Pilon - https://github.com/broadinstitute/pilon
+
+samtools - http://www.htslib.org/
+
+# Data
+
+_B.cereus_ reference genomes:
+
+- https://www.ncbi.nlm.nih.gov/nuccore/NZ_CP024655?report=fasta
+- https://www.ncbi.nlm.nih.gov/nuccore/CP068719.1?report=fasta
+- https://www.ncbi.nlm.nih.gov/nuccore/CP043966?report=fasta
+

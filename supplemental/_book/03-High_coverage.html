@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#sample-file"><i class="fa fa-check"></i><b>2.2</b> Sample file</a></li>
 <li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
 <li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
+<li class="chapter" data-level="2.5" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#gnu-parallel"><i class="fa fa-check"></i><b>2.5</b> GNU Parallel</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="03-High_coverage.html"><a href="03-High_coverage.html"><i class="fa fa-check"></i><b>3</b> High coverage</a>
 <ul>
@@ -155,11 +156,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-assembly-conda-environment-directory"><i class="fa fa-check"></i><b>4.1</b> Hybrid assembly: Conda environment &amp; directory</a></li>
 <li class="chapter" data-level="4.2" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybridspades"><i class="fa fa-check"></i><b>4.2</b> hybridSPAdes</a></li>
+<li class="chapter" data-level="4.3" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#pilon"><i class="fa fa-check"></i><b>4.3</b> Pilon</a></li>
+<li class="chapter" data-level="4.4" data-path="04-Hybrid_assembly.html"><a href="04-Hybrid_assembly.html#hybrid-approaches-recap"><i class="fa fa-check"></i><b>4.4</b> Hybrid approaches recap</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
-<li class="chapter" data-level="B" data-path="12-Appendix.html"><a href="12-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
-<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
+<li class="chapter" data-level="A" data-path="05-Appendix.html"><a href="05-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
+<li class="chapter" data-level="B" data-path="05-Appendix.html"><a href="05-Appendix.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
+<li class="chapter" data-level="C" data-path="05-Appendix.html"><a href="05-Appendix.html#data"><i class="fa fa-check"></i><b>C</b> Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -180,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="high-coverage" class="section level1" number="3">
+<div id="coverage" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> High coverage</h1>
 <p><img src="figures/wifi_coverage.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>Low sequence coverage (&lt;20X) can cause assembly issues due to:</p>
@@ -191,27 +194,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Errors cannot be corrected/polished.
 <ul>
-<li>Low coverage may mean there are areas which do not have enough sequences to produce an accurate assembly.</li>
+<li>Low coverage may mean there are areas which do not have enough sequences to produce an accurate consensus.</li>
 </ul></li>
 </ul>
 <p>Low sequence coverage can be corrected by carrying out more sequencing.</p>
-<p>High sequence coverage (&gt;100X) may seem perfect but it can cause issues. Although it may seem good, high coverage will cause assembly issues. As coverage increases the number of errors in the data increases (even if the % of errors is stable). If data contains a 10% error rate then 100 megabases will contain 10 megabases of errors whilst 1 gigabase will contain 100 megabases of errors. It is a lot easier for an assembly to detemrine what may be errors if there is a smaller total amount of them.</p>
+<p>High sequence coverage (&gt;100X) may seem perfect but it can cause assembly issues. As coverage increases the number of errors in the data increases (even if the % of errors is stable). If data contains a 10% error rate then 100 megabases will contain 10 megabases of errors whilst 1 gigabase will contain 100 megabases of errors. It is a lot easier for an assembler to determine what may be errors if there is a smaller total amount of them.</p>
 <p>The errors will confuse the assembler and it may create create an assembly graph that looks like a bowl of spaghetti rather than one long spaghetti strand. If you provide enough coverage the assembler may never finish or crash due to memory limitations as it tries to disentangle the graph.</p>
 <p>How do we prevent this?</p>
 <div id="detecting-high-coverage" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Detecting high coverage</h2>
 <p><img src="figures/altimeter.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>To detect high coverage (&gt;100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix command sto do this.</p>
+<p>To detect high coverage (&gt;100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix commands to do this.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="03-High_coverage.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the directory with your ecoli reads</span></span>
 <span id="cb10-2"><a href="03-High_coverage.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/ecoli_reads</span>
 <span id="cb10-3"><a href="03-High_coverage.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out to screen the number of bases in ecoli.fastq</span></span>
 <span id="cb10-4"><a href="03-High_coverage.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli.fastq <span class="kw">|</span> <span class="ex">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
 <p>The command consists of multiple parts with the parts piping (<code>|</code>) their outputs to be the next command’s input. The parts are:</p>
 <ul>
-<li><code>cat ecoli.fastq</code> : read <code>ecoli.fastq</code> to use it as the intial input for the commands.</li>
+<li><code>cat ecoli.fastq</code> : read <code>ecoli.fastq</code> to use it as the initial input for the commands.</li>
 <li><code>paste - - - -</code> : This separates the lines into columns. Four columns are specified here by <code>- - - -</code>. As each fastq entry consists of four lines this works perfectly to create a header, a sequence, a quality header, and a quality column.</li>
 <li><code>cut -f 2</code> : <code>cut</code> will extract our field/column (<code>-f</code>) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.</li>
-<li><code>wc -c</code> : <code>wc</code> stands for word count and the <code>-c</code> options stands for characters. We are therefore counting all the characters. We therefore print to screen the number of bases in the fastq file.</li>
+<li><code>wc -c</code> : <code>wc</code> stands for word count and the <code>-c</code> options stands for characters. This counts all the characters.</li>
 </ul>
 <p>With this we can find out if we may have too much coverage. In this case 106,770,005bp is about 23X for a 4.6m genome (<em>E.coli</em>) so we are definitely not worried about the coverage being too high.</p>
 </div>
@@ -236,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>if the number is a whole number (1, 100, 98762 etc.) the specified number of reads will be extracted.</li>
 </ul></li>
 </ul>
-<p>As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsamples file.</p>
+<p>As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsampled file.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="03-High_coverage.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli_subsample.fastq <span class="kw">|</span> <span class="ex">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
 <p><strong>Tasks</strong></p>
 <ul>
@@ -244,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Try out different seed numbers, with the same subsample number/fraction, to see the effect it has on subsampling.</li>
 </ul>
 <p><strong>Note</strong> There is probable no reason you would want 10X in real life this is just for practice.</p>
-<p>I generally suggest only carrying out random subsampling if you have very high coverage (&gt;100X) and trying to get subsample to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.</p>
+<p>I generally suggest only carrying out random subsampling if you have very high coverage (&gt;100X) and trying to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.</p>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-12" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="12-Appendix.html"><a href="12-Appendix.html"><i class="fa fa-check"></i><b>A</b> Next steps</a></li>
 <li class="chapter" data-level="B" data-path="09-Annotation.html"><a href="09-Annotation.html#manuals"><i class="fa fa-check"></i><b>B</b> Manuals</a></li>
-<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#data"><i class="fa fa-check"></i><b>C</b> Data</a></li>
+<li class="chapter" data-level="C" data-path="12-Appendix.html"><a href="12-Appendix.html#obtaining-read-data"><i class="fa fa-check"></i><b>C</b> Obtaining Read Data</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -338,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>BUSCO</code> has many different lineage datasets. These are datasets of the different groups of BUSCOs found in various different lineages. Carry out the below command to see all these different datasets.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="06-Genome_assessment.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="at">--list-datasets</span> <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span></code></pre></div>
 <p>You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, &amp; eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organisms lineage. A more specific lineage will have more BUSCOs that a more generic one.</p>
-<p><strong>Note</strong>: All datasets end with <code>_odb10</code> which tands for OrthoDB version 10 (<a href="https://www.orthodb.org/" class="uri">https://www.orthodb.org/</a>).</p>
+<p><strong>Note</strong>: All datasets end with <code>_odb10</code> which stands for OrthoDB version 10 (<a href="https://www.orthodb.org/" class="uri">https://www.orthodb.org/</a>).</p>
 <p>Looking through the choices (and using NCBI taxonomy) what lineage dataset would you use for the following genera?</p>
 <ul>
 <li><strong>Psychrobacter</strong> (Taxonomy ID: 497)</li>
@@ -393,7 +393,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First create an output directory.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="06-Genome_assessment.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> checkm/redbean/ecoli</span></code></pre></div>
 <p><code>CheckM</code> has many different commands. We will use its typical workflow which is conveniently wrapped into one command.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="06-Genome_assessment.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">--tab_table</span> <span class="at">-f</span> checkm/ecoli_checkm.tsv <span class="at">-t</span> 8 <span class="at">-x</span> ctg.fa redbean_assembly/ checkm/redbean/ecoli</span></code></pre></div>
+<p><strong>Note</strong>: This command can take &gt;10 minutes.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="06-Genome_assessment.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="dt">\</span></span>
+<span id="cb20-2"><a href="06-Genome_assessment.html#cb20-2" aria-hidden="true" tabindex="-1"></a>--tab_table <span class="dt">\</span></span>
+<span id="cb20-3"><a href="06-Genome_assessment.html#cb20-3" aria-hidden="true" tabindex="-1"></a>-f checkm/redbean/ecoli/ecoli_checkm.tsv <span class="dt">\</span></span>
+<span id="cb20-4"><a href="06-Genome_assessment.html#cb20-4" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
+<span id="cb20-5"><a href="06-Genome_assessment.html#cb20-5" aria-hidden="true" tabindex="-1"></a>-x ctg.fa redbean_assembly/ <span class="dt">\</span></span>
+<span id="cb20-6"><a href="06-Genome_assessment.html#cb20-6" aria-hidden="true" tabindex="-1"></a>checkm/redbean/ecoli</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><code>--tab_table</code> : Creates a <code>.tsv</code> file (tab seperated value) that acts a summary of results. This is the one file we will inspect.</li>
@@ -406,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ignore all the other files and view the summary files.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="06-Genome_assessment.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> checkm/redbean/ecoli/ecoli_checkm.tsv</span></code></pre></div>
 <p>There are quite a few statistics but we are only interested in the <code>Contamination</code> column (you may need to use the right key to move to it). This value is a percentage. Is it a large value?</p>
-<p>Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. There is info on how to crry this out in the supplemental bookdown.</p>
+<p>Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you ar einterested in contamination removal (link in <a href="09-Annotation.html#manuals">Appendix</a>)</p>
 <p>If you are interested in the other values please check: <a href="https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics" class="uri">https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics</a></p>
 </div>
 <div id="assessment-recap" class="section level2" number="6.5">

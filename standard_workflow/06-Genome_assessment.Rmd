@@ -127,7 +127,7 @@ busco --list-datasets | less -S
 
 You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, & eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organisms lineage. A more specific lineage will have more BUSCOs that a more generic one.
 
-__Note__: All datasets end with `_odb10` which tands for OrthoDB version 10 (https://www.orthodb.org/).
+__Note__: All datasets end with `_odb10` which stands for OrthoDB version 10 (https://www.orthodb.org/).
 
 Looking through the choices (and using NCBI taxonomy) what lineage dataset would you use for the following genera?
 
@@ -171,9 +171,9 @@ This provides us with 6 values. These values are presented in terms of percentag
 - __Complete BUSCOs__ : The number of complete BUSCOs discovered. The closer this value is to 100% the better. This number is the sum of the next two values.
 - __Complete and single-copy BUSCOs__: The number of BUSCOs found as complete and single-copy. The closer this number is to 100% the better. A good assembly will generally be >90%.
 - __Complete and duplicated BUSCOs__: Complete BUSCOs that have been found two or more times within the assembly. This indicates there are duplicated areas of the genome. Preferably we would like this number to be low. 
-- __Fragmented BUSCOs__: This could indicate that genes that only partially present within the genome. This could be due to misassmebly.
-- __Missing BUSCOs__: These are BUSCOs that could not be found in the genome assembly. This could indicate parts of the genome are missing in the assembly.
-- __Total BUSCO groups searched__: This represents the total number of BUSCOs within lineage dataset used for analysis.
+- __Fragmented BUSCOs__: This could indicate that there are genes that are only partially present within the genome. This could be due to misassmebly.
+- __Missing BUSCOs__: These are BUSCOs that could not be found in the genome assembly. This could indicate that parts of the genome are missing in the assembly.
+- __Total BUSCO groups searched__: This represents the total number of BUSCOs within the lineage dataset used for analysis.
 
 For more info on interpreting the results please see the following link: https://busco.ezlab.org/busco_userguide.html#interpreting-the-results
 
@@ -199,8 +199,15 @@ mkdir -p checkm/redbean/ecoli
 
 `CheckM` has many different commands. We will use its typical workflow which is conveniently wrapped into one command.
 
+__Note__: This command can take >10 minutes.
+
 ```{bash eval=FALSE}
-checkm lineage_wf --tab_table -f checkm/ecoli_checkm.tsv -t 8 -x ctg.fa redbean_assembly/ checkm/redbean/ecoli
+checkm lineage_wf \
+--tab_table \
+-f checkm/redbean/ecoli/ecoli_checkm.tsv \
+-t 8 \
+-x ctg.fa redbean_assembly/ \
+checkm/redbean/ecoli
 ```
 
 __Parameters__
@@ -220,7 +227,7 @@ less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 
 There are quite a few statistics but we are only interested in the  `Contamination` column (you may need to use the right key to move to it). This value is a percentage. Is it a large value?
 
-Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. There is info on how to crry this out in the supplemental bookdown.
+Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you ar einterested in contamination removal (link in [Appendix](#manuals))
 
 If you are interested in the other values please check: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
 
