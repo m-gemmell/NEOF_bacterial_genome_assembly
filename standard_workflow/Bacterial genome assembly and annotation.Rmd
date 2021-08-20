@@ -921,8 +921,8 @@ With the corrected reads we can now carry out the `Circlator` step. `Circlator` 
 0. __Check the input assembly__: Formatting fasta headers.
 1. __Map reads to assembly__: Alignment of reads to the assmebly by `BWA mem`.
 2. __Extract reads for reassembly__: Extract the aligned reads, therefore removing reads that did not align to the assembly.
-3. __Assembly of extract reads__: Carried out with the `SPAdes` assembler.
-4. __Merge and circularise__: Merges overlapping contigs form the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.
+3. __Assembly of extracted reads__: Carried out with the `SPAdes` assembler.
+4. __Merge and circularise__: Merges overlapping contigs from the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.
 5. __Clean contigs__: Removal of small contigs (default = 2k) and contigs completely contained in another contig.
 6. __Fix contig start positions__: Attempts to make the start position to be at a dnaA gene (if found).
    - dnaA gene produces the "Chromosomal replication initiator protein DnaA" (https://www.uniprot.org/uniprot/P03004).
@@ -1148,7 +1148,7 @@ __Questions__
 The next best human-readable file is the `.tsv` file. This is in essence a table with one row per annotated feature.
 
 ```{bash eval=FALSE}
-less -S prokka/ecoli/ecoli.txt
+less -S prokka/ecoli/ecoli.tsv
 ```
 
 __Questions__
@@ -1216,7 +1216,7 @@ Now we will run `QUAST` with the added option of `-r` specifying the reference f
 #Make QUAST output directory
 mkdir quast
 #Run QUAST
-quast -r ../../ecoli_ref.fasta -o quast assembly/ecoli.fasta
+quast -r ../../ref/ecoli_ref.fasta -o quast assembly/ecoli.fasta
 ```
 
 This `-r` option will add comparison metrics of the provided assembly/assemblies to the reference assembly. This is similar to `dnadiff` but more basic. We will look at the `QUAST metrics further down.
@@ -1291,7 +1291,7 @@ More info on metrics: http://quast.sourceforge.net/docs/manual.html#sec3.1
 __Questions__
 
 - What percentage of reference bases aligned to the genome assembly?
-- When compared to the reference is there a higher number of Mismatches of Indels? Do you think Illumina sequencing would cause the same issue?
+- When compared to the reference is there a higher number of Mismatches or Indels? Do you think Illumina sequencing would cause the same issue?
 - How have the BUSCO metrics changed from the BUSCO of the original assembly?
 
 ## Final recap
@@ -1326,7 +1326,7 @@ As you can see there are a lot of ways to try to improve an assembly. That is wh
 knitr::include_graphics(path = "figures/sweep.png", auto_pdf = TRUE)
 ``` 
 
-When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the `final_assembly` directory but instead we will delete files that are definitely not needed. Thi will leave files that we may want to use again (assembly fasta files, stats etc.).
+When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the `final_assembly` directory but instead we will delete files that are definitely not needed. This will leave files that we may want to use again (assembly fasta files, stats etc.).
 
 You can delete files/directories you definitely don't need as you go along (recommended for large files/directories or if storage space is a premium) but I tend to do my cleanup at the end of a project.
 
@@ -1352,8 +1352,10 @@ du -hsc *
 du -hsc redbean_assembly/*
 #Delete the gzipped files that we will most likely never even look at
 #I always like to ls before using wildcards to delete or 
-# deleting directories
+# when deleting directories
 #This helps ensure you are not going to delete anything you don’t want to
+#rm -i is also a good way to not delete stuff by accident
+#It will give you a prompt before every removal
 ls redbean_assembly/*gz
 rm redbean_assembly/*gz
 #Delete the assembly index files
@@ -1371,9 +1373,6 @@ du -hsc busco/redbean/*
 #This contained the lineage dataset information
 ls busco_downloads
 rm -r busco_downloads
-#Delete the BUSCO logs
-ls busco/redbean/busco_*.log
-rm busco/redbean/busco_*.log
 #Check file storage of ecoli BUSCO results
 du -hsc busco/redbean/ecoli/*
 #Remove the logs directory
@@ -1413,7 +1412,7 @@ du -hsc circlator/redbean_raconi2/ecoli/*
 #We are only interested in the files produced by the 6th step
 #Delete all the 00-05 files
 ls circlator/redbean_raconi2/ecoli/0[0-5]*
-rm circlator/redbean_raconi2/ecoli/0[0-5]*
+rm -r circlator/redbean_raconi2/ecoli/0[0-5]*
 
 ##Prokka
 #All the prokka files are useful so no deleting here

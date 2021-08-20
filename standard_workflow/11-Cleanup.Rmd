@@ -3,7 +3,7 @@
 knitr::include_graphics(path = "figures/sweep.png", auto_pdf = TRUE)
 ``` 
 
-When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the `final_assembly` directory but instead we will delete files that are definitely not needed. Thi will leave files that we may want to use again (assembly fasta files, stats etc.).
+When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the `final_assembly` directory but instead we will delete files that are definitely not needed. This will leave files that we may want to use again (assembly fasta files, stats etc.).
 
 You can delete files/directories you definitely don't need as you go along (recommended for large files/directories or if storage space is a premium) but I tend to do my cleanup at the end of a project.
 
@@ -29,8 +29,10 @@ du -hsc *
 du -hsc redbean_assembly/*
 #Delete the gzipped files that we will most likely never even look at
 #I always like to ls before using wildcards to delete or 
-# deleting directories
+# when deleting directories
 #This helps ensure you are not going to delete anything you don’t want to
+#rm -i is also a good way to not delete stuff by accident
+#It will give you a prompt before every removal
 ls redbean_assembly/*gz
 rm redbean_assembly/*gz
 #Delete the assembly index files
@@ -48,9 +50,6 @@ du -hsc busco/redbean/*
 #This contained the lineage dataset information
 ls busco_downloads
 rm -r busco_downloads
-#Delete the BUSCO logs
-ls busco/redbean/busco_*.log
-rm busco/redbean/busco_*.log
 #Check file storage of ecoli BUSCO results
 du -hsc busco/redbean/ecoli/*
 #Remove the logs directory
@@ -90,7 +89,7 @@ du -hsc circlator/redbean_raconi2/ecoli/*
 #We are only interested in the files produced by the 6th step
 #Delete all the 00-05 files
 ls circlator/redbean_raconi2/ecoli/0[0-5]*
-rm circlator/redbean_raconi2/ecoli/0[0-5]*
+rm -r circlator/redbean_raconi2/ecoli/0[0-5]*
 
 ##Prokka
 #All the prokka files are useful so no deleting here

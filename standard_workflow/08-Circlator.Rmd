@@ -85,8 +85,8 @@ With the corrected reads we can now carry out the `Circlator` step. `Circlator` 
 0. __Check the input assembly__: Formatting fasta headers.
 1. __Map reads to assembly__: Alignment of reads to the assmebly by `BWA mem`.
 2. __Extract reads for reassembly__: Extract the aligned reads, therefore removing reads that did not align to the assembly.
-3. __Assembly of extract reads__: Carried out with the `SPAdes` assembler.
-4. __Merge and circularise__: Merges overlapping contigs form the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.
+3. __Assembly of extracted reads__: Carried out with the `SPAdes` assembler.
+4. __Merge and circularise__: Merges overlapping contigs from the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.
 5. __Clean contigs__: Removal of small contigs (default = 2k) and contigs completely contained in another contig.
 6. __Fix contig start positions__: Attempts to make the start position to be at a dnaA gene (if found).
    - dnaA gene produces the "Chromosomal replication initiator protein DnaA" (https://www.uniprot.org/uniprot/P03004).

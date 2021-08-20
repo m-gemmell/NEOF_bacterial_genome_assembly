@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2021-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -270,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="10-Final_report.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make QUAST output directory</span></span>
 <span id="cb47-2"><a href="10-Final_report.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> quast</span>
 <span id="cb47-3"><a href="10-Final_report.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run QUAST</span></span>
-<span id="cb47-4"><a href="10-Final_report.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-r</span> ../../ecoli_ref.fasta <span class="at">-o</span> quast assembly/ecoli.fasta</span></code></pre></div>
+<span id="cb47-4"><a href="10-Final_report.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-r</span> ../../ref/ecoli_ref.fasta <span class="at">-o</span> quast assembly/ecoli.fasta</span></code></pre></div>
 <p>This <code>-r</code> option will add comparison metrics of the provided assembly/assemblies to the reference assembly. This is similar to <code>dnadiff</code> but more basic. We will look at the `QUAST metrics further down.</p>
 </div>
 <div id="report-busco" class="section level3" number="10.1.3">
@@ -323,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Questions</strong></p>
 <ul>
 <li>What percentage of reference bases aligned to the genome assembly?</li>
-<li>When compared to the reference is there a higher number of Mismatches of Indels? Do you think Illumina sequencing would cause the same issue?</li>
+<li>When compared to the reference is there a higher number of Mismatches or Indels? Do you think Illumina sequencing would cause the same issue?</li>
 <li>How have the BUSCO metrics changed from the BUSCO of the original assembly?</li>
 </ul>
 </div>

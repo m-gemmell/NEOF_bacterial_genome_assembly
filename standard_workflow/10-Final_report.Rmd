@@ -40,7 +40,7 @@ Now we will run `QUAST` with the added option of `-r` specifying the reference f
 #Make QUAST output directory
 mkdir quast
 #Run QUAST
-quast -r ../../ecoli_ref.fasta -o quast assembly/ecoli.fasta
+quast -r ../../ref/ecoli_ref.fasta -o quast assembly/ecoli.fasta
 ```
 
 This `-r` option will add comparison metrics of the provided assembly/assemblies to the reference assembly. This is similar to `dnadiff` but more basic. We will look at the `QUAST metrics further down.
@@ -115,7 +115,7 @@ More info on metrics: http://quast.sourceforge.net/docs/manual.html#sec3.1
 __Questions__
 
 - What percentage of reference bases aligned to the genome assembly?
-- When compared to the reference is there a higher number of Mismatches of Indels? Do you think Illumina sequencing would cause the same issue?
+- When compared to the reference is there a higher number of Mismatches or Indels? Do you think Illumina sequencing would cause the same issue?
 - How have the BUSCO metrics changed from the BUSCO of the original assembly?
 
 ## Final recap

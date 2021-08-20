@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2021-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -289,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a <code>.fasta.gz</code> file, and gunzip the file for further use.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="08-Circlator.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy corrected read fasta.gz file</span></span>
-<span id="cb35-2"><a href="08-Circlator.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/matthew/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads</span>
+<span id="cb35-2"><a href="08-Circlator.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads</span>
 <span id="cb35-3"><a href="08-Circlator.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Gunzip file</span></span>
 <span id="cb35-4"><a href="08-Circlator.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> ecoli_reads/ecoli.correctedReads.fasta.gz</span></code></pre></div>
 </div>
@@ -301,8 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Check the input assembly</strong>: Formatting fasta headers.</li>
 <li><strong>Map reads to assembly</strong>: Alignment of reads to the assmebly by <code>BWA mem</code>.</li>
 <li><strong>Extract reads for reassembly</strong>: Extract the aligned reads, therefore removing reads that did not align to the assembly.</li>
-<li><strong>Assembly of extract reads</strong>: Carried out with the <code>SPAdes</code> assembler.</li>
-<li><strong>Merge and circularise</strong>: Merges overlapping contigs form the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.</li>
+<li><strong>Assembly of extracted reads</strong>: Carried out with the <code>SPAdes</code> assembler.</li>
+<li><strong>Merge and circularise</strong>: Merges overlapping contigs from the assembly. Once merging is complete circular sequences are identified. Circular sequences are arranged so the last base is followed by the first base.</li>
 <li><strong>Clean contigs</strong>: Removal of small contigs (default = 2k) and contigs completely contained in another contig.</li>
 <li><strong>Fix contig start positions</strong>: Attempts to make the start position to be at a dnaA gene (if found).
 <ul>

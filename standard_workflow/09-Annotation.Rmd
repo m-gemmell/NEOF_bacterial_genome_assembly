@@ -185,7 +185,7 @@ __Questions__
 The next best human-readable file is the `.tsv` file. This is in essence a table with one row per annotated feature.
 
 ```{bash eval=FALSE}
-less -S prokka/ecoli/ecoli.txt
+less -S prokka/ecoli/ecoli.tsv
 ```
 
 __Questions__

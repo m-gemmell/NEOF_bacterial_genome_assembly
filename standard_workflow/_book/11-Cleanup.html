@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2021-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cleanup" class="section level1" number="11">
 <h1><span class="header-section-number">Chapter 11</span> Cleanup</h1>
 <p><img src="figures/sweep.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the <code>final_assembly</code> directory but instead we will delete files that are definitely not needed. Thi will leave files that we may want to use again (assembly fasta files, stats etc.).</p>
+<p>When carrying out a bioinformatics project it is always good to remove intermediary files that are not needed. We could delete all the directories apart from the <code>final_assembly</code> directory but instead we will delete files that are definitely not needed. This will leave files that we may want to use again (assembly fasta files, stats etc.).</p>
 <p>You can delete files/directories you definitely don’t need as you go along (recommended for large files/directories or if storage space is a premium) but I tend to do my cleanup at the end of a project.</p>
 <div id="deleting-unwanted-data" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Deleting unwanted data</h2>
@@ -266,71 +266,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-10"><a href="11-Cleanup.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> redbean_assembly/<span class="pp">*</span></span>
 <span id="cb52-11"><a href="11-Cleanup.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the gzipped files that we will most likely never even look at</span></span>
 <span id="cb52-12"><a href="11-Cleanup.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co">#I always like to ls before using wildcards to delete or </span></span>
-<span id="cb52-13"><a href="11-Cleanup.html#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co"># deleting directories</span></span>
+<span id="cb52-13"><a href="11-Cleanup.html#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co"># when deleting directories</span></span>
 <span id="cb52-14"><a href="11-Cleanup.html#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co">#This helps ensure you are not going to delete anything you don’t want to</span></span>
-<span id="cb52-15"><a href="11-Cleanup.html#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/<span class="pp">*</span>gz</span>
-<span id="cb52-16"><a href="11-Cleanup.html#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> redbean_assembly/<span class="pp">*</span>gz</span>
-<span id="cb52-17"><a href="11-Cleanup.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the assembly index files</span></span>
-<span id="cb52-18"><a href="11-Cleanup.html#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="co">#We created these for racon polishing</span></span>
-<span id="cb52-19"><a href="11-Cleanup.html#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span>
-<span id="cb52-20"><a href="11-Cleanup.html#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span>
-<span id="cb52-21"><a href="11-Cleanup.html#cb52-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-22"><a href="11-Cleanup.html#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="co">##QUAST</span></span>
-<span id="cb52-23"><a href="11-Cleanup.html#cb52-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Generally quast does not produce large files so we will ignore its output</span></span>
-<span id="cb52-24"><a href="11-Cleanup.html#cb52-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-25"><a href="11-Cleanup.html#cb52-25" aria-hidden="true" tabindex="-1"></a><span class="co">##BUSCO</span></span>
-<span id="cb52-26"><a href="11-Cleanup.html#cb52-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
-<span id="cb52-27"><a href="11-Cleanup.html#cb52-27" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> busco/redbean/<span class="pp">*</span></span>
-<span id="cb52-28"><a href="11-Cleanup.html#cb52-28" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the the BUSCO downloads directory</span></span>
-<span id="cb52-29"><a href="11-Cleanup.html#cb52-29" aria-hidden="true" tabindex="-1"></a><span class="co">#This contained the lineage dataset information</span></span>
-<span id="cb52-30"><a href="11-Cleanup.html#cb52-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco_downloads</span>
-<span id="cb52-31"><a href="11-Cleanup.html#cb52-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco_downloads</span>
-<span id="cb52-32"><a href="11-Cleanup.html#cb52-32" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the BUSCO logs</span></span>
-<span id="cb52-33"><a href="11-Cleanup.html#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/busco_<span class="pp">*</span>.log</span>
-<span id="cb52-34"><a href="11-Cleanup.html#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> busco/redbean/busco_<span class="pp">*</span>.log</span>
-<span id="cb52-35"><a href="11-Cleanup.html#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage of ecoli BUSCO results</span></span>
-<span id="cb52-36"><a href="11-Cleanup.html#cb52-36" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> busco/redbean/ecoli/<span class="pp">*</span></span>
-<span id="cb52-37"><a href="11-Cleanup.html#cb52-37" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the logs directory</span></span>
-<span id="cb52-38"><a href="11-Cleanup.html#cb52-38" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/logs</span>
-<span id="cb52-39"><a href="11-Cleanup.html#cb52-39" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/logs</span>
-<span id="cb52-40"><a href="11-Cleanup.html#cb52-40" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the prodigal output</span></span>
-<span id="cb52-41"><a href="11-Cleanup.html#cb52-41" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/prodigal_output</span>
-<span id="cb52-42"><a href="11-Cleanup.html#cb52-42" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/prodigal_output</span>
-<span id="cb52-43"><a href="11-Cleanup.html#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the run output</span></span>
-<span id="cb52-44"><a href="11-Cleanup.html#cb52-44" aria-hidden="true" tabindex="-1"></a><span class="co">#This directory may be useful but normally the short summary </span></span>
-<span id="cb52-45"><a href="11-Cleanup.html#cb52-45" aria-hidden="true" tabindex="-1"></a><span class="co"># is sufficient to keep and use</span></span>
-<span id="cb52-46"><a href="11-Cleanup.html#cb52-46" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/run_enterobacterales_odb10</span>
-<span id="cb52-47"><a href="11-Cleanup.html#cb52-47" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/run_enterobacterales_odb10</span>
-<span id="cb52-48"><a href="11-Cleanup.html#cb52-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-49"><a href="11-Cleanup.html#cb52-49" aria-hidden="true" tabindex="-1"></a><span class="co">## checkm</span></span>
-<span id="cb52-50"><a href="11-Cleanup.html#cb52-50" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
-<span id="cb52-51"><a href="11-Cleanup.html#cb52-51" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> checkm/redbean/ecoli/<span class="pp">*</span></span>
-<span id="cb52-52"><a href="11-Cleanup.html#cb52-52" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the CheckM storage directory</span></span>
-<span id="cb52-53"><a href="11-Cleanup.html#cb52-53" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> checkm/redbean/ecoli/storage</span>
-<span id="cb52-54"><a href="11-Cleanup.html#cb52-54" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> checkm/redbean/ecoli/storage</span>
-<span id="cb52-55"><a href="11-Cleanup.html#cb52-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-56"><a href="11-Cleanup.html#cb52-56" aria-hidden="true" tabindex="-1"></a><span class="co">## racon</span></span>
-<span id="cb52-57"><a href="11-Cleanup.html#cb52-57" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
-<span id="cb52-58"><a href="11-Cleanup.html#cb52-58" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> racon/redbean/ecoli/<span class="pp">*</span></span>
-<span id="cb52-59"><a href="11-Cleanup.html#cb52-59" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the SAM files</span></span>
-<span id="cb52-60"><a href="11-Cleanup.html#cb52-60" aria-hidden="true" tabindex="-1"></a><span class="co">#These are relatively large and can be generated quickly</span></span>
-<span id="cb52-61"><a href="11-Cleanup.html#cb52-61" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/<span class="pp">*</span>sam</span>
-<span id="cb52-62"><a href="11-Cleanup.html#cb52-62" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> racon/redbean/ecoli/<span class="pp">*</span>sam</span>
-<span id="cb52-63"><a href="11-Cleanup.html#cb52-63" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the index files</span></span>
-<span id="cb52-64"><a href="11-Cleanup.html#cb52-64" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/<span class="pp">*</span>.fasta.<span class="pp">*</span></span>
-<span id="cb52-65"><a href="11-Cleanup.html#cb52-65" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> racon/redbean/ecoli/<span class="pp">*</span>.fasta.<span class="pp">*</span></span>
-<span id="cb52-66"><a href="11-Cleanup.html#cb52-66" aria-hidden="true" tabindex="-1"></a><span class="co">#The dnadiff output is small so we will leave it alone</span></span>
-<span id="cb52-67"><a href="11-Cleanup.html#cb52-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-68"><a href="11-Cleanup.html#cb52-68" aria-hidden="true" tabindex="-1"></a><span class="co">##Circlator</span></span>
-<span id="cb52-69"><a href="11-Cleanup.html#cb52-69" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
-<span id="cb52-70"><a href="11-Cleanup.html#cb52-70" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> circlator/redbean_raconi2/ecoli/<span class="pp">*</span></span>
-<span id="cb52-71"><a href="11-Cleanup.html#cb52-71" aria-hidden="true" tabindex="-1"></a><span class="co">#We are only interested in the files produced by the 6th step</span></span>
-<span id="cb52-72"><a href="11-Cleanup.html#cb52-72" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete all the 00-05 files</span></span>
-<span id="cb52-73"><a href="11-Cleanup.html#cb52-73" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> circlator/redbean_raconi2/ecoli/0[0-5]<span class="pp">*</span></span>
-<span id="cb52-74"><a href="11-Cleanup.html#cb52-74" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> circlator/redbean_raconi2/ecoli/0[0-5]<span class="pp">*</span></span>
-<span id="cb52-75"><a href="11-Cleanup.html#cb52-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-76"><a href="11-Cleanup.html#cb52-76" aria-hidden="true" tabindex="-1"></a><span class="co">##Prokka</span></span>
-<span id="cb52-77"><a href="11-Cleanup.html#cb52-77" aria-hidden="true" tabindex="-1"></a><span class="co">#All the prokka files are useful so no deleting here</span></span></code></pre></div>
+<span id="cb52-15"><a href="11-Cleanup.html#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="co">#rm -i is also a good way to not delete stuff by accident</span></span>
+<span id="cb52-16"><a href="11-Cleanup.html#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="co">#It will give you a prompt before every removal</span></span>
+<span id="cb52-17"><a href="11-Cleanup.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/<span class="pp">*</span>gz</span>
+<span id="cb52-18"><a href="11-Cleanup.html#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> redbean_assembly/<span class="pp">*</span>gz</span>
+<span id="cb52-19"><a href="11-Cleanup.html#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the assembly index files</span></span>
+<span id="cb52-20"><a href="11-Cleanup.html#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="co">#We created these for racon polishing</span></span>
+<span id="cb52-21"><a href="11-Cleanup.html#cb52-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span>
+<span id="cb52-22"><a href="11-Cleanup.html#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span>
+<span id="cb52-23"><a href="11-Cleanup.html#cb52-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-24"><a href="11-Cleanup.html#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="co">##QUAST</span></span>
+<span id="cb52-25"><a href="11-Cleanup.html#cb52-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Generally quast does not produce large files so we will ignore its output</span></span>
+<span id="cb52-26"><a href="11-Cleanup.html#cb52-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-27"><a href="11-Cleanup.html#cb52-27" aria-hidden="true" tabindex="-1"></a><span class="co">##BUSCO</span></span>
+<span id="cb52-28"><a href="11-Cleanup.html#cb52-28" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-29"><a href="11-Cleanup.html#cb52-29" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> busco/redbean/<span class="pp">*</span></span>
+<span id="cb52-30"><a href="11-Cleanup.html#cb52-30" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the the BUSCO downloads directory</span></span>
+<span id="cb52-31"><a href="11-Cleanup.html#cb52-31" aria-hidden="true" tabindex="-1"></a><span class="co">#This contained the lineage dataset information</span></span>
+<span id="cb52-32"><a href="11-Cleanup.html#cb52-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco_downloads</span>
+<span id="cb52-33"><a href="11-Cleanup.html#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco_downloads</span>
+<span id="cb52-34"><a href="11-Cleanup.html#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage of ecoli BUSCO results</span></span>
+<span id="cb52-35"><a href="11-Cleanup.html#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> busco/redbean/ecoli/<span class="pp">*</span></span>
+<span id="cb52-36"><a href="11-Cleanup.html#cb52-36" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the logs directory</span></span>
+<span id="cb52-37"><a href="11-Cleanup.html#cb52-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/logs</span>
+<span id="cb52-38"><a href="11-Cleanup.html#cb52-38" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/logs</span>
+<span id="cb52-39"><a href="11-Cleanup.html#cb52-39" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the prodigal output</span></span>
+<span id="cb52-40"><a href="11-Cleanup.html#cb52-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/prodigal_output</span>
+<span id="cb52-41"><a href="11-Cleanup.html#cb52-41" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/prodigal_output</span>
+<span id="cb52-42"><a href="11-Cleanup.html#cb52-42" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the run output</span></span>
+<span id="cb52-43"><a href="11-Cleanup.html#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="co">#This directory may be useful but normally the short summary </span></span>
+<span id="cb52-44"><a href="11-Cleanup.html#cb52-44" aria-hidden="true" tabindex="-1"></a><span class="co"># is sufficient to keep and use</span></span>
+<span id="cb52-45"><a href="11-Cleanup.html#cb52-45" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> busco/redbean/ecoli/run_enterobacterales_odb10</span>
+<span id="cb52-46"><a href="11-Cleanup.html#cb52-46" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> busco/redbean/ecoli/run_enterobacterales_odb10</span>
+<span id="cb52-47"><a href="11-Cleanup.html#cb52-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-48"><a href="11-Cleanup.html#cb52-48" aria-hidden="true" tabindex="-1"></a><span class="co">## checkm</span></span>
+<span id="cb52-49"><a href="11-Cleanup.html#cb52-49" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-50"><a href="11-Cleanup.html#cb52-50" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> checkm/redbean/ecoli/<span class="pp">*</span></span>
+<span id="cb52-51"><a href="11-Cleanup.html#cb52-51" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the CheckM storage directory</span></span>
+<span id="cb52-52"><a href="11-Cleanup.html#cb52-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> checkm/redbean/ecoli/storage</span>
+<span id="cb52-53"><a href="11-Cleanup.html#cb52-53" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> checkm/redbean/ecoli/storage</span>
+<span id="cb52-54"><a href="11-Cleanup.html#cb52-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-55"><a href="11-Cleanup.html#cb52-55" aria-hidden="true" tabindex="-1"></a><span class="co">## racon</span></span>
+<span id="cb52-56"><a href="11-Cleanup.html#cb52-56" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-57"><a href="11-Cleanup.html#cb52-57" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> racon/redbean/ecoli/<span class="pp">*</span></span>
+<span id="cb52-58"><a href="11-Cleanup.html#cb52-58" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete the SAM files</span></span>
+<span id="cb52-59"><a href="11-Cleanup.html#cb52-59" aria-hidden="true" tabindex="-1"></a><span class="co">#These are relatively large and can be generated quickly</span></span>
+<span id="cb52-60"><a href="11-Cleanup.html#cb52-60" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/<span class="pp">*</span>sam</span>
+<span id="cb52-61"><a href="11-Cleanup.html#cb52-61" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> racon/redbean/ecoli/<span class="pp">*</span>sam</span>
+<span id="cb52-62"><a href="11-Cleanup.html#cb52-62" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the index files</span></span>
+<span id="cb52-63"><a href="11-Cleanup.html#cb52-63" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/<span class="pp">*</span>.fasta.<span class="pp">*</span></span>
+<span id="cb52-64"><a href="11-Cleanup.html#cb52-64" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> racon/redbean/ecoli/<span class="pp">*</span>.fasta.<span class="pp">*</span></span>
+<span id="cb52-65"><a href="11-Cleanup.html#cb52-65" aria-hidden="true" tabindex="-1"></a><span class="co">#The dnadiff output is small so we will leave it alone</span></span>
+<span id="cb52-66"><a href="11-Cleanup.html#cb52-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-67"><a href="11-Cleanup.html#cb52-67" aria-hidden="true" tabindex="-1"></a><span class="co">##Circlator</span></span>
+<span id="cb52-68"><a href="11-Cleanup.html#cb52-68" aria-hidden="true" tabindex="-1"></a><span class="co">#Check file storage</span></span>
+<span id="cb52-69"><a href="11-Cleanup.html#cb52-69" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hsc</span> circlator/redbean_raconi2/ecoli/<span class="pp">*</span></span>
+<span id="cb52-70"><a href="11-Cleanup.html#cb52-70" aria-hidden="true" tabindex="-1"></a><span class="co">#We are only interested in the files produced by the 6th step</span></span>
+<span id="cb52-71"><a href="11-Cleanup.html#cb52-71" aria-hidden="true" tabindex="-1"></a><span class="co">#Delete all the 00-05 files</span></span>
+<span id="cb52-72"><a href="11-Cleanup.html#cb52-72" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> circlator/redbean_raconi2/ecoli/0[0-5]<span class="pp">*</span></span>
+<span id="cb52-73"><a href="11-Cleanup.html#cb52-73" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> circlator/redbean_raconi2/ecoli/0[0-5]<span class="pp">*</span></span>
+<span id="cb52-74"><a href="11-Cleanup.html#cb52-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-75"><a href="11-Cleanup.html#cb52-75" aria-hidden="true" tabindex="-1"></a><span class="co">##Prokka</span></span>
+<span id="cb52-76"><a href="11-Cleanup.html#cb52-76" aria-hidden="true" tabindex="-1"></a><span class="co">#All the prokka files are useful so no deleting here</span></span></code></pre></div>
 <p><strong>Task</strong></p>
 <p>Using the experience above cleanup unwanted files and directories in your final assembly directory</p>
 </div>
