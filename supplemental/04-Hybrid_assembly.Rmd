@@ -44,7 +44,7 @@ ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq pacbio_data
 knitr::include_graphics(path = "figures/spades.png", auto_pdf = TRUE)
 ``` 
 
-A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's use case is very similar to just using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
+A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's use is very similar to just using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
 
 First we will create an output directory for `HybridSPAdes`.
 

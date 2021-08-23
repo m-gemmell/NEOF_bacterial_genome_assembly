@@ -39,7 +39,7 @@ The command consists of multiple parts with the parts piping (`|`) their outputs
 - `cut -f 2` : `cut` will extract our field/column (`-f`) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.
 - `wc -c` : `wc` stands for word count and the `-c` options stands for characters. This counts all the characters.
 
-With this we can find out if we may have too much coverage. In this case 106,770,005bp is about 23X for a 4.6m genome (_E.coli_) so we are definitely not worried about the coverage being too high.
+With this we can find out if we may have too much coverage. In this case 139,252,345bp is about 30X for a 4.6m genome (_E.coli_) so we are not worried about the coverage being too high.
 
 ## Subsampling
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE}
@@ -77,6 +77,6 @@ __Tasks__
 - Using `seqtk sample` attempt to subsample the data so you retain ~10X coverage (44-48Mbp). What fraction/number did you use?
 - Try out different seed numbers, with the same subsample number/fraction, to see the effect it has on subsampling.
 
-__Note__ There is probable no reason you would want 10X in real life this is just for practice.
+__Note__ There is probably no reason you would want 10X in real life this is just for practice.
 
 I generally suggest only carrying out random subsampling if you have very high coverage (>100X) and trying to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.

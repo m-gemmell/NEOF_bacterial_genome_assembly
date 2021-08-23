@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-18" />
+<meta name="date" content="2021-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-4"><a href="02-Multi-sample_workflow.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multi_sample_workflow/data</span>
 <span id="cb2-5"><a href="02-Multi-sample_workflow.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the new analysis directory</span></span>
 <span id="cb2-6"><a href="02-Multi-sample_workflow.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multi_sample_workflow</span></code></pre></div>
-<p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We’ll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you not its not going to move from its original location.</p>
+<p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We’ll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you are not going to move it from its original location.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="02-Multi-sample_workflow.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Softlink the PacBio fastq files we will use</span></span>
 <span id="cb3-2"><a href="02-Multi-sample_workflow.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/<span class="pp">*</span> data/</span>
 <span id="cb3-3"><a href="02-Multi-sample_workflow.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of the data directory</span></span>
@@ -273,19 +273,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-16"><a href="02-Multi-sample_workflow.html#cb8-16" aria-hidden="true" tabindex="-1"></a>-i redbean_assembly/<span class="va">${s}</span>.ctg.lay.gz <span class="dt">\</span></span>
 <span id="cb8-17"><a href="02-Multi-sample_workflow.html#cb8-17" aria-hidden="true" tabindex="-1"></a>-fo redbean_assembly/<span class="va">${s}</span>.ctg.fa</span>
 <span id="cb8-18"><a href="02-Multi-sample_workflow.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
-<p>IN the commands the contents of the file <code>samples.txt</code> is provided to the loop (<code>while read</code>) with a <code>cat</code> command and a pipe <code>|</code>.</p>
+<p>In the commands the contents of the file <code>samples.txt</code> is provided to the loop (<code>while read</code>) with a <code>cat</code> command and a pipe <code>|</code>.</p>
 <p>When looping through this file the commands in the loop are carried out three times, once for each sample. In future cases the loop will occur as many times as there are lines in the <code>samples.txt</code> file.</p>
 <p>In each loop the <code>${s}</code> is replaced with the current line from the file. <code>s</code> is set as the <code>variable</code> by the user when the loop is initiated (<code>while read s</code>). <code>s</code> is arbitrary and I use it to be short for “sample” . It could be any letter or even a word, I would not recommend using only numbers.</p>
-<p>Below we will put the <code>wtdbg2</code> within an echo within the loop. This will print out to screen the commands that would be run, replacing the variables (<code>${s}</code>) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.</p>
+<p>Below we will use echo to print everything within the wtdbg2 loop to demonstrate how the loop is behaving. This will print out to screen the commands that would be run, replacing the variables (<code>${s}</code>) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="02-Multi-sample_workflow.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> samples.txt <span class="kw">|</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">s</span></span>
 <span id="cb9-2"><a href="02-Multi-sample_workflow.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb9-3"><a href="02-Multi-sample_workflow.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span></span>
-<span id="cb9-4"><a href="02-Multi-sample_workflow.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="ex">wtdbg2</span> <span class="dt">\</span></span>
-<span id="cb9-5"><a href="02-Multi-sample_workflow.html#cb9-5" aria-hidden="true" tabindex="-1"></a>-x rs <span class="dt">\</span></span>
-<span id="cb9-6"><a href="02-Multi-sample_workflow.html#cb9-6" aria-hidden="true" tabindex="-1"></a>-g 5.4m <span class="dt">\</span></span>
-<span id="cb9-7"><a href="02-Multi-sample_workflow.html#cb9-7" aria-hidden="true" tabindex="-1"></a>-i data/<span class="va">${s}</span>.fastq <span class="dt">\</span></span>
-<span id="cb9-8"><a href="02-Multi-sample_workflow.html#cb9-8" aria-hidden="true" tabindex="-1"></a>-o redbean_assembly/<span class="va">${s}</span> <span class="dt">\</span></span>
-<span id="cb9-9"><a href="02-Multi-sample_workflow.html#cb9-9" aria-hidden="true" tabindex="-1"></a>-t 8<span class="kw">`</span></span>
+<span id="cb9-3"><a href="02-Multi-sample_workflow.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="dt">\</span></span>
+<span id="cb9-4"><a href="02-Multi-sample_workflow.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;wtdbg2 </span><span class="dt">\</span></span>
+<span id="cb9-5"><a href="02-Multi-sample_workflow.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">-x rs </span><span class="dt">\</span></span>
+<span id="cb9-6"><a href="02-Multi-sample_workflow.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">-g 5.4m </span><span class="dt">\</span></span>
+<span id="cb9-7"><a href="02-Multi-sample_workflow.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">-i data/</span><span class="va">${s}</span><span class="st">.fastq </span><span class="dt">\</span></span>
+<span id="cb9-8"><a href="02-Multi-sample_workflow.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">-o redbean_assembly/</span><span class="va">${s}</span><span class="st"> </span><span class="dt">\</span></span>
+<span id="cb9-9"><a href="02-Multi-sample_workflow.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">-t 8&quot;</span></span>
 <span id="cb9-10"><a href="02-Multi-sample_workflow.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <p><strong>Note</strong>: Loops need to start with <code>do</code> and end with <code>done</code> as shown in the commands.</p>
 </div>
@@ -303,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="gnu-parallel" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> GNU Parallel</h2>
 <p><img src="figures/gnu_parallel.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>Loops are a convenient method for relatively quick processes or when you have the time. However in the future you may be on time constraints or you may have a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.</p>
+<p>Loops are a convenient method for relatively quick processes or when you have the time. However, in the future you may have time constraints or a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.</p>
 <p>There a different ways to do this but the most common tool I use is <code>GNU Parallel</code>. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. Keep in mind other users might be taking up the machine’s processes. The command <code>top</code> allows you to see the current load on a machine.</p>
 <p><code>GNU Parallel</code> will put on a new job once a job has finished. I.e. if you have four jobs on at once, with 4 waiting, the fifth job will be put on once one of the first four finish (depending on which finished first). Compare this to another tool that can put put on multiple jobs/processes at once, such as <code>xargs</code>. If you put on four jobs/processes at once with <code>xargs</code> it will wait for the first four processes to all finish before putting on the next four. This can increase the time of analysis due to some samples taking much longer than others, as visualised below.</p>
 <p><img src="figures/xargs_vs_gnu_parallel.png" width="60%" style="display: block; margin: auto;" /></p>

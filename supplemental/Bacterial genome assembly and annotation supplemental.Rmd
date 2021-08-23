@@ -23,7 +23,7 @@ knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
 knitr::include_graphics(path = "figures/bact_genome_supplement.png", auto_pdf = TRUE)
 ```
 
-This bookdown is a supplement to the main one. It contains some workflows and tools that are not part of the standard workflow workflow. However, they may prove useful depending on your needs.
+This bookdown is a supplement to the main one. It contains some workflows and tools that are not part of the standard workflow. However, they may prove useful depending on your needs.
 
 The sections in this supplement will cover:
 
@@ -64,7 +64,7 @@ mkdir -p multi_sample_workflow/data
 cd multi_sample_workflow
 ```
 
-We will be running three _Bacillus cereus_ samples through the standard workflow. We'll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you not its not going to move from its original location.
+We will be running three _Bacillus cereus_ samples through the standard workflow. We'll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you are not going to move it from its original location.
 
 ```{bash eval=FALSE}
 #Softlink the PacBio fastq files we will use
@@ -165,24 +165,24 @@ wtpoa-cns \
 done
 ```
 
-IN the commands the contents of the file `samples.txt` is provided to the loop (`while read`) with a `cat` command and a pipe `|`. 
+In the commands the contents of the file `samples.txt` is provided to the loop (`while read`) with a `cat` command and a pipe `|`. 
 
 When looping through this file the commands in the loop are carried out three times, once for each sample. In future cases the loop will occur as many times as there are lines in the `samples.txt` file.
 
 In each loop the `${s}` is replaced with the current line from the file. `s` is set as the `variable` by the user when the loop is initiated (`while read s`). `s` is arbitrary and I use it to be short for "sample" . It could be any letter or even a word, I would not recommend using only numbers.
 
-Below we will put the `wtdbg2` within an echo within the loop. This will print out to screen the commands that would be run, replacing the variables (`${s}`) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.
+Below we will use echo to print everything within the wtdbg2 loop to demonstrate how the loop is behaving. This will print out to screen the commands that would be run, replacing the variables (`${s}`) with the sample names. This is useful to get a sense of what the loop is actually doing. This can also be a handy way to debug your loops if they are not working as intended.
 
 ```{bash eval=FALSE}
 cat samples.txt | while read s
 do
-echo
-`wtdbg2 \
+echo \
+"wtdbg2 \
 -x rs \
 -g 5.4m \
 -i data/${s}.fastq \
 -o redbean_assembly/${s} \
--t 8`
+-t 8"
 done
 ```
 
@@ -206,7 +206,7 @@ __Notes__:
 knitr::include_graphics(path = "figures/gnu_parallel.png", auto_pdf = TRUE)
 ``` 
 
-Loops are a convenient method for relatively quick processes or when you have the time. However in the future you may be on time constraints or you may have a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.
+Loops are a convenient method for relatively quick processes or when you have the time. However, in the future you may have time constraints or a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.
 
 There a different ways to do this but the most common tool I use is `GNU Parallel`. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. Keep in mind other users might be taking up the machine's processes. The command `top` allows you to see the current load on a machine.
 
@@ -261,7 +261,7 @@ The command consists of multiple parts with the parts piping (`|`) their outputs
 - `cut -f 2` : `cut` will extract our field/column (`-f`) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.
 - `wc -c` : `wc` stands for word count and the `-c` options stands for characters. This counts all the characters.
 
-With this we can find out if we may have too much coverage. In this case 106,770,005bp is about 23X for a 4.6m genome (_E.coli_) so we are definitely not worried about the coverage being too high.
+With this we can find out if we may have too much coverage. In this case 139,252,345bp is about 30X for a 4.6m genome (_E.coli_) so we are not worried about the coverage being too high.
 
 ## Subsampling
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE}
@@ -299,7 +299,7 @@ __Tasks__
 - Using `seqtk sample` attempt to subsample the data so you retain ~10X coverage (44-48Mbp). What fraction/number did you use?
 - Try out different seed numbers, with the same subsample number/fraction, to see the effect it has on subsampling.
 
-__Note__ There is probable no reason you would want 10X in real life this is just for practice.
+__Note__ There is probably no reason you would want 10X in real life this is just for practice.
 
 I generally suggest only carrying out random subsampling if you have very high coverage (>100X) and trying to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.
 
@@ -351,7 +351,7 @@ ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq pacbio_data
 knitr::include_graphics(path = "figures/spades.png", auto_pdf = TRUE)
 ``` 
 
-A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's use case is very similar to just using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
+A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's use is very similar to just using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
 
 First we will create an output directory for `HybridSPAdes`.
 

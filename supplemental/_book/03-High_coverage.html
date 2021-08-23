@@ -24,7 +24,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-18" />
+<meta name="date" content="2021-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>cut -f 2</code> : <code>cut</code> will extract our field/column (<code>-f</code>) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.</li>
 <li><code>wc -c</code> : <code>wc</code> stands for word count and the <code>-c</code> options stands for characters. This counts all the characters.</li>
 </ul>
-<p>With this we can find out if we may have too much coverage. In this case 106,770,005bp is about 23X for a 4.6m genome (<em>E.coli</em>) so we are definitely not worried about the coverage being too high.</p>
+<p>With this we can find out if we may have too much coverage. In this case 139,252,345bp is about 30X for a 4.6m genome (<em>E.coli</em>) so we are not worried about the coverage being too high.</p>
 </div>
 <div id="subsampling" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Subsampling</h2>
@@ -246,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Using <code>seqtk sample</code> attempt to subsample the data so you retain ~10X coverage (44-48Mbp). What fraction/number did you use?</li>
 <li>Try out different seed numbers, with the same subsample number/fraction, to see the effect it has on subsampling.</li>
 </ul>
-<p><strong>Note</strong> There is probable no reason you would want 10X in real life this is just for practice.</p>
+<p><strong>Note</strong> There is probably no reason you would want 10X in real life this is just for practice.</p>
 <p>I generally suggest only carrying out random subsampling if you have very high coverage (&gt;100X) and trying to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.</p>
 
 </div>
