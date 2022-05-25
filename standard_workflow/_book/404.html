@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Final report | Bacterial genome assembly and annotation</title>
+  <title>Page not found | Bacterial genome assembly and annotation</title>
   <meta name="description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Final report | Bacterial genome assembly and annotation" />
+  <meta property="og:title" content="Page not found | Bacterial genome assembly and annotation" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Final report | Bacterial genome assembly and annotation" />
+  <meta name="twitter:title" content="Page not found | Bacterial genome assembly and annotation" />
   
   <meta name="twitter:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-<link rel="prev" href="09-Annotation.html"/>
-<link rel="next" href="11-Cleanup.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,118 +244,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="finalreport" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Final report<a href="10-Final_report.html#finalreport" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="figures/final_report.png" width="20%" style="display: block; margin: auto;" /></p>
-<div id="report" class="section level2 hasAnchor" number="10.1">
-<h2><span class="header-section-number">10.1</span> Report<a href="10-Final_report.html#report" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Once you have your final assmeblies it is always a good idea to make a final report. This will involve running <code>QUAST</code> and <code>BUSCO</code> on the final assemblies. Additionally, we will use <code>MultiQC</code> to make a html report including the metrics/stats from <code>QUAST</code>, <code>BUSCO</code>, and <code>Prokka</code>.</p>
-<div id="report-conda-environment-directory" class="section level3 hasAnchor" number="10.1.1">
-<h3><span class="header-section-number">10.1.1</span> Report: Conda environment &amp; directory<a href="10-Final_report.html#report-conda-environment-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>We will use the <code>bacterial_genome_assessment</code> conda environment for our report generation. Either:</p>
-<ul>
-<li>Use your currently open <code>bacterial_genome_assessment</code> terminal.</li>
-<li>If you need a new <code>bacterial_genome_assessment</code> terminal see the <a href="06-Genome_assessment.html#assessmentconda">assembly assessment conda activation instructions</a></li>
-</ul>
-<p>Ensure you are in the <code>final_assembly</code> directory</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="10-Final_report.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/final_assembly</span></code></pre></div>
-</div>
-<div id="report-quast" class="section level3 hasAnchor" number="10.1.2">
-<h3><span class="header-section-number">10.1.2</span> Report: QUAST<a href="10-Final_report.html#report-quast" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/measuring_tape.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>We will run <code>QUAST</code> but this time we will include a reference. Make a softlink for the genome reference. This reference genome is the genome used to create the PacBio simulated reads we have been using for assembly.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="10-Final_report.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/ref/ ~/bacterial_assembly/</span></code></pre></div>
-<p>Now we will run <code>QUAST</code> with the added option of <code>-r</code> specifying the reference fasta to be used.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="10-Final_report.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make QUAST output directory</span></span>
-<span id="cb47-2"><a href="10-Final_report.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> quast</span>
-<span id="cb47-3"><a href="10-Final_report.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run QUAST</span></span>
-<span id="cb47-4"><a href="10-Final_report.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-r</span> ../../ref/ecoli_ref.fasta <span class="at">-o</span> quast assembly/ecoli.fasta</span></code></pre></div>
-<p>This <code>-r</code> option will add comparison metrics of the provided assembly/assemblies to the reference assembly. This is similar to <code>dnadiff</code> but more basic. We will look at the `QUAST metrics further down.</p>
-</div>
-<div id="report-busco" class="section level3 hasAnchor" number="10.1.3">
-<h3><span class="header-section-number">10.1.3</span> Report: BUSCO<a href="10-Final_report.html#report-busco" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/universe.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>Now to run <code>BUSCO</code> for the assembly.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="10-Final_report.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make BUSCO directory</span></span>
-<span id="cb48-2"><a href="10-Final_report.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> busco</span>
-<span id="cb48-3"><a href="10-Final_report.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#run BUSCO</span></span>
-<span id="cb48-4"><a href="10-Final_report.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="at">-i</span> assembly/ecoli.fasta <span class="at">-l</span> enterobacterales_odb10 <span class="at">-m</span> geno <span class="at">-o</span> ecoli <span class="at">--out_path</span> ./busco/</span></code></pre></div>
-</div>
-<div id="report-multiqc" class="section level3 hasAnchor" number="10.1.4">
-<h3><span class="header-section-number">10.1.4</span> Report: MultiQC<a href="10-Final_report.html#report-multiqc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="figures/multiqc.png" width="25%" style="display: block; margin: auto;" /></p>
-<p><code>MultiQC</code> will create a html report from the output from various tools. A list of compatible tools and output files can be found at: <a href="https://multiqc.info/docs/#multiqc-modules" class="uri">https://multiqc.info/docs/#multiqc-modules</a></p>
-<p>When running <code>MultiQC</code> the user points it to a directory or multiple directories which contain the output you want included in the report. <code>MultiQC</code> will then search through the files looking for all the compatible files and ignoring the incompatible files.</p>
-<p>However, I find <code>MultiQC</code> is very slow to search through files, especially for tools that create a lot of output files. I therefore like to create an <code>input</code> directory where I copy all the input for <code>MultiQC</code> so it will run much quicker. Let's do that now.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="10-Final_report.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make MultiQC directory</span></span>
-<span id="cb49-2"><a href="10-Final_report.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> multiqc</span>
-<span id="cb49-3"><a href="10-Final_report.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into MultiQC directory</span></span>
-<span id="cb49-4"><a href="10-Final_report.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc</span>
-<span id="cb49-5"><a href="10-Final_report.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a input directory</span></span>
-<span id="cb49-6"><a href="10-Final_report.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> input</span>
-<span id="cb49-7"><a href="10-Final_report.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy the relevant QUAST, BUSCO, and Prokka files to be used as MultiQC input</span></span>
-<span id="cb49-8"><a href="10-Final_report.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../quast/report.tsv input/</span>
-<span id="cb49-9"><a href="10-Final_report.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../busco/ecoli/short_summary.specific.enterobacterales_odb10.txt input/</span>
-<span id="cb49-10"><a href="10-Final_report.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../prokka/ecoli/ecoli.txt input/</span></code></pre></div>
-<p>Now we can run <code>MultiQC</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="10-Final_report.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">--cl-config</span> <span class="st">&quot;prokka_fn_snames: True&quot;</span> <span class="at">-o</span> . input/</span></code></pre></div>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>--cl-config</code> : This parameter allows you to config how MultiQC will analyse/present data.
-<ul>
-<li><code>"prokka_fn_snames: True"</code>: <code>MultiQC</code> will use the file names as the sample names. Other wise the sample name is generated using the first line of the <code>Prokka</code> <code>.txt</code> file.</li>
-<li>More info on configuring <code>MultiQC</code>: <a href="https://multiqc.info/docs/#configuring-multiqc" class="uri">https://multiqc.info/docs/#configuring-multiqc</a></li>
-</ul></li>
-<li><code>-o</code> : Output directory.</li>
-<li>At the end of the command all the input directories (directories with the <code>MultiQC</code> inputs) are supplied. In this case it is just <code>input/</code> as it contains all our input.</li>
-</ul>
-<p>Inspect the html report.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="10-Final_report.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> multiqc_report.html</span></code></pre></div>
-<p>In the <code>QUAST</code> <code>Assembly Statistics</code> table you will see normal contiguity metrics plus new metrics based on comparing the assembly to the reference assembly:</p>
-<ul>
-<li><strong>Misassemblies</strong>: Number of misassmebly positions in contigs.</li>
-<li><strong>Mismatches/100kbp</strong>: Average number of mismatches per 100000 aligned bases.</li>
-<li><strong>Indels/100kbp</strong>: Average number of indels per 100000 aligned bases.</li>
-<li><strong>Genome Fraction</strong>: Percentage of bases in the reference that aligned to the genome assembly.</li>
-</ul>
-<p>More info on metrics: <a href="http://quast.sourceforge.net/docs/manual.html#sec3.1" class="uri">http://quast.sourceforge.net/docs/manual.html#sec3.1</a></p>
-<p><strong>Questions</strong></p>
-<ul>
-<li>What percentage of reference bases aligned to the genome assembly?</li>
-<li>When compared to the reference is there a higher number of Mismatches or Indels? Do you think Illumina sequencing would cause the same issue?</li>
-<li>How have the BUSCO metrics changed from the BUSCO of the original assembly?</li>
-</ul>
-</div>
-</div>
-<div id="final-recap" class="section level2 hasAnchor" number="10.2">
-<h2><span class="header-section-number">10.2</span> Final recap<a href="10-Final_report.html#final-recap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/recap.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>We have produced a circularised, and polished genome assembly. Additionally we have annotated this assembly and assessed it for contiguity and completeness.</p>
-<p>The assembly has very good contiguity but not the highest completeness estimation which appears to be due to missassemblies from mismatches but primarily indels (as evidenced by comparing the assembly to the reference).</p>
-<p>Below are a few suggestions for how this could be improved in a real project:</p>
-<ul>
-<li>Better QC of the initial data.
-<ul>
-<li>Filter out small reads (&lt;500-1kbp).</li>
-<li>Correct reads prior to the first assembly.</li>
-</ul></li>
-<li>Try out other long read assemblers.</li>
-<li>Further polishing
-<ul>
-<li>Polishing after circularisation.</li>
-<li>Try out a different polisher.</li>
-</ul></li>
-<li>Include Illumina reads
-<ul>
-<li>Hybrid assembly with PacBio and Illumina reads</li>
-<li>Polish PacBio reads with Illumina reads</li>
-<li>Polish the assembly with the Illumina reads rather than the PacBio reads. PacBio &amp; ONT reads are less accurate and more susceptible to indel errors than Illumina reads.</li>
-</ul></li>
-</ul>
-<p>As you can see there are a lot of ways to try to improve an assembly. That is why it is always important to carry out regular assembly assessment to determine if you are taking the best route. Additionally, it is also good to know if you have reached the optimum assembly from your data, if so there is not much point spending a lot more bioinformatics time to improve the assembly. Some times you need better/more data.</p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
 <script>
 
@@ -533,8 +426,8 @@ window.onload = function() {
           </div>
         </div>
       </div>
-<a href="09-Annotation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="11-Cleanup.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

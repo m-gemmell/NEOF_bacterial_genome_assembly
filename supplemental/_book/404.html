@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 High coverage | Bacterial genome assembly and annotation supplemental</title>
+  <title>Page not found | Bacterial genome assembly and annotation supplemental</title>
   <meta name="description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 High coverage | Bacterial genome assembly and annotation supplemental" />
+  <meta property="og:title" content="Page not found | Bacterial genome assembly and annotation supplemental" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 High coverage | Bacterial genome assembly and annotation supplemental" />
+  <meta name="twitter:title" content="Page not found | Bacterial genome assembly and annotation supplemental" />
   
   <meta name="twitter:description" content="NEOF supplemental book for the Bacterial genome assembly and annotation workshop" />
   <meta name="twitter:image" content="/figures/NEOF.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
-<link rel="prev" href="02-Multi-sample_workflow.html"/>
-<link rel="next" href="04-Hybrid_assembly.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -183,73 +183,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="coverage" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> High coverage<a href="03-High_coverage.html#coverage" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="figures/wifi_coverage.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>Low sequence coverage (&lt;20X) can cause assembly issues due to:</p>
-<ul>
-<li>Under represented areas of the genomes.
-<ul>
-<li>Sequencing will not lead to uniform coverage across the genome and so the lower coverage areas may not be missing of have very low coverage.</li>
-</ul></li>
-<li>Errors cannot be corrected/polished.
-<ul>
-<li>Low coverage may mean there are areas which do not have enough sequences to produce an accurate consensus.</li>
-</ul></li>
-</ul>
-<p>Low sequence coverage can be corrected by carrying out more sequencing.</p>
-<p>High sequence coverage (&gt;100X) may seem perfect but it can cause assembly issues. As coverage increases the number of errors in the data increases (even if the % of errors is stable). If data contains a 10% error rate then 100 megabases will contain 10 megabases of errors whilst 1 gigabase will contain 100 megabases of errors. It is a lot easier for an assembler to determine what may be errors if there is a smaller total amount of them.</p>
-<p>The errors will confuse the assembler and it may create create an assembly graph that looks like a bowl of spaghetti rather than one long spaghetti strand. If you provide enough coverage the assembler may never finish or crash due to memory limitations as it tries to disentangle the graph.</p>
-<p>How do we prevent this?</p>
-<div id="detecting-high-coverage" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Detecting high coverage<a href="03-High_coverage.html#detecting-high-coverage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/altimeter.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>To detect high coverage (&gt;100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix commands to do this.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="03-High_coverage.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the directory with your ecoli reads</span></span>
-<span id="cb11-2"><a href="03-High_coverage.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/ecoli_reads</span>
-<span id="cb11-3"><a href="03-High_coverage.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out to screen the number of bases in ecoli.fastq</span></span>
-<span id="cb11-4"><a href="03-High_coverage.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
-<p>The command consists of multiple parts with the parts piping (<code>|</code>) their outputs to be the next command's input. The parts are:</p>
-<ul>
-<li><code>cat ecoli.fastq</code> : read <code>ecoli.fastq</code> to use it as the initial input for the commands.</li>
-<li><code>paste - - - -</code> : This separates the lines into columns. Four columns are specified here by <code>- - - -</code>. As each fastq entry consists of four lines this works perfectly to create a header, a sequence, a quality header, and a quality column.</li>
-<li><code>cut -f 2</code> : <code>cut</code> will extract our field/column (<code>-f</code>) of choice. In this case it is the 2nd field as all the sequence data is in the second field. Therefore we have removed all non sequence information.</li>
-<li><code>wc -c</code> : <code>wc</code> stands for word count and the <code>-c</code> options stands for characters. This counts all the characters.</li>
-</ul>
-<p>With this we can find out if we may have too much coverage. In this case 139,252,345bp is about 30X for a 4.6m genome (<em>E.coli</em>) so we are not worried about the coverage being too high.</p>
-</div>
-<div id="subsampling" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Subsampling<a href="03-High_coverage.html#subsampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/subsample.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>To reduce the coverage we can subsample the reads. This is the act of randomly extracting reads (without replacement) to a set number or fraction. As the process is random it should not add in any bias (or at least any more bias than is present in sequencing anyway).</p>
-<p>We will use <code>Seqtk</code> along with its option <code>subsample</code> to extract half (0.5) of the ecoli reads in the hopes we will be left with slightly more than 50Mbp.</p>
-<p><strong>Note</strong>: Use the <code>Conda</code> environment <code>bacterial_assembly</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="03-High_coverage.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqtk</span> sample <span class="at">-s</span> 100 ecoli.fastq 0.5 <span class="op">&gt;</span> ecoli_subsample.fastq</span></code></pre></div>
-<p><strong>Parameters</strong></p>
-<ul>
-<li><code>-s 100</code> : This indicates the random seed to be used for subsampling.
-<ul>
-<li>This can be any number and is arbitrarily chosen.</li>
-<li>With Paired reads this number must be the same for the forward and reverse reads. This is to ensure the two files have matching reads.</li>
-</ul></li>
-<li><code>ecoli.fastq</code> : The first flagless parameter to indicate the input fastq file.</li>
-<li><code>0.5</code> : The second flagless parameter to indicate the subsample size.
-<ul>
-<li>If the number is a fraction (0.5, 0.2, 0.87 etc.) then the specified fraction of reads (compared to the intial total) will be extracted.</li>
-<li>if the number is a whole number (1, 100, 98762 etc.) the specified number of reads will be extracted.</li>
-</ul></li>
-</ul>
-<p>As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsampled file.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="03-High_coverage.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli_subsample.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
-<p><strong>Tasks</strong></p>
-<ul>
-<li>Using <code>seqtk sample</code> attempt to subsample the data so you retain ~10X coverage (44-48Mbp). What fraction/number did you use?</li>
-<li>Try out different seed numbers, with the same subsample number/fraction, to see the effect it has on subsampling.</li>
-</ul>
-<p><strong>Note</strong> There is probably no reason you would want 10X in real life this is just for practice.</p>
-<p>I generally suggest only carrying out random subsampling if you have very high coverage (&gt;100X) and trying to get a coverage close to 100X (95-100X). It does not have to be very exact as even a coverage of 80X would be very good for a bacterial genome.</p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
 <script>
 
@@ -427,8 +365,8 @@ window.onload = function() {
           </div>
         </div>
       </div>
-<a href="02-Multi-sample_workflow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="04-Hybrid_assembly.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

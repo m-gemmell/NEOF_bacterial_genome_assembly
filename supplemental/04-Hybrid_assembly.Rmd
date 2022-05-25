@@ -208,4 +208,4 @@ Once polishing is done check the number of changes. Has the number decreased a l
 knitr::include_graphics(path = "figures/recap.png", auto_pdf = TRUE)
 ``` 
 
-Great now you can carry out and hybrid assembly and polishing with short reads. If you produce a hybrid assembly it may also be a good idea to polish the assembly with `Racon` or `Pilon`.
+Great now you can carry out hybrid assembly and polishing with short reads. If you produce a hybrid assembly it may also be a good idea to polish the assembly with `Racon` or `Pilon`.

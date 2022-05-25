@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Genome assembly assessment | Bacterial genome assembly and annotation</title>
   <meta name="description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Genome assembly assessment | Bacterial genome assembly and annotation" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2021-08-20" />
+<meta name="date" content="2022-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
 <link rel="prev" href="05-Assembly.html"/>
 <link rel="next" href="07-Polishing.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +49,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -122,6 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="www/webex.css" type="text/css" />
 </head>
 
 <body>
@@ -244,8 +244,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="genomeassemblyassessment" class="section level1" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Genome assembly assessment</h1>
+<div id="genomeassemblyassessment" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Genome assembly assessment<a href="06-Genome_assessment.html#genomeassemblyassessment" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="figures/inspect.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>After carrying out an assembly it is always advised to assess its quality. We will carry this out with three tools:</p>
 <ul>
@@ -253,8 +253,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>BUSCO</code> - Estimates completeness of a genome.</li>
 <li><code>CheckM</code> - Estimates completeness and contamination of a genome.</li>
 </ul>
-<div id="assessmentconda" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Assessment: Conda environnment &amp; directory</h2>
+<div id="assessmentconda" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Assessment: Conda environnment &amp; directory<a href="06-Genome_assessment.html#assessmentconda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Open a new terminal (right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>).</p>
 <p>We will use the <code>bacterial_genome_assessment</code> <code>conda</code> environment for our genome assessment tools.</p>
@@ -263,8 +263,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ensure you are in the the <code>standard_workflow</code> directory for this new terminal and environment.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="06-Genome_assessment.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span></code></pre></div>
 </div>
-<div id="quast" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> QUAST</h2>
+<div id="quast" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> QUAST<a href="06-Genome_assessment.html#quast" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/measuring_tape.png" width="10%" style="display: block; margin: auto;" /></p>
 <p><code>QUAST</code> is the most used tool to assess genomes. It gives various statistics related to the contiguity of the assembly. Unless stated these statistics are based on contigs that are &gt;=500bp.</p>
 <p>Create an output directory and run <code>QUAST</code>.</p>
@@ -275,7 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Parameters</strong></p>
 <ul>
 <li><code>-o</code> : The output directory.</li>
-<li>The input file/s are at the end of the command without a flag (e.g. <code>-o</code>).
+<li>The input file/s are at the end of the command without a flag (e.g. <code>-o</code>).
 <ul>
 <li><strong>Note</strong> : <code>QUAST</code> can be run on multiple assemblies giving a report which contains info on all the input assemblies.</li>
 </ul></li>
@@ -324,8 +324,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Further assessment can elucidate if there are any issues and what the issue may be.</p>
 </div>
-<div id="busco" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> BUSCO</h2>
+<div id="busco" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> BUSCO<a href="06-Genome_assessment.html#busco" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/universe.png" width="15%" style="display: block; margin: auto;" /></p>
 <p><code>BUSCO</code> stands for Benchmarking Universal Single-Copy Orthologs. The tool is used to estimate the completeness of genome assemblies by determining how many BUSCOs are present.</p>
 <p>Prior to running <code>BUSCO</code> we will create an output directory for the <code>BUSCO</code> analysis.</p>
@@ -356,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Parameter choice</strong></p>
 <ul>
 <li><code>-i</code> : The input genome assembly in fasat format.</li>
-<li><code>-l</code> : The lineage dataset to be used. This has to end with the <code>_odb10</code> part. This will download the dataset (if it does not exist) into a directory called <code>busco_downloads</code> in the current directory. The directory will be created if it doesn’t exist.</li>
+<li><code>-l</code> : The lineage dataset to be used. This has to end with the <code>_odb10</code> part. This will download the dataset (if it does not exist) into a directory called <code>busco_downloads</code> in the current directory. The directory will be created if it doesn't exist.</li>
 <li><code>-m</code> : The assessment mode.
 <ul>
 <li><code>geno</code> = genome assemblies (DNA)</li>
@@ -384,10 +384,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Ignoring total BUSCOs, what is the highest value? Do you want this value to be the highest?</li>
 <li>Are these values good? What may the stats indicate?</li>
 </ul>
-<p>The <code>BUSCO</code> stats are ok. There are a bit more fragmented and missing BUSCOs than we would like. We’ll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on.</p>
+<p>The <code>BUSCO</code> stats are ok. There are a bit more fragmented and missing BUSCOs than we would like. We'll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on.</p>
 </div>
-<div id="checkm" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> CheckM</h2>
+<div id="checkm" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> CheckM<a href="06-Genome_assessment.html#checkm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/CheckM.png" width="30%" style="display: block; margin: auto;" /></p>
 <p><code>CheckM</code> can also be used to estimate the completeness of a bacterial genome, however I prefer <code>BUSCO</code> for this. Instead, we will use <code>CheckM</code> to estimate contamination within our assembly.</p>
 <p>First create an output directory.</p>
@@ -415,14 +415,185 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you ar einterested in contamination removal (link in <a href="09-Annotation.html#manuals">Appendix</a>)</p>
 <p>If you are interested in the other values please check: <a href="https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics" class="uri">https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics</a></p>
 </div>
-<div id="assessment-recap" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Assessment recap</h2>
+<div id="assessment-recap" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Assessment recap<a href="06-Genome_assessment.html#assessment-recap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/recap.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Our assembly looks good. Good contiguity figures from <code>QUAST</code>, and <code>CheckM</code> shows low signs, if any, contamination. The <code>BUSCO</code> values are not brilliant with some fragmented and missing BUSCOs.</p>
 <p>In real analysis I would try another assembler to see if that would improve the BUSCO situation. For the purpose of time we will continue and I will let you explore other assemblers in your own time.</p>
 
 </div>
 </div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script>
             </section>
 
           </div>
@@ -433,7 +604,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -460,6 +630,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

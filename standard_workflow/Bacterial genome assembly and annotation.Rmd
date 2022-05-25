@@ -12,6 +12,31 @@ favicon: figures/NEOF_favicon.png
 description: NEOF book for the Bacterial genome assembly and annotation workshop
 cover-image: "figures/NEOF.png"
 ---
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+
+```{r cite-packages, include = FALSE}
+# automatically create a bib database for R packages
+# add any packages you want to cite here
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'webexercises'
+), 'packages.bib')
+```
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
@@ -45,6 +70,23 @@ echo "This is a command example"
 
 <!--chapter:end:01-Bacterial_genome_assembly_and_annotation.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Cluster Introduction
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/cluster.png", auto_pdf = TRUE)
@@ -85,6 +127,23 @@ __To open a new terminal window__, right click on the main screen, choose `Appli
 
 <!--chapter:end:02-Cluster_Introduction.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # (PART\*) Standard workflow {.unnumbered}
 
 # Setup {#setup}
@@ -151,6 +210,23 @@ For your own future analyses you would use your own `Conda`. If you are interest
 
 <!--chapter:end:03-Start.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Overview {#overview}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/overview.png", auto_pdf = TRUE)
@@ -170,6 +246,23 @@ This workflow will not always be effective which may require the use of other as
 
 <!--chapter:end:04-Overview.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Genome Assembly {#redbeanassembly}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/string.png", auto_pdf = TRUE)
@@ -354,6 +447,23 @@ Other long read assemblers to explore for yourself include (links in [appendix](
 
 <!--chapter:end:05-Assembly.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Genome assembly assessment {#genomeassemblyassessment}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/inspect.png", auto_pdf = TRUE)
@@ -598,6 +708,23 @@ In real analysis I would try another assembler to see if that would improve the 
 
 <!--chapter:end:06-Genome_assessment.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Polishing {#polishing}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/polishing.png", auto_pdf = TRUE)
@@ -834,6 +961,23 @@ Other polishers to explore for yourself include (links in [appendix](#manuals)):
 
 <!--chapter:end:07-Polishing.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Circularisation {#Circlator}
 ```{r, fig.align = 'center',out.width= '18%', echo=FALSE }
 knitr::include_graphics(path = "figures/circlator.png", auto_pdf = TRUE)
@@ -961,6 +1105,23 @@ You are more than welcome to do that now, if not we will go onto annotation.
 
 <!--chapter:end:08-Circlator.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Annotation {#annotation}
 
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
@@ -1174,6 +1335,23 @@ There are various ways to inspect the annotation data. We will not go into them 
 
 <!--chapter:end:09-Annotation.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Final report {#finalreport}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/final_report.png", auto_pdf = TRUE)
@@ -1321,6 +1499,23 @@ As you can see there are a lot of ways to try to improve an assembly. That is wh
 
 <!--chapter:end:10-Final_report.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Cleanup {#cleanup}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
 knitr::include_graphics(path = "figures/sweep.png", auto_pdf = TRUE)
@@ -1471,6 +1666,23 @@ Great! That is the end of this bookdown. Check out the appendix for some links t
 
 <!--chapter:end:11-Cleanup.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # (APPENDIX) Appendix {-}
 
 # Next steps{#nextsteps}
