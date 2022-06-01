@@ -166,8 +166,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessmentconda"><i class="fa fa-check"></i><b>6.1</b> Assessment: Conda environnment &amp; directory</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
-<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-questions"><i class="fa fa-check"></i><b>6.2.1</b> QUAST Questions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-summary"><i class="fa fa-check"></i><b>6.2.2</b> QUAST summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-lineages"><i class="fa fa-check"></i><b>6.3.1</b> BUSCO lineages</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#run-busco"><i class="fa fa-check"></i><b>6.3.2</b> Run BUSCO</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-output"><i class="fa fa-check"></i><b>6.3.3</b> BUSCO output</a></li>
+<li class="chapter" data-level="6.3.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-questions"><i class="fa fa-check"></i><b>6.3.4</b> BUSCO questions</a></li>
+<li class="chapter" data-level="6.3.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-summary"><i class="fa fa-check"></i><b>6.3.5</b> BUSCO summary</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
 <li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
 </ul></li>
@@ -181,6 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.4" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing"><i class="fa fa-check"></i><b>7.1.4</b> Racon: Polishing</a></li>
 <li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
 <li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
+<li class="chapter" data-level="7.1.7" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-questions-summary"><i class="fa fa-check"></i><b>7.1.7</b> Racon; Questions &amp; Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
 </ul></li>
@@ -252,11 +264,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>The 10th base in a contig is A.</li>
 <li>Reads are aligned to the contig with 11 reads covering the 10th base.</li>
-<li>Therefore there are 11 bases form reads aligned to the 10th base.</li>
-<li>4 of these bases are A, 1 is C, and 5 are Gs.</li>
+<li>Therefore there are 11 bases from the reads aligned to the 10th base.</li>
+<li>4 of these bases are A, 1 is C, and 6 are Gs.</li>
 <li>In this case the polisher may determine that the 10th base is more likely to be a G and so <strong>polishes</strong> the base to a G.</li>
 </ul>
-<p>If possible I would recommend polishing with Illumina reads over long reads due to their accuracy if they are available. However, we only have PacBio reads so that is what we will use.</p>
+<p>If possible I would recommend polishing with Illumina reads instead of long reads due if they are available. This is because Illumina reads are more accurate. However, we only have PacBio reads so that is what we will use.</p>
 <div id="racon" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Racon<a href="07-Polishing.html#racon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/racoon.png" width="20%" style="display: block; margin: auto;" /></p>
@@ -267,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will use the <code>bacterial_assembly</code> conda environment for our <code>Racon</code> polishing. Either:</p>
 <ul>
 <li>Use your currently open <code>bacterial_assembly</code> terminal.</li>
-<li>If you need a new <code>bacterial_assembly</code> terminal see the <a href="05-Assembly.html#redbeanassemblyconda">bacterial assembly conda activation instructions</a></li>
+<li>Or, if you need a new <code>bacterial_assembly</code> terminal see the <a href="05-Assembly.html#redbeanassemblyconda">bacterial assembly conda activation instructions</a></li>
 </ul>
 <p>Ensure you are in the correct directory and create a new output directory.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="07-Polishing.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span>
@@ -286,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="racon-read-alignment-to-assembly" class="section level3 hasAnchor" number="7.1.3">
 <h3><span class="header-section-number">7.1.3</span> Racon: Read alignment to assembly<a href="07-Polishing.html#racon-read-alignment-to-assembly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/alignment.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>With our index files created we can align the reads we will use for polishing to the assembly to be polished. This may take &gt;10 minutes.</p>
+<p>With our index files created we can align the reads to the assembly. Ensure to use the reads which will be used for polishing. This may take &gt;10 minutes.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="07-Polishing.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="dt">\</span></span>
 <span id="cb24-2"><a href="07-Polishing.html#cb24-2" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
 <span id="cb24-3"><a href="07-Polishing.html#cb24-3" aria-hidden="true" tabindex="-1"></a>-x pacbio <span class="dt">\</span></span>
@@ -301,11 +313,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>pacbio</code> : Pacbio reads.</li>
 <li><code>ont2d</code> : Oxford Nanopore 2D-reads</li>
 </ul></li>
-<li>The second last parameter (<code>redbean_assembly/ecoli.ctg.fa</code>) indicates the indexed assembly the reads will be aligned to.</li>
-<li>The last parameter (<code>ecoli_reads/ecoli.fastq</code>) indicates the reads to be aligned.</li>
+<li>The second last flagless input (<code>redbean_assembly/ecoli.ctg.fa</code>) indicates the indexed assembly the reads will be aligned to.</li>
+<li>The last flagless input (<code>ecoli_reads/ecoli.fastq</code>) indicates the reads to be aligned.</li>
 <li>The command would output the alignment to your screen (i.e. the standard output) but instead we will redirect (<code>&gt;</code>) it to a new file (<code>racon/redbean/ecoli/ecoli_i1.sam</code>). This is a SAM file which contains the alignment information (SAM file specification: <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" class="uri">https://samtools.github.io/hts-specs/SAMv1.pdf</a>).</li>
 </ul>
-<p>BAM files are the binary version of SAM files. FOr most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, <code>Racon</code> rquires a SAM file so we will not convert it to BAM.</p>
+<p>BAM files are the binary version of SAM files. For most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, <code>Racon</code> requires a SAM file so we will not convert it to BAM.</p>
 </div>
 <div id="racon-polishing" class="section level3 hasAnchor" number="7.1.4">
 <h3><span class="header-section-number">7.1.4</span> Racon: Polishing<a href="07-Polishing.html#racon-polishing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -328,7 +340,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="racon-polishing-report" class="section level3 hasAnchor" number="7.1.5">
 <h3><span class="header-section-number">7.1.5</span> Racon: Polishing report<a href="07-Polishing.html#racon-polishing-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/report.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>unfortunately <code>Racon</code> does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the <code>dnadiff</code> command from the program <code>MUMmer</code>.</p>
+<p>Unfortunately <code>Racon</code> does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the <code>dnadiff</code> command from the program <code>MUMmer</code>.</p>
 <p><code>dnadiff</code> will create quite a few files so we will create an output directory for its results.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="07-Polishing.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> racon/redbean/ecoli/dnadiff</span></code></pre></div>
 <p>We will use <code>dnadiff</code> to align the original assembly (reference) to our polished assembly (query). This will then provide detailed information on the differences between the two assemblies (i.e. we can see how polishing affected the assembly).</p>
@@ -342,11 +354,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The first flagless input is the reference assembly for comparison.</li>
 <li>The second flagless input is the query assembly for comparison.</li>
 </ul>
-<p>List all the output files. There is a lot of information in them but for our purposes we will only inspect the report file.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="07-Polishing.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#List the output files</span></span>
-<span id="cb28-2"><a href="07-Polishing.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/dnadiff</span>
-<span id="cb28-3"><a href="07-Polishing.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#View the report</span></span>
-<span id="cb28-4"><a href="07-Polishing.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report</span></code></pre></div>
+<p>List all the output files.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="07-Polishing.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> racon/redbean/ecoli/dnadiff</span></code></pre></div>
+<p>There is a lot of information in them but for our purposes we will only inspect the report file.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="07-Polishing.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report</span></code></pre></div>
 <p>There is a lot of useful information in this file. The <strong>[REF]</strong> column represents the original assembly whilst the <strong>[QRY]</strong> column represent the polished assembly. Let us go through some (not all) of the stats.</p>
 <p><strong>Note</strong>: Your values may differ from those mentioned below.</p>
 <ul>
@@ -357,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><strong>[Bases]</strong>
 <ul>
-<li>TotalBases: Our total bases has decreased (~50k) from reference to query.</li>
+<li>TotalBases: Our total bases has decreased (~50kbp) from reference to query.</li>
 </ul></li>
 <li><strong>[Feature Estimates]</strong>
 <ul>
@@ -365,15 +376,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><strong>[SNPs]</strong>
 <ul>
-<li>TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627 were changed due to the polisher.</li>
-<li>TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases added and removed by polishing.
+<li>TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627bp were changed due to the polisher.</li>
+<li>TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases were added and removed by polishing.
 <ul>
 <li>The first four rows in the [QRY] column show added bases. ~2500 bases were added by polishing.</li>
 <li>The next four rows in the [QRY] column show bases removed by polishing. ~1200 bases were removed by polishing.</li>
 </ul></li>
 </ul></li>
 </ul>
-<p>This shows that polishing definetly worked and did quite a lot.</p>
+<p>This shows that polishing definitely worked and did quite a lot.</p>
 <p>For more info on <code>dnadiff</code> and the report statistics README:
 <a href="https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README" class="uri">https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README</a></p>
 </div>
@@ -381,36 +392,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.1.6</span> Racon: Second iteration<a href="07-Polishing.html#racon-second-iteration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/repeat.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>With genome polishing normally multiple iterations are required. Therefore let us polish the polished assembly to create the second iteration of polishing.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="07-Polishing.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Index iteration 1 polished assembly</span></span>
-<span id="cb29-2"><a href="07-Polishing.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index racon/redbean/ecoli/ecoli_i1.fasta</span>
-<span id="cb29-3"><a href="07-Polishing.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Align the reads to iteration 1 polished assembly</span></span>
-<span id="cb29-4"><a href="07-Polishing.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create the second iteration SAM file</span></span>
-<span id="cb29-5"><a href="07-Polishing.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="dt">\</span></span>
-<span id="cb29-6"><a href="07-Polishing.html#cb29-6" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
-<span id="cb29-7"><a href="07-Polishing.html#cb29-7" aria-hidden="true" tabindex="-1"></a>-x pacbio <span class="dt">\</span></span>
-<span id="cb29-8"><a href="07-Polishing.html#cb29-8" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta <span class="dt">\</span></span>
-<span id="cb29-9"><a href="07-Polishing.html#cb29-9" aria-hidden="true" tabindex="-1"></a>ecoli_reads/ecoli.fastq <span class="dt">\</span></span>
-<span id="cb29-10"><a href="07-Polishing.html#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> racon/redbean/ecoli/ecoli_i2.sam</span>
-<span id="cb29-11"><a href="07-Polishing.html#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Polish iteration 1 pished assembly</span></span>
-<span id="cb29-12"><a href="07-Polishing.html#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Carried out with the second iteration SAM file</span></span>
-<span id="cb29-13"><a href="07-Polishing.html#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="ex">racon</span> <span class="dt">\</span></span>
-<span id="cb29-14"><a href="07-Polishing.html#cb29-14" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
-<span id="cb29-15"><a href="07-Polishing.html#cb29-15" aria-hidden="true" tabindex="-1"></a>ecoli_reads/ecoli.fastq <span class="dt">\</span></span>
-<span id="cb29-16"><a href="07-Polishing.html#cb29-16" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i2.sam <span class="dt">\</span></span>
-<span id="cb29-17"><a href="07-Polishing.html#cb29-17" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta <span class="dt">\</span></span>
-<span id="cb29-18"><a href="07-Polishing.html#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> racon/redbean/ecoli/ecoli_i2.fasta</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="07-Polishing.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Index iteration 1 polished assembly</span></span>
+<span id="cb30-2"><a href="07-Polishing.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index racon/redbean/ecoli/ecoli_i1.fasta</span>
+<span id="cb30-3"><a href="07-Polishing.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Align the reads to the iteration 1 polished assembly</span></span>
+<span id="cb30-4"><a href="07-Polishing.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create the second iteration SAM file</span></span>
+<span id="cb30-5"><a href="07-Polishing.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="dt">\</span></span>
+<span id="cb30-6"><a href="07-Polishing.html#cb30-6" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
+<span id="cb30-7"><a href="07-Polishing.html#cb30-7" aria-hidden="true" tabindex="-1"></a>-x pacbio <span class="dt">\</span></span>
+<span id="cb30-8"><a href="07-Polishing.html#cb30-8" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta <span class="dt">\</span></span>
+<span id="cb30-9"><a href="07-Polishing.html#cb30-9" aria-hidden="true" tabindex="-1"></a>ecoli_reads/ecoli.fastq <span class="dt">\</span></span>
+<span id="cb30-10"><a href="07-Polishing.html#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> racon/redbean/ecoli/ecoli_i2.sam</span>
+<span id="cb30-11"><a href="07-Polishing.html#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Polish the iteration 1 polished assembly</span></span>
+<span id="cb30-12"><a href="07-Polishing.html#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Carried out with the second iteration SAM file</span></span>
+<span id="cb30-13"><a href="07-Polishing.html#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="ex">racon</span> <span class="dt">\</span></span>
+<span id="cb30-14"><a href="07-Polishing.html#cb30-14" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
+<span id="cb30-15"><a href="07-Polishing.html#cb30-15" aria-hidden="true" tabindex="-1"></a>ecoli_reads/ecoli.fastq <span class="dt">\</span></span>
+<span id="cb30-16"><a href="07-Polishing.html#cb30-16" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i2.sam <span class="dt">\</span></span>
+<span id="cb30-17"><a href="07-Polishing.html#cb30-17" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta <span class="dt">\</span></span>
+<span id="cb30-18"><a href="07-Polishing.html#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> racon/redbean/ecoli/ecoli_i2.fasta</span></code></pre></div>
 <p>With the second iteration of polishing carried out we will assess how much polishing was carried out with <code>dnadiff</code>. In this case we will use the first iteration polished assembly as the reference and the second iteration polished assembly as the query.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="07-Polishing.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dnadiff</span> <span class="dt">\</span></span>
-<span id="cb30-2"><a href="07-Polishing.html#cb30-2" aria-hidden="true" tabindex="-1"></a>--prefix racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2 <span class="dt">\</span></span>
-<span id="cb30-3"><a href="07-Polishing.html#cb30-3" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta <span class="dt">\</span></span>
-<span id="cb30-4"><a href="07-Polishing.html#cb30-4" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i2.fasta</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="07-Polishing.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dnadiff</span> <span class="dt">\</span></span>
+<span id="cb31-2"><a href="07-Polishing.html#cb31-2" aria-hidden="true" tabindex="-1"></a>--prefix racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2 <span class="dt">\</span></span>
+<span id="cb31-3"><a href="07-Polishing.html#cb31-3" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta <span class="dt">\</span></span>
+<span id="cb31-4"><a href="07-Polishing.html#cb31-4" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i2.fasta</span></code></pre></div>
 <p>Inspect the new report file.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="07-Polishing.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2.report</span></code></pre></div>
-<p><strong>Questions</strong></p>
-<ul>
-<li>Has the number of changes reduced?</li>
-<li>Would you carry out further polishing?</li>
-</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="07-Polishing.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2.report</span></code></pre></div>
+</div>
+<div id="racon-questions-summary" class="section level3 hasAnchor" number="7.1.7">
+<h3><span class="header-section-number">7.1.7</span> Racon; Questions &amp; Summary<a href="07-Polishing.html#racon-questions-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/sum_green.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Has the number of changes reduced?</p>
+<p>Would you carry out further polishing?</p>
 <p>The number of changes has indeed reduced by quite a bit, from 3782 to 40 TotalSNPs. When we are polishing we are looking for these stats to stop changing and converge to a similar value.</p>
 <p>Unfortunately my experience is that no matter how many iterations you carry out these stats will not go to zero. Instead the polisher gets to a certain point where it cannot tell what base certain positions should be. As an example one position could be polished to change it from an A to a G then in the next polishing iteration it will change from G to A and so on.</p>
 <p>So it would be advised to do some more polishing but for the sake of time we will continue on.</p>

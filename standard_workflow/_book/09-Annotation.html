@@ -166,8 +166,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessmentconda"><i class="fa fa-check"></i><b>6.1</b> Assessment: Conda environnment &amp; directory</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
-<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-questions"><i class="fa fa-check"></i><b>6.2.1</b> QUAST Questions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-summary"><i class="fa fa-check"></i><b>6.2.2</b> QUAST summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-lineages"><i class="fa fa-check"></i><b>6.3.1</b> BUSCO lineages</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#run-busco"><i class="fa fa-check"></i><b>6.3.2</b> Run BUSCO</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-output"><i class="fa fa-check"></i><b>6.3.3</b> BUSCO output</a></li>
+<li class="chapter" data-level="6.3.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-questions"><i class="fa fa-check"></i><b>6.3.4</b> BUSCO questions</a></li>
+<li class="chapter" data-level="6.3.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-summary"><i class="fa fa-check"></i><b>6.3.5</b> BUSCO summary</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
 <li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
 </ul></li>
@@ -181,6 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.4" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing"><i class="fa fa-check"></i><b>7.1.4</b> Racon: Polishing</a></li>
 <li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
 <li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
+<li class="chapter" data-level="7.1.7" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-questions-summary"><i class="fa fa-check"></i><b>7.1.7</b> Racon; Questions &amp; Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
 </ul></li>
@@ -246,36 +258,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="annotation" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Annotation<a href="09-Annotation.html#annotation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="figures/gene_anno.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/gene_anno.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Genome annotation is the act of identifying genomics features and adding useful information to these annotations. This includes adding information on genes, repeat regions, pathways etc..</p>
 <div id="prokka" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Prokka<a href="09-Annotation.html#prokka" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="figures/quokka.png" width="10%" style="display: block; margin: auto;" /></p>
+<p><img src="figures/quokka.png" width="15%" style="display: block; margin: auto;" /></p>
 <p><code>Prokka</code> is a rapid genome annotation tool for bacterial, archaeal, and viral genomes. It is the standard method for bacterial genome annotation and wraps various other tools to carry out its processes.</p>
 <p><code>Prokka</code> is fast, reliable and basic. It will detect genomic features such as CDS (coding sequence), genes, rRNA, and repeat regions. Additionally, it will provide pathway information for CDS annotations in the form of:</p>
 <ul>
-<li><p><strong>EC (Enzyme Commission) numbers</strong>: This is a scheme of numbers grouping enzymes based on the reaction they catalyse.</p>
+<li><strong>EC (Enzyme Commission) numbers</strong>: This is a scheme of numbers grouping enzymes based on the reaction they catalyse.
 <ul>
-<li>An example EC number is <strong>EC 3.1.1</strong>. The number are hierarchical.</li>
+<li>An example EC number is <strong>EC 3.1.1</strong>. The numbers are hierarchical.
+<ul>
 <li>EC 3 = Hydrolase enzymes.</li>
 <li>EC 3.1 = Hydrolase enzymes that act on ester bonds.</li>
 <li>EC 3.1.1 = Carboxylic Ester Hydrolases.</li>
+</ul></li>
 <li>More info : <a href="https://en.wikipedia.org/wiki/Enzyme_Commission_number" class="uri">https://en.wikipedia.org/wiki/Enzyme_Commission_number</a></li>
 </ul></li>
-<li><p><strong>COG</strong>: Cluster of Orthologous Genes. Orthologs are gene sequences derived from the same ancestral gene present in two species' last common ancestor. COGs group CDS into three main tiers.</p>
+<li><strong>COG</strong>: Cluster of Orthologous Genes. Orthologs are gene sequences derived from the same ancestral gene present in two species' last common ancestor. COGs group CDS into three main tiers.
 <ol style="list-style-type: decimal">
-<li><p>COG Categories: This is the highest level grouping and are represented by the alphabet. Examples include:</p>
+<li>COG Categories: This is the highest level grouping and are represented by the alphabet. Examples include:
 <ul>
 <li>K - Transcription</li>
 <li>Z - Cytoskeleton</li>
 <li>L - Replication, Recombination, and Repair</li>
 </ul></li>
-<li><p>Pathways: The step below categories there are 63 different pathways represented in COG. Each pathway represnts different number of COGs.</p>
+<li>Pathways: The step below categories. There are 63 different pathways represented in COG. Each pathway represents a different number of COGs.
 <ul>
 <li>Examples of COG pathways include 16S rRNA modifciation (15 COGs), Arginine biosynthesis (12 COGs), and Glycolysis (18 COGs).</li>
 <li>List of COG pathways: <a href="https://www.ncbi.nlm.nih.gov/research/cog/pathways/" class="uri">https://www.ncbi.nlm.nih.gov/research/cog/pathways/</a></li>
 </ul></li>
-<li><p>COGs: These are the clusters of Orthologous Genes.</p>
+<li>COGs: These are the clusters of Orthologous Genes.
 <ul>
 <li>COGs are represented by a number, a symbol, and a name.</li>
 </ul></li>
@@ -328,50 +342,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Open a new terminal (right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>).</p>
 <p>We will use the <code>prokka</code> <code>conda</code> environment for our genome annotation.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="09-Annotation.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
-<span id="cb38-2"><a href="09-Annotation.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> useprokka</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="09-Annotation.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
+<span id="cb39-2"><a href="09-Annotation.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> useprokka</span></code></pre></div>
 <p>Ensure you are in the standard workflow directory.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="09-Annotation.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="09-Annotation.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span></code></pre></div>
 <p>Whenever I have my final genome assemblies I like to put them into a final directory that will contain all the output for them. Create a final directory and move into it.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="09-Annotation.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> final_assembly</span>
-<span id="cb40-2"><a href="09-Annotation.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> final_assembly</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="09-Annotation.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> final_assembly</span>
+<span id="cb41-2"><a href="09-Annotation.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> final_assembly</span></code></pre></div>
 <p>For ease I also like to make a directory that contains all the final assemblies. Additionally, it allows us to name the fasta files with the sample name.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="09-Annotation.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make directory</span></span>
-<span id="cb41-2"><a href="09-Annotation.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> assembly</span>
-<span id="cb41-3"><a href="09-Annotation.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy final assembly naming it with the sample name (ecoli)</span></span>
-<span id="cb41-4"><a href="09-Annotation.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../circlator/redbean_racon_i2/ecoli/06.fixstart.fasta assembly/ecoli.fasta</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="09-Annotation.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make directory</span></span>
+<span id="cb42-2"><a href="09-Annotation.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> assembly</span>
+<span id="cb42-3"><a href="09-Annotation.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy final assembly naming it with the sample name (ecoli)</span></span>
+<span id="cb42-4"><a href="09-Annotation.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../circlator/redbean_racon_i2/ecoli/06.fixstart.fasta assembly/ecoli.fasta</span></code></pre></div>
 </div>
 <div id="prokka-run" class="section level3 hasAnchor" number="9.1.2">
 <h3><span class="header-section-number">9.1.2</span> Prokka: Run<a href="09-Annotation.html#prokka-run" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/enter_key.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>Now it is time to run <code>Prokka</code> annotation</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="09-Annotation.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a prokka directory</span></span>
-<span id="cb42-2"><a href="09-Annotation.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> prokka</span>
-<span id="cb42-3"><a href="09-Annotation.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run Prokka</span></span>
-<span id="cb42-4"><a href="09-Annotation.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#outdir must not exist</span></span>
-<span id="cb42-5"><a href="09-Annotation.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="ex">prokka</span> <span class="dt">\</span></span>
-<span id="cb42-6"><a href="09-Annotation.html#cb42-6" aria-hidden="true" tabindex="-1"></a>--addgenes <span class="dt">\</span></span>
-<span id="cb42-7"><a href="09-Annotation.html#cb42-7" aria-hidden="true" tabindex="-1"></a>--prefix ecoli <span class="dt">\</span></span>
-<span id="cb42-8"><a href="09-Annotation.html#cb42-8" aria-hidden="true" tabindex="-1"></a>--genus Escherichia <span class="dt">\</span></span>
-<span id="cb42-9"><a href="09-Annotation.html#cb42-9" aria-hidden="true" tabindex="-1"></a>--species coli <span class="dt">\</span></span>
-<span id="cb42-10"><a href="09-Annotation.html#cb42-10" aria-hidden="true" tabindex="-1"></a>--kingdom Bacteria <span class="dt">\</span></span>
-<span id="cb42-11"><a href="09-Annotation.html#cb42-11" aria-hidden="true" tabindex="-1"></a>--outdir prokka/ecoli <span class="dt">\</span></span>
-<span id="cb42-12"><a href="09-Annotation.html#cb42-12" aria-hidden="true" tabindex="-1"></a>assembly/ecoli.fasta</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="09-Annotation.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a prokka directory</span></span>
+<span id="cb43-2"><a href="09-Annotation.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> prokka</span>
+<span id="cb43-3"><a href="09-Annotation.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run Prokka</span></span>
+<span id="cb43-4"><a href="09-Annotation.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#outdir must not exist</span></span>
+<span id="cb43-5"><a href="09-Annotation.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ex">prokka</span> <span class="dt">\</span></span>
+<span id="cb43-6"><a href="09-Annotation.html#cb43-6" aria-hidden="true" tabindex="-1"></a>--addgenes <span class="dt">\</span></span>
+<span id="cb43-7"><a href="09-Annotation.html#cb43-7" aria-hidden="true" tabindex="-1"></a>--prefix ecoli <span class="dt">\</span></span>
+<span id="cb43-8"><a href="09-Annotation.html#cb43-8" aria-hidden="true" tabindex="-1"></a>--genus Escherichia <span class="dt">\</span></span>
+<span id="cb43-9"><a href="09-Annotation.html#cb43-9" aria-hidden="true" tabindex="-1"></a>--species coli <span class="dt">\</span></span>
+<span id="cb43-10"><a href="09-Annotation.html#cb43-10" aria-hidden="true" tabindex="-1"></a>--kingdom Bacteria <span class="dt">\</span></span>
+<span id="cb43-11"><a href="09-Annotation.html#cb43-11" aria-hidden="true" tabindex="-1"></a>--outdir prokka/ecoli <span class="dt">\</span></span>
+<span id="cb43-12"><a href="09-Annotation.html#cb43-12" aria-hidden="true" tabindex="-1"></a>assembly/ecoli.fasta</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><p><code>--addgenes</code> : This will add gene features for each CDS feature.</p></li>
-<li><p><code>--prefix</code> : The prefix of the output files.</p></li>
-<li><p><code>--genus</code> : The genus name that will be included in output.</p></li>
-<li><p><code>--species</code> : The species name that will be included in output.</p></li>
-<li><p><code>--kingdom</code> : Annotation mode to be used. Options are:</p>
+<li><code>--addgenes</code> : This will add gene features for each CDS feature.</li>
+<li><code>--prefix</code> : The prefix of the output files.</li>
+<li><code>--genus</code> : The genus name that will be included in output.</li>
+<li><code>--species</code> : The species name that will be included in output.</li>
+<li><code>--kingdom</code> : Annotation mode to be used. Options are:
 <ul>
 <li><code>Bacteria</code> (default)</li>
 <li><code>Archaea</code></li>
 <li><code>Mitochondria</code></li>
 <li><code>Viruses</code></li>
 </ul></li>
-<li><p><code>--outdir</code> : The output directory of <code>Prokka</code>. This must not exist before running the command.</p></li>
-<li><p>The last flagless parameter is the fasta file to be annotated.</p></li>
+<li><code>--outdir</code> : The output directory of <code>Prokka</code>. This must not exist before running the command.</li>
+<li>The last flagless parameter is the fasta file to be annotated.</li>
 </ul>
 </div>
 <div id="prokka-output" class="section level3 hasAnchor" number="9.1.3">
@@ -442,14 +456,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>The first file to look at is the summary <code>.txt</code> file.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="09-Annotation.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> prokka/ecoli/ecoli.txt</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="09-Annotation.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> prokka/ecoli/ecoli.txt</span></code></pre></div>
 <p><strong>Questions</strong></p>
 <ul>
 <li>How many CDS are annotated?</li>
 <li>How many repeat regions were detected?</li>
 </ul>
 <p>The next best human-readable file is the <code>.tsv</code> file. This is in essence a table with one row per annotated feature.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="09-Annotation.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> prokka/ecoli/ecoli.tsv</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="09-Annotation.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> prokka/ecoli/ecoli.tsv</span></code></pre></div>
 <p><strong>Questions</strong></p>
 <ul>
 <li>What type of feature (ftype) is the first annotated feature?</li>

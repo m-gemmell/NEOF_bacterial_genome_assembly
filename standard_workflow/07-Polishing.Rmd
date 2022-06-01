@@ -9,11 +9,11 @@ The general principle is to align reads to the genome assembly to correct incorr
 
 - The 10th base in a contig is A.
 - Reads are aligned to the contig with 11 reads covering the 10th base.
-- Therefore there are 11 bases form reads aligned to the 10th base.
-- 4 of these bases are A, 1 is C, and 5 are Gs.
+- Therefore there are 11 bases from the reads aligned to the 10th base.
+- 4 of these bases are A, 1 is C, and 6 are Gs.
 - In this case the polisher may determine that the 10th base is more likely to be a G and so __polishes__ the base to a G.
 
-If possible I would recommend polishing with Illumina reads over long reads due to their accuracy if they are available. However, we only have PacBio reads so that is what we will use.
+If possible I would recommend polishing with Illumina reads instead of long reads due if they are available. This is because Illumina reads are more accurate. However, we only have PacBio reads so that is what we will use.
 
 ## Racon
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
@@ -30,7 +30,7 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 We will use the `bacterial_assembly` conda environment for our `Racon` polishing. Either:
 
 - Use your currently open `bacterial_assembly` terminal.
-- If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
+- Or, if you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
 
 Ensure you are in the correct directory and create a new output directory.
 
@@ -60,7 +60,7 @@ ls redbean_assembly/ecoli.ctg.fa.*
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With our index files created we can align the reads we will use for polishing to the assembly to be polished. This may take >10 minutes.
+With our index files created we can align the reads to the assembly. Ensure to use the reads which will be used for polishing. This may take >10 minutes.
 
 ```{bash eval=FALSE}
 bwa mem \
@@ -77,11 +77,11 @@ __Parameters__
 - `-x` : Read type. This will change various parameters to suit the read technology better.
    - `pacbio` : Pacbio reads.
    - `ont2d` : Oxford Nanopore 2D-reads
-- The second last parameter (`redbean_assembly/ecoli.ctg.fa`) indicates the indexed assembly the reads will be aligned to.
-- The last parameter (`ecoli_reads/ecoli.fastq`) indicates the reads to be aligned.
+- The second last flagless input (`redbean_assembly/ecoli.ctg.fa`) indicates the indexed assembly the reads will be aligned to.
+- The last flagless input (`ecoli_reads/ecoli.fastq`) indicates the reads to be aligned.
 - The command would output the alignment to your screen (i.e. the standard output) but instead we will redirect (`>`) it to a new file (`racon/redbean/ecoli/ecoli_i1.sam`). This is a SAM file which contains the alignment information (SAM file specification: https://samtools.github.io/hts-specs/SAMv1.pdf).
 
-BAM files are the binary version of SAM files. FOr most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, `Racon` rquires a SAM file so we will not convert it to BAM. 
+BAM files are the binary version of SAM files. For most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, `Racon` requires a SAM file so we will not convert it to BAM. 
 
 ### Racon: Polishing
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -111,7 +111,7 @@ __Parameters__
 knitr::include_graphics(path = "figures/report.png", auto_pdf = TRUE)
 ```
 
-unfortunately `Racon` does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the `dnadiff` command from the program `MUMmer`.
+Unfortunately `Racon` does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the `dnadiff` command from the program `MUMmer`.
 
 `dnadiff` will create quite a few files so we will create an output directory for its results.
 
@@ -134,12 +134,15 @@ __Parameters__
 - The first flagless input is the reference assembly for comparison.
 - The second flagless input is the query assembly for comparison.
 
-List all the output files. There is a lot of information in them but for our purposes we will only inspect the report file.
+List all the output files. 
 
 ```{bash eval=FALSE}
-#List the output files
 ls racon/redbean/ecoli/dnadiff
-#View the report
+```
+
+There is a lot of information in them but for our purposes we will only inspect the report file.
+
+```{bash eval=FALSE}
 less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 ```
 
@@ -151,16 +154,16 @@ __Note__: Your values may differ from those mentioned below.
    - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. Racon has removed unpolished contigs.
    - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa. 
 - __[Bases]__
-   - TotalBases: Our total bases has decreased (~50k) from reference to query.
+   - TotalBases: Our total bases has decreased (~50kbp) from reference to query.
 - __[Feature Estimates]__
    - Insertions: There are 19 insertion events that consists of ~50Kbp in the reference assembly. This indicates these areas were caused by misassembly and removed from the query by polishing.
 - __[SNPs]__
-   - TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627 were changed due to the polisher.
-   - TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases added and removed by polishing. 
+   - TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627bp were changed due to the polisher.
+   - TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases were added and removed by polishing. 
       - The first four rows in the [QRY] column show added bases. ~2500 bases were added by polishing.
       - The next four rows in the [QRY] column show bases removed by polishing. ~1200 bases were removed by polishing.
 
-This shows that polishing definetly worked and did quite a lot.
+This shows that polishing definitely worked and did quite a lot.
 
 For more info on `dnadiff` and the report statistics README:
 https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
@@ -175,7 +178,7 @@ With genome polishing normally multiple iterations are required. Therefore let u
 ```{bash eval=FALSE}
 #Index iteration 1 polished assembly
 bwa index racon/redbean/ecoli/ecoli_i1.fasta
-#Align the reads to iteration 1 polished assembly
+#Align the reads to the iteration 1 polished assembly
 #This will create the second iteration SAM file
 bwa mem \
 -t 8 \
@@ -183,8 +186,8 @@ bwa mem \
 racon/redbean/ecoli/ecoli_i1.fasta \
 ecoli_reads/ecoli.fastq \
 > racon/redbean/ecoli/ecoli_i2.sam
-#Polish iteration 1 pished assembly
-# Carried out with the second iteration SAM file
+#Polish the iteration 1 polished assembly
+#Carried out with the second iteration SAM file
 racon \
 -t 8 \
 ecoli_reads/ecoli.fastq \
@@ -208,10 +211,15 @@ Inspect the new report file.
 less -S racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2.report
 ```
 
-__Questions__
+### Racon; Questions & Summary
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_green.png", auto_pdf = TRUE)
+```
 
-- Has the number of changes reduced?
-- Would you carry out further polishing?
+
+Has the number of changes reduced?
+
+Would you carry out further polishing?
 
 The number of changes has indeed reduced by quite a bit, from 3782 to 40 TotalSNPs. When we are polishing we are looking for these stats to stop changing and converge to a similar value.
 

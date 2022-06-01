@@ -166,8 +166,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessmentconda"><i class="fa fa-check"></i><b>6.1</b> Assessment: Conda environnment &amp; directory</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
-<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-questions"><i class="fa fa-check"></i><b>6.2.1</b> QUAST Questions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-summary"><i class="fa fa-check"></i><b>6.2.2</b> QUAST summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-lineages"><i class="fa fa-check"></i><b>6.3.1</b> BUSCO lineages</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#run-busco"><i class="fa fa-check"></i><b>6.3.2</b> Run BUSCO</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-output"><i class="fa fa-check"></i><b>6.3.3</b> BUSCO output</a></li>
+<li class="chapter" data-level="6.3.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-questions"><i class="fa fa-check"></i><b>6.3.4</b> BUSCO questions</a></li>
+<li class="chapter" data-level="6.3.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-summary"><i class="fa fa-check"></i><b>6.3.5</b> BUSCO summary</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
 <li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
 </ul></li>
@@ -181,6 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.4" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing"><i class="fa fa-check"></i><b>7.1.4</b> Racon: Polishing</a></li>
 <li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
 <li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
+<li class="chapter" data-level="7.1.7" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-questions-summary"><i class="fa fa-check"></i><b>7.1.7</b> Racon; Questions &amp; Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
 </ul></li>
@@ -259,28 +271,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If you need a new <code>bacterial_genome_assessment</code> terminal see the <a href="06-Genome_assessment.html#assessmentconda">assembly assessment conda activation instructions</a></li>
 </ul>
 <p>Ensure you are in the <code>final_assembly</code> directory</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="10-Final_report.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/final_assembly</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="10-Final_report.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/final_assembly</span></code></pre></div>
 </div>
 <div id="report-quast" class="section level3 hasAnchor" number="10.1.2">
 <h3><span class="header-section-number">10.1.2</span> Report: QUAST<a href="10-Final_report.html#report-quast" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/measuring_tape.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We will run <code>QUAST</code> but this time we will include a reference. Make a softlink for the genome reference. This reference genome is the genome used to create the PacBio simulated reads we have been using for assembly.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="10-Final_report.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/ref/ ~/bacterial_assembly/</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="10-Final_report.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/ref/ ~/bacterial_assembly/</span></code></pre></div>
 <p>Now we will run <code>QUAST</code> with the added option of <code>-r</code> specifying the reference fasta to be used.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="10-Final_report.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make QUAST output directory</span></span>
-<span id="cb47-2"><a href="10-Final_report.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> quast</span>
-<span id="cb47-3"><a href="10-Final_report.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run QUAST</span></span>
-<span id="cb47-4"><a href="10-Final_report.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-r</span> ../../ref/ecoli_ref.fasta <span class="at">-o</span> quast assembly/ecoli.fasta</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="10-Final_report.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make QUAST output directory</span></span>
+<span id="cb48-2"><a href="10-Final_report.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> quast</span>
+<span id="cb48-3"><a href="10-Final_report.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Run QUAST</span></span>
+<span id="cb48-4"><a href="10-Final_report.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quast</span> <span class="at">-r</span> ../../ref/ecoli_ref.fasta <span class="at">-o</span> quast assembly/ecoli.fasta</span></code></pre></div>
 <p>This <code>-r</code> option will add comparison metrics of the provided assembly/assemblies to the reference assembly. This is similar to <code>dnadiff</code> but more basic. We will look at the `QUAST metrics further down.</p>
 </div>
 <div id="report-busco" class="section level3 hasAnchor" number="10.1.3">
 <h3><span class="header-section-number">10.1.3</span> Report: BUSCO<a href="10-Final_report.html#report-busco" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/universe.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Now to run <code>BUSCO</code> for the assembly.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="10-Final_report.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make BUSCO directory</span></span>
-<span id="cb48-2"><a href="10-Final_report.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> busco</span>
-<span id="cb48-3"><a href="10-Final_report.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#run BUSCO</span></span>
-<span id="cb48-4"><a href="10-Final_report.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="at">-i</span> assembly/ecoli.fasta <span class="at">-l</span> enterobacterales_odb10 <span class="at">-m</span> geno <span class="at">-o</span> ecoli <span class="at">--out_path</span> ./busco/</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="10-Final_report.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make BUSCO directory</span></span>
+<span id="cb49-2"><a href="10-Final_report.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> busco</span>
+<span id="cb49-3"><a href="10-Final_report.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#run BUSCO</span></span>
+<span id="cb49-4"><a href="10-Final_report.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="at">-i</span> assembly/ecoli.fasta <span class="at">-l</span> enterobacterales_odb10 <span class="at">-m</span> geno <span class="at">-o</span> ecoli <span class="at">--out_path</span> ./busco/</span></code></pre></div>
 </div>
 <div id="report-multiqc" class="section level3 hasAnchor" number="10.1.4">
 <h3><span class="header-section-number">10.1.4</span> Report: MultiQC<a href="10-Final_report.html#report-multiqc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -288,18 +300,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>MultiQC</code> will create a html report from the output from various tools. A list of compatible tools and output files can be found at: <a href="https://multiqc.info/docs/#multiqc-modules" class="uri">https://multiqc.info/docs/#multiqc-modules</a></p>
 <p>When running <code>MultiQC</code> the user points it to a directory or multiple directories which contain the output you want included in the report. <code>MultiQC</code> will then search through the files looking for all the compatible files and ignoring the incompatible files.</p>
 <p>However, I find <code>MultiQC</code> is very slow to search through files, especially for tools that create a lot of output files. I therefore like to create an <code>input</code> directory where I copy all the input for <code>MultiQC</code> so it will run much quicker. Let's do that now.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="10-Final_report.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make MultiQC directory</span></span>
-<span id="cb49-2"><a href="10-Final_report.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> multiqc</span>
-<span id="cb49-3"><a href="10-Final_report.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into MultiQC directory</span></span>
-<span id="cb49-4"><a href="10-Final_report.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc</span>
-<span id="cb49-5"><a href="10-Final_report.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a input directory</span></span>
-<span id="cb49-6"><a href="10-Final_report.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> input</span>
-<span id="cb49-7"><a href="10-Final_report.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy the relevant QUAST, BUSCO, and Prokka files to be used as MultiQC input</span></span>
-<span id="cb49-8"><a href="10-Final_report.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../quast/report.tsv input/</span>
-<span id="cb49-9"><a href="10-Final_report.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../busco/ecoli/short_summary.specific.enterobacterales_odb10.txt input/</span>
-<span id="cb49-10"><a href="10-Final_report.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../prokka/ecoli/ecoli.txt input/</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="10-Final_report.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make MultiQC directory</span></span>
+<span id="cb50-2"><a href="10-Final_report.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> multiqc</span>
+<span id="cb50-3"><a href="10-Final_report.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into MultiQC directory</span></span>
+<span id="cb50-4"><a href="10-Final_report.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc</span>
+<span id="cb50-5"><a href="10-Final_report.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a input directory</span></span>
+<span id="cb50-6"><a href="10-Final_report.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> input</span>
+<span id="cb50-7"><a href="10-Final_report.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy the relevant QUAST, BUSCO, and Prokka files to be used as MultiQC input</span></span>
+<span id="cb50-8"><a href="10-Final_report.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../quast/report.tsv input/</span>
+<span id="cb50-9"><a href="10-Final_report.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../busco/ecoli/short_summary.specific.enterobacterales_odb10.txt input/</span>
+<span id="cb50-10"><a href="10-Final_report.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../prokka/ecoli/ecoli.txt input/</span></code></pre></div>
 <p>Now we can run <code>MultiQC</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="10-Final_report.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">--cl-config</span> <span class="st">&quot;prokka_fn_snames: True&quot;</span> <span class="at">-o</span> . input/</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="10-Final_report.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">--cl-config</span> <span class="st">&quot;prokka_fn_snames: True&quot;</span> <span class="at">-o</span> . input/</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><code>--cl-config</code> : This parameter allows you to config how MultiQC will analyse/present data.
@@ -311,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>At the end of the command all the input directories (directories with the <code>MultiQC</code> inputs) are supplied. In this case it is just <code>input/</code> as it contains all our input.</li>
 </ul>
 <p>Inspect the html report.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="10-Final_report.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> multiqc_report.html</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="10-Final_report.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> multiqc_report.html</span></code></pre></div>
 <p>In the <code>QUAST</code> <code>Assembly Statistics</code> table you will see normal contiguity metrics plus new metrics based on comparing the assembly to the reference assembly:</p>
 <ul>
 <li><strong>Misassemblies</strong>: Number of misassmebly positions in contigs.</li>

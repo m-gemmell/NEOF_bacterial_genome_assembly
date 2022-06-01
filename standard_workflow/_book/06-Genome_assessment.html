@@ -166,8 +166,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessmentconda"><i class="fa fa-check"></i><b>6.1</b> Assessment: Conda environnment &amp; directory</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
-<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-questions"><i class="fa fa-check"></i><b>6.2.1</b> QUAST Questions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-summary"><i class="fa fa-check"></i><b>6.2.2</b> QUAST summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-lineages"><i class="fa fa-check"></i><b>6.3.1</b> BUSCO lineages</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#run-busco"><i class="fa fa-check"></i><b>6.3.2</b> Run BUSCO</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-output"><i class="fa fa-check"></i><b>6.3.3</b> BUSCO output</a></li>
+<li class="chapter" data-level="6.3.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-questions"><i class="fa fa-check"></i><b>6.3.4</b> BUSCO questions</a></li>
+<li class="chapter" data-level="6.3.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-summary"><i class="fa fa-check"></i><b>6.3.5</b> BUSCO summary</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
 <li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
 </ul></li>
@@ -181,6 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.4" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing"><i class="fa fa-check"></i><b>7.1.4</b> Racon: Polishing</a></li>
 <li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
 <li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
+<li class="chapter" data-level="7.1.7" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-questions-summary"><i class="fa fa-check"></i><b>7.1.7</b> Racon; Questions &amp; Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
 </ul></li>
@@ -289,20 +301,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Order the contigs from largest to smallest.</li>
 <li>Find the point that is 50% the length of the assembly starting from the start of the largest contig going toward the smallest contig.</li>
 <li>Determine which contig this point belongs to.</li>
-<li>The N50 is equal to the length of the contig.</li>
+<li>The N50 is equal to the length of that contig.</li>
 <li>The L50 is equal to the number of contigs that is &gt;= in length to the N50.</li>
 </ol>
 <p>To find the N75 &amp; L75 change the 50% to 75% in point 2. You can use any number between 1-100 for the Nx or Lx.</p>
 <p>Additionally, below is a visual demonstration of Nx and Lx.</p>
 <p><img src="figures/n50_n90.png" width="60%" style="display: block; margin: auto;" /></p>
-<p><strong>Questions</strong></p>
-<ul>
-<li>How many total contigs are there?</li>
-<li>Approximately how much bigger is the total assembly compared to the largest contigs (to the nearest 1k)?</li>
-<li>Does the GC% match what is know about <em>E.coli</em>? (You may need to google)</li>
-<li>Why is the N50 and N75 the same?</li>
-</ul>
-<p>Overall these contiguity stats are good. It is not a one contig assembly, which is what we would aim for a single chromosome genome, but it is close. It mainly consists of one large contig with 3 smaller contigs.</p>
+<div id="quast-questions" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> QUAST Questions<a href="06-Genome_assessment.html#quast-questions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/question_bubble.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Answer the below MCQs (Multiple Choice Questions) based on <code>redbean's</code> <code>report.html</code>.</p>
+<ol style="list-style-type: decimal">
+<li>How many total contigs are there?
+<div id="radio_ZKGVQQNOQJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZKGVQQNOQJ" value=""></input> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_ZKGVQQNOQJ" value="answer"></input> <span>4</span></label><label><input type="radio" autocomplete="off" name="radio_ZKGVQQNOQJ" value=""></input> <span>10</span></label>
+</div></li>
+<li>Approximately how much bigger is the total assembly (all contigs) compared to the largest contig (to the nearest 10k)?
+<div id="radio_XDBTSXPHKR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XDBTSXPHKR" value="answer"></input> <span>50k</span></label><label><input type="radio" autocomplete="off" name="radio_XDBTSXPHKR" value=""></input> <span>80k</span></label><label><input type="radio" autocomplete="off" name="radio_XDBTSXPHKR" value=""></input> <span>100k</span></label>
+</div></li>
+<li>Does the GC% match what is know about <em>E.coli</em>? (You may need to google)
+<div id="radio_BDUPMCMDZI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BDUPMCMDZI" value="answer"></input> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_BDUPMCMDZI" value=""></input> <span>No</span></label>
+</div></li>
+</ol>
+<div class="webex-solution">
+<button>
+Click for GC% answer
+</button>
+<p><em>Escherichia</em> GC% varies between 50.4-50.8%. Our assembly's GC% is 50.8% so it matches perfectly. This gives us more confidence that we have assembled an <em>Escherichia genome</em>.</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Why does the the N50 and N75 have the same value?
+<div id="radio_SXZLRZCZBA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SXZLRZCZBA" value=""></input> <span>N50 &amp; N75 mean the same thing</span></label><label><input type="radio" autocomplete="off" name="radio_SXZLRZCZBA" value=""></input> <span>The value is the total length of the assembly</span></label><label><input type="radio" autocomplete="off" name="radio_SXZLRZCZBA" value="answer"></input> <span>The longest contig makes up more than 50% and 75% of the assembly length. Therefore the length of the longest contig is the N50 and N75 in this case</span></label>
+</div></li>
+</ol>
+</div>
+<div id="quast-summary" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> QUAST summary<a href="06-Genome_assessment.html#quast-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/sum_orange.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Overall these contiguity stats are good. It is not a one contig assembly, which would be our aim for a single chromosome genome, but it is close. It mainly consists of one large contig with 3 smaller contigs.</p>
 <p>Some things you will want to look out for in future projects:</p>
 <ul>
 <li>High number of contigs, with small N50: This may indicate the genome assembly is very uncontiguous and so the assembler had issues with assembly.
@@ -319,10 +358,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Parts of the genome are duplicated in the assembly causing the assembly to be too long. This can be caused by parts where a consensus could not be reached effectively.</li>
 <li>A short assembly can indicate that parts of the genome are missing.</li>
-<li>A drastically increased length can indicate the presence of contamination from another organism. The GC (%) can give a clue if this may be the case.</li>
+<li>A drastically increased length can indicate the presence of contamination from another organism. The GC(%) can give a clue if this may be the case.</li>
 </ul></li>
 </ul>
 <p>Further assessment can elucidate if there are any issues and what the issue may be.</p>
+</div>
 </div>
 <div id="busco" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> BUSCO<a href="06-Genome_assessment.html#busco" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -335,18 +375,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Universal</strong>: The genes are present in all organisms of a specific lineage.</li>
 <li><strong>Single-Copy</strong>: The genes are only found as one copy.</li>
 </ul>
+<div id="busco-lineages" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> BUSCO lineages<a href="06-Genome_assessment.html#busco-lineages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/phylo_tree.png" width="15%" style="display: block; margin: auto;" /></p>
 <p><code>BUSCO</code> has many different lineage datasets. These are datasets of the different groups of BUSCOs found in various different lineages. Carry out the below command to see all these different datasets.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="06-Genome_assessment.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="at">--list-datasets</span> <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span></code></pre></div>
-<p>You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, &amp; eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organisms lineage. A more specific lineage will have more BUSCOs that a more generic one.</p>
-<p><strong>Note</strong>: All datasets end with <code>_odb10</code> which stands for OrthoDB version 10 (<a href="https://www.orthodb.org/" class="uri">https://www.orthodb.org/</a>).</p>
-<p>Looking through the choices (and using NCBI taxonomy) what lineage dataset would you use for the following genera?</p>
-<ul>
-<li><strong>Psychrobacter</strong> (Taxonomy ID: 497)</li>
-<li><strong>Iamia</strong> (Taxonomy ID: 467975)</li>
-<li><strong>Phycisphaera</strong> (Taxonomy ID: 666508)</li>
-<li><strong>Atribacter</strong> (Taxonomy ID: 2847777)</li>
-</ul>
+<p>You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, &amp; eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organism's lineage. A more specific lineage will have more BUSCOs that a more generic one.</p>
+<p><strong>Note</strong>: All datasets end with <code>_odb10</code> which stands for <a href="https://www.orthodb.org/">OrthoDB version 10</a>.</p>
+<p>Looking through the choices (and using the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy website</a>) what lineage dataset would you use for the following genera?</p>
+<ol style="list-style-type: decimal">
+<li><strong>Psychrobacter</strong> (Taxonomy ID: 497)
+<div id="radio_WGUHYOVIRO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WGUHYOVIRO" value=""></input> <span>actinobacteria_phylum_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_WGUHYOVIRO" value=""></input> <span>bacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_WGUHYOVIRO" value="answer"></input> <span>gammaproteobacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_WGUHYOVIRO" value=""></input> <span>planctomycetes_odb10</span></label>
+</div></li>
+<li><strong>Iamia</strong> (Taxonomy ID: 467975)
+<div id="radio_DHZWJEEUOD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DHZWJEEUOD" value="answer"></input> <span>actinobacteria_phylum_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_DHZWJEEUOD" value=""></input> <span>bacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_DHZWJEEUOD" value=""></input> <span>gammaproteobacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_DHZWJEEUOD" value=""></input> <span>planctomycetes_odb10</span></label>
+</div></li>
+<li><strong>Phycisphaera</strong> (Taxonomy ID: 666508)
+<div id="radio_JHWWGMHJKA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JHWWGMHJKA" value=""></input> <span>actinobacteria_phylum_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_JHWWGMHJKA" value=""></input> <span>bacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_JHWWGMHJKA" value=""></input> <span>gammaproteobacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_JHWWGMHJKA" value="answer"></input> <span>planctomycetes_odb10</span></label>
+</div></li>
+<li><strong>Atribacter</strong> (Taxonomy ID: 2847777)
+<div id="radio_LYPIHEFEMC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LYPIHEFEMC" value=""></input> <span>actinobacteria_phylum_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_LYPIHEFEMC" value="answer"></input> <span>bacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_LYPIHEFEMC" value=""></input> <span>gammaproteobacteria_odb10</span></label><label><input type="radio" autocomplete="off" name="radio_LYPIHEFEMC" value=""></input> <span>planctomycetes_odb10</span></label>
+</div></li>
+</ol>
+<div class="webex-solution">
+<button>
+Click to reveal links to NCBI taxonomies
+</button>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=497"><strong>Psychrobacter</strong> (Taxonomy ID: 497)</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=467975"><strong>Iamia</strong> (Taxonomy ID: 467975)</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=666508"><strong>Phycisphaera</strong> (Taxonomy ID: 666508)</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2847777"><strong>Atribacter</strong> (Taxonomy ID: 2847777)</a></li>
+</ol>
+</div>
+</div>
+<div id="run-busco" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Run BUSCO<a href="06-Genome_assessment.html#run-busco" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/enter_key.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>For our <code>E.coli</code> we will choose the <code>enterobacterales_odb10</code> as our lineage dataset. With that we can run <code>BUSCO</code> on our genome assembly.</p>
+<p><strong>Note</strong>: The parameters <code>-i</code>, <code>-l</code>, <code>-m</code>, &amp; <code>-o</code> are all letters.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="06-Genome_assessment.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">busco</span> <span class="dt">\</span></span>
 <span id="cb17-2"><a href="06-Genome_assessment.html#cb17-2" aria-hidden="true" tabindex="-1"></a>-i redbean_assembly/ecoli.ctg.fa <span class="dt">\</span></span>
 <span id="cb17-3"><a href="06-Genome_assessment.html#cb17-3" aria-hidden="true" tabindex="-1"></a>-l enterobacterales_odb10 <span class="dt">\</span></span>
@@ -366,8 +437,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>-o</code> : The run name. Output folders and files will be labelled with this name.</li>
 <li><code>--out_path</code> : Path where the output directory will be created.</li>
 </ul>
+</div>
+<div id="busco-output" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> BUSCO output<a href="06-Genome_assessment.html#busco-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/output.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>There are many output files in the directory <code>busco/redbean/ecoli</code>. A full list of the output can be found in the following link: <a href="https://busco.ezlab.org/busco_userguide.html#outputs" class="uri">https://busco.ezlab.org/busco_userguide.html#outputs</a></p>
-<p>I ignore most of the output most of the time, instead only looking at the short summary file.</p>
+<p>I ignore the majority of the output files most of the time, instead only looking at the short summary file.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="06-Genome_assessment.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> busco/redbean/ecoli/short_summary.specific.enterobacterales_obd10.ecoli.txt</span></code></pre></div>
 <p>This provides us with 6 values. These values are presented in terms of percentage (along the top line of the Results) and total numbers (the next 6 lines). The values represent:</p>
 <ul>
@@ -379,12 +454,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Total BUSCO groups searched</strong>: This represents the total number of BUSCOs within the lineage dataset used for analysis.</li>
 </ul>
 <p>For more info on interpreting the results please see the following link: <a href="https://busco.ezlab.org/busco_userguide.html#interpreting-the-results" class="uri">https://busco.ezlab.org/busco_userguide.html#interpreting-the-results</a></p>
-<p><strong>Questions</strong></p>
-<ul>
-<li>Ignoring total BUSCOs, what is the highest value? Do you want this value to be the highest?</li>
-<li>Are these values good? What may the stats indicate?</li>
-</ul>
-<p>The <code>BUSCO</code> stats are ok. There are a bit more fragmented and missing BUSCOs than we would like. We'll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on.</p>
+</div>
+<div id="busco-questions" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> BUSCO questions<a href="06-Genome_assessment.html#busco-questions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/question_bubble_blue.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Answer the below MCQs based on the results in your short summary file.</p>
+<ol style="list-style-type: decimal">
+<li>Ignoring "total BUSCO groups searched", which value is the highest?
+<div id="radio_SEIIRHIEUG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SEIIRHIEUG" value="answer"></input> <span>Complete BUSCOs (C)</span></label><label><input type="radio" autocomplete="off" name="radio_SEIIRHIEUG" value=""></input> <span>Fragmented BUSCOs (F)</span></label><label><input type="radio" autocomplete="off" name="radio_SEIIRHIEUG" value=""></input> <span>Missing BUSCOs (M)</span></label>
+</div></li>
+<li>What is the sum of fragmented and missing BUSCOs?
+<div id="radio_ZGJGZZTKGU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZGJGZZTKGU" value=""></input> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_ZGJGZZTKGU" value=""></input> <span>440</span></label><label><input type="radio" autocomplete="off" name="radio_ZGJGZZTKGU" value="answer"></input> <span>55</span></label>
+</div></li>
+<li>Which value would you want to be highest for a complete non duplicated assembly?
+<div id="radio_KOKRQCDNPR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KOKRQCDNPR" value="answer"></input> <span>Complete and single-copy BUSCOs (S)</span></label><label><input type="radio" autocomplete="off" name="radio_KOKRQCDNPR" value=""></input> <span>Complete and duplicated BUSCOs (D)</span></label><label><input type="radio" autocomplete="off" name="radio_KOKRQCDNPR" value=""></input> <span>Fragmented BUSCOs (F)</span></label><label><input type="radio" autocomplete="off" name="radio_KOKRQCDNPR" value=""></input> <span>Missing BUSCOs (M)</span></label>
+</div></li>
+</ol>
+</div>
+<div id="busco-summary" class="section level3 hasAnchor" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> BUSCO summary<a href="06-Genome_assessment.html#busco-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="figures/sum_blue.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>The <code>BUSCO</code> stats are OK. There are more fragmented and missing BUSCOs than we would like. We'll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on with some more assessment.</p>
+</div>
 </div>
 <div id="checkm" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> CheckM<a href="06-Genome_assessment.html#checkm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -402,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-6"><a href="06-Genome_assessment.html#cb20-6" aria-hidden="true" tabindex="-1"></a>checkm/redbean/ecoli</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><code>--tab_table</code> : Creates a <code>.tsv</code> file (tab seperated value) that acts a summary of results. This is the one file we will inspect.</li>
+<li><code>--tab_table</code> : Creates a <code>.tsv</code> file (tab seperated value) that acts a summary of results. This is the file we will inspect.</li>
 <li><code>-f</code> : Path for output summary <code>.tsv</code> file.</li>
 <li><code>-t</code> : Number of threads to be used.</li>
 <li><code>-x</code> : Suffix of genome assembly files to be analysed. The command will carry out analysis on all the files with this suffix in the <strong>bin directory</strong>.</li>
@@ -412,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ignore all the other files and view the summary files.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="06-Genome_assessment.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> checkm/redbean/ecoli/ecoli_checkm.tsv</span></code></pre></div>
 <p>There are quite a few statistics but we are only interested in the <code>Contamination</code> column (you may need to use the right key to move to it). This value is a percentage. Is it a large value?</p>
-<p>Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you ar einterested in contamination removal (link in <a href="09-Annotation.html#manuals">Appendix</a>)</p>
+<p>Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you are interested in contamination removal (link in <a href="09-Annotation.html#manuals">Appendix</a>)</p>
 <p>If you are interested in the other values please check: <a href="https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics" class="uri">https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics</a></p>
 </div>
 <div id="assessment-recap" class="section level2 hasAnchor" number="6.5">

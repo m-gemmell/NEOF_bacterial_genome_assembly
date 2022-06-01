@@ -66,7 +66,7 @@ __Parameters__
 - `-pacbio` : Specify the pacbio reads to be used.
    - Alternative options are: `-nanopore` and `-pacbio-hifi`.
 
-The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a `.fasta.gz` file, and gunzip the file for further use.
+The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a `.fasta.gz` file, and gunzip (unzip a compressed .gzip/.gz file) the file for later use.
 
 ```{bash eval=FALSE}
 #Copy corrected read fasta.gz file

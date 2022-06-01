@@ -16,7 +16,14 @@ other-long-read-assemblers
 genomeassemblyassessment
 assessmentconda
 quast
+quast-questions
+quast-summary
 busco
+busco-lineages
+run-busco
+busco-output
+busco-questions
+busco-summary
 checkm
 assessment-recap
 polishing
@@ -27,6 +34,7 @@ racon-read-alignment-to-assembly
 racon-polishing
 racon-polishing-report
 racon-second-iteration
+racon-questions-summary
 other-polishers
 Circlator
 circlator

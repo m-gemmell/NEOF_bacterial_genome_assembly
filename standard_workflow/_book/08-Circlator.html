@@ -166,8 +166,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html"><i class="fa fa-check"></i><b>6</b> Genome assembly assessment</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessmentconda"><i class="fa fa-check"></i><b>6.1</b> Assessment: Conda environnment &amp; directory</a></li>
-<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a></li>
-<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast"><i class="fa fa-check"></i><b>6.2</b> QUAST</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-questions"><i class="fa fa-check"></i><b>6.2.1</b> QUAST Questions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#quast-summary"><i class="fa fa-check"></i><b>6.2.2</b> QUAST summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco"><i class="fa fa-check"></i><b>6.3</b> BUSCO</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-lineages"><i class="fa fa-check"></i><b>6.3.1</b> BUSCO lineages</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#run-busco"><i class="fa fa-check"></i><b>6.3.2</b> Run BUSCO</a></li>
+<li class="chapter" data-level="6.3.3" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-output"><i class="fa fa-check"></i><b>6.3.3</b> BUSCO output</a></li>
+<li class="chapter" data-level="6.3.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-questions"><i class="fa fa-check"></i><b>6.3.4</b> BUSCO questions</a></li>
+<li class="chapter" data-level="6.3.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#busco-summary"><i class="fa fa-check"></i><b>6.3.5</b> BUSCO summary</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#checkm"><i class="fa fa-check"></i><b>6.4</b> CheckM</a></li>
 <li class="chapter" data-level="6.5" data-path="06-Genome_assessment.html"><a href="06-Genome_assessment.html#assessment-recap"><i class="fa fa-check"></i><b>6.5</b> Assessment recap</a></li>
 </ul></li>
@@ -181,6 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.4" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing"><i class="fa fa-check"></i><b>7.1.4</b> Racon: Polishing</a></li>
 <li class="chapter" data-level="7.1.5" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-polishing-report"><i class="fa fa-check"></i><b>7.1.5</b> Racon: Polishing report</a></li>
 <li class="chapter" data-level="7.1.6" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-second-iteration"><i class="fa fa-check"></i><b>7.1.6</b> Racon: Second iteration</a></li>
+<li class="chapter" data-level="7.1.7" data-path="07-Polishing.html"><a href="07-Polishing.html#racon-questions-summary"><i class="fa fa-check"></i><b>7.1.7</b> Racon; Questions &amp; Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="07-Polishing.html"><a href="07-Polishing.html#other-polishers"><i class="fa fa-check"></i><b>7.2</b> Other polishers</a></li>
 </ul></li>
@@ -258,13 +270,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We will use the <code>circlator</code> conda environment for our <code>Circlator</code> circularisation.</p>
 <p>Open a new terminal (right click on the main screen, choose <code>Applications</code> -&gt; <code>Shell</code> -&gt; <code>bash</code>) and run:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="08-Circlator.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
-<span id="cb32-2"><a href="08-Circlator.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usecirclator</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="08-Circlator.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
+<span id="cb33-2"><a href="08-Circlator.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usecirclator</span></code></pre></div>
 <p>Move to the <code>standard_workflow</code> directory and make a new output directory for <code>Circlator</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="08-Circlator.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
-<span id="cb33-2"><a href="08-Circlator.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span>
-<span id="cb33-3"><a href="08-Circlator.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make directory</span></span>
-<span id="cb33-4"><a href="08-Circlator.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> circlator/redbean_racon_i2/</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="08-Circlator.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change directory</span></span>
+<span id="cb34-2"><a href="08-Circlator.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span>
+<span id="cb34-3"><a href="08-Circlator.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make directory</span></span>
+<span id="cb34-4"><a href="08-Circlator.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> circlator/redbean_racon_i2/</span></code></pre></div>
 </div>
 <div id="circlator-read-correction" class="section level3 hasAnchor" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Circlator: Read correction<a href="08-Circlator.html#circlator-read-correction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -272,11 +284,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>Circlator</code> requires corrected reads (reads with improved accuracy). There are various tools to correct reads (<a href="https://github.com/sanger-pathogens/circlator/wiki/Input-files-for-circlator" class="uri">https://github.com/sanger-pathogens/circlator/wiki/Input-files-for-circlator</a>). We will use the assembler <code>Canu</code> to correct our reads.</p>
 <p>If you assemble your data with <code>Canu</code> you would already have the corrected reads. Since we have not we can correct them now using the correction part and skipping the assembly part.</p>
 <p><strong>Note</strong>: The below command takes a long time. In the interest of time skip the command and use the lower down copy command to get the pre-computed corrected reads.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="08-Circlator.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">canu</span> <span class="at">-correct</span> <span class="dt">\</span></span>
-<span id="cb34-2"><a href="08-Circlator.html#cb34-2" aria-hidden="true" tabindex="-1"></a>-p ecoli <span class="dt">\</span></span>
-<span id="cb34-3"><a href="08-Circlator.html#cb34-3" aria-hidden="true" tabindex="-1"></a>-d ecoli_reads <span class="dt">\</span></span>
-<span id="cb34-4"><a href="08-Circlator.html#cb34-4" aria-hidden="true" tabindex="-1"></a>genomeSize=4.6m <span class="dt">\</span></span>
-<span id="cb34-5"><a href="08-Circlator.html#cb34-5" aria-hidden="true" tabindex="-1"></a>-pacbio ecoli_reads/ecoli.fastq</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="08-Circlator.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">canu</span> <span class="at">-correct</span> <span class="dt">\</span></span>
+<span id="cb35-2"><a href="08-Circlator.html#cb35-2" aria-hidden="true" tabindex="-1"></a>-p ecoli <span class="dt">\</span></span>
+<span id="cb35-3"><a href="08-Circlator.html#cb35-3" aria-hidden="true" tabindex="-1"></a>-d ecoli_reads <span class="dt">\</span></span>
+<span id="cb35-4"><a href="08-Circlator.html#cb35-4" aria-hidden="true" tabindex="-1"></a>genomeSize=4.6m <span class="dt">\</span></span>
+<span id="cb35-5"><a href="08-Circlator.html#cb35-5" aria-hidden="true" tabindex="-1"></a>-pacbio ecoli_reads/ecoli.fastq</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><code>-p</code> : Prefix of output files.</li>
@@ -287,11 +299,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Alternative options are: <code>-nanopore</code> and <code>-pacbio-hifi</code>.</li>
 </ul></li>
 </ul>
-<p>The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a <code>.fasta.gz</code> file, and gunzip the file for further use.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="08-Circlator.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy corrected read fasta.gz file</span></span>
-<span id="cb35-2"><a href="08-Circlator.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads</span>
-<span id="cb35-3"><a href="08-Circlator.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Gunzip file</span></span>
-<span id="cb35-4"><a href="08-Circlator.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> ecoli_reads/ecoli.correctedReads.fasta.gz</span></code></pre></div>
+<p>The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a <code>.fasta.gz</code> file, and gunzip (unzip a compressed .gzip/.gz file) the file for later use.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="08-Circlator.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy corrected read fasta.gz file</span></span>
+<span id="cb36-2"><a href="08-Circlator.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.correctedReads.fasta.gz ecoli_reads</span>
+<span id="cb36-3"><a href="08-Circlator.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Gunzip file</span></span>
+<span id="cb36-4"><a href="08-Circlator.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> ecoli_reads/ecoli.correctedReads.fasta.gz</span></code></pre></div>
 </div>
 <div id="circlator-circularisation" class="section level3 hasAnchor" number="8.1.3">
 <h3><span class="header-section-number">8.1.3</span> Circlator: Circularisation<a href="08-Circlator.html#circlator-circularisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -310,10 +322,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ol>
 <p>To run all 7 steps as a workflow We will use the <code>circlator all</code> command (<a href="https://github.com/sanger-pathogens/circlator/wiki/Task:-all" class="uri">https://github.com/sanger-pathogens/circlator/wiki/Task:-all</a>).</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="08-Circlator.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">circlator</span> all <span class="dt">\</span></span>
-<span id="cb36-2"><a href="08-Circlator.html#cb36-2" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i2.fasta <span class="dt">\</span></span>
-<span id="cb36-3"><a href="08-Circlator.html#cb36-3" aria-hidden="true" tabindex="-1"></a>ecoli_reads/ecoli.correctedReads.fasta <span class="dt">\</span></span>
-<span id="cb36-4"><a href="08-Circlator.html#cb36-4" aria-hidden="true" tabindex="-1"></a>circlator/redbean_racon_i2/ecoli</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="08-Circlator.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">circlator</span> all <span class="dt">\</span></span>
+<span id="cb37-2"><a href="08-Circlator.html#cb37-2" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i2.fasta <span class="dt">\</span></span>
+<span id="cb37-3"><a href="08-Circlator.html#cb37-3" aria-hidden="true" tabindex="-1"></a>ecoli_reads/ecoli.correctedReads.fasta <span class="dt">\</span></span>
+<span id="cb37-4"><a href="08-Circlator.html#cb37-4" aria-hidden="true" tabindex="-1"></a>circlator/redbean_racon_i2/ecoli</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
 <li>The 1st flagless option is the input assembly to be circularised.</li>
@@ -321,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The 3rd flagless option is the output directory.</li>
 </ul>
 <p>You can list all the output noting the prefix number shows which step the files/directories were created at.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="08-Circlator.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> circlator/redbean_racon_i2/ecoli</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="08-Circlator.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> circlator/redbean_racon_i2/ecoli</span></code></pre></div>
 <p>The final circularised genome is in the file <code>06.fixstart.fasta</code>.</p>
 </div>
 <div id="circlator-assessment-polishing" class="section level3 hasAnchor" number="8.1.4">

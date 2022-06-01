@@ -536,7 +536,7 @@ To calculate N50 and L50:
 1. Order the contigs from largest to smallest.
 2. Find the point that is 50% the length of the assembly starting from the start of the largest contig going toward the smallest contig.
 3. Determine which contig this point belongs to.
-4. The N50 is equal to the length of the contig.
+4. The N50 is equal to the length of that contig.
 5. The L50 is equal to the number of contigs that is >= in length to the N50.
 
 To find the N75 & L75 change the 50% to 75% in point 2. You can use any number between 1-100 for the Nx or Lx.
@@ -547,14 +547,47 @@ Additionally, below is a visual demonstration of Nx and Lx.
 knitr::include_graphics(path = "figures/n50_n90.png", auto_pdf = TRUE)
 ``` 
 
-__Questions__
+### QUAST Questions
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble.png", auto_pdf = TRUE)
+``` 
 
-- How many total contigs are there?
-- Approximately how much bigger is the total assembly compared to the largest contigs (to the nearest 1k)?
-- Does the GC% match what is know about _E.coli_? (You may need to google)
-- Why is the N50 and N75 the same?
+Answer the below MCQs (Multiple Choice Questions) based on `redbean's` `report.html`.
 
-Overall these contiguity stats are good. It is not a one contig assembly, which is what we would aim for a single chromosome genome, but it is close. It mainly consists of one large contig with 3 smaller contigs.
+```{r, echo = FALSE}
+opts_p <- c("1", answer = "4", "10")
+```
+
+1. How many total contigs are there? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer = "50k", "80k", "100k")
+```
+
+2. Approximately how much bigger is the total assembly (all contigs) compared to the largest contig (to the nearest 10k)? `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c(answer = "Yes", "No")
+```
+
+3. Does the GC% match what is know about _E.coli_? (You may need to google) `r longmcq(opts_p)` 
+
+`r hide("Click for GC% answer")` _Escherichia_ GC% varies between 50.4-50.8%. Our assembly's GC% is 50.8% so it matches perfectly. This gives us more confidence that we have assembled an _Escherichia genome_. `r unhide()`
+
+```{r, echo = FALSE}
+opts_p <- c("N50 & N75 mean the same thing", 
+            "The value is the total length of the assembly",
+            answer = "The longest contig makes up more than 50% and 75% of the assembly length. Therefore the length of the longest contig is the N50 and N75 in this case")
+```
+
+4. Why does the the N50 and N75 have the same value? `r longmcq(opts_p)`
+
+### QUAST summary
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_orange.png", auto_pdf = TRUE)
+``` 
+
+Overall these contiguity stats are good. It is not a one contig assembly, which would be our aim for a single chromosome genome, but it is close. It mainly consists of one large contig with 3 smaller contigs.
 
 Some things you will want to look out for in future projects:
 
@@ -567,7 +600,7 @@ Some things you will want to look out for in future projects:
 - Length is not correct: Could be caused by several reasons:
    - Parts of the genome are duplicated in the assembly causing the assembly to be too long. This can be caused by parts where a consensus could not be reached effectively.
    - A short assembly can indicate that parts of the genome are missing.
-   - A drastically increased length can indicate the presence of contamination from another organism. The GC (%) can give a clue if this may be the case.
+   - A drastically increased length can indicate the presence of contamination from another organism. The GC(%) can give a clue if this may be the case.
    
 Further assessment can elucidate if there are any issues and what the issue may be.
 
@@ -589,24 +622,74 @@ BUSCOs are genes that are:
 - __Universal__: The genes are present in all organisms of a specific lineage.
 - __Single-Copy__: The genes are only found as one copy.
 
+### BUSCO lineages
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/phylo_tree.png", auto_pdf = TRUE)
+``` 
+
 `BUSCO` has many different lineage datasets. These are datasets of the different groups of BUSCOs found in various different lineages. Carry out the below command to see all these different datasets.
 
 ```{bash eval=FALSE}
 busco --list-datasets | less -S
 ```
 
-You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, & eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organisms lineage. A more specific lineage will have more BUSCOs that a more generic one.
+You will notice that the lineage datasets are at various taxonomic levels going from kingdom (bacteria, archaea, & eukaryota) down to order (rhizobiales, burkholderiales etc.). It is always good to be as specific as you can to your organism's lineage. A more specific lineage will have more BUSCOs that a more generic one.
 
-__Note__: All datasets end with `_odb10` which stands for OrthoDB version 10 (https://www.orthodb.org/).
+__Note__: All datasets end with `_odb10` which stands for [OrthoDB version 10](https://www.orthodb.org/).
 
-Looking through the choices (and using NCBI taxonomy) what lineage dataset would you use for the following genera?
+Looking through the choices (and using the [NCBI taxonomy website](https://www.ncbi.nlm.nih.gov/taxonomy)) what lineage dataset would you use for the following genera?
 
-- __Psychrobacter__ (Taxonomy ID: 497)
-- __Iamia__ (Taxonomy ID: 467975)
-- __Phycisphaera__ (Taxonomy ID: 666508)
-- __Atribacter__ (Taxonomy ID: 2847777)
+```{r, echo = FALSE}
+opts_p <- c("actinobacteria_phylum_odb10", 
+            "bacteria_odb10", 
+            answer = "gammaproteobacteria_odb10", 
+            "planctomycetes_odb10")
+```
+
+1. __Psychrobacter__ (Taxonomy ID: 497) `r longmcq(opts_p)` 
+
+```{r, echo = FALSE}
+opts_p <- c(answer = "actinobacteria_phylum_odb10", 
+            "bacteria_odb10", 
+            "gammaproteobacteria_odb10", 
+            "planctomycetes_odb10")
+```
+
+2. __Iamia__ (Taxonomy ID: 467975) `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("actinobacteria_phylum_odb10", 
+            "bacteria_odb10", 
+            "gammaproteobacteria_odb10", 
+            answer = "planctomycetes_odb10")
+```
+
+3. __Phycisphaera__ (Taxonomy ID: 666508) `r longmcq(opts_p)`
+
+```{r, echo = FALSE}
+opts_p <- c("actinobacteria_phylum_odb10", 
+            answer = "bacteria_odb10", 
+            "gammaproteobacteria_odb10", 
+            "planctomycetes_odb10")
+```
+
+4. __Atribacter__ (Taxonomy ID: 2847777) `r longmcq(opts_p)`
+
+`r hide("Click to reveal links to NCBI taxonomies")`
+1. [__Psychrobacter__ (Taxonomy ID: 497)](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=497)
+2. [__Iamia__ (Taxonomy ID: 467975)](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=467975)
+3. [__Phycisphaera__ (Taxonomy ID: 666508)](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=666508)
+4. [__Atribacter__ (Taxonomy ID: 2847777)](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=2847777)
+`r unhide()`
+
+### Run BUSCO
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/enter_key.png", auto_pdf = TRUE)
+``` 
 
 For our `E.coli` we will choose the `enterobacterales_odb10` as our lineage dataset. With that we can run `BUSCO` on our genome assembly.
+
+__Note__: The parameters `-i`, `-l`, `-m`, & `-o` are all letters.
 
 ```{bash eval=FALSE}
 busco \
@@ -628,9 +711,14 @@ __Parameter choice__
 - `-o` : The run name. Output folders and files will be labelled with this name.
 - `--out_path` : Path where the output directory will be created.
 
+### BUSCO output
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/output.png", auto_pdf = TRUE)
+``` 
+
 There are many output files in the directory `busco/redbean/ecoli`. A full list of the output can be found in the following link: https://busco.ezlab.org/busco_userguide.html#outputs
 
-I ignore most of the output most of the time, instead only looking at the short summary file.
+I ignore the majority of the output files most of the time, instead only looking at the short summary file.
 
 ```{bash eval=FALSE}
 less busco/redbean/ecoli/short_summary.specific.enterobacterales_obd10.ecoli.txt
@@ -647,12 +735,51 @@ This provides us with 6 values. These values are presented in terms of percentag
 
 For more info on interpreting the results please see the following link: https://busco.ezlab.org/busco_userguide.html#interpreting-the-results
 
-__Questions__
+### BUSCO questions
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/question_bubble_blue.png", auto_pdf = TRUE)
+``` 
 
-- Ignoring total BUSCOs, what is the highest value? Do you want this value to be the highest?
-- Are these values good? What may the stats indicate?
+Answer the below MCQs based on the results in your short summary file.
 
-The `BUSCO` stats are ok. There are a bit more fragmented and missing BUSCOs than we would like. We'll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on.
+```{r, echo = FALSE}
+opts_p <- c(answer = "Complete BUSCOs (C)", 
+            "Fragmented BUSCOs (F)", 
+            "Missing BUSCOs (M)")
+```
+
+1. Ignoring "total BUSCO groups searched", which value is the highest? `r longmcq(opts_p)` 
+
+```{r, echo = FALSE}
+opts_p <- c("1", 
+            "440", 
+            answer = "55")
+```
+
+2. What is the sum of fragmented and missing BUSCOs? `r longmcq(opts_p)` 
+
+```{r, echo = FALSE}
+opts_p <- c(answer = "Complete and single-copy BUSCOs (S)", 
+            "Complete and duplicated BUSCOs (D)", 
+            "Fragmented BUSCOs (F)",
+            "Missing BUSCOs (M)")
+```
+
+3. Which value would you want to be highest for a complete non duplicated assembly? `r longmcq(opts_p)` 
+
+```{r, echo = FALSE}
+opts_p <- c(answer = "Complete and single-copy BUSCOs (S)", 
+            "Complete and duplicated BUSCOs (D)", 
+            "Fragmented BUSCOs (F)",
+            "Missing BUSCOs (M)")
+```
+
+### BUSCO summary
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_blue.png", auto_pdf = TRUE)
+``` 
+
+The `BUSCO` stats are OK. There are more fragmented and missing BUSCOs than we would like. We'll try to improve this with polishing. We could also try to get some better data (maybe some Illumina data) or try a different assembler. However, as this is a workshop we will continue on with some more assessment.
 
 ## CheckM
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
@@ -682,7 +809,7 @@ checkm/redbean/ecoli
 
 __Parameters__
 
-- `--tab_table` : Creates a `.tsv` file (tab seperated value) that acts a summary of results. This is the one file we will inspect.
+- `--tab_table` : Creates a `.tsv` file (tab seperated value) that acts a summary of results. This is the file we will inspect.
 - `-f` : Path for output summary `.tsv` file.
 - `-t` : Number of threads to be used.
 - `-x` : Suffix of genome assembly files to be analysed. The command will carry out analysis on all the files with this suffix in the __bin directory__.
@@ -697,7 +824,7 @@ less -S checkm/redbean/ecoli/ecoli_checkm.tsv
 
 There are quite a few statistics but we are only interested in the  `Contamination` column (you may need to use the right key to move to it). This value is a percentage. Is it a large value?
 
-Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you ar einterested in contamination removal (link in [Appendix](#manuals))
+Thankfully not, it is less than 1%. If this was larger than 1% we may need to worry. If that was the case we could try to determine if it is real contamination and remove it if so. Please check out Blobtools2 if you are interested in contamination removal (link in [Appendix](#manuals))
 
 If you are interested in the other values please check: https://github.com/Ecogenomics/CheckM/wiki/Reported-Statistics
 
@@ -740,11 +867,11 @@ The general principle is to align reads to the genome assembly to correct incorr
 
 - The 10th base in a contig is A.
 - Reads are aligned to the contig with 11 reads covering the 10th base.
-- Therefore there are 11 bases form reads aligned to the 10th base.
-- 4 of these bases are A, 1 is C, and 5 are Gs.
+- Therefore there are 11 bases from the reads aligned to the 10th base.
+- 4 of these bases are A, 1 is C, and 6 are Gs.
 - In this case the polisher may determine that the 10th base is more likely to be a G and so __polishes__ the base to a G.
 
-If possible I would recommend polishing with Illumina reads over long reads due to their accuracy if they are available. However, we only have PacBio reads so that is what we will use.
+If possible I would recommend polishing with Illumina reads instead of long reads due if they are available. This is because Illumina reads are more accurate. However, we only have PacBio reads so that is what we will use.
 
 ## Racon
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
@@ -761,7 +888,7 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 We will use the `bacterial_assembly` conda environment for our `Racon` polishing. Either:
 
 - Use your currently open `bacterial_assembly` terminal.
-- If you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
+- Or, if you need a new `bacterial_assembly` terminal see the [bacterial assembly conda activation instructions](#redbeanassemblyconda)
 
 Ensure you are in the correct directory and create a new output directory.
 
@@ -791,7 +918,7 @@ ls redbean_assembly/ecoli.ctg.fa.*
 knitr::include_graphics(path = "figures/alignment.png", auto_pdf = TRUE)
 ``` 
 
-With our index files created we can align the reads we will use for polishing to the assembly to be polished. This may take >10 minutes.
+With our index files created we can align the reads to the assembly. Ensure to use the reads which will be used for polishing. This may take >10 minutes.
 
 ```{bash eval=FALSE}
 bwa mem \
@@ -808,11 +935,11 @@ __Parameters__
 - `-x` : Read type. This will change various parameters to suit the read technology better.
    - `pacbio` : Pacbio reads.
    - `ont2d` : Oxford Nanopore 2D-reads
-- The second last parameter (`redbean_assembly/ecoli.ctg.fa`) indicates the indexed assembly the reads will be aligned to.
-- The last parameter (`ecoli_reads/ecoli.fastq`) indicates the reads to be aligned.
+- The second last flagless input (`redbean_assembly/ecoli.ctg.fa`) indicates the indexed assembly the reads will be aligned to.
+- The last flagless input (`ecoli_reads/ecoli.fastq`) indicates the reads to be aligned.
 - The command would output the alignment to your screen (i.e. the standard output) but instead we will redirect (`>`) it to a new file (`racon/redbean/ecoli/ecoli_i1.sam`). This is a SAM file which contains the alignment information (SAM file specification: https://samtools.github.io/hts-specs/SAMv1.pdf).
 
-BAM files are the binary version of SAM files. FOr most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, `Racon` rquires a SAM file so we will not convert it to BAM. 
+BAM files are the binary version of SAM files. For most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, `Racon` requires a SAM file so we will not convert it to BAM. 
 
 ### Racon: Polishing
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
@@ -842,7 +969,7 @@ __Parameters__
 knitr::include_graphics(path = "figures/report.png", auto_pdf = TRUE)
 ```
 
-unfortunately `Racon` does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the `dnadiff` command from the program `MUMmer`.
+Unfortunately `Racon` does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the `dnadiff` command from the program `MUMmer`.
 
 `dnadiff` will create quite a few files so we will create an output directory for its results.
 
@@ -865,12 +992,15 @@ __Parameters__
 - The first flagless input is the reference assembly for comparison.
 - The second flagless input is the query assembly for comparison.
 
-List all the output files. There is a lot of information in them but for our purposes we will only inspect the report file.
+List all the output files. 
 
 ```{bash eval=FALSE}
-#List the output files
 ls racon/redbean/ecoli/dnadiff
-#View the report
+```
+
+There is a lot of information in them but for our purposes we will only inspect the report file.
+
+```{bash eval=FALSE}
 less -S racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1.report
 ```
 
@@ -882,16 +1012,16 @@ __Note__: Your values may differ from those mentioned below.
    - TotalSeqs: We can see that we have dropped from 4 contigs to 1 contig. Racon has removed unpolished contigs.
    - AlignedSeqs: Additionally, The 4 contigs of the reference align to the 1 contig of the query and vice versa. 
 - __[Bases]__
-   - TotalBases: Our total bases has decreased (~50k) from reference to query.
+   - TotalBases: Our total bases has decreased (~50kbp) from reference to query.
 - __[Feature Estimates]__
    - Insertions: There are 19 insertion events that consists of ~50Kbp in the reference assembly. This indicates these areas were caused by misassembly and removed from the query by polishing.
 - __[SNPs]__
-   - TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627 were changed due to the polisher.
-   - TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases added and removed by polishing. 
+   - TotalSNPs: We can see there are 627 SNPs between the two assemblies. This shows 627bp were changed due to the polisher.
+   - TotalIndels: 3782 single nucleotide Indels were found. This indicates a lot of bases were added and removed by polishing. 
       - The first four rows in the [QRY] column show added bases. ~2500 bases were added by polishing.
       - The next four rows in the [QRY] column show bases removed by polishing. ~1200 bases were removed by polishing.
 
-This shows that polishing definetly worked and did quite a lot.
+This shows that polishing definitely worked and did quite a lot.
 
 For more info on `dnadiff` and the report statistics README:
 https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README
@@ -906,7 +1036,7 @@ With genome polishing normally multiple iterations are required. Therefore let u
 ```{bash eval=FALSE}
 #Index iteration 1 polished assembly
 bwa index racon/redbean/ecoli/ecoli_i1.fasta
-#Align the reads to iteration 1 polished assembly
+#Align the reads to the iteration 1 polished assembly
 #This will create the second iteration SAM file
 bwa mem \
 -t 8 \
@@ -914,8 +1044,8 @@ bwa mem \
 racon/redbean/ecoli/ecoli_i1.fasta \
 ecoli_reads/ecoli.fastq \
 > racon/redbean/ecoli/ecoli_i2.sam
-#Polish iteration 1 pished assembly
-# Carried out with the second iteration SAM file
+#Polish the iteration 1 polished assembly
+#Carried out with the second iteration SAM file
 racon \
 -t 8 \
 ecoli_reads/ecoli.fastq \
@@ -939,10 +1069,15 @@ Inspect the new report file.
 less -S racon/redbean/ecoli/dnadiff/ref_raconi1_query_raconi2.report
 ```
 
-__Questions__
+### Racon; Questions & Summary
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
+knitr::include_graphics(path = "figures/sum_green.png", auto_pdf = TRUE)
+```
 
-- Has the number of changes reduced?
-- Would you carry out further polishing?
+
+Has the number of changes reduced?
+
+Would you carry out further polishing?
 
 The number of changes has indeed reduced by quite a bit, from 3782 to 40 TotalSNPs. When we are polishing we are looking for these stats to stop changing and converge to a similar value.
 
@@ -1050,7 +1185,7 @@ __Parameters__
 - `-pacbio` : Specify the pacbio reads to be used.
    - Alternative options are: `-nanopore` and `-pacbio-hifi`.
 
-The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a `.fasta.gz` file, and gunzip the file for further use.
+The above command would produce various files. However, we are only interested in the corrected reads. Copy the pre-computed corrected reads, these come in a `.fasta.gz` file, and gunzip (unzip a compressed .gzip/.gz file) the file for later use.
 
 ```{bash eval=FALSE}
 #Copy corrected read fasta.gz file
@@ -1128,7 +1263,7 @@ knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
 ```
 # Annotation {#annotation}
 
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/gene_anno.png", auto_pdf = TRUE)
 ```
 
@@ -1136,7 +1271,7 @@ Genome annotation is the act of identifying genomics features and adding useful 
 
 ## Prokka
 
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ```
 
@@ -1144,30 +1279,22 @@ knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 
 `Prokka` is fast, reliable and basic. It will detect genomic features such as CDS (coding sequence), genes, rRNA, and repeat regions. Additionally, it will provide pathway information for CDS annotations in the form of:
 
--   **EC (Enzyme Commission) numbers**: This is a scheme of numbers grouping enzymes based on the reaction they catalyse.
-
-    -   An example EC number is **EC 3.1.1**. The number are hierarchical.
-    -   EC 3 = Hydrolase enzymes.
-    -   EC 3.1 = Hydrolase enzymes that act on ester bonds.
-    -   EC 3.1.1 = Carboxylic Ester Hydrolases.
-    -   More info : <https://en.wikipedia.org/wiki/Enzyme_Commission_number>
-
--   **COG**: Cluster of Orthologous Genes. Orthologs are gene sequences derived from the same ancestral gene present in two species' last common ancestor. COGs group CDS into three main tiers.
-
-    1.  COG Categories: This is the highest level grouping and are represented by the alphabet. Examples include:
-
-        -   K - Transcription
-        -   Z - Cytoskeleton
-        -   L - Replication, Recombination, and Repair
-
-    2.  Pathways: The step below categories there are 63 different pathways represented in COG. Each pathway represnts different number of COGs.
-
-        -   Examples of COG pathways include 16S rRNA modifciation (15 COGs), Arginine biosynthesis (12 COGs), and Glycolysis (18 COGs).
-        -   List of COG pathways: <https://www.ncbi.nlm.nih.gov/research/cog/pathways/>
-
-    3.  COGs: These are the clusters of Orthologous Genes.
-
-        -   COGs are represented by a number, a symbol, and a name.
+- **EC (Enzyme Commission) numbers**: This is a scheme of numbers grouping enzymes based on the reaction they catalyse.
+    - An example EC number is **EC 3.1.1**. The numbers are hierarchical.
+       - EC 3 = Hydrolase enzymes.
+       - EC 3.1 = Hydrolase enzymes that act on ester bonds.
+       - EC 3.1.1 = Carboxylic Ester Hydrolases.
+    - More info : <https://en.wikipedia.org/wiki/Enzyme_Commission_number>
+- **COG**: Cluster of Orthologous Genes. Orthologs are gene sequences derived from the same ancestral gene present in two species' last common ancestor. COGs group CDS into three main tiers.
+    1. COG Categories: This is the highest level grouping and are represented by the alphabet. Examples include:
+        - K - Transcription
+        - Z - Cytoskeleton
+        - L - Replication, Recombination, and Repair
+    2. Pathways: The step below categories. There are 63 different pathways represented in COG. Each pathway represents a different number of COGs.
+        - Examples of COG pathways include 16S rRNA modifciation (15 COGs), Arginine biosynthesis (12 COGs), and Glycolysis (18 COGs).
+        - List of COG pathways: <https://www.ncbi.nlm.nih.gov/research/cog/pathways/>
+    3. COGs: These are the clusters of Orthologous Genes.
+        - COGs are represented by a number, a symbol, and a name.
 
 +-----------------------------------------------------------+-----------------------+------------+------------+-----------------------------------------------------------------------------------------+
 | COG category                                              | Pathway               | COG number | COG symbol | Name                                                                                    |
@@ -1243,24 +1370,17 @@ assembly/ecoli.fasta
 
 **Parameters**
 
--   `--addgenes` : This will add gene features for each CDS feature.
-
--   `--prefix` : The prefix of the output files.
-
--   `--genus` : The genus name that will be included in output.
-
--   `--species` : The species name that will be included in output.
-
--   `--kingdom` : Annotation mode to be used. Options are:
-
-    -   `Bacteria` (default)
-    -   `Archaea`
-    -   `Mitochondria`
-    -   `Viruses`
-
--   `--outdir` : The output directory of `Prokka`. This must not exist before running the command.
-
--   The last flagless parameter is the fasta file to be annotated.
+- `--addgenes` : This will add gene features for each CDS feature.
+- `--prefix` : The prefix of the output files.
+- `--genus` : The genus name that will be included in output.
+- `--species` : The species name that will be included in output.
+- `--kingdom` : Annotation mode to be used. Options are:
+    - `Bacteria` (default)
+    - `Archaea`
+    - `Mitochondria`
+    - `Viruses`
+- `--outdir` : The output directory of `Prokka`. This must not exist before running the command.
+- The last flagless parameter is the fasta file to be annotated.
 
 ### Prokka: Output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }

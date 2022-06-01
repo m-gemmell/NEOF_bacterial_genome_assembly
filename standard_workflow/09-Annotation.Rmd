@@ -1,6 +1,6 @@
 # Annotation {#annotation}
 
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/gene_anno.png", auto_pdf = TRUE)
 ```
 
@@ -8,7 +8,7 @@ Genome annotation is the act of identifying genomics features and adding useful 
 
 ## Prokka
 
-```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
+```{r, fig.align = 'center',out.width= '15%', echo=FALSE }
 knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 ```
 
@@ -16,30 +16,22 @@ knitr::include_graphics(path = "figures/quokka.png", auto_pdf = TRUE)
 
 `Prokka` is fast, reliable and basic. It will detect genomic features such as CDS (coding sequence), genes, rRNA, and repeat regions. Additionally, it will provide pathway information for CDS annotations in the form of:
 
--   **EC (Enzyme Commission) numbers**: This is a scheme of numbers grouping enzymes based on the reaction they catalyse.
-
-    -   An example EC number is **EC 3.1.1**. The number are hierarchical.
-    -   EC 3 = Hydrolase enzymes.
-    -   EC 3.1 = Hydrolase enzymes that act on ester bonds.
-    -   EC 3.1.1 = Carboxylic Ester Hydrolases.
-    -   More info : <https://en.wikipedia.org/wiki/Enzyme_Commission_number>
-
--   **COG**: Cluster of Orthologous Genes. Orthologs are gene sequences derived from the same ancestral gene present in two species' last common ancestor. COGs group CDS into three main tiers.
-
-    1.  COG Categories: This is the highest level grouping and are represented by the alphabet. Examples include:
-
-        -   K - Transcription
-        -   Z - Cytoskeleton
-        -   L - Replication, Recombination, and Repair
-
-    2.  Pathways: The step below categories there are 63 different pathways represented in COG. Each pathway represnts different number of COGs.
-
-        -   Examples of COG pathways include 16S rRNA modifciation (15 COGs), Arginine biosynthesis (12 COGs), and Glycolysis (18 COGs).
-        -   List of COG pathways: <https://www.ncbi.nlm.nih.gov/research/cog/pathways/>
-
-    3.  COGs: These are the clusters of Orthologous Genes.
-
-        -   COGs are represented by a number, a symbol, and a name.
+- **EC (Enzyme Commission) numbers**: This is a scheme of numbers grouping enzymes based on the reaction they catalyse.
+    - An example EC number is **EC 3.1.1**. The numbers are hierarchical.
+       - EC 3 = Hydrolase enzymes.
+       - EC 3.1 = Hydrolase enzymes that act on ester bonds.
+       - EC 3.1.1 = Carboxylic Ester Hydrolases.
+    - More info : <https://en.wikipedia.org/wiki/Enzyme_Commission_number>
+- **COG**: Cluster of Orthologous Genes. Orthologs are gene sequences derived from the same ancestral gene present in two species' last common ancestor. COGs group CDS into three main tiers.
+    1. COG Categories: This is the highest level grouping and are represented by the alphabet. Examples include:
+        - K - Transcription
+        - Z - Cytoskeleton
+        - L - Replication, Recombination, and Repair
+    2. Pathways: The step below categories. There are 63 different pathways represented in COG. Each pathway represents a different number of COGs.
+        - Examples of COG pathways include 16S rRNA modifciation (15 COGs), Arginine biosynthesis (12 COGs), and Glycolysis (18 COGs).
+        - List of COG pathways: <https://www.ncbi.nlm.nih.gov/research/cog/pathways/>
+    3. COGs: These are the clusters of Orthologous Genes.
+        - COGs are represented by a number, a symbol, and a name.
 
 +-----------------------------------------------------------+-----------------------+------------+------------+-----------------------------------------------------------------------------------------+
 | COG category                                              | Pathway               | COG number | COG symbol | Name                                                                                    |
@@ -115,24 +107,17 @@ assembly/ecoli.fasta
 
 **Parameters**
 
--   `--addgenes` : This will add gene features for each CDS feature.
-
--   `--prefix` : The prefix of the output files.
-
--   `--genus` : The genus name that will be included in output.
-
--   `--species` : The species name that will be included in output.
-
--   `--kingdom` : Annotation mode to be used. Options are:
-
-    -   `Bacteria` (default)
-    -   `Archaea`
-    -   `Mitochondria`
-    -   `Viruses`
-
--   `--outdir` : The output directory of `Prokka`. This must not exist before running the command.
-
--   The last flagless parameter is the fasta file to be annotated.
+- `--addgenes` : This will add gene features for each CDS feature.
+- `--prefix` : The prefix of the output files.
+- `--genus` : The genus name that will be included in output.
+- `--species` : The species name that will be included in output.
+- `--kingdom` : Annotation mode to be used. Options are:
+    - `Bacteria` (default)
+    - `Archaea`
+    - `Mitochondria`
+    - `Viruses`
+- `--outdir` : The output directory of `Prokka`. This must not exist before running the command.
+- The last flagless parameter is the fasta file to be annotated.
 
 ### Prokka: Output
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE }
