@@ -143,7 +143,7 @@ ls .
 
 The `"s/_0001//"` is made of four parts:
 
-1. `s/`: The `s` indicates we are carrying out a __substitution__. We will subsititue regular expressions (i.e. pattern) for a replacement.
+1. `s/`: The `s` indicates we are carrying out a __substitution__. We will substitute regular expressions (i.e. pattern) for a replacement.
 2. `/_0001/`: The first instance of `_0001` is to be substituted.
    - This is the regular expression.
 3. `//`: The matched pattern (`_0001`) is to be substituted with nothing.
@@ -250,6 +250,17 @@ __Notes__:
 - `QUAST`: This command can be provided multiple assembly files at once so a loop won't be needed.
 - `BUSCO`: Ensure you use the correct lineage dataset for _Bacillus cereus_.
 - `MultiQC`: Like QUAST no loop is required for this command.
+
+To get the corrected reads, required for circularisation, please run the below commands in your `multi_sample_workflow` directory.
+
+```{bash eval=FALSE}
+#Copy compressed directory corrected corrected reads
+cp /pub39/tea/nsc006/NEOF/bact_assembly/corrected_reads.tar.gz
+#Uncompress directory
+tar -xzvf corrected_reads.tar.gz
+#List contents of uncompressed directory
+ls corrected_reads
+```
 
 ## GNU Parallel
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE }

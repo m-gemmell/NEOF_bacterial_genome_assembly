@@ -220,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>rename</code> will rename all indicated files (<code>*.fastq</code> = all files in current directory with the suffix <code>.fastq</code>) using syntax similar to the <code>sed</code> command.</p>
 <p>The <code>"s/_0001//"</code> is made of four parts:</p>
 <ol style="list-style-type: decimal">
-<li><code>s/</code>: The <code>s</code> indicates we are carrying out a <strong>substitution</strong>. We will subsititue regular expressions (i.e. pattern) for a replacement.</li>
+<li><code>s/</code>: The <code>s</code> indicates we are carrying out a <strong>substitution</strong>. We will substitute regular expressions (i.e. pattern) for a replacement.</li>
 <li><code>/_0001/</code>: The first instance of <code>_0001</code> is to be substituted.
 <ul>
 <li>This is the regular expression.</li>
@@ -301,6 +301,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>BUSCO</code>: Ensure you use the correct lineage dataset for <em>Bacillus cereus</em>.</li>
 <li><code>MultiQC</code>: Like QUAST no loop is required for this command.</li>
 </ul>
+<p>To get the corrected reads, required for circularisation, please run the below commands in your <code>multi_sample_workflow</code> directory.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="02-Multi-sample_workflow.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy compressed directory corrected corrected reads</span></span>
+<span id="cb11-2"><a href="02-Multi-sample_workflow.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /pub39/tea/nsc006/NEOF/bact_assembly/corrected_reads.tar.gz</span>
+<span id="cb11-3"><a href="02-Multi-sample_workflow.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Uncompress directory</span></span>
+<span id="cb11-4"><a href="02-Multi-sample_workflow.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzvf</span> corrected_reads.tar.gz</span>
+<span id="cb11-5"><a href="02-Multi-sample_workflow.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of uncompressed directory</span></span>
+<span id="cb11-6"><a href="02-Multi-sample_workflow.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> corrected_reads</span></code></pre></div>
 </div>
 <div id="gnu-parallel" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> GNU Parallel<a href="02-Multi-sample_workflow.html#gnu-parallel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
