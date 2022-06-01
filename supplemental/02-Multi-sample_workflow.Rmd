@@ -95,7 +95,13 @@ knitr::include_graphics(path = "figures/while_loop.png", auto_pdf = TRUE)
 
 Now that we have our data and our sample file we can start carrying out the standard workflow with loops.
 
-First ensure you are in a terminal with an active `bacterial_assembly` environment then create an assembly output directory.
+Run the below example `while read` loop to see its output.
+
+```{bash eval=FALSE}
+cat samples.txt | while read s ; do echo "File for sample ${s} is ${s}.fastq" ; done
+```
+
+Ensure you are in a terminal with an active [`bacterial_assembly`](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Bacterial_genome_assembly/Standard_workflow/05-Assembly.html#redbeanassemblyconda) environment then create an assembly output directory.
 
 ```{bash eval=FALSE}
 mkdir redbean_assembly

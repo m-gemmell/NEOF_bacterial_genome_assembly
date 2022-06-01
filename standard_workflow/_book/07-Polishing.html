@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Polishing | Bacterial genome assembly and annotation</title>
   <meta name="description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Polishing | Bacterial genome assembly and annotation" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   
@@ -24,7 +23,11 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
+<<<<<<< HEAD
 <meta name="date" content="2021-09-09" />
+=======
+<meta name="date" content="2022-05-25" />
+>>>>>>> master
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +36,8 @@
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
 <link rel="prev" href="06-Genome_assessment.html"/>
 <link rel="next" href="08-Circlator.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +53,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -122,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="www/webex.css" type="text/css" />
 </head>
 
 <body>
@@ -244,8 +248,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="polishing" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Polishing</h1>
+<div id="polishing" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Polishing<a href="07-Polishing.html#polishing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="figures/polishing.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>Genome polishing is very important for long read assembly. This is due to the relatively high rate of error in PacBio and ONT technologies compared to Illumina.</p>
 <p>The general principle is to align reads to the genome assembly to correct incorrect bases. This is carried out by determining the consensus on each base. For example:</p>
@@ -257,12 +261,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In this case the polisher may determine that the 10th base is more likely to be a G and so <strong>polishes</strong> the base to a G.</li>
 </ul>
 <p>If possible I would recommend polishing with Illumina reads over long reads due to their accuracy if they are available. However, we only have PacBio reads so that is what we will use.</p>
-<div id="racon" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Racon</h2>
+<div id="racon" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Racon<a href="07-Polishing.html#racon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/racoon.png" width="20%" style="display: block; margin: auto;" /></p>
 <p><code>Racon</code> is a polisher that can use Illumina, PacBio or ONT reads to polish genome assemblies. This makes it a lot more flexible that other polishers that can only use one or two types of sequencing technologies for polishing.</p>
-<div id="racon-conda-environment-directory" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Racon: Conda environment &amp; directory</h3>
+<div id="racon-conda-environment-directory" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Racon: Conda environment &amp; directory<a href="07-Polishing.html#racon-conda-environment-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We will use the <code>bacterial_assembly</code> conda environment for our <code>Racon</code> polishing. Either:</p>
 <ul>
@@ -273,8 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="07-Polishing.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow</span>
 <span id="cb22-2"><a href="07-Polishing.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> racon/redbean/ecoli</span></code></pre></div>
 </div>
-<div id="racon-index-assembly" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Racon: Index assembly</h3>
+<div id="racon-index-assembly" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Racon: Index assembly<a href="07-Polishing.html#racon-index-assembly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/index.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>The first step is to <code>bwa index</code> the assembly we want polished. This will create various index files that start with <code>redbean_assembly/ecoli.ctg.fa</code> and end with different suffixes (<code>.ann</code>, <code>.bwt</code>, <code>.mmi</code>, etc).</p>
 <p>Without the index files the read alignment process would be much more difficult and therefore slower. Imagine trying to search for a topic in an encyclopaedia without an index or trying to search for a topic in Wikipedia without the search bar. You could probably do it but it would take a lot longer.</p>
@@ -283,8 +287,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb23-3"><a href="07-Polishing.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List the index files</span></span>
 <span id="cb23-4"><a href="07-Polishing.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> redbean_assembly/ecoli.ctg.fa.<span class="pp">*</span></span></code></pre></div>
 </div>
-<div id="racon-read-alignment-to-assembly" class="section level3" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Racon: Read alignment to assembly</h3>
+<div id="racon-read-alignment-to-assembly" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Racon: Read alignment to assembly<a href="07-Polishing.html#racon-read-alignment-to-assembly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/alignment.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>With our index files created we can align the reads we will use for polishing to the assembly to be polished. This may take &gt;10 minutes.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="07-Polishing.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> mem <span class="dt">\</span></span>
@@ -303,12 +307,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>The second last parameter (<code>redbean_assembly/ecoli.ctg.fa</code>) indicates the indexed assembly the reads will be aligned to.</li>
 <li>The last parameter (<code>ecoli_reads/ecoli.fastq</code>) indicates the reads to be aligned.</li>
-<li>The command would output the alignment to your screen (i.e. the standard output) but instead we will redirect (<code>&gt;</code>) it to a new file (<code>racon/redbean/ecoli/ecoli_i1.sam</code>). This is a SAM file which contains the alignment information (SAM file specification: <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" class="uri">https://samtools.github.io/hts-specs/SAMv1.pdf</a>).</li>
+<li>The command would output the alignment to your screen (i.e. the standard output) but instead we will redirect (<code>&gt;</code>) it to a new file (<code>racon/redbean/ecoli/ecoli_i1.sam</code>). This is a SAM file which contains the alignment information (SAM file specification: <a href="https://samtools.github.io/hts-specs/SAMv1.pdf" class="uri">https://samtools.github.io/hts-specs/SAMv1.pdf</a>).</li>
 </ul>
 <p>BAM files are the binary version of SAM files. FOr most processes we would convert the SAM to BAM for storage purposes (BAM files are smaller than SAM files). However, <code>Racon</code> rquires a SAM file so we will not convert it to BAM.</p>
 </div>
-<div id="racon-polishing" class="section level3" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> Racon: Polishing</h3>
+<div id="racon-polishing" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Racon: Polishing<a href="07-Polishing.html#racon-polishing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/shiny_emerald.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>Now that we have all the required files we will carry out <code>Racon</code> polishing.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="07-Polishing.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">racon</span> <span class="at">-t</span> 8 <span class="dt">\</span></span>
@@ -325,20 +329,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The output is redirected (<code>&gt;</code>) to a fasta file (<code>racon/redbean/ecoli/ecoli_i1.fasta</code>). This contains the polished assembly.</li>
 </ul>
 </div>
-<div id="racon-polishing-report" class="section level3" number="7.1.5">
-<h3><span class="header-section-number">7.1.5</span> Racon: Polishing report</h3>
+<div id="racon-polishing-report" class="section level3 hasAnchor" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> Racon: Polishing report<a href="07-Polishing.html#racon-polishing-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/report.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>unfortunately <code>Racon</code> does not create a polishing report. We will therefore create our own to determine how much polishing was carried out. This can be carried out with the <code>dnadiff</code> command from the program <code>MUMmer</code>.</p>
 <p><code>dnadiff</code> will create quite a few files so we will create an output directory for its results.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="07-Polishing.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> racon/redbean/ecoli/dnadiff</span></code></pre></div>
-<p>We will use <code>dnadiff</code> to align the original assembly (reference) to our polished assembly (query). This will then provide detailed information on the differences between the two assemblies (i.e. we can see how polishing affected the assembly).</p>
+<p>We will use <code>dnadiff</code> to align the original assembly (reference) to our polished assembly (query). This will then provide detailed information on the differences between the two assemblies (i.e. we can see how polishing affected the assembly).</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="07-Polishing.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dnadiff</span> <span class="dt">\</span></span>
 <span id="cb27-2"><a href="07-Polishing.html#cb27-2" aria-hidden="true" tabindex="-1"></a>--prefix racon/redbean/ecoli/dnadiff/ref_redbean_query_raconi1 <span class="dt">\</span></span>
 <span id="cb27-3"><a href="07-Polishing.html#cb27-3" aria-hidden="true" tabindex="-1"></a>redbean_assembly/ecoli.ctg.fa <span class="dt">\</span></span>
 <span id="cb27-4"><a href="07-Polishing.html#cb27-4" aria-hidden="true" tabindex="-1"></a>racon/redbean/ecoli/ecoli_i1.fasta</span></code></pre></div>
 <p><strong>Parameters</strong></p>
 <ul>
-<li>–prefix : Prefix of the output files. The output files will be in the directory <code>racon/redbean/ecoli/dnadiff/</code> with the prefix <code>ref_redbean_query_raconi1</code>.</li>
+<li>--prefix : Prefix of the output files. The output files will be in the directory <code>racon/redbean/ecoli/dnadiff/</code> with the prefix <code>ref_redbean_query_raconi1</code>.</li>
 <li>The first flagless input is the reference assembly for comparison.</li>
 <li>The second flagless input is the query assembly for comparison.</li>
 </ul>
@@ -377,8 +381,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For more info on <code>dnadiff</code> and the report statistics README:
 <a href="https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README" class="uri">https://github.com/mummer4/mummer/blob/master/docs/dnadiff.README</a></p>
 </div>
-<div id="racon-second-iteration" class="section level3" number="7.1.6">
-<h3><span class="header-section-number">7.1.6</span> Racon: Second iteration</h3>
+<div id="racon-second-iteration" class="section level3 hasAnchor" number="7.1.6">
+<h3><span class="header-section-number">7.1.6</span> Racon: Second iteration<a href="07-Polishing.html#racon-second-iteration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/repeat.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>With genome polishing normally multiple iterations are required. Therefore let us polish the polished assembly to create the second iteration of polishing.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="07-Polishing.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Index iteration 1 polished assembly</span></span>
@@ -416,20 +420,191 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>So it would be advised to do some more polishing but for the sake of time we will continue on.</p>
 </div>
 </div>
-<div id="other-polishers" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Other polishers</h2>
+<div id="other-polishers" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Other polishers<a href="07-Polishing.html#other-polishers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/pilon.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>Other polishers to explore for yourself include (links in <a href="09-Annotation.html#manuals">appendix</a>):</p>
 <ul>
 <li><code>Pilon</code></li>
-<li>PacBio’s <code>GenomicConsensus</code></li>
-<li>ONT’s <code>Medaka</code></li>
+<li>PacBio's <code>GenomicConsensus</code></li>
+<li>ONT's <code>Medaka</code></li>
 <li><code>HyPo</code></li>
 <li><code>NextPolish</code></li>
 </ul>
 
 </div>
 </div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script>
             </section>
 
           </div>
@@ -440,7 +615,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -467,6 +641,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

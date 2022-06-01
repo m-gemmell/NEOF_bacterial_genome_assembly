@@ -12,6 +12,31 @@ favicon: figures/NEOF_favicon.png
 description: NEOF supplemental book for the Bacterial genome assembly and annotation workshop
 cover-image: "figures/NEOF.png"
 ---
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
+
+```{r cite-packages, include = FALSE}
+# automatically create a bib database for R packages
+# add any packages you want to cite here
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'webexercises'
+), 'packages.bib')
+```
 
 ```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
 knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
@@ -41,6 +66,23 @@ echo "This is a command example"
 
 <!--chapter:end:01-Bacterial_genome_supplemental.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Multiple sample workflow {#multisampleworkflow}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
 knitr::include_graphics(path = "figures/bacteria_multiple.png", auto_pdf = TRUE)
@@ -138,7 +180,13 @@ knitr::include_graphics(path = "figures/while_loop.png", auto_pdf = TRUE)
 
 Now that we have our data and our sample file we can start carrying out the standard workflow with loops.
 
-First ensure you are in a terminal with an active `bacterial_assembly` environment then create an assembly output directory.
+Run the below example `while read` loop to see its output.
+
+```{bash eval=FALSE}
+cat samples.txt | while read s ; do echo "File for sample ${s} is ${s}.fastq" ; done
+```
+
+Ensure you are in a terminal with an active [`bacterial_assembly`](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Bacterial_genome_assembly/Standard_workflow/05-Assembly.html#redbeanassemblyconda) environment then create an assembly output directory.
 
 ```{bash eval=FALSE}
 mkdir redbean_assembly
@@ -222,6 +270,23 @@ Each coloured block is a different job with the width showing the time it takes 
 
 <!--chapter:end:02-Multi-sample_workflow.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # High coverage {#coverage}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
 knitr::include_graphics(path = "figures/wifi_coverage.png", auto_pdf = TRUE)
@@ -307,6 +372,23 @@ I generally suggest only carrying out random subsampling if you have very high c
 
 <!--chapter:end:03-High_coverage.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # Hybrid assembly {#hybrid}
 ```{r, fig.align = 'center',out.width= '20%', echo=FALSE}
 knitr::include_graphics(path = "figures/hybrid_car.png", auto_pdf = TRUE)
@@ -517,10 +599,27 @@ Once polishing is done check the number of changes. Has the number decreased a l
 knitr::include_graphics(path = "figures/recap.png", auto_pdf = TRUE)
 ``` 
 
-Great now you can carry out and hybrid assembly and polishing with short reads. If you produce a hybrid assembly it may also be a good idea to polish the assembly with `Racon` or `Pilon`.
+Great now you can carry out hybrid assembly and polishing with short reads. If you produce a hybrid assembly it may also be a good idea to polish the assembly with `Racon` or `Pilon`.
 
 <!--chapter:end:04-Hybrid_assembly.Rmd-->
 
+```{r include=FALSE, cache=FALSE}
+suppressPackageStartupMessages({
+  library(webexercises)
+})
+
+knitr::knit_hooks$set(webex.hide = function(before, options, envir) {
+  if (before) {
+    if (is.character(options$webex.hide)) {
+      hide(options$webex.hide)
+    } else {
+      hide()
+    }
+  } else {
+    unhide()
+  }
+})
+```
 # (APPENDIX) Appendix {-}
 
 # Next steps{#nextsteps}

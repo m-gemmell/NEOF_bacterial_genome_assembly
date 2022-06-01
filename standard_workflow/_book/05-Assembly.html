@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Genome Assembly | Bacterial genome assembly and annotation</title>
   <meta name="description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Genome Assembly | Bacterial genome assembly and annotation" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/figures/NEOF.png" />
   <meta property="og:description" content="NEOF book for the Bacterial genome assembly and annotation workshop" />
   
@@ -24,7 +23,11 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
+<<<<<<< HEAD
 <meta name="date" content="2021-09-09" />
+=======
+<meta name="date" content="2022-05-25" />
+>>>>>>> master
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +36,8 @@
   <link rel="shortcut icon" href="figures/NEOF_favicon.png" type="image/x-icon" />
 <link rel="prev" href="04-Overview.html"/>
 <link rel="next" href="06-Genome_assessment.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +53,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -122,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="www/webex.css" type="text/css" />
 </head>
 
 <body>
@@ -244,11 +248,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="redbeanassembly" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Genome Assembly</h1>
+<div id="redbeanassembly" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Genome Assembly<a href="05-Assembly.html#redbeanassembly" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="figures/string.png" width="20%" style="display: block; margin: auto;" /></p>
 <p>The first step of any genome assembly project is to carry out QC of the read data. The very next step is genome assembly. There are many different assemblers and in the past the choice of assembler and its parameters was the primary task to produce a good quality assembly after getting good quality reads.</p>
-<p>The bioinformatician’s choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:</p>
+<p>The bioinformatician's choice of assembler and parameters is not as vital as it once was. This is due to great improvements to sequencing technologies and bioinformatics processes which include:</p>
 <ul>
 <li>Sequencing technologies are creating longer and higher quality reads.
 <ul>
@@ -265,14 +269,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Now like many bioinformatics tools, assemblers will attempt to use the best parameters for your data. Generally they are better and quicker than humans at this.</li>
 </ul></li>
 </ul>
-<div id="redbean" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Redbean</h2>
+<div id="redbean" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Redbean<a href="05-Assembly.html#redbean" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/redbean.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>For assembly of our PacBio reads we will be using <code>Redbean</code> (AKA <code>wtdbg2</code>). <code>Redbean</code> is a long read assembler with comparable performance to others. However, where it excels is its speed, it is much faster than other long read assemblers. This make it perfect for this workshop.</p>
 <p><code>Redbean</code> can be used for genomes of all sizes. It will work for Viruses, Bacteria, Archaea, and Eukaryotes.</p>
 <p><code>Redbean</code> works for PacBio RSII, PacBio Sequel, and Oxford nanopore data.</p>
-<div id="redbeanassemblyconda" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Redbean: Conda environment &amp; directory</h3>
+<div id="redbeanassemblyconda" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Redbean: Conda environment &amp; directory<a href="05-Assembly.html#redbeanassemblyconda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We will use the <code>bacterial_assembly</code> <code>conda</code> environment for our <code>Redbean</code> assembly. This will be our main conda environment for our standard workflow.</p>
 <p>Activate the environment:</p>
@@ -283,8 +287,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="05-Assembly.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create directory for redbean output</span></span>
 <span id="cb5-4"><a href="05-Assembly.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> redbean_assembly</span></code></pre></div>
 </div>
-<div id="redbean-assemble-long-reads" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Redbean: Assemble long reads</h3>
+<div id="redbean-assemble-long-reads" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Redbean: Assemble long reads<a href="05-Assembly.html#redbean-assemble-long-reads" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/assembly_simple.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>The first step of <code>Redbean</code> is to carry out the assembly. This is carried out with the <code>wtdgb2</code> command.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="05-Assembly.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg2</span> <span class="at">-x</span> rs <span class="at">-g</span> 4.6m <span class="at">-i</span> ecoli_reads/ecoli.fastq <span class="at">-o</span> redbean_assembly/ecoli <span class="at">-t</span> 8</span></code></pre></div>
@@ -315,8 +319,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The will create a bunch of output files. Most of these we will ignore with only 4 being used below.</p>
 </div>
-<div id="redbean-derive-consensus" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Redbean: Derive consensus</h3>
+<div id="redbean-derive-consensus" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Redbean: Derive consensus<a href="05-Assembly.html#redbean-derive-consensus" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="figures/consensus.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>If you checked the output directory you may have noticed there was no fasta file. Therefore the next step is to create a fasta file that contains the consensus assembly with <code>wtpoa-cns</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="05-Assembly.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wtpoa-cns</span> <span class="at">-t</span> 8 <span class="at">-i</span> redbean_assembly/ecoli.ctg.lay.gz <span class="at">-fo</span> redbean_assembly/ecoli.ctg.fa</span></code></pre></div>
@@ -343,8 +347,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The consensus can then be thought of as the one best path through the graph to produce the most likely genome assembly.</p>
 </div>
 </div>
-<div id="bandage-visualisation" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Bandage Visualisation</h2>
+<div id="bandage-visualisation" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Bandage Visualisation<a href="05-Assembly.html#bandage-visualisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/bandage.png" width="15%" style="display: block; margin: auto;" /></p>
 <p>This part is optional and generally something I never do in real analyses. However, it is interesting and will help your understanding of assembly graphs.</p>
 <p><code>Redbean</code> carries out 3 iterations of graph construction, each getting better. These three graph iterations are represented by the <code>.dot.gz</code> files. We can visualise these graphs with the tool <code>Bandage</code>.</p>
@@ -383,8 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Fewer branches</strong>: In the 1st and 2nd graphs you will see branches, parts of the graph that branch off and possibly reconnect again. This represents multiple paths through the assembly that are possible. Through the <code>Redbean</code> iterations the assembler chooses the best routes, removing the other routes. You will need to zoom in to properly see these branches.</li>
 </ul>
 </div>
-<div id="other-long-read-assemblers" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Other long read assemblers</h2>
+<div id="other-long-read-assemblers" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Other long read assemblers<a href="05-Assembly.html#other-long-read-assemblers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/canoe.png" width="15%" style="display: block; margin: auto;" /></p>
 <p><code>Redbean</code> will not always be the optimal assembler. However, even if you plan to use another assembler <code>Redbean</code> is very good as a first pass tool due to its speed. It can be very useful to run a <code>Redbean</code> assembly and carry out genome assessment (shown in next chapter) to see if there are any issues with the reads that was not caught in the read QC. Various issues and solutions are covered in the supplemental bookdown.</p>
 <p>Other long read assemblers to explore for yourself include (links in <a href="09-Annotation.html#manuals">appendix</a>):</p>
@@ -399,6 +403,177 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script>
             </section>
 
           </div>
@@ -409,7 +584,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -436,6 +610,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
