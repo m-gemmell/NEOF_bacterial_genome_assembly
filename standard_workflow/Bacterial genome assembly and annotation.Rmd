@@ -335,7 +335,7 @@ __Parameters__
    - `ccs` = PacBio CCS reads
    - `ont` = Oxford Nanopore
 - `-g` : This indicates the estimated size of the genome
-   - This does not need to be super exact with and you can round up to two significant figures. Examples are below.
+   - This does not need to be super exact and you can round up to two significant figures. Examples are below.
       - _E.coli_ | genome size = 4,639,221 bp => `-g 4.6m` (m = megabases)
       - _Phi-X174_ | genome size = 5386 bp => `-g 5.4k` (k = kilobase)
       - _H.Sapiens_ | genome size = 3.2Gb => `-g 3g` (g = gigabase)
@@ -370,9 +370,9 @@ Two examples of how this may occur are:
 - __Repeating regions__: An assembler may find it hard to determine how many times a repeat occurs within the repeat region. Maybe it is 10 or 11 times.
 - __Identical homopolymers__: It is possible that long homopolymers of As (or one of the other bases) occurs multiple times in the genome. It may then be difficult to know what is at either end of each unique homopolymer location. 
    - E.g. There are 2 homopolymer sequences (H1 & H2) with 4 ends (E1-4).
-      - Is H1 flanked by E1 and E2 and therefore H2 is flanked by E3 and E4?
-      - Or is H1 flanked by E1 and E3 and therefore H2 is flanked by E2 and E4?
-      - Etc.
+      - If H1 is flanked by E1 and E2, H2 would then be flanked by E3 and E4.
+      - Or H1 could be flanked by E1 and E3 and therefore H2 would be flanked by E2 and E4.
+      - Or other ways are possible.
 
 The consensus can then be thought of as the one best path through the graph to produce the most likely genome assembly.
 
@@ -397,7 +397,9 @@ gunzip redbean_assembly/ecoli.3.dot.gz
 
 Next we convert the `.dot` files into `.gfa` files.
 
-The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. Unfortunately this is not installed when you install `wtdbg2` via `Conda`.
+The script `wtdbg2-dot2gfa.pl` is found in the scripts directory of `wtdbg2` which can be found at: https://github.com/ruanjue/wtdbg2/tree/master/scripts. 
+
+__Note__ Unfortunately this script is not installed when you install `wtdbg2` via `Conda`. You will need to add this script to the correct directory when carrying out your own analysis.
 
 ```{bash eval=FALSE}
 wtdbg-dot2gfa.pl redbean_assembly/ecoli.1.dot > redbean_assembly/ecoli.1.dot.gfa

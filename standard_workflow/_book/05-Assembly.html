@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><code>-g</code> : This indicates the estimated size of the genome
 <ul>
-<li>This does not need to be super exact with and you can round up to two significant figures. Examples are below.
+<li>This does not need to be super exact and you can round up to two significant figures. Examples are below.
 <ul>
 <li><em>E.coli</em> | genome size = 4,639,221 bp =&gt; <code>-g 4.6m</code> (m = megabases)</li>
 <li><em>Phi-X174</em> | genome size = 5386 bp =&gt; <code>-g 5.4k</code> (k = kilobase)</li>
@@ -334,9 +334,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>E.g. There are 2 homopolymer sequences (H1 &amp; H2) with 4 ends (E1-4).
 <ul>
-<li>Is H1 flanked by E1 and E2 and therefore H2 is flanked by E3 and E4?</li>
-<li>Or is H1 flanked by E1 and E3 and therefore H2 is flanked by E2 and E4?</li>
-<li>Etc.</li>
+<li>If H1 is flanked by E1 and E2, H2 would then be flanked by E3 and E4.</li>
+<li>Or H1 could be flanked by E1 and E3 and therefore H2 would be flanked by E2 and E4.</li>
+<li>Or other ways are possible.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -354,7 +354,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-2"><a href="05-Assembly.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> redbean_assembly/ecoli.2.dot.gz</span>
 <span id="cb8-3"><a href="05-Assembly.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> redbean_assembly/ecoli.3.dot.gz</span></code></pre></div>
 <p>Next we convert the <code>.dot</code> files into <code>.gfa</code> files.</p>
-<p>The script <code>wtdbg2-dot2gfa.pl</code> is found in the scripts directory of <code>wtdbg2</code> which can be found at: <a href="https://github.com/ruanjue/wtdbg2/tree/master/scripts" class="uri">https://github.com/ruanjue/wtdbg2/tree/master/scripts</a>. Unfortunately this is not installed when you install <code>wtdbg2</code> via <code>Conda</code>.</p>
+<p>The script <code>wtdbg2-dot2gfa.pl</code> is found in the scripts directory of <code>wtdbg2</code> which can be found at: <a href="https://github.com/ruanjue/wtdbg2/tree/master/scripts" class="uri">https://github.com/ruanjue/wtdbg2/tree/master/scripts</a>.</p>
+<p><strong>Note</strong> Unfortunately this script is not installed when you install <code>wtdbg2</code> via <code>Conda</code>. You will need to add this script to the correct directory when carrying out your own analysis.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="05-Assembly.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg-dot2gfa.pl</span> redbean_assembly/ecoli.1.dot <span class="op">&gt;</span> redbean_assembly/ecoli.1.dot.gfa</span>
 <span id="cb9-2"><a href="05-Assembly.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg-dot2gfa.pl</span> redbean_assembly/ecoli.2.dot <span class="op">&gt;</span> redbean_assembly/ecoli.2.dot.gfa</span>
 <span id="cb9-3"><a href="05-Assembly.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">wtdbg-dot2gfa.pl</span> redbean_assembly/ecoli.3.dot <span class="op">&gt;</span> redbean_assembly/ecoli.3.dot.gfa</span></code></pre></div>
