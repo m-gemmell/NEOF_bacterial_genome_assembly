@@ -170,7 +170,7 @@ To get the corrected reads, required for circularisation, please run the below c
 
 ```{bash eval=FALSE}
 #Copy compressed directory corrected corrected reads
-cp /pub39/tea/nsc006/NEOF/bact_assembly/corrected_reads.tar.gz
+cp /pub39/tea/nsc006/NEOF/bact_assembly/data/corrected_reads.tar.gz .
 #Uncompress directory
 tar -xzvf corrected_reads.tar.gz
 #List contents of uncompressed directory
