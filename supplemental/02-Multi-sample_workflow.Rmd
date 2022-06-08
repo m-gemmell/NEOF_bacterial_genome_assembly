@@ -3,16 +3,16 @@
 knitr::include_graphics(path = "figures/bacteria_multiple.png", auto_pdf = TRUE)
 ``` 
 
-In the standard workflow bookdown we assembled and annotated a single sample/genome. In your future projects you will most likely need to carry this out for multiple samples at one. This could be carried out by running each command for each sample separately. However, there are much quicker methods.
+In the standard workflow bookdown we assembled and annotated a single sample/genome. In your future projects you will most likely need to carry this out for multiple samples. This could be carried out by running each command for each sample separately. However, there are much quicker methods.
 
 In this section I will introduce you to my preferred method of carrying out commands on multiple samples. This involves a text file containing all the samples names in conjunction with `while read` loops.
 
-## Multiple sample raw data
+## Raw data of multiple samples
 ```{r, fig.align = 'center',out.width= '10%', echo=FALSE}
 knitr::include_graphics(path = "figures/usb_stick.png", auto_pdf = TRUE)
 ``` 
 
-Prior to running we need the data first. Copy over the directory that contains the data. The copied directory will be used as the analysis directory.
+Prior to running the analysis we will need the data and an analysis directory.
 
 ```{bash eval=FALSE}
 #Move to your bacterial_assembly directory
@@ -23,7 +23,9 @@ mkdir -p multi_sample_workflow/data
 cd multi_sample_workflow
 ```
 
-We will be running three _Bacillus cereus_ samples through the standard workflow. We'll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you are not going to move it from its original location.
+We will be running three _Bacillus cereus_ samples through the standard workflow. We'll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you are not going to move it from its original location. 
+
+Softlinks are like file shortcuts. It is much quicker to create a softlink than copy data and it means you are not using unneeded storage to store the data multiple times.
 
 ```{bash eval=FALSE}
 #Softlink the PacBio fastq files we will use
@@ -58,15 +60,15 @@ ls .
 
 The `"s/_0001//"` is made of four parts:
 
-1. `s/`: The `s` indicates we are carrying out a __substitution__. We will subsititue regular expressions (i.e. pattern) for a replacement.
+1. `s/`: The `s` indicates we are carrying out a __substitution__. We will substitute regular expressions (i.e. pattern) for a replacement.
 2. `/_0001/`: The first instance of `_0001` is to be substituted.
    - This is the regular expression.
 3. `//`: The matched pattern (`_0001`) is to be substituted with nothing.
    - This is the replacement.
 4. The end, after the last `/`: Contains any flags to be provided to the substitution command. 
-   - The most commonly used flag is `g` which stands for global substitution. This will cause substitutions to occur for every instance of the regular expression found. Default is only the first instance of the regular expression to replaced.
+   - The most commonly used flag is `g` which stands for global substitution. This will cause substitutions to occur for every instance of the regular expression found. The default is that only the first instance of the regular expression will be replaced.
 
-For more info on `sed` please the Intro to Unix bookdown.
+For more info on `sed` please the [Intro to Unix bookdown](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#sed).
 
 With our newly named softlinks we can quickly create our sample file.
 
@@ -162,7 +164,7 @@ With this quick intro to using `while loops` and the Standard workflow bookdown,
 
 __Notes__: 
 
-- `QUAST`: This command can be provided multiple assembly files at once so a loop won't be needed.
+- `QUAST`: You can provide this command with multiple assembly files at once so a loop won't be needed.
 - `BUSCO`: Ensure you use the correct lineage dataset for _Bacillus cereus_.
 - `MultiQC`: Like QUAST no loop is required for this command.
 
@@ -171,9 +173,11 @@ __Notes__:
 knitr::include_graphics(path = "figures/gnu_parallel.png", auto_pdf = TRUE)
 ``` 
 
-Loops are a convenient method for relatively quick processes or when you have the time. However, in the future you may have time constraints or a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.
+Loops are a convenient method for relatively quick processes or when you have the time. However, in the future you may have time constraints or a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at the same time.
 
-There a different ways to do this but the most common tool I use is `GNU Parallel`. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. Keep in mind other users might be taking up the machine's processes. The command `top` allows you to see the current load on a machine.
+There a different ways to do this but the most common tool I use is `GNU Parallel`. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. 
+
+Keep in mind other users might be taking up the machine's processes. The command `top` allows you to see the current load on a machine.
 
 `GNU Parallel` will put on a new job once a job has finished. I.e. if you have four jobs on at once, with 4 waiting, the fifth job will be put on once one of the first four finish (depending on which finished first). Compare this to another tool that can put put on multiple jobs/processes at once, such as `xargs`. If you put on four jobs/processes at once with `xargs` it will wait for the first four processes to all finish before putting on the next four. This can increase the time of analysis due to some samples taking much longer than others, as visualised below.
 

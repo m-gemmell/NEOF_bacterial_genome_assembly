@@ -23,7 +23,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-05-25" />
+<meta name="date" content="2022-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="01-Bacterial_genome_supplemental.html"><a href="01-Bacterial_genome_supplemental.html"><i class="fa fa-check"></i><b>1</b> Supplemental</a></li>
 <li class="chapter" data-level="2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html"><i class="fa fa-check"></i><b>2</b> Multiple sample workflow</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#multiple-sample-raw-data"><i class="fa fa-check"></i><b>2.1</b> Multiple sample raw data</a></li>
+<li class="chapter" data-level="2.1" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#raw-data-of-multiple-samples"><i class="fa fa-check"></i><b>2.1</b> Raw data of multiple samples</a></li>
 <li class="chapter" data-level="2.2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#sample-file"><i class="fa fa-check"></i><b>2.2</b> Sample file</a></li>
 <li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
 <li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
@@ -195,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Hybrid assembly: Conda environment &amp; directory<a href="04-Hybrid_assembly.html#hybrid-assembly-conda-environment-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/conda.png" width="10%" style="display: block; margin: auto;" /></p>
 <p>We will use the <code>hybrid</code> <code>conda</code> environment for our hybrid assembly methods.</p>
-<p>Activate the environment:</p>
+<p>Activate the environment in a new terminal:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="04-Hybrid_assembly.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">chos</span> 8</span>
 <span id="cb14-2"><a href="04-Hybrid_assembly.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> usehybrid</span></code></pre></div>
 <p>Before running any commands we will get the Illumina and PacBio data directories setup.</p>
@@ -215,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="hybridspades" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> hybridSPAdes<a href="04-Hybrid_assembly.html#hybridspades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/spades.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>A popular hybrid assembler for bacterial genomes is <code>hybridSPAdes</code>. It's use is very similar to just using Illumina data. The only difference is the addition of the <code>--pacbio</code> for PacBio reads or <code>--nanopore</code> for Oxford nanopore reads.</p>
+<p>A popular hybrid assembler for bacterial genomes is <code>hybridSPAdes</code>. It's hybrid usage is very similar to only using Illumina data. The only difference is the addition of the <code>--pacbio</code> for PacBio reads or <code>--nanopore</code> for Oxford nanopore reads.</p>
 <p>First we will create an output directory for <code>HybridSPAdes</code>.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="04-Hybrid_assembly.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Main output directory</span></span>
 <span id="cb16-2"><a href="04-Hybrid_assembly.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> hybridspades</span>
@@ -260,7 +260,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb19-5"><a href="04-Hybrid_assembly.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> long_read_assembly</span>
 <span id="cb19-6"><a href="04-Hybrid_assembly.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Softlink of assembly</span></span>
 <span id="cb19-7"><a href="04-Hybrid_assembly.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Using a premade file in case you don&#39;t have yours</span></span>
-<span id="cb19-8"><a href="04-Hybrid_assembly.html#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/standard_workflow/ecoli.fasta long_read_assembly</span></code></pre></div>
+<span id="cb19-8"><a href="04-Hybrid_assembly.html#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/standard_workflow/ecoli.fasta <span class="dt">\</span></span>
+<span id="cb19-9"><a href="04-Hybrid_assembly.html#cb19-9" aria-hidden="true" tabindex="-1"></a>long_read_assembly</span></code></pre></div>
 <p>The next part is to align our Illumina reads to our assembly. This is similar to the process for <code>Racon</code>.</p>
 <p>First we index the assembly.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="04-Hybrid_assembly.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index long_read_assembly/ecoli.fasta</span></code></pre></div>
@@ -322,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The pilon polished assembly <code>pilon/ecoli/ecoli_i1.fasta</code> as the input for the <code>bwa</code> and <code>pilon</code> commands.</li>
 <li><code>i2</code> instead of <code>i1</code> for the new files you make.</li>
 </ul>
-<p>Once polishing is done check the number of changes. Has the number decreased a lot?</p>
+<p>Once polishing is done check the number of changes. Has the number decreased a lot compared to the changes made by the first round of polishing?</p>
 </div>
 <div id="hybrid-approaches-recap" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Hybrid approaches recap<a href="04-Hybrid_assembly.html#hybrid-approaches-recap" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -1,6 +1,6 @@
 supplemental
 multisampleworkflow
-multiple-sample-raw-data
+raw-data-of-multiple-samples
 sample-file
 start-looping
 continuing-the-workflow
