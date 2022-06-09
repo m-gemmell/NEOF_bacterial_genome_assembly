@@ -23,11 +23,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<<<<<<< HEAD
-<meta name="date" content="2022-06-01" />
-=======
-<meta name="date" content="2022-06-08" />
->>>>>>> master
+<meta name="date" content="2022-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -208,19 +204,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="detecting-high-coverage" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Detecting high coverage<a href="03-High_coverage.html#detecting-high-coverage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/altimeter.png" width="10%" style="display: block; margin: auto;" /></p>
-<<<<<<< HEAD
-<p>To detect high coverage (&gt;100X) you will need to first know the estimate size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix commands to do this.</p>
+<p>To detect high coverage (&gt;100X) you will need to first know the estimated size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix commands to do this.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="03-High_coverage.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the directory with your ecoli reads</span></span>
 <span id="cb12-2"><a href="03-High_coverage.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/ecoli_reads</span>
 <span id="cb12-3"><a href="03-High_coverage.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out to screen the number of bases in ecoli.fastq</span></span>
 <span id="cb12-4"><a href="03-High_coverage.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
-=======
-<p>To detect high coverage (&gt;100X) you will need to first know the estimated size of your genome. Then you can look at the sequencing summary to hopefully find the number of bases in your sequencing data. If you do not have this we can use some quick unix commands to do this.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="03-High_coverage.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the directory with your ecoli reads</span></span>
-<span id="cb11-2"><a href="03-High_coverage.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/standard_workflow/ecoli_reads</span>
-<span id="cb11-3"><a href="03-High_coverage.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Print out to screen the number of bases in ecoli.fastq</span></span>
-<span id="cb11-4"><a href="03-High_coverage.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
->>>>>>> master
 <p>The command consists of multiple parts with the parts piping (<code>|</code>) their outputs to be the next command's input. The parts are:</p>
 <ul>
 <li><code>cat ecoli.fastq</code> : read <code>ecoli.fastq</code> to use it as the initial input for the commands.</li>
@@ -251,13 +239,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>if the number is a whole number (1, 100, 98762 etc.) the specified number of reads will be extracted.</li>
 </ul></li>
 </ul>
-<<<<<<< HEAD
-<p>As we extract by number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsampled file.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="03-High_coverage.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli_subsample.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
-=======
 <p>As we have extracted by the number/fraction of reads and the size of PacBio and ONT reads vary we may not get the number of bases we desire. It is therefore always good to count the number of bases in our subsampled file.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="03-High_coverage.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli_subsample.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
->>>>>>> master
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="03-High_coverage.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ecoli_subsample.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 2 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div>
 <p><strong>Tasks</strong></p>
 <ul>
 <li>Using <code>seqtk sample</code> attempt to subsample the data so you retain ~10X coverage (44-48Mbp). What fraction/number did you use?</li>
