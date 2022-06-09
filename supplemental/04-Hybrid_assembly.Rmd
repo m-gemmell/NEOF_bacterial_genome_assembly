@@ -15,7 +15,7 @@ knitr::include_graphics(path = "figures/conda.png", auto_pdf = TRUE)
 
 We will use the `hybrid` `conda` environment for our hybrid assembly methods.
 
-Activate the environment:
+Activate the environment in a new terminal:
 
 ```{bash eval=FALSE}
 chos 8
@@ -44,7 +44,7 @@ ln -s /pub39/tea/nsc006/NEOF/bact_assembly/data/ecoli.fastq pacbio_data
 knitr::include_graphics(path = "figures/spades.png", auto_pdf = TRUE)
 ``` 
 
-A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's use is very similar to just using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
+A popular hybrid assembler for bacterial genomes is `hybridSPAdes`. It's hybrid usage is very similar to only using Illumina data. The only difference is the addition of the `--pacbio` for PacBio reads or `--nanopore` for Oxford nanopore reads.
 
 First we will create an output directory for `HybridSPAdes`.
 
@@ -109,7 +109,8 @@ cd ~/bacterial_assembly/hybrid_methods
 mkdir long_read_assembly
 #Softlink of assembly
 #Using a premade file in case you don't have yours
-ln -s /pub39/tea/nsc006/NEOF/bact_assembly/standard_workflow/ecoli.fasta long_read_assembly
+ln -s /pub39/tea/nsc006/NEOF/bact_assembly/standard_workflow/ecoli.fasta \
+long_read_assembly
 ```
 
 The next part is to align our Illumina reads to our assembly. This is similar to the process for `Racon`. 
@@ -201,7 +202,7 @@ It would be good to polish the genome again. Therefore polish it once more using
 - The pilon polished assembly `pilon/ecoli/ecoli_i1.fasta` as the input for the `bwa` and `pilon` commands.
 - `i2` instead of `i1` for the new files you make.
 
-Once polishing is done check the number of changes. Has the number decreased a lot?
+Once polishing is done check the number of changes. Has the number decreased a lot compared to the changes made by the first round of polishing?
 
 ## Hybrid approaches recap
 ```{r, fig.align = 'center',out.width= '15%', echo=FALSE}

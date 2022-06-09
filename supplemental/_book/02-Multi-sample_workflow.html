@@ -23,7 +23,11 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
+<<<<<<< HEAD
 <meta name="date" content="2022-06-01" />
+=======
+<meta name="date" content="2022-06-08" />
+>>>>>>> master
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="01-Bacterial_genome_supplemental.html"><a href="01-Bacterial_genome_supplemental.html"><i class="fa fa-check"></i><b>1</b> Supplemental</a></li>
 <li class="chapter" data-level="2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html"><i class="fa fa-check"></i><b>2</b> Multiple sample workflow</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#multiple-sample-raw-data"><i class="fa fa-check"></i><b>2.1</b> Multiple sample raw data</a></li>
+<li class="chapter" data-level="2.1" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#raw-data-of-multiple-samples"><i class="fa fa-check"></i><b>2.1</b> Raw data of multiple samples</a></li>
 <li class="chapter" data-level="2.2" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#sample-file"><i class="fa fa-check"></i><b>2.2</b> Sample file</a></li>
 <li class="chapter" data-level="2.3" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#start-looping"><i class="fa fa-check"></i><b>2.3</b> Start looping</a></li>
 <li class="chapter" data-level="2.4" data-path="02-Multi-sample_workflow.html"><a href="02-Multi-sample_workflow.html#continuing-the-workflow"><i class="fa fa-check"></i><b>2.4</b> Continuing the workflow</a></li>
@@ -186,12 +190,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multisampleworkflow" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Multiple sample workflow<a href="02-Multi-sample_workflow.html#multisampleworkflow" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="figures/bacteria_multiple.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>In the standard workflow bookdown we assembled and annotated a single sample/genome. In your future projects you will most likely need to carry this out for multiple samples at one. This could be carried out by running each command for each sample separately. However, there are much quicker methods.</p>
+<p>In the standard workflow bookdown we assembled and annotated a single sample/genome. In your future projects you will most likely need to carry this out for multiple samples. This could be carried out by running each command for each sample separately. However, there are much quicker methods.</p>
 <p>In this section I will introduce you to my preferred method of carrying out commands on multiple samples. This involves a text file containing all the samples names in conjunction with <code>while read</code> loops.</p>
-<div id="multiple-sample-raw-data" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Multiple sample raw data<a href="02-Multi-sample_workflow.html#multiple-sample-raw-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="raw-data-of-multiple-samples" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Raw data of multiple samples<a href="02-Multi-sample_workflow.html#raw-data-of-multiple-samples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/usb_stick.png" width="10%" style="display: block; margin: auto;" /></p>
-<p>Prior to running we need the data first. Copy over the directory that contains the data. The copied directory will be used as the analysis directory.</p>
+<p>Prior to running the analysis we will need the data and an analysis directory.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="02-Multi-sample_workflow.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Move to your bacterial_assembly directory</span></span>
 <span id="cb2-2"><a href="02-Multi-sample_workflow.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/bacterial_assembly/</span>
 <span id="cb2-3"><a href="02-Multi-sample_workflow.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a multi_sample_workflow directory with a data subdirectory</span></span>
@@ -199,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-5"><a href="02-Multi-sample_workflow.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Move into the new analysis directory</span></span>
 <span id="cb2-6"><a href="02-Multi-sample_workflow.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multi_sample_workflow</span></code></pre></div>
 <p>We will be running three <em>Bacillus cereus</em> samples through the standard workflow. We'll create softlinks of the PacBio fastq files. It is always good to use softlinks for read data if you are not going to move it from its original location.</p>
+<p>Softlinks are like file shortcuts. It is much quicker to create a softlink than copy data and it means you are not using unneeded storage to store the data multiple times.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="02-Multi-sample_workflow.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Softlink the PacBio fastq files we will use</span></span>
 <span id="cb3-2"><a href="02-Multi-sample_workflow.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /pub39/tea/nsc006/NEOF/bact_assembly/multi_sample_workflow/<span class="pp">*</span> data/</span>
 <span id="cb3-3"><a href="02-Multi-sample_workflow.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#List contents of the data directory</span></span>
@@ -231,10 +236,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>The end, after the last <code>/</code>: Contains any flags to be provided to the substitution command.
 <ul>
-<li>The most commonly used flag is <code>g</code> which stands for global substitution. This will cause substitutions to occur for every instance of the regular expression found. Default is only the first instance of the regular expression to replaced.</li>
+<li>The most commonly used flag is <code>g</code> which stands for global substitution. This will cause substitutions to occur for every instance of the regular expression found. The default is that only the first instance of the regular expression will be replaced.</li>
 </ul></li>
 </ol>
-<p>For more info on <code>sed</code> please the Intro to Unix bookdown.</p>
+<p>For more info on <code>sed</code> please the <a href="http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Intro_to_Unix/12-Advanced_linux_practice.html#sed">Intro to Unix bookdown</a>.</p>
 <p>With our newly named softlinks we can quickly create our sample file.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="02-Multi-sample_workflow.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#List fastq files</span></span>
 <span id="cb5-2"><a href="02-Multi-sample_workflow.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>fastq</span>
@@ -297,7 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>With this quick intro to using <code>while loops</code> and the Standard workflow bookdown, complete the genome assembly and annotation for these three samples. Finish off with one final <code>MultiQC</code> report containing the final <code>QUAST</code> , <code>BUSCO</code>, and <code>Prokka</code> info for all the samples.</p>
 <p><strong>Notes</strong>:</p>
 <ul>
-<li><code>QUAST</code>: This command can be provided multiple assembly files at once so a loop won't be needed.</li>
+<li><code>QUAST</code>: You can provide this command with multiple assembly files at once so a loop won't be needed.</li>
 <li><code>BUSCO</code>: Ensure you use the correct lineage dataset for <em>Bacillus cereus</em>.</li>
 <li><code>MultiQC</code>: Like QUAST no loop is required for this command.</li>
 </ul>
@@ -312,8 +317,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="gnu-parallel" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> GNU Parallel<a href="02-Multi-sample_workflow.html#gnu-parallel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/gnu_parallel.png" width="20%" style="display: block; margin: auto;" /></p>
-<p>Loops are a convenient method for relatively quick processes or when you have the time. However, in the future you may have time constraints or a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at a one time.</p>
-<p>There a different ways to do this but the most common tool I use is <code>GNU Parallel</code>. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on. Keep in mind other users might be taking up the machine's processes. The command <code>top</code> allows you to see the current load on a machine.</p>
+<p>Loops are a convenient method for relatively quick processes or when you have the time. However, in the future you may have time constraints or a large machine you want to make the most out of. In these cases you can parallelise your processes so multiple samples are being analysed at the same time.</p>
+<p>There a different ways to do this but the most common tool I use is <code>GNU Parallel</code>. This command allows you to state how many jobs you want to parallelise. This number is chosen based on how many cores and how much RAM each process would need versus the current availability of the machine you are working on.</p>
+<p>Keep in mind other users might be taking up the machine's processes. The command <code>top</code> allows you to see the current load on a machine.</p>
 <p><code>GNU Parallel</code> will put on a new job once a job has finished. I.e. if you have four jobs on at once, with 4 waiting, the fifth job will be put on once one of the first four finish (depending on which finished first). Compare this to another tool that can put put on multiple jobs/processes at once, such as <code>xargs</code>. If you put on four jobs/processes at once with <code>xargs</code> it will wait for the first four processes to all finish before putting on the next four. This can increase the time of analysis due to some samples taking much longer than others, as visualised below.</p>
 <p><img src="figures/xargs_vs_gnu_parallel.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>Each coloured block is a different job with the width showing the time it takes to run. With four jobs/processes being parallelised at once the same 8 jobs are finished with <code>GNU Parallel</code> quicker than with <code>xargs</code>.</p>
