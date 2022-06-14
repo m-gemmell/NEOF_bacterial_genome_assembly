@@ -251,7 +251,7 @@ There are many output files in the directory `busco/redbean/ecoli`. A full list 
 I ignore the majority of the output files most of the time, instead only looking at the short summary file.
 
 ```{bash eval=FALSE}
-less busco/redbean/ecoli/short_summary.specific.enterobacterales_obd10.ecoli.txt
+less busco/redbean/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt
 ```
 
 This provides us with 6 values. These values are presented in terms of percentage (along the top line of the Results) and total numbers (the next 6 lines). The values represent:
