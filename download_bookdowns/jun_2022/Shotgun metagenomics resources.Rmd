@@ -1,0 +1,73 @@
+--- 
+title: "Shotgun Metagenomics resources"
+author: "Sam Haldenby and Matthew R. Gemmell"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+favicon: figures/NEOF_favicon.png
+description: NEOF book for the Microbial shotgun metagenomics workshop resources
+cover-image: "figures/NEOF.png"
+---
+
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
+``` 
+
+# Videos, slides, & files
+
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/squid.png", auto_pdf = TRUE)
+``` 
+
+## Introduction
+
+```{r, echo=FALSE, warning=FALSE, }
+library("vembedr")
+embed_url("https://www.youtube.com/watch?v=U1tOEjaqO1o")
+```
+
+[__Slides__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/Intro%20to%20Shotgun%20Metagenomics.pdf)
+
+## HUMAnN & bioBakery
+
+```{r, echo=FALSE, warning=FALSE, out.width=100}
+library("vembedr")
+embed_url("https://www.youtube.com/watch?v=w_-4xldv2fI")
+```
+
+[__Slides__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/HUMAnN%20&%20bioBakery.pdf)
+
+## Assembly approach
+
+```{r, echo=FALSE, warning=FALSE, }
+library("vembedr")
+embed_url("https://www.youtube.com/watch?v=Kf4nkvbaXDM")
+```
+
+[__Slides__]()
+
+## Workshop files
+
+The below compressed directory is provided so you may attempt the workshop materials on a computer/cluster available to you.
+
+Note:
+
+- The file locations will not match
+- The `. use` scripts will not work. You will have to install your own programs. I recommend looking into [conda](https://docs.conda.io/en/latest/) to more easily install programs.
+
+[__Download files__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/Shotgun_metagenomics.zip)
+
+## Bookdown html
+
+You can download the html files of the bookdown below. Ensure you unzip the directory before use.
+
+[__Download zipped bookdown__](http://www.cgr.liv.ac.uk/illum/NEOFworkshops_5bfa93ca0482d69d/Shotgun_Metagenomics/resources/NEOF_shotgun_metageomics_bookdown.zip)
+
+
+
+<!--chapter:end:01-Shotgun_metagenomics.Rmd-->
+

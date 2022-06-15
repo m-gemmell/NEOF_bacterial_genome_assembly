@@ -1,0 +1,61 @@
+--- 
+title: "Genome assembly resources"
+author: "Matthew R. Gemmell"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+favicon: figures/NEOF_favicon.png
+description: NEOF book for the Bacterial genome assembly and annotation workshop resources
+cover-image: "figures/NEOF.png"
+---
+
+```{r, fig.align = 'center',out.width= '30%', echo=FALSE }
+knitr::include_graphics(path = "figures/NEOF.png", auto_pdf = TRUE)
+``` 
+
+# Videos, slides, & files
+
+```{r, fig.align = 'center',out.width= '20%', echo=FALSE }
+knitr::include_graphics(path = "figures/bacterial_assembly.png", auto_pdf = TRUE)
+``` 
+
+## Introduction
+
+```{r, echo=FALSE, warning=FALSE, }
+library("vembedr")
+embed_url("https://www.youtube.com/watch?v=nagjRr57CQk")
+```
+
+[__Slides__]()
+
+## Supplemental information
+
+```{r, echo=FALSE, warning=FALSE, out.width=100}
+library("vembedr")
+embed_url("")
+```
+
+[__Slides__]()
+
+## Workshop files
+
+The below compressed directory is provided so you may attempt the workshop materials on a computer/cluster available to you.
+
+Note:
+
+- The file locations will not match
+- The `. use` scripts will not work. You will have to install your own programs. I recommend looking into [conda](https://docs.conda.io/en/latest/) to more easily install programs.
+
+[__Download files__]()
+
+## Bookdown html
+
+You can download the html files of the bookdown below. Ensure you unzip the directory before use.
+
+[__Download zipped bookdown__]()
+
+
