@@ -23,7 +23,7 @@
 <meta name="author" content="Matthew R. Gemmell" />
 
 
-<meta name="date" content="2022-06-09" />
+<meta name="date" content="2022-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -308,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-6"><a href="10-Final_report.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> input</span>
 <span id="cb50-7"><a href="10-Final_report.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Copy the relevant QUAST, BUSCO, and Prokka files to be used as MultiQC input</span></span>
 <span id="cb50-8"><a href="10-Final_report.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../quast/report.tsv input/</span>
-<span id="cb50-9"><a href="10-Final_report.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../busco/ecoli/short_summary.specific.enterobacterales_odb10.txt input/</span>
+<span id="cb50-9"><a href="10-Final_report.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../busco/ecoli/short_summary.specific.enterobacterales_odb10.ecoli.txt input/</span>
 <span id="cb50-10"><a href="10-Final_report.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../prokka/ecoli/ecoli.txt input/</span></code></pre></div>
 <p>Now we can run <code>MultiQC</code>.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="10-Final_report.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">--cl-config</span> <span class="st">&quot;prokka_fn_snames: True&quot;</span> <span class="at">-o</span> . input/</span></code></pre></div>

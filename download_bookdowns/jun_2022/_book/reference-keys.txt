@@ -1,6 +1,5 @@
 videos-slides-files
 introduction
-humann-biobakery
-assembly-approach
+supplemental-information
 workshop-files
 bookdown-html
